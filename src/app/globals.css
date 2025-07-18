@@ -1,26 +1,31 @@
+/* globals.css */
 @import "tailwindcss";
 
+/* 1️⃣ Regular CSS variables */
 :root {
-  --background: #ffffff;
+  --primary: #1E4B96;
+  --secondary: #F9DD4A;
+  --accent: #3375C2;
+  --background: #9ec5e98c;
   --foreground: #171717;
 }
 
+/* 2️⃣ Link CSS vars to Tailwind theme utilities */
 @theme inline {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
+/* 3️⃣ Dark mode overrides */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --primary: #1E4B96;
+    --secondary: #F9DD4A;
+    --accent: #3375C2;
+    --background: #9ec5e98c;
+    --foreground: #151617;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+} 

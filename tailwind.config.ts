@@ -1,12 +1,23 @@
+// tailwind.config.ts
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './src/**/*.{js,ts,jsx,tsx}', // Tell Tailwind to scan these files
+    'src/app/**/*.{ts,tsx}',
+    'src/app/components/**/*.{ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: 'var(--color-primary)',
+        secondary: 'var(--color-secondary)',
+        accent: 'var(--color-accent)',
+        background: 'var(--color-background)',
+        foreground: 'var(--color-foreground)',
+      },
+    },
   },
   plugins: [],
 }
+
 export default config
