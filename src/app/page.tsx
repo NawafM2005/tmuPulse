@@ -2,6 +2,7 @@ import Navbar from "@/components/navbar";
 import homeBanner from '@/assets/home-banner-transparent.png';
 import logo from '@/assets/tmu-monkey-logo.png';
 import Footer from "@/components/footer";
+import FAQ from "@/components/faq";
 
 export default function Home() {
   return (
@@ -130,6 +131,11 @@ export default function Home() {
           </p>
         </div>
       </div>
+
+        <div>
+          <FAQ/>
+        </div>
+
       <Footer/>
     </main>
   );
