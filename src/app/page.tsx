@@ -1,13 +1,14 @@
 import Navbar from "@/components/navbar";
 import homeBanner from '@/assets/home-banner-transparent.png';
 import logo from '@/assets/tmu-monkey-logo.png';
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen items-center justify-center bg-foreground">
       <Navbar />
 
-      <div className="flex flex-col items-center justify-center mt-20">
+      <div className="flex flex-col items-center justify-center mt-30">
         <div className="text-white flex flex-col gap-4 p-10 items-center justify-center">
           <h1 className="text-[70px] font-[800]">Welcome to Your <span className="text-accent">T</span><span className="text-secondary">M</span><span className="text-primary">U</span> Dashboard</h1>
           <h3 className="text-[30px] font-[600]">Shape Your Semester,</h3>
@@ -18,14 +19,14 @@ export default function Home() {
           <button className="bg-primary w-[170px] text-secondary text-[9px] font-bold rounded-[10px] p-1"
           style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.75)" }}
           >Toronto Metropolitan University</button>
-          <div className="flex flex-row gap-20 mt-4">
+          <div className="flex flex-row gap-10 mt-4">
               <button className="bg-primary text-black font-bold text-[15px] bg-secondary px-2 py-2 rounded hover:cursor-pointer hover:opacity-90 transition-colors duration-200">Browse Courses</button>
               <button className="bg-primary text-white font-bold text-[15px] bg-accent px-2 py-2 rounded hover:cursor-pointer hover:opacity-90 transition-colors duration-200">Build Schedule</button>
           </div>
         </div>
 
-        <div className="flex flex-row gap-10">
-          <img src={homeBanner.src} alt="Home Banner" className="h-60 w-180" />
+        <div className="flex flex-row gap-10 mt-10">
+          <img src={homeBanner.src} alt="Home Banner" className="h-80 w-220" />
         </div>
       </div>
 
@@ -35,7 +36,7 @@ export default function Home() {
 
         <div className="flex flex-wrap gap-8 justify-center mt-10 mb-20">
           <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer 
-          hover:opacity-90 transition-all duration-500 hover:bg-black/90 hover:scale-102" 
+          hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-white" 
           style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
                   backgroundSize: "cover",
@@ -48,7 +49,7 @@ export default function Home() {
             </p>
           </div>
           <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
-           hover:opacity-90 transition-all duration-500 hover:bg-black/90 hover:scale-102"
+           hover:opacity-90 transition-all duration-200 hover:bg-black hover:scale-105 hover:border-1 border-white"
            style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
                   backgroundSize: "cover",
@@ -57,11 +58,11 @@ export default function Home() {
                 }}>
             <h2 className="font-bold text-lg mb-2">Degree Planner</h2>
             <p className="text-sm text-center">
-              Map out your degree requirements and track your academic progress semester by semester.
+              Map out your degree requirements and track your academic progress per semester.
             </p>
           </div>
           <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
-           hover:opacity-90 transition-all duration-500 hover:bg-black/90 hover:scale-102"
+           hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-white"
            style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
                   backgroundSize: "cover",
@@ -74,7 +75,7 @@ export default function Home() {
             </p>
           </div>
           <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
-           hover:opacity-90 transition-all duration-500 hover:bg-black/90 hover:scale-102"
+           hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-white"
            style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
                   backgroundSize: "cover",
@@ -88,6 +89,48 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+
+      <h1 className="text-[55px] font-[600] text-white">Trusted by Students Across TMU...</h1>
+
+      <div className="flex flex-row gap-4 mb-10 mt-5">
+        <div className="bg-white rounded-2xl p-6 shadow flex-1 max-w-[700px]">
+          <div className="flex items-center gap-2 mt-4">
+            <img
+              src={logo.src}
+              className="w-10 h-10 rounded-full object-cover border"
+              alt="Anna Liu"
+            />
+            <div>
+              <span className="block font-semibold">Anna Liu</span>
+              <span className="block text-sm text-gray-500">Business Technology Management, TMU</span>
+            </div>
+            <span className="ml-auto text-yellow-500 text-lg">★★★★★</span>
+          </div>
+           <p className="italic text-gray-700 mt-5">
+            "This platform helped me streamline my group projects and manage my schedule more effectively. The interface is intuitive and makes collaboration so much easier."
+          </p>
+        </div>
+        <div className="bg-white rounded-2xl p-6 shadow flex-1 max-w-[700px]">
+
+          <div className="flex items-center gap-2 mt-4">
+            <img
+              src={logo.src}
+              className="w-10 h-10 rounded-full object-cover border"
+              alt="Omar Hassan"
+            />
+            <div>
+              <span className="block font-semibold">Omar Hassan</span>
+              <span className="block text-sm text-gray-500">Economics, TMU</span>
+            </div>
+            <span className="ml-auto text-yellow-500 text-lg">★★★★★</span>
+          </div>
+          <p className="italic text-gray-700 mt-5">
+            "As a TMU student balancing academics and extracurriculars, this app has made it easy to keep everything organized. Highly recommend to anyone looking to boost their productivity."
+          </p>
+        </div>
+      </div>
+      <Footer/>
     </main>
   );
 }
