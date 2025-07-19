@@ -4,6 +4,10 @@ import logo from '@/assets/tmu-monkey-logo.png';
 import Footer from "@/components/footer";
 import FAQ from "@/components/faq";
 import Link from 'next/link';
+import degree from '@/assets/degree.png';
+import schedule from '@/assets/schedule.png';
+import transcript from '@/assets/transcript.png';
+import courses from '@/assets/courses.png';
 
 export default function Home() {
   return (
@@ -22,8 +26,8 @@ export default function Home() {
           style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.75)" }}
           >Toronto Metropolitan University</button>
           <div className="flex flex-row gap-10 mt-4">
-              <button className="bg-primary text-black font-bold text-[15px] bg-secondary px-2 py-2 rounded hover:cursor-pointer hover:opacity-90 transition-colors duration-200">Browse Courses</button>
-              <button className="bg-primary text-white font-bold text-[15px] bg-accent px-2 py-2 rounded hover:cursor-pointer hover:opacity-90 transition-colors duration-200">Build Schedule</button>
+              <button className="bg-primary text-black font-bold text-[15px] bg-secondary px-2 py-2 rounded hover:cursor-pointer hover:opacity-90 transition-all duration-200 hover:scale-101">Browse Courses</button>
+              <button className="bg-primary text-white font-bold text-[15px] bg-accent px-2 py-2 rounded hover:cursor-pointer hover:opacity-90 transition-all duration-200 hover:scale-101">Build Schedule</button>
           </div>
         </div>
 
@@ -38,9 +42,9 @@ export default function Home() {
 
         <div className="flex flex-wrap gap-8 justify-center mt-10 mb-20">
           <Link href="/catalogue" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer 
-          hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-white" 
+          hover:opacity-90 transition-all duration-100 hover:bg-black hover:scale-105 hover:border-1 border-white" 
           style={{
-                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
+                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.87)), url(${courses.src})`,
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
@@ -53,7 +57,7 @@ export default function Home() {
           <Link href="/planner" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
            hover:opacity-90 transition-all duration-200 hover:bg-black hover:scale-105 hover:border-1 border-white"
            style={{
-                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
+                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.87)), url(${degree.src})`,
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
@@ -66,7 +70,7 @@ export default function Home() {
           <Link href="/schedule" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
            hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-white"
            style={{
-                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
+                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.87)), url(${schedule.src})`,
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
@@ -79,7 +83,7 @@ export default function Home() {
           <Link href="/transcript" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
            hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-white"
            style={{
-                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
+                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.87)), url(${transcript.src})`,
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
