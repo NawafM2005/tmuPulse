@@ -3,6 +3,7 @@ import homeBanner from '@/assets/home-banner-transparent.png';
 import logo from '@/assets/tmu-monkey-logo.png';
 import Footer from "@/components/footer";
 import FAQ from "@/components/faq";
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -36,7 +37,7 @@ export default function Home() {
         <h3 className="text-[15px] text-white mt-5">All the Tools You Need to Conquer TMU, All in One Place</h3>
 
         <div className="flex flex-wrap gap-8 justify-center mt-10 mb-20">
-          <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer 
+          <Link href="/catalogue" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer 
           hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-white" 
           style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
@@ -48,8 +49,8 @@ export default function Home() {
             <p className="text-sm text-center">
               Browse all TMU courses, prerequisites, and detailed descriptions in one organized place.
             </p>
-          </div>
-          <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
+          </Link>
+          <Link href="/planner" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
            hover:opacity-90 transition-all duration-200 hover:bg-black hover:scale-105 hover:border-1 border-white"
            style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
@@ -61,8 +62,8 @@ export default function Home() {
             <p className="text-sm text-center">
               Map out your degree requirements and track your academic progress per semester.
             </p>
-          </div>
-          <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
+          </Link>
+          <Link href="/schedule" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
            hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-white"
            style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
@@ -74,8 +75,8 @@ export default function Home() {
             <p className="text-sm text-center">
               Create your ideal timetable by mixing and matching courses to avoid conflicts and optimize your week.
             </p>
-          </div>
-          <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
+          </Link>
+          <Link href="/transcript" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
            hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-white"
            style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
@@ -87,7 +88,7 @@ export default function Home() {
             <p className="text-sm text-center">
               Upload your transcript to automatically extract completed courses and update your planner.
             </p>
-          </div>
+          </Link>
         </div>
       </div>
 

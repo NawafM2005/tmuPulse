@@ -19,6 +19,10 @@ const faqs = [
     q: "Who built TMU Planner?",
     a: "TMU Planner was built by TMU students, for TMU students, to make planning university life simple and stress-free.",
   },
+  {
+    q: "Do I need to create an account?",
+    a: "Nope! You can use TMU Planner without creating an account. Just start planning your courses right away. BUT, creating an account allows you to save your plans and access them from any device.",
+  },
 ];
 
 export default function FAQ() {
@@ -28,7 +32,7 @@ export default function FAQ() {
     <div className="p-6 max-w-8xl mx-auto mb-10 mt-10 bg-foreground rounded-2xl shadow-lg">
       <h2 className="text-[55px] font-[600] text-white text-center mb-10">Frequently Asked Questions</h2>
       {faqs.map((item, i) => (
-        <div key={i} className="mb-3 bg-white rounded-xl shadow-sm">
+        <div key={i} className="mb-3 bg-white rounded-xl shadow-sm max-w-3xl">
           <button
             className={`font-semibold w-full text-left flex items-center justify-between px-4 py-3 rounded-xl
               focus:outline-none transition-colors duration-150
