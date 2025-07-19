@@ -3,14 +3,14 @@ import tmuLogo from '../assets/tmu-monkey-logo.png';
 
 export default function Navbar() {
   return (
-    <nav className="bg-black text-white px-20 py-2 flex flex-row justify-between items-center gap-30 absolute top-0 left-0 w-full text-15 border-b-2 border-secondary">
+    <nav className="bg-black/30 backdrop-blur-xl text-white px-20 py-2 flex flex-row justify-between items-center gap-30 fixed top-0 left-0 w-full text-[15px] border-b-2 border-secondary z-50">
         
         <a href='/'>
             <div className="text-xl font-bold flex flex-row hover:cursor-pointer items-center">
             <img src={tmuLogo.src} alt="TMU Logo" className="h-15 w-15" />
 
             <p className="text-accent">TMU</p>
-            <p className="text-secondary">.courses</p>
+            <p className="text-secondary">.planner</p>
         </div>
         </a>
 
@@ -19,7 +19,7 @@ export default function Navbar() {
             <a href="#" className="p-2 rounded-[10px] hover:bg-secondary hover:text-black transition-colors duration-200">Catalogue</a>
             </li>
             <li>
-            <a href="#" className="p-2 rounded-[10px] hover:bg-secondary hover:text-black transition-colors duration-200">Courses Planner</a>
+            <a href="#" className="p-2 rounded-[10px] hover:bg-secondary hover:text-black transition-colors duration-200">Degree Planner</a>
             </li>
             <li>
             <a href="#" className="p-2 rounded-[10px] hover:bg-secondary hover:text-black transition-colors duration-200">Schedule Builder</a>

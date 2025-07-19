@@ -1,34 +1,92 @@
 import Navbar from "@/components/navbar";
-import tmuLogo from '@/assets/tmu-monkey-logo.png';
+import homeBanner from '@/assets/home-banner-transparent.png';
+import logo from '@/assets/tmu-monkey-logo.png';
 
 export default function Home() {
   return (
-    <main className="flex flex-row min-h-screen items-center justify-center bg-foreground">
+    <main className="flex flex-col min-h-screen items-center justify-center bg-foreground">
       <Navbar />
 
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center mt-20">
         <div className="text-white flex flex-col gap-4 p-10 items-center justify-center">
-          <h1 className="text-[70px] font-[800]">Welcome to Your TMU Dashboard</h1>
+          <h1 className="text-[70px] font-[800]">Welcome to Your <span className="text-accent">T</span><span className="text-secondary">M</span><span className="text-primary">U</span> Dashboard</h1>
           <h3 className="text-[30px] font-[600]">Shape Your Semester,</h3>
-          <h3 className="text-[30px] font-[600] m">Your Way</h3>
+          <h3 className="text-[30px] font-[600] text-red-400">Your Way</h3>
           <p className="w-[1000px]">Stay ahead with smart course tracking, personalized schedules, and instant academic updates.
               All your university essentials—organized, accessible, and tailored for TMU students.
           </p>
           <button className="bg-primary w-[170px] text-secondary text-[9px] font-bold rounded-[10px] p-1"
           style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.75)" }}
           >Toronto Metropolitan University</button>
-          <div className="flex flex-row gap-4 mt-4">
-              <button className="bg-primary text-white px-4 py-2 rounded">Browse Courses</button>
-              <button className="bg-primary text-white px-4 py-2 rounded">Build Schedule</button>
+          <div className="flex flex-row gap-20 mt-4">
+              <button className="bg-primary text-black font-bold text-[15px] bg-secondary px-2 py-2 rounded hover:cursor-pointer hover:opacity-90 transition-colors duration-200">Browse Courses</button>
+              <button className="bg-primary text-white font-bold text-[15px] bg-accent px-2 py-2 rounded hover:cursor-pointer hover:opacity-90 transition-colors duration-200">Build Schedule</button>
           </div>
         </div>
 
         <div className="flex flex-row gap-10">
-          <img src={tmuLogo.src} alt="TMU Logo" className="h-50 w-50" />
-          <img src={tmuLogo.src} alt="TMU Logo" className="h-50 w-50" />
+          <img src={homeBanner.src} alt="Home Banner" className="h-60 w-180" />
         </div>
-       
-       
+      </div>
+
+      <div className="flex flex-col items-center justify-center mt-30">
+        <h1 className="text-[55px] font-[600] text-white">Unlock Your Academic Toolbox</h1>
+        <h3 className="text-[15px] text-white mt-5">All the Tools You Need to Conquer TMU, All in One Place</h3>
+
+        <div className="flex flex-wrap gap-8 justify-center mt-10 mb-20">
+          <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer 
+          hover:opacity-90 transition-all duration-500 hover:bg-black/90 hover:scale-102" 
+          style={{
+                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}>
+            <h2 className="font-bold text-lg mb-2">Course Catalogue</h2>
+            <p className="text-sm text-center">
+              Browse all TMU courses, prerequisites, and detailed descriptions in one organized place.
+            </p>
+          </div>
+          <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
+           hover:opacity-90 transition-all duration-500 hover:bg-black/90 hover:scale-102"
+           style={{
+                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}>
+            <h2 className="font-bold text-lg mb-2">Degree Planner</h2>
+            <p className="text-sm text-center">
+              Map out your degree requirements and track your academic progress semester by semester.
+            </p>
+          </div>
+          <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
+           hover:opacity-90 transition-all duration-500 hover:bg-black/90 hover:scale-102"
+           style={{
+                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}>
+            <h2 className="font-bold text-lg mb-2">Schedule Builder</h2>
+            <p className="text-sm text-center">
+              Create your ideal timetable by mixing and matching courses to avoid conflicts and optimize your week.
+            </p>
+          </div>
+          <div className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
+           hover:opacity-90 transition-all duration-500 hover:bg-black/90 hover:scale-102"
+           style={{
+                  backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.65)), url(${logo.src})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}>
+            <h2 className="font-bold text-lg mb-2">Transcript Parser</h2>
+            <p className="text-sm text-center">
+              Upload your transcript to automatically extract completed courses and update your planner.
+            </p>
+          </div>
+        </div>
       </div>
     </main>
   );
