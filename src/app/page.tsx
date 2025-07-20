@@ -26,8 +26,15 @@ export default function Home() {
           style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.75)" }}
           >Toronto Metropolitan University</button>
           <div className="flex flex-row gap-10 mt-4">
-              <button className="bg-primary text-black font-bold text-[15px] bg-secondary px-2 py-2 rounded hover:cursor-pointer hover:opacity-90 transition-all duration-200 hover:scale-101">Browse Courses</button>
-              <button className="bg-primary text-white font-bold text-[15px] bg-accent px-2 py-2 rounded hover:cursor-pointer hover:opacity-90 transition-all duration-200 hover:scale-101">Build Schedule</button>
+            <Link href="/catalogue">
+              <button className="bg-primary text-black font-bold text-[15px] bg-secondary px-2 py-2 rounded hover:cursor-pointer
+               hover:opacity-90 transition-all duration-200 hover:scale-101 shadow-[0_2px_5px_0_rgba(255,225,225,0.5)]">Browse Courses</button>
+            </Link>
+
+            <Link href="/schedule">
+              <button className="bg-primary text-white font-bold text-[15px] bg-accent px-2 py-2 rounded hover:cursor-pointer
+               hover:opacity-90 transition-all duration-100 hover:scale-101 shadow-[0_2px_5px_0_rgba(255,225,225,0.5)]">Build Schedule</button>
+            </Link>
           </div>
         </div>
 
