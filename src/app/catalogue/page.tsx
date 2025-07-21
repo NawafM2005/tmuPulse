@@ -1,21 +1,50 @@
 "use client";
 import Navbar from "@/components/navbar";
 import { Input } from "@/components/ui/input";
-import logo from "@/assets/tmu-monkey-logo.png";
+import search from "@/assets/search.png";
 import { SimpleSelectScrollable } from "@/components/selectScrollable";
 import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
+import Loading from "../loading";
+import Footer from "@/components/footer";
 
 export default function Catalogue() {
   const [departments, setDepartments] = useState<{value: string, label: string}[]>([]);
+  const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const COURSES_PER_PAGE = 20;
+
+  const startIdx = (page - 1) * COURSES_PER_PAGE;
+  const endIdx = startIdx + COURSES_PER_PAGE;
+  const paginatedCourses = courses.slice(startIdx, endIdx);
+
+  type Course = {
+    id: number;
+    code: string;
+    name: string;
+    description: string;
+    weekly_contact: string;
+    gpa_weight: string;
+    billing_unit: string;
+    course_count: string;
+    prerequisites: string;
+    corequisites: string;
+    antirequisites: string;
+    custom_requisites: string;
+    department_id: number;
+  };
+
+
+  function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   useEffect(() => {
     const fetchDepartments = async () => {
-      setLoading(true);
       let { data, error } = await supabase
-        .from('departments')         // Change to your actual table name!
-        .select('id, name');         // Adjust fields as needed
+        .from('departments')
+        .select('id, name');
       if (error) {
         console.error("Error Fetching Departments...", error);
         setDepartments([]);
@@ -27,17 +56,37 @@ export default function Catalogue() {
           }))
         );
       }
+      await sleep(500);
       setLoading(false);
     };
 
-    fetchDepartments();
-  }, []);
+      fetchDepartments();
+    }, []);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      let { data, error } = await supabase
+        .from('courses')
+        .select('*');
+      if (error) {
+        console.error("Error Fetching Courses...", error);
+        setDepartments([]);
+      } else {
+        setCourses(data ?? []);
+      }
+      await sleep(500);
+      setLoading(false);
+    };
+      fetchCourses();
+    }, []);
 
   return (
     <main className="flex flex-col min-h-screen items-center justify-center bg-foreground">
+      {loading && <Loading/>}
+
       <Navbar/>
 
-      <div className="flex flex-col items-center justify-center p-8 w-full max-w-3xl mt-8 gap-4 text-center">
+      <div className="flex flex-col items-center justify-center p-8 w-full max-w-3xl mt-30 gap-4 text-center">
         <h1 className="text-[70px] font-[800] text-secondary" >Course Catalogue</h1>
         <p className="text-[20px] font-[400] text-white">Browse all current courses at TMU. Search, filter, and discover classes by course code, department, or keyword.</p>
       </div>
@@ -45,7 +94,7 @@ export default function Catalogue() {
       <div className="flex justify-center w-full max-w-3xl mt-8">
         <div className="relative w-full">
           <img
-            src={logo.src}
+            src={search.src}
             alt="TMU Logo"
             className="absolute left-3 top-1/2 transform -translate-y-1/2 h-6 w-6 pointer-events-none"
           />
@@ -57,13 +106,77 @@ export default function Catalogue() {
         </div>
       </div>
 
-      <div className="flex flex-row gap-10 justify-left w-full max-w-3xl mt-8 text-center">
+      <div className="flex flex-row gap-10 justify-left w-full max-w-3xl mt-4 text-center">
         <SimpleSelectScrollable
           className="bg-black/20 text-secondary font-semibold"
           options={departments}
           placeholder="Select a department"
         />
       </div>
+
+      <div className="flex flex-col items-center justify-center w-full max-w-3xl mb-10 gap-4">
+          <div className="flex flex-col items-center justify-center w-full max-w-3xl mb-10 gap-4">
+            {paginatedCourses.map((course) => (
+              <div
+                key={course.id}
+                className="flex flex-col justify-left p-8 w-full max-w-3xl mt-8 gap-4 text-left bg-black/40 text-white rounded-lg shadow-lg border-2 border-secondary hover:cursor-pointer transition-all duration-300 ease-in-out hover:scale-101 text-[15px]"
+              >
+                <h1
+                  className="font-bold text-[20px] text-white"
+                  style={{ textShadow: "2px 2px 8px #000, 1px 1px 10px #6af3daff" }}
+                >
+                  {course.code} - {course.name}
+                </h1>
+                <p>{course.description}</p>
+
+                <div className="flex flex-row gap-5">
+                  <p>Lecture: {course.weekly_contact || "N/A"}</p>
+                  <p>GPA Weight: {course.gpa_weight || "N/A"}</p>
+                  <p>Billing Unit: {course.billing_unit || "N/A"}</p>
+                  <p>Course Count: {course.course_count || "N/A"}</p>
+                </div>
+
+                <div className="flex flex-row gap-10">
+                  <p>Prerequisites: {course.prerequisites || "None"}</p>
+                  <p>Corequisites: {course.corequisites || "None"}</p>
+                </div>
+
+                <div className="flex flex-row gap-10">
+                  <p>Antirequisites: {course.antirequisites || "None"}</p>
+                  <p>Custom Requisites: {course.custom_requisites || "None"}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex flex-row gap-4 mt-6">
+            <button
+              className="px-4 py-2 bg-secondary text-black font-semibold rounded disabled:opacity-50"
+              onClick={() => {
+                setPage(page - 1);
+                window.scrollTo({ top: 200, behavior: "smooth" });
+              }}
+              
+              disabled={page === 1}
+            >
+              Previous
+            </button>
+            <span className="text-white font-bold self-center">
+              Page {page} of {Math.ceil(courses.length / COURSES_PER_PAGE)}
+            </span>
+            <button
+              className="px-4 py-2 bg-secondary text-black font-semibold rounded disabled:opacity-50"
+             onClick={() => {
+                setPage(page + 1);
+                window.scrollTo({ top: 200, behavior: "smooth" });
+              }}
+              disabled={endIdx >= courses.length}
+            >
+              Next
+            </button>
+          </div>
+      </div>
+      <Footer/>
 
     </main>
   );
