@@ -11,15 +11,27 @@ import Footer from "@/components/footer";
 export default function Catalogue() {
   const [departments, setDepartments] = useState<{value: string, label: string}[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
-  const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
+  const [selectedDepartment, setSelectedDepartment] = useState<string | undefined>(undefined);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const COURSES_PER_PAGE = 10;
-
   const startIdx = (page - 1) * COURSES_PER_PAGE;
   const endIdx = startIdx + COURSES_PER_PAGE;
-  const paginatedCourses = courses.slice(startIdx, endIdx);
+
+  const filteredCourses = courses.filter(course => {
+  const matchesDepartment =
+    !selectedDepartment || course.department_id === Number(selectedDepartment);
+  const matchesSearch =
+    course.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    course.name.toLowerCase().includes(searchTerm.toLowerCase());
+  return matchesDepartment && matchesSearch;
+})
+.sort((a, b) => a.code.localeCompare(b.code));
+
+
+  const paginatedCourses = filteredCourses.slice(startIdx, endIdx);
 
   type Course = {
     id: number;
@@ -68,41 +80,35 @@ export default function Catalogue() {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      try {
-        if (selectedDepartment) {
-          let { data, error } = await supabase
-            .from('courses')
-            .select('*')
-            .eq('department_id', selectedDepartment)
-            .order('code', { ascending: true });
-          if (error) {
-            console.error("Error Fetching Courses...", error);
-            setCourses([]);
-          } else {
-            setCourses(data ?? []);
-            setPage(1);
-          }
-        } else {
-          let { data, error } = await supabase
-            .from('courses')
-            .select('*');
-          if (error) {
-            console.error("Error Fetching Courses...", error);
-            setCourses([]);
-          } else {
-            setCourses(data ?? []);
-          }
-        }
-      } catch (err) {
-        console.error("Monky error!", err);
+      let { data, error } = await supabase
+        .from('courses')
+        .select('*')
+      if (error) {
         setCourses([]);
+      } else {
+        setCourses(data ?? []);
       }
       await sleep(250);
       setLoading(false);
     };
-
     fetchData();
-  }, [selectedDepartment]);
+  }, []);
+
+
+  const resetSearch = () => {
+    setSearchTerm("");
+    if (departments.length > 0) setSelectedDepartment(undefined);
+    else {
+      const interval = setInterval(() => {
+        if (departments.length > 0) {
+          setSelectedDepartment(undefined);
+          clearInterval(interval);
+        }
+      }, 50);
+    }
+    setPage(1);
+  };
+
 
 
   return (
@@ -127,19 +133,28 @@ export default function Catalogue() {
             className="pl-12 text-secondary bg-black/20 w-full font-semibold"
             type="search"
             placeholder="Course Code, Title..."
+            value={searchTerm}
+            onChange={e => {
+              setSearchTerm(e.target.value);
+              setPage(1);
+            }}
           />
         </div>
       </div>
 
       <div className="flex flex-row gap-10 justify-between w-full max-w-3xl mt-4 text-center">
+        {departments.length > 0 && (
         <SimpleSelectScrollable
+          key={selectedDepartment ?? "empty"}
           className="bg-black/20 text-secondary font-semibold"
           options={departments}
           placeholder="Select a department"
           value={selectedDepartment}
-          onChange={(option) => setSelectedDepartment(option?.value ?? null)}
+          onChange={(option) => setSelectedDepartment(option?.value ?? undefined)}
         />
-        <button className="text-red-400 font-semibold mr-2 hover:cursor-pointer hover:underline" onClick={() =>setSelectedDepartment(null)}>Reset</button>
+
+      )}
+        <button className="text-red-400 font-semibold mr-2 hover:cursor-pointer hover:underline" onClick={() =>resetSearch()}>Reset</button>
       </div>
 
       <div className="flex flex-col items-center justify-center w-full max-w-3xl mb-10 gap-4">
@@ -174,6 +189,7 @@ export default function Catalogue() {
             ))}
           </div>
           
+          {filteredCourses.length > 10 && (
           <div className="flex flex-row gap-4 mt-6">
             <button
               className="px-4 py-2 bg-secondary text-black font-semibold rounded disabled:opacity-50 hover:cursor-pointer"
@@ -181,25 +197,25 @@ export default function Catalogue() {
                 setPage(page - 1);
                 window.scrollTo({ top: 200, behavior: "smooth" });
               }}
-              
               disabled={page === 1}
             >
               Previous
             </button>
             <span className="text-white font-bold self-center">
-              Page {page} of {Math.ceil(courses.length / COURSES_PER_PAGE)}
+              Page {page} of {Math.ceil(filteredCourses.length / COURSES_PER_PAGE)}
             </span>
             <button
               className="px-4 py-2 bg-secondary text-black font-semibold rounded disabled:opacity-50 hover:cursor-pointer"
-             onClick={() => {
+              onClick={() => {
                 setPage(page + 1);
                 window.scrollTo({ top: 200, behavior: "smooth" });
               }}
-              disabled={endIdx >= courses.length}
+              disabled={endIdx >= filteredCourses.length}
             >
               Next
             </button>
           </div>
+        )}
       </div>
       <Footer/>
 
