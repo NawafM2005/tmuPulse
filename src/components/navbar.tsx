@@ -31,7 +31,7 @@ export default function Navbar() {
 
         <ul>
             <li>
-            <Link href="/login" className="px-5 py-2 rounded-[5px] bg-red-500 hover:bg-red-800 transition-colors duration-100 font-bold text-[15px]">Login</Link>
+            <Link href="/login" className="px-5 py-2 rounded-[5px] bg-red-500 hover:bg-red-800 transition-all duration-100 hover:scale-101 font-bold text-[15px]">Login</Link>
             </li>
         </ul>
     </nav>
