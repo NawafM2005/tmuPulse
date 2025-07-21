@@ -1,224 +1,153 @@
-"use client";
+"use client"
+
+import { useState, useEffect } from "react";
 import Navbar from "@/components/navbar";
-import { Input } from "@/components/ui/input";
-import search from "@/assets/search.png";
-import { SimpleSelectScrollable } from "@/components/selectScrollable";
+import { Course, columns } from "./columns";
+import { DataTable } from "./data-table";
+import { ProgramSelector } from "./program-selector";
 import { supabase } from "@/lib/supabaseClient";
-import { useEffect, useState } from "react";
 import Loading from "../loading";
-import Footer from "@/components/footer";
+
+// Define the Supabase Course type
+type SupabaseCourse = {
+  id: number;
+  code: string;
+  name: string;
+  description: string;
+  weekly_contact: string;
+  gpa_weight: string;
+  billing_unit: string;
+  course_count: string;
+  prerequisites: string;
+  corequisites: string;
+  antirequisites: string;
+  custom_requisites: string;
+  department_id: number;
+}
+
+// Define the Department type
+type Department = {
+  id: number;
+  name: string;
+}
 
 export default function Catalogue() {
-  const [departments, setDepartments] = useState<{value: string, label: string}[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
-  const [selectedDepartment, setSelectedDepartment] = useState<string | undefined>(undefined);
-  const [searchTerm, setSearchTerm] = useState("");
-
+  const [departments, setDepartments] = useState<Department[]>([]);
+  const [selectedDepartments, setSelectedDepartments] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const COURSES_PER_PAGE = 10;
-  const startIdx = (page - 1) * COURSES_PER_PAGE;
-  const endIdx = startIdx + COURSES_PER_PAGE;
 
-  const filteredCourses = courses.filter(course => {
-  const matchesDepartment =
-    !selectedDepartment || course.department_id === Number(selectedDepartment);
-  const matchesSearch =
-    course.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    course.name.toLowerCase().includes(searchTerm.toLowerCase());
-  return matchesDepartment && matchesSearch;
-})
-.sort((a, b) => a.code.localeCompare(b.code));
-
-
-  const paginatedCourses = filteredCourses.slice(startIdx, endIdx);
-
-  type Course = {
-    id: number;
-    code: string;
-    name: string;
-    description: string;
-    weekly_contact: string;
-    gpa_weight: string;
-    billing_unit: string;
-    course_count: string;
-    prerequisites: string;
-    corequisites: string;
-    antirequisites: string;
-    custom_requisites: string;
-    department_id: number;
-  };
-
-
-  function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
+  // Fetch departments from Supabase
   useEffect(() => {
     const fetchDepartments = async () => {
-      let { data, error } = await supabase
-        .from('departments')
-        .select('id, name');
-      if (error) {
-        console.error("Error Fetching Departments...", error);
+      try {
+        const { data, error } = await supabase
+          .from('departments')
+          .select('id, name')
+          .order('name');
+
+        if (error) {
+          console.error('Error fetching departments:', error);
+          setDepartments([]);
+        } else {
+          setDepartments(data || []);
+        }
+      } catch (error) {
+        console.error('Error fetching departments:', error);
         setDepartments([]);
-      } else {
-        setDepartments(
-          (data ?? []).map((dept: {id: string, name: string}) => ({
-            value: dept.id,
-            label: dept.name.toUpperCase(),
-          }))
-        );
       }
-      await sleep(250);
-      setLoading(false);
     };
 
-      fetchDepartments();
-    }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      let { data, error } = await supabase
-        .from('courses')
-        .select('*')
-      if (error) {
-        setCourses([]);
-      } else {
-        setCourses(data ?? []);
-      }
-      await sleep(250);
-      setLoading(false);
-    };
-    fetchData();
+    fetchDepartments();
   }, []);
 
+  // Fetch courses from Supabase
+  useEffect(() => {
+    const fetchCourses = async () => {
+      setLoading(true);
+      try {
+        let query = supabase
+          .from('courses')
+          .select('*')
+          .order('code');
 
-  const resetSearch = () => {
-    setSearchTerm("");
-    if (departments.length > 0) setSelectedDepartment(undefined);
-    else {
-      const interval = setInterval(() => {
-        if (departments.length > 0) {
-          setSelectedDepartment(undefined);
-          clearInterval(interval);
+        // Filter by selected departments if any are selected
+        if (selectedDepartments.length > 0) {
+          query = query.in('department_id', selectedDepartments);
         }
-      }, 50);
-    }
-    setPage(1);
+
+        const { data, error } = await query;
+
+        if (error) {
+          console.error('Error fetching courses:', error);
+          setCourses([]);
+        } else {
+          // Transform Supabase data to match our Course interface
+          const transformedCourses: Course[] = (data || []).map((course: SupabaseCourse) => ({
+            code: course.code,
+            name: course.name,
+            description: course.description,
+            "weekly contact": course.weekly_contact,
+            "gpa weight": course.gpa_weight,
+            "billing unit": course.billing_unit,
+            "course count": course.course_count,
+            prerequisites: course.prerequisites,
+            corequisites: course.corequisites,
+            antirequisites: course.antirequisites,
+            "custom requisites": course.custom_requisites,
+          }));
+          setCourses(transformedCourses);
+        }
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+        setCourses([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, [selectedDepartments]);
+
+  const handleDepartmentToggle = (departmentId: number) => {
+    setSelectedDepartments(prev => {
+      if (prev.includes(departmentId)) {
+        return prev.filter(id => id !== departmentId);
+      } else {
+        return [...prev, departmentId];
+      }
+    });
   };
 
+  const handleClearSelection = () => {
+    setSelectedDepartments([]);
+  };
 
+  if (loading && courses.length === 0) {
+    return <Loading />;
+  }
 
   return (
-    <main className="flex flex-col min-h-screen items-center justify-center bg-foreground">
-      {loading && <Loading/>}
-
+    <main className="min-h-screen bg-foreground pt-20">
       <Navbar/>
-
-      <div className="flex flex-col items-center justify-center p-8 w-full max-w-3xl mt-30 gap-4 text-center">
-        <h1 className="text-[70px] font-[800] text-secondary" >Course Catalogue</h1>
-        <p className="text-[20px] font-[400] text-white">Browse all current courses at TMU. Search, filter, and discover classes by course code, department, or keyword.</p>
-      </div>
-
-      <div className="flex justify-center w-full max-w-3xl mt-8">
-        <div className="relative w-full">
-          <img
-            src={search.src}
-            alt="TMU Logo"
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 h-6 w-6 pointer-events-none"
-          />
-          <Input
-            className="pl-12 text-secondary bg-black/20 w-full font-semibold"
-            type="search"
-            placeholder="Course Code, Title..."
-            value={searchTerm}
-            onChange={e => {
-              setSearchTerm(e.target.value);
-              setPage(1);
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="flex flex-row gap-10 justify-between w-full max-w-3xl mt-4 text-center">
-        {departments.length > 0 && (
-        <SimpleSelectScrollable
-          key={selectedDepartment ?? "empty"}
-          className="bg-black/20 text-secondary font-semibold"
-          options={departments}
-          placeholder="Select a department"
-          value={selectedDepartment}
-          onChange={(option) => setSelectedDepartment(option?.value ?? undefined)}
+      <div className="container mx-auto py-10">
+        <h1 className="text-3xl font-bold mb-6 text-white">Course Catalogue</h1>
+        <ProgramSelector 
+          programs={departments.map(dept => dept.name)} 
+          selectedPrograms={departments
+            .filter(dept => selectedDepartments.includes(dept.id))
+            .map(dept => dept.name)
+          }
+          onProgramToggle={(programName: string) => {
+            const department = departments.find(dept => dept.name === programName);
+            if (department) {
+              handleDepartmentToggle(department.id);
+            }
+          }}
+          onClearSelection={handleClearSelection}
         />
-
-      )}
-        <button className="text-red-400 font-semibold mr-2 hover:cursor-pointer hover:underline" onClick={() =>resetSearch()}>Reset</button>
+        <DataTable columns={columns} data={courses} />
       </div>
-
-      <div className="flex flex-col items-center justify-center w-full max-w-3xl mb-10 gap-4">
-          <div className="flex flex-col items-center justify-center w-full max-w-3xl mb-10 gap-4">
-            {paginatedCourses.map((course) => (
-              <div
-                key={course.id}
-                className="flex flex-col justify-left p-8 w-full max-w-3xl mt-8 gap-4 text-left bg-black/40 text-white rounded-lg shadow-lg border-4 border-secondary hover:cursor-pointer transition-all duration-300 ease-in-out hover:scale-101 text-[15px]"
-              >
-                <h1
-                  className="font-bold text-[20px] text-white"
-                  style={{ textShadow: "2px 2px 8px #000, 1px 1px 10px #6af3daff" }}
-                >
-                  {course.code} - {course.name}
-                </h1>
-                <p>{course.description}</p>
-
-                <div className="flex flex-row gap-5">
-                  <p>Lecture: {course.weekly_contact || "N/A"}</p>
-                  <p>GPA Weight: {course.gpa_weight || "N/A"}</p>
-                  <p>Billing Unit: {course.billing_unit || "N/A"}</p>
-                  <p>Course Count: {course.course_count || "N/A"}</p>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <p>Prerequisites: {course.prerequisites || "None"}</p>
-                  <p>Corequisites: {course.corequisites || "None"}</p>
-                  <p>Antirequisites: {course.antirequisites || "None"}</p>
-                  <p>Custom Requisites: {course.custom_requisites || "None"}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          {filteredCourses.length > 10 && (
-          <div className="flex flex-row gap-4 mt-6">
-            <button
-              className="px-4 py-2 bg-secondary text-black font-semibold rounded disabled:opacity-50 hover:cursor-pointer"
-              onClick={() => {
-                setPage(page - 1);
-                window.scrollTo({ top: 200, behavior: "smooth" });
-              }}
-              disabled={page === 1}
-            >
-              Previous
-            </button>
-            <span className="text-white font-bold self-center">
-              Page {page} of {Math.ceil(filteredCourses.length / COURSES_PER_PAGE)}
-            </span>
-            <button
-              className="px-4 py-2 bg-secondary text-black font-semibold rounded disabled:opacity-50 hover:cursor-pointer"
-              onClick={() => {
-                setPage(page + 1);
-                window.scrollTo({ top: 200, behavior: "smooth" });
-              }}
-              disabled={endIdx >= filteredCourses.length}
-            >
-              Next
-            </button>
-          </div>
-        )}
-      </div>
-      <Footer/>
-
     </main>
   );
 }
