@@ -3,10 +3,12 @@ import json
 from dotenv import load_dotenv
 import os
 
+
 load_dotenv()
 
 url = os.getenv("db_url")
 key = os.getenv("db_key")
+supabase = create_client(url, key)
 
 
 print("📡 Connected to Supabase")
@@ -39,6 +41,7 @@ for dept_name, course_list in data.items():
             "prerequisites": course.get("prerequisites"),
             "corequisites": course.get("corequisites"),
             "antirequisites": course.get("antirequisites"),
+            "liberal": course.get("liberal"),
             "custom_requisites": course.get("custom requisites"),
             "department_id": dept_id
         }).execute()

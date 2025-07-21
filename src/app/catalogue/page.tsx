@@ -46,6 +46,7 @@ export default function Catalogue() {
     corequisites: string;
     antirequisites: string;
     custom_requisites: string;
+    liberal: string;
     department_id: number;
   };
 
@@ -177,6 +178,7 @@ export default function Catalogue() {
                   <p>GPA Weight: {course.gpa_weight || "N/A"}</p>
                   <p>Billing Unit: {course.billing_unit || "N/A"}</p>
                   <p>Course Count: {course.course_count || "N/A"}</p>
+                  <p>Liberal: {course.liberal || "N/A"}</p>
                 </div>
 
                 <div className="flex flex-col gap-1">
