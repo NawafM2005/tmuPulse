@@ -11,9 +11,11 @@ import Footer from "@/components/footer";
 export default function Catalogue() {
   const [departments, setDepartments] = useState<{value: string, label: string}[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
+  const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
+
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const COURSES_PER_PAGE = 20;
+  const COURSES_PER_PAGE = 10;
 
   const startIdx = (page - 1) * COURSES_PER_PAGE;
   const endIdx = startIdx + COURSES_PER_PAGE;
@@ -56,7 +58,7 @@ export default function Catalogue() {
           }))
         );
       }
-      await sleep(500);
+      await sleep(250);
       setLoading(false);
     };
 
@@ -64,21 +66,44 @@ export default function Catalogue() {
     }, []);
 
   useEffect(() => {
-    const fetchCourses = async () => {
-      let { data, error } = await supabase
-        .from('courses')
-        .select('*');
-      if (error) {
-        console.error("Error Fetching Courses...", error);
-        setDepartments([]);
-      } else {
-        setCourses(data ?? []);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        if (selectedDepartment) {
+          let { data, error } = await supabase
+            .from('courses')
+            .select('*')
+            .eq('department_id', selectedDepartment)
+            .order('code', { ascending: true });
+          if (error) {
+            console.error("Error Fetching Courses...", error);
+            setCourses([]);
+          } else {
+            setCourses(data ?? []);
+            setPage(1);
+          }
+        } else {
+          let { data, error } = await supabase
+            .from('courses')
+            .select('*');
+          if (error) {
+            console.error("Error Fetching Courses...", error);
+            setCourses([]);
+          } else {
+            setCourses(data ?? []);
+          }
+        }
+      } catch (err) {
+        console.error("Monky error!", err);
+        setCourses([]);
       }
-      await sleep(500);
+      await sleep(250);
       setLoading(false);
     };
-      fetchCourses();
-    }, []);
+
+    fetchData();
+  }, [selectedDepartment]);
+
 
   return (
     <main className="flex flex-col min-h-screen items-center justify-center bg-foreground">
@@ -106,12 +131,15 @@ export default function Catalogue() {
         </div>
       </div>
 
-      <div className="flex flex-row gap-10 justify-left w-full max-w-3xl mt-4 text-center">
+      <div className="flex flex-row gap-10 justify-between w-full max-w-3xl mt-4 text-center">
         <SimpleSelectScrollable
           className="bg-black/20 text-secondary font-semibold"
           options={departments}
           placeholder="Select a department"
+          value={selectedDepartment}
+          onChange={(option) => setSelectedDepartment(option?.value ?? null)}
         />
+        <button className="text-red-400 font-semibold mr-2 hover:cursor-pointer hover:underline" onClick={() =>setSelectedDepartment(null)}>Reset</button>
       </div>
 
       <div className="flex flex-col items-center justify-center w-full max-w-3xl mb-10 gap-4">
@@ -119,7 +147,7 @@ export default function Catalogue() {
             {paginatedCourses.map((course) => (
               <div
                 key={course.id}
-                className="flex flex-col justify-left p-8 w-full max-w-3xl mt-8 gap-4 text-left bg-black/40 text-white rounded-lg shadow-lg border-2 border-secondary hover:cursor-pointer transition-all duration-300 ease-in-out hover:scale-101 text-[15px]"
+                className="flex flex-col justify-left p-8 w-full max-w-3xl mt-8 gap-4 text-left bg-black/40 text-white rounded-lg shadow-lg border-4 border-secondary hover:cursor-pointer transition-all duration-300 ease-in-out hover:scale-101 text-[15px]"
               >
                 <h1
                   className="font-bold text-[20px] text-white"
@@ -136,12 +164,9 @@ export default function Catalogue() {
                   <p>Course Count: {course.course_count || "N/A"}</p>
                 </div>
 
-                <div className="flex flex-row gap-10">
+                <div className="flex flex-col gap-1">
                   <p>Prerequisites: {course.prerequisites || "None"}</p>
                   <p>Corequisites: {course.corequisites || "None"}</p>
-                </div>
-
-                <div className="flex flex-row gap-10">
                   <p>Antirequisites: {course.antirequisites || "None"}</p>
                   <p>Custom Requisites: {course.custom_requisites || "None"}</p>
                 </div>
@@ -151,7 +176,7 @@ export default function Catalogue() {
           
           <div className="flex flex-row gap-4 mt-6">
             <button
-              className="px-4 py-2 bg-secondary text-black font-semibold rounded disabled:opacity-50"
+              className="px-4 py-2 bg-secondary text-black font-semibold rounded disabled:opacity-50 hover:cursor-pointer"
               onClick={() => {
                 setPage(page - 1);
                 window.scrollTo({ top: 200, behavior: "smooth" });
@@ -165,7 +190,7 @@ export default function Catalogue() {
               Page {page} of {Math.ceil(courses.length / COURSES_PER_PAGE)}
             </span>
             <button
-              className="px-4 py-2 bg-secondary text-black font-semibold rounded disabled:opacity-50"
+              className="px-4 py-2 bg-secondary text-black font-semibold rounded disabled:opacity-50 hover:cursor-pointer"
              onClick={() => {
                 setPage(page + 1);
                 window.scrollTo({ top: 200, behavior: "smooth" });

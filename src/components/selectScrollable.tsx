@@ -17,15 +17,25 @@ type SimpleSelectProps = {
   options: Option[]
   placeholder?: string
   className?: string
+  value?: string | null 
+  onChange?: (option: Option | null) => void
 }
 
 export function SimpleSelectScrollable({
   options,
+  value,
+  onChange,
   placeholder = "Select a department",
   className = "w-[280px]",
 }: SimpleSelectProps) {
   return (
-    <Select>
+    <Select
+      value={value ?? undefined}
+      onValueChange={v => {
+        const found = options.find(opt => opt.value === v)
+        onChange?.(found ?? null)
+      }}
+    >
       <SelectTrigger className={className}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
@@ -39,3 +49,4 @@ export function SimpleSelectScrollable({
     </Select>
   )
 }
+
