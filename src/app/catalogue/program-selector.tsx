@@ -1,13 +1,16 @@
 "use client"
 
+import * as React from "react"
+import { Button } from "@/components/ui/button"
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { ChevronDown } from "lucide-react"
 import { useRouter, useSearchParams } from 'next/navigation'
 
 interface ProgramSelectorProps {
@@ -60,54 +63,55 @@ export function ProgramSelector({ programs, selectedPrograms, onProgramToggle, o
     }
   }
 
+  const getButtonText = () => {
+    if (selectedPrograms.length === 0) {
+      return "All Programs"
+    } else if (selectedPrograms.length === 1) {
+      return selectedPrograms[0]
+    } else {
+      return `${selectedPrograms.length} Programs Selected`
+    }
+  }
+
   return (
-    <Card className="mb-6 bg-black/30 border-gray-700">
-      <CardHeader>
-        <CardTitle className="text-white">Select Program</CardTitle>
-        <CardDescription className="text-gray-300">
-          Choose one or more programs to view their courses. Click badges to add/remove programs from your selection.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="flex flex-wrap gap-2">
-          <Badge
-            variant={selectedPrograms.length === 0 ? "default" : "outline"}
-            className={`cursor-pointer transition-colors border ${
-              selectedPrograms.length === 0
-                ? "bg-[#3375C2] text-white hover:bg-[#3375C2]/80 border-[#3375C2]" 
-                : "bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-gray-700 hover:text-white hover:border-gray-500"
-            }`}
-            onClick={handleClearSelection}
+    <div>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button 
+            variant="outline" 
+            className="bg-black/30 border-gray-700 text-white hover:bg-gray-800 hover:text-white"
           >
-            All Programs
-          </Badge>
+            {getButtonText()}
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56 bg-black/90 border-gray-700">
+          <DropdownMenuLabel className="text-gray-300">Select Programs</DropdownMenuLabel>
+          <DropdownMenuSeparator className="bg-gray-700" />
           {programs.map((program) => (
-            <Badge
+            <DropdownMenuCheckboxItem
               key={program}
-              variant={selectedPrograms.includes(program) ? "default" : "outline"}
-              className={`cursor-pointer transition-colors border ${
-                selectedPrograms.includes(program)
-                  ? "bg-[#3375C2] text-white hover:bg-[#3375C2]/80 border-[#3375C2]"
-                  : "bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-gray-700 hover:text-white hover:border-gray-500"
-              }`}
-              onClick={() => handleProgramToggle(program)}
+              checked={selectedPrograms.includes(program)}
+              onCheckedChange={() => handleProgramToggle(program)}
+              className="text-white hover:bg-gray-800 focus:bg-gray-800"
             >
               {program}
-            </Badge>
+            </DropdownMenuCheckboxItem>
           ))}
-        </div>
-        {selectedPrograms.length > 0 && (
-          <div className="mt-4 p-3 bg-blue-900/30 rounded-lg border border-blue-700">
-            <p className="text-sm text-blue-200">
-              <span className="font-semibold">Showing courses for:</span>{" "}
-              {selectedPrograms.length === 1 
-                ? selectedPrograms[0]
-                : `${selectedPrograms.length} programs (${selectedPrograms.join(", ")})`
-              }
-            </p>
-          </div>
-        )}
-      </CardContent>
-    </Card>
+          {selectedPrograms.length > 0 && (
+            <>
+              <DropdownMenuSeparator className="bg-gray-700" />
+              <DropdownMenuCheckboxItem
+                checked={false}
+                onCheckedChange={handleClearSelection}
+                className="text-gray-400 hover:bg-gray-800 focus:bg-gray-800"
+              >
+                Clear All
+              </DropdownMenuCheckboxItem>
+            </>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   )
 }

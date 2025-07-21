@@ -27,11 +27,15 @@ import { Input } from "@/components/ui/input"
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    topContent?: React.ReactNode
+    belowSearchContent?: React.ReactNode
 }
 
 export function DataTable<TData, TValue>({
     columns,
-    data
+    data,
+    topContent,
+    belowSearchContent
 }: DataTableProps<TData, TValue>) {
     const [globalFilter, setGlobalFilter] = React.useState("")
     
@@ -57,14 +61,16 @@ export function DataTable<TData, TValue>({
 
     return (
         <div>
-            <div className="flex items-center py-4">
+            <div className="flex items-center justify-between py-4">
                 <Input
                 placeholder="Search courses by code or name..."
                 value={globalFilter ?? ""}
                 onChange={(event) => setGlobalFilter(event.target.value)}
                 className="max-w-sm bg-black/30 border-gray-700 text-white placeholder:text-gray-400"
                 />
+                {topContent}
             </div>
+            {belowSearchContent}
             <div className="rounded-md border border-gray-700 bg-black/20">
                 <Table>
                     <TableHeader>

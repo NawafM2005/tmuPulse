@@ -7,6 +7,8 @@ import { DataTable } from "./data-table";
 import { ProgramSelector } from "./program-selector";
 import { supabase } from "@/lib/supabaseClient";
 import Loading from "../loading";
+import { Badge } from "@/components/ui/badge";
+import { X } from "lucide-react";
 
 // Define the Supabase Course type
 type SupabaseCourse = {
@@ -119,6 +121,13 @@ export default function Catalogue() {
     });
   };
 
+  const handleDepartmentRemove = (departmentName: string) => {
+    const department = departments.find(dept => dept.name === departmentName);
+    if (department) {
+      handleDepartmentToggle(department.id);
+    }
+  };
+
   const handleClearSelection = () => {
     setSelectedDepartments([]);
   };
@@ -132,21 +141,56 @@ export default function Catalogue() {
       <Navbar/>
       <div className="container mx-auto py-10">
         <h1 className="text-3xl font-bold mb-6 text-white">Course Catalogue</h1>
-        <ProgramSelector 
-          programs={departments.map(dept => dept.name)} 
-          selectedPrograms={departments
-            .filter(dept => selectedDepartments.includes(dept.id))
-            .map(dept => dept.name)
+        <DataTable 
+          columns={columns} 
+          data={courses} 
+          topContent={
+            <ProgramSelector 
+              programs={departments.map(dept => dept.name)} 
+              selectedPrograms={departments
+                .filter(dept => selectedDepartments.includes(dept.id))
+                .map(dept => dept.name)
+              }
+              onProgramToggle={(programName: string) => {
+                const department = departments.find(dept => dept.name === programName);
+                if (department) {
+                  handleDepartmentToggle(department.id);
+                }
+              }}
+              onClearSelection={handleClearSelection}
+            />
           }
-          onProgramToggle={(programName: string) => {
-            const department = departments.find(dept => dept.name === programName);
-            if (department) {
-              handleDepartmentToggle(department.id);
-            }
-          }}
-          onClearSelection={handleClearSelection}
+          belowSearchContent={
+            selectedDepartments.length > 0 && (
+              <div className="mb-4 p-3 bg-blue-900/30 rounded-lg border border-blue-700">
+                <div className="flex flex-wrap gap-2 items-center">
+                  <span className="text-sm text-blue-200 font-semibold mr-2">Selected:</span>
+                  {departments
+                    .filter(dept => selectedDepartments.includes(dept.id))
+                    .map(dept => (
+                      <Badge
+                        key={dept.id}
+                        variant="secondary"
+                        className="bg-[#F9DD4A] text-black hover:bg-[#F9DD4A]/80 border-[#F9DD4A] cursor-pointer group flex items-center gap-1"
+                        onClick={() => handleDepartmentRemove(dept.name)}
+                      >
+                        {dept.name}
+                        <X className="h-3 w-3 group-hover:text-red-600 transition-colors" />
+                      </Badge>
+                    ))
+                  }
+                  <Badge
+                    variant="outline"
+                    className="bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-red-800/50 hover:border-red-600 hover:text-white cursor-pointer"
+                    onClick={handleClearSelection}
+                  >
+                    Clear All
+                  </Badge>
+                </div>
+              </div>
+            )
+          }
         />
-        <DataTable columns={columns} data={courses} />
       </div>
     </main>
   );
