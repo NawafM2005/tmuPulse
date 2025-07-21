@@ -26,7 +26,7 @@ processed_count = 0
 
 # ✅ Start Playwright once, outside the loop
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=False)
+    browser = p.chromium.launch(headless=True)
 
     for row in rows:
         link = row.find("td").find("a")
@@ -63,6 +63,7 @@ with sync_playwright() as p:
             gpa_weight = item.select_one("div.gpaWeight")
             billing_unit = item.select_one("div.billingUnit")
             course_count = item.select_one("div.courseCount")
+            liberal = item.select_one("div.courseAttribute")
 
             url = "https://www.torontomu.ca/" + code_block["href"]
             res = requests.get(url)
@@ -93,13 +94,14 @@ with sync_playwright() as p:
                 "gpa weight": gpa_weight.text.split(":")[1] if gpa_weight else "None",
                 "billing unit": billing_unit.text.split(":")[1] if billing_unit else "None",
                 "course count": course_count.text.split(":")[1] if course_count else "None",
+                "liberal": liberal.text.split(":")[1] if liberal else "None",
                 **requisites_data
             })
 
         # 🟡 Update progress
         processed_count += 1
         percent_done = int((processed_count / total_programs) * 100)
-        print(f"Fetching all TMU Programs...{percent_done}% - {major.text}")
+        print(f"Fetching all TMU Courses...{percent_done}% - {major.text}")
 
     browser.close()
 

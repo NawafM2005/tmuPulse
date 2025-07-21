@@ -1,9 +1,13 @@
 from supabase import create_client
 import json
+from dotenv import load_dotenv
+import os
 
-# URL and key for your Supabase project
-url = "https://znvxemmeltezycyzfobo.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpudnhlbW1lbHRlenljeXpmb2JvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4MDMwMTMsImV4cCI6MjA2ODM3OTAxM30.kXxs3NepH3BwnbD87JXEqoNJNGXU-q2tyciC0Vgy1Gw"
+
+load_dotenv()
+
+url = os.getenv("db_url")
+key = os.getenv("db_key")
 supabase = create_client(url, key)
 
 
@@ -37,6 +41,7 @@ for dept_name, course_list in data.items():
             "prerequisites": course.get("prerequisites"),
             "corequisites": course.get("corequisites"),
             "antirequisites": course.get("antirequisites"),
+            "liberal": course.get("liberal"),
             "custom_requisites": course.get("custom requisites"),
             "department_id": dept_id
         }).execute()
