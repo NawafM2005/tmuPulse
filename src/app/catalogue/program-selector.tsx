@@ -15,12 +15,13 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 interface ProgramSelectorProps {
   programs: string[]
+  label?: string
   selectedPrograms: string[]
   onProgramToggle?: (program: string) => void
   onClearSelection?: () => void
 }
 
-export function ProgramSelector({ programs, selectedPrograms, onProgramToggle, onClearSelection }: ProgramSelectorProps) {
+export function ProgramSelector({ label = "Programs", programs, selectedPrograms, onProgramToggle, onClearSelection }: ProgramSelectorProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -65,13 +66,14 @@ export function ProgramSelector({ programs, selectedPrograms, onProgramToggle, o
 
   const getButtonText = () => {
     if (selectedPrograms.length === 0) {
-      return "All Programs"
+      return `${label}`
     } else if (selectedPrograms.length === 1) {
       return selectedPrograms[0]
     } else {
-      return `${selectedPrograms.length} Programs Selected`
+      return `${selectedPrograms.length} ${label} Selected`
     }
   }
+
 
   return (
     <div>
@@ -79,21 +81,21 @@ export function ProgramSelector({ programs, selectedPrograms, onProgramToggle, o
         <DropdownMenuTrigger asChild>
           <Button 
             variant="outline" 
-            className="bg-black/30 border-gray-700 text-white hover:bg-gray-800 hover:text-white"
+            className="bg-black/30 border-secondary border-2 text-white hover:bg-gray-800 hover:text-white hover:cursor-pointer"
           >
             {getButtonText()}
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56 bg-black/90 border-gray-700">
-          <DropdownMenuLabel className="text-gray-300">Select Programs</DropdownMenuLabel>
+        <DropdownMenuContent className="w-100 bg-black border-accent border-4 max-h-80 overflow-y-auto" side="bottom">
+          <DropdownMenuLabel className="text-gray-300">{`Select ${label}`}</DropdownMenuLabel>
           <DropdownMenuSeparator className="bg-gray-700" />
           {programs.map((program) => (
             <DropdownMenuCheckboxItem
               key={program}
               checked={selectedPrograms.includes(program)}
               onCheckedChange={() => handleProgramToggle(program)}
-              className="text-white hover:bg-gray-800 focus:bg-gray-800"
+              className="text-white hover:bg-gray-800 focus:bg-gray-800 hover:cursor-pointer"
             >
               {program}
             </DropdownMenuCheckboxItem>

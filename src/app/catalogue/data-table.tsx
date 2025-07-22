@@ -22,6 +22,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import search from "@/assets/search.png"
 
 
 interface DataTableProps<TData, TValue> {
@@ -38,6 +39,10 @@ export function DataTable<TData, TValue>({
     belowSearchContent
 }: DataTableProps<TData, TValue>) {
     const [globalFilter, setGlobalFilter] = React.useState("")
+    const [pagination, setPagination] = React.useState({
+        pageIndex: 0,
+        pageSize: 15,
+    });
     
     const table = useReactTable({
         data,
@@ -50,34 +55,51 @@ export function DataTable<TData, TValue>({
             const name = row.getValue("name") as string
             const searchValue = filterValue.toLowerCase()
             
-            return code.toLowerCase().includes(searchValue) || 
-                   name.toLowerCase().includes(searchValue)
+            const codeNoSpaces = code.toLowerCase().replace(/\s+/g, "");
+            const nameNoSpaces = name.toLowerCase().replace(/\s+/g, "");
+            const searchNoSpaces = searchValue.replace(/\s+/g, "");
+
+            return codeNoSpaces.includes(searchNoSpaces) ||
+                nameNoSpaces.includes(searchNoSpaces);
         },
         state: {
             globalFilter,
+            pagination,
         },
         onGlobalFilterChange: setGlobalFilter,
+        onPaginationChange: setPagination,
     })
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 200, behavior: "smooth" });
+        };
+
     return (
-        <div>
-            <div className="flex items-center justify-between py-4">
-                <Input
-                placeholder="Search courses by code or name..."
-                value={globalFilter ?? ""}
-                onChange={(event) => setGlobalFilter(event.target.value)}
-                className="max-w-sm bg-black/30 border-gray-700 text-white placeholder:text-gray-400"
-                />
-                {topContent}
-            </div>
+        <div className="flex flex-col items-center">
+            <div className="flex flex-col justify-center items-center w-full max-w-3xl mt-5 mb-5 gap-6">
+                <div className="relative w-full">
+                    <img
+                        src={search.src}
+                        alt="TMU Logo"
+                        className="absolute left-5 top-1/2 transform -translate-y-1/2 h-6 w-6 pointer-events-none"
+                    />
+                    <Input
+                        className="pl-12 text-secondary bg-black/20 w-full font-semibold h-14 border-4"
+                        placeholder="Search courses by code or name..."
+                        value={globalFilter ?? ""}
+                        onChange={(event) => setGlobalFilter(event.target.value)}
+                    />
+                </div>
+            {topContent}
+        </div>
             {belowSearchContent}
-            <div className="rounded-md border border-gray-700 bg-black/20">
-                <Table>
+            <div className="rounded-md border border-gray-700 bg-black/50 p-5 w-full max-w-7xl">
+                <Table className="table-fixed w-full overflow-hidden">
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id} className="border-gray-700 hover:bg-gray-800/50">
+                            <TableRow key={headerGroup.id} className="border-gray-700 hover:bg-gray-800/50 ">
                                 {headerGroup.headers.map((header) => (
-                                    <TableHead key={header.id} className="text-gray-300">
+                                    <TableHead key={header.id} className="text-accent text-center font-[600] text-[18px] p-5 bg-secondary">
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
@@ -95,10 +117,10 @@ export function DataTable<TData, TValue>({
                                 <TableRow 
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
-                                    className="border-gray-700 hover:bg-gray-800/30"
+                                    className="border-gray-700 hover:bg-gray-800/30 hover:cursor-pointer transition-colors hover:scale-101"
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id} className="text-white">
+                                        <TableCell key={cell.id} className="text-white whitespace-normal break-words max-w-[600px] text-center p-5">
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext()
@@ -111,7 +133,7 @@ export function DataTable<TData, TValue>({
                             <TableRow>
                                 <TableCell 
                                     colSpan={columns.length} 
-                                    className="h-24 text-center text-gray-400"
+                                    className="h-24 text-center"
                                 >
                                     No results.
                                 </TableCell>
@@ -120,22 +142,28 @@ export function DataTable<TData, TValue>({
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
+            <div className="flex items-center justify-end space-x-2 py-4 mt-5">
                 <Button
                 variant="outline"
                 size="sm"
-                onClick={() => table.previousPage()}
+                onClick={() => {
+                    table.previousPage();
+                    scrollToTop();
+                }}
                 disabled={!table.getCanPreviousPage()}
-                className="border-gray-700 text-white hover:bg-gray-800"
+                className="border-gray-700 text-white hover:bg-gray-800 hover:cursor-pointer"
                 >
                     Previous
                 </Button>
                 <Button
                 variant="outline"
                 size="sm"
-                onClick={() => table.nextPage()}
+                onClick={() => {
+                    table.nextPage();
+                    scrollToTop();
+                }}
                 disabled={!table.getCanNextPage()}
-                className="border-gray-700 text-white hover:bg-gray-800"
+                className="border-gray-700 text-white hover:bg-gray-800 hover:cursor-pointer"
                 >
                     Next
                 </Button>

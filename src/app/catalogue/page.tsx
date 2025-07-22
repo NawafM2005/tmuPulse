@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabaseClient";
 import Loading from "../loading";
 import { Badge } from "@/components/ui/badge";
 import { X } from "lucide-react";
+import Footer from "@/components/footer";
 
 // Define the Supabase Course type
 type SupabaseCourse = {
@@ -25,6 +26,7 @@ type SupabaseCourse = {
   antirequisites: string;
   custom_requisites: string;
   department_id: number;
+  liberal: string;
 }
 
 // Define the Department type
@@ -33,13 +35,20 @@ type Department = {
   name: string;
 }
 
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export default function Catalogue() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [departments, setDepartments] = useState<Department[]>([]);
   const [selectedDepartments, setSelectedDepartments] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
+  const typeOptions = ["Lower liberal", "Upper liberal"];
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
-  // Fetch departments from Supabase
+
+
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
@@ -63,7 +72,6 @@ export default function Catalogue() {
     fetchDepartments();
   }, []);
 
-  // Fetch courses from Supabase
   useEffect(() => {
     const fetchCourses = async () => {
       setLoading(true);
@@ -76,6 +84,16 @@ export default function Catalogue() {
         // Filter by selected departments if any are selected
         if (selectedDepartments.length > 0) {
           query = query.in('department_id', selectedDepartments);
+        }
+
+        const typeMap = {
+          "Lower liberal": "LL",
+          "Upper liberal": "UL"
+        };
+        const supabaseTypes = selectedTypes.map(t => typeMap[t as keyof typeof typeMap]);
+
+        if (supabaseTypes.length > 0) {
+          query = query.in('liberal', supabaseTypes);
         }
 
         const { data, error } = await query;
@@ -104,12 +122,13 @@ export default function Catalogue() {
         console.error('Error fetching courses:', error);
         setCourses([]);
       } finally {
+        await sleep(750);
         setLoading(false);
       }
     };
 
     fetchCourses();
-  }, [selectedDepartments]);
+  }, [selectedDepartments, selectedTypes]);
 
   const handleDepartmentToggle = (departmentId: number) => {
     setSelectedDepartments(prev => {
@@ -136,65 +155,107 @@ export default function Catalogue() {
     return <Loading />;
   }
 
+  const handleTypeToggle = (typeName: string) => {
+    setSelectedTypes(prev =>
+      prev.includes(typeName)
+        ? prev.filter(t => t !== typeName)
+        : [...prev, typeName]
+    );
+  };
+
+  const handleClearTypeSelection = () => {
+    setSelectedTypes([]);
+  };
+
   return (
-    <main className="min-h-screen bg-foreground pt-20">
+    <main className="min-h-screen bg-foreground pt-5">
       <Navbar/>
-      <div className="container mx-auto py-10">
-      <div className="flex flex-col items-center justify-center p-8 w-full max-w-3xl mt-30 gap-4 text-center">
-              <h1 className="text-[70px] font-[800] text-secondary" >Course Catalogue</h1>
-              <p className="text-[20px] font-[400] text-white">Browse all current courses at TMU. Search, filter, and discover classes by course code, department, or keyword.</p>
-            </div>        
-        <DataTable 
-          columns={columns} 
-          data={courses} 
-          topContent={
-            <ProgramSelector 
-              programs={departments.map(dept => dept.name)} 
-              selectedPrograms={departments
-                .filter(dept => selectedDepartments.includes(dept.id))
-                .map(dept => dept.name)
-              }
-              onProgramToggle={(programName: string) => {
-                const department = departments.find(dept => dept.name === programName);
-                if (department) {
-                  handleDepartmentToggle(department.id);
-                }
-              }}
-              onClearSelection={handleClearSelection}
-            />
-          }
-          belowSearchContent={
-            selectedDepartments.length > 0 && (
-              <div className="mb-4 p-3 bg-blue-900/30 rounded-lg border border-blue-700">
-                <div className="flex flex-wrap gap-2 items-center">
-                  <span className="text-sm text-blue-200 font-semibold mr-2">Selected:</span>
-                  {departments
+      <div className="flex flex-col items-center mb-10">
+        <div className="flex flex-col items-center justify-center p-8 w-full max-w-6xl mt-30 gap-4 text-center">
+            <h1 className="text-[70px] font-[800] text-secondary" >Course Catalogue</h1>
+            <p className="text-[20px] font-[400] text-white">Browse all current courses at TMU. Search, filter, and discover classes by course code, department, or keyword.</p>
+        </div>        
+          <DataTable 
+            columns={columns} 
+            data={courses} 
+            topContent={
+              <div className="flex flex-row items-center w-full max-w-3xl gap-10">
+                <ProgramSelector 
+                  programs={departments.map(dept => dept.name)} 
+                  selectedPrograms={departments
                     .filter(dept => selectedDepartments.includes(dept.id))
-                    .map(dept => (
+                    .map(dept => dept.name)
+                  }
+                  onProgramToggle={(programName: string) => {
+                    const department = departments.find(dept => dept.name === programName);
+                    if (department) {
+                      handleDepartmentToggle(department.id);
+                    }
+                  }}
+                  onClearSelection={handleClearSelection}
+                />
+                <ProgramSelector
+                  label="Type"
+                  programs={typeOptions}
+                  selectedPrograms={selectedTypes}
+                  onProgramToggle={(typeName) => {
+                    handleTypeToggle(typeName);
+                  }}
+                  onClearSelection={handleClearTypeSelection}
+                />
+            </div>
+            }
+            belowSearchContent={
+              (selectedDepartments.length > 0 || selectedTypes.length > 0) && (
+                <div className="mb-4 p-3 bg-blue-900/30 rounded-lg border border-blue-700">
+                  <div className="flex flex-wrap gap-2 items-center">
+                    <span className="text-sm text-blue-200 font-semibold mr-2">Selected:</span>
+                    {/* Department Badges */}
+                    {departments
+                      .filter(dept => selectedDepartments.includes(dept.id))
+                      .map(dept => (
+                        <Badge
+                          key={dept.id}
+                          variant="secondary"
+                          className="bg-[#F9DD4A] text-black hover:bg-[#F9DD4A]/80 border-[#F9DD4A] cursor-pointer group flex items-center gap-1"
+                          onClick={() => handleDepartmentRemove(dept.name)}
+                        >
+                          {dept.name}
+                          <X className="h-3 w-3 group-hover:text-red-600 transition-colors" />
+                        </Badge>
+                      ))}
+                    {/* Type Badges */}
+                    {selectedTypes.map(type => (
                       <Badge
-                        key={dept.id}
+                        key={type}
                         variant="secondary"
-                        className="bg-[#F9DD4A] text-black hover:bg-[#F9DD4A]/80 border-[#F9DD4A] cursor-pointer group flex items-center gap-1"
-                        onClick={() => handleDepartmentRemove(dept.name)}
+                        className="bg-[#60a5fa] text-black hover:bg-[#38bdf8]/80 border-[#60a5fa] cursor-pointer group flex items-center gap-1"
+                        onClick={() => setSelectedTypes(selectedTypes.filter(t => t !== type))}
                       >
-                        {dept.name}
+                        {type}
                         <X className="h-3 w-3 group-hover:text-red-600 transition-colors" />
                       </Badge>
-                    ))
-                  }
-                  <Badge
-                    variant="outline"
-                    className="bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-red-800/50 hover:border-red-600 hover:text-white cursor-pointer"
-                    onClick={handleClearSelection}
-                  >
-                    Clear All
-                  </Badge>
+                    ))}
+                    {(selectedDepartments.length > 0 || selectedTypes.length > 0) && (
+                      <Badge
+                        variant="outline"
+                        className="bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-red-800/50 hover:border-red-600 hover:text-white cursor-pointer"
+                        onClick={() => {
+                          handleClearSelection();
+                          handleClearTypeSelection();
+                        }}
+                      >
+                        Clear All
+                      </Badge>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )
-          }
-        />
-      </div>
+              )
+            }
+          />
+        </div>
+
+        <Footer/>
     </main>
   );
 }
