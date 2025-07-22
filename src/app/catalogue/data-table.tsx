@@ -23,7 +23,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import search from "@/assets/search.png"
-
+import PopUp from "@/components/course-popup"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -38,7 +38,9 @@ export function DataTable<TData, TValue>({
     topContent,
     belowSearchContent
 }: DataTableProps<TData, TValue>) {
-    const [globalFilter, setGlobalFilter] = React.useState("")
+    const [globalFilter, setGlobalFilter] = React.useState("");
+    const [showPopup, setShowPopup] = React.useState(false);
+    const [popupRowData, setPopupRowData] = React.useState<any>(null);
     const [pagination, setPagination] = React.useState({
         pageIndex: 0,
         pageSize: 15,
@@ -118,6 +120,10 @@ export function DataTable<TData, TValue>({
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
                                     className="border-gray-700 hover:bg-gray-800/30 hover:cursor-pointer transition-colors hover:scale-101"
+                                    onClick={() => {
+                                        setPopupRowData(row.original);
+                                        setShowPopup(true);
+                                    }}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id} className="text-white whitespace-normal break-words max-w-[600px] text-center p-5">
@@ -141,6 +147,7 @@ export function DataTable<TData, TValue>({
                         )}
                     </TableBody>
                 </Table>
+                <PopUp open={showPopup} course={popupRowData} onClose={() => setShowPopup(false)}></PopUp>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4 mt-5">
                 <Button

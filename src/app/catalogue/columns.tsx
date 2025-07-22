@@ -29,6 +29,7 @@ export type Course = {
     corequisites: string
     antirequisites: string
     "custom requisites": string
+    liberal: string
 }
 
 
@@ -38,11 +39,29 @@ export const columns: ColumnDef<Course>[] = [
         header: "Course Code",
         cell: ({ row }) => {
             const code = row.getValue("code") as string
+            const description = row.original?.description || "No description available"
             return (
                 <div className="flex items-center justify-center gap-2">
                     <Badge className="bg-secondary text-black hover:bg-secondary/80 p-2 text-sm font-semibold">
                         {code}
                     </Badge>
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Info className="h-10 w-5 cursor-pointer text-gray-500 hover:text-gray-700 transition-colors" />
+                        </PopoverTrigger>
+                        <PopoverContent className="w-80 p-0 bg-white border shadow-lg">
+                            <Card className="bg-white border-0">
+                                <CardHeader className="bg-white">
+                                    <CardTitle className="text-gray-900">{code}</CardTitle>
+                                </CardHeader>
+                                <CardContent className="bg-white">
+                                    <CardDescription className="text-sm text-gray-700">
+                                        {description}
+                                    </CardDescription>
+                                </CardContent>
+                            </Card>
+                        </PopoverContent>
+                    </Popover>
                 </div>
             )
         }

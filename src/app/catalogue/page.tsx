@@ -104,18 +104,19 @@ export default function Catalogue() {
         } else {
           // Transform Supabase data to match our Course interface
           const transformedCourses: Course[] = (data || []).map((course: SupabaseCourse) => ({
-            code: course.code,
-            name: course.name,
-            description: course.description,
-            "weekly contact": course.weekly_contact,
-            "gpa weight": course.gpa_weight,
-            "billing unit": course.billing_unit,
-            "course count": course.course_count,
-            prerequisites: course.prerequisites,
-            corequisites: course.corequisites,
-            antirequisites: course.antirequisites,
-            "custom requisites": course.custom_requisites,
-          }));
+          code: course.code,
+          name: course.name,
+          description: course.description,
+          "weekly contact": course.weekly_contact,
+          "gpa weight": course.gpa_weight,
+          "billing unit": course.billing_unit,
+          "course count": course.course_count,
+          prerequisites: course.prerequisites,
+          corequisites: course.corequisites,
+          antirequisites: course.antirequisites,
+          "custom requisites": course.custom_requisites,
+          liberal: course.liberal
+        }));
           setCourses(transformedCourses);
         }
       } catch (error) {
@@ -210,7 +211,6 @@ export default function Catalogue() {
                 <div className="mb-4 p-3 bg-blue-900/30 rounded-lg border border-blue-700">
                   <div className="flex flex-wrap gap-2 items-center">
                     <span className="text-sm text-blue-200 font-semibold mr-2">Selected:</span>
-                    {/* Department Badges */}
                     {departments
                       .filter(dept => selectedDepartments.includes(dept.id))
                       .map(dept => (
@@ -224,7 +224,6 @@ export default function Catalogue() {
                           <X className="h-3 w-3 group-hover:text-red-600 transition-colors" />
                         </Badge>
                       ))}
-                    {/* Type Badges */}
                     {selectedTypes.map(type => (
                       <Badge
                         key={type}
