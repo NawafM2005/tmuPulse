@@ -27,6 +27,7 @@ type SupabaseCourse = {
   custom_requisites: string;
   department_id: number;
   liberal: string;
+  term: string[];
 }
 
 // Define the Department type
@@ -46,6 +47,8 @@ export default function Catalogue() {
   const [loading, setLoading] = useState(true);
   const typeOptions = ["Lower liberal", "Upper liberal"];
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const termOptions = ["Fall", "Winter"];
+  const [selectedTerm, setSelectedTerm] = useState<string[]>([]);
 
 
 
@@ -96,6 +99,10 @@ export default function Catalogue() {
           query = query.in('liberal', supabaseTypes);
         }
 
+        if (selectedTerm.length > 0) {
+          query = query.overlaps('term', selectedTerm);
+        }
+
         const { data, error } = await query;
 
         if (error) {
@@ -115,7 +122,8 @@ export default function Catalogue() {
           corequisites: course.corequisites,
           antirequisites: course.antirequisites,
           "custom requisites": course.custom_requisites,
-          liberal: course.liberal
+          liberal: course.liberal,
+          term: course.term
         }));
           setCourses(transformedCourses);
         }
@@ -129,7 +137,7 @@ export default function Catalogue() {
     };
 
     fetchCourses();
-  }, [selectedDepartments, selectedTypes]);
+  }, [selectedDepartments, selectedTypes, selectedTerm]);
 
   const handleDepartmentToggle = (departmentId: number) => {
     setSelectedDepartments(prev => {
@@ -168,6 +176,18 @@ export default function Catalogue() {
     setSelectedTypes([]);
   };
 
+const handleTermToggle = (termName: string) => {
+  setSelectedTerm(prev =>
+    prev.includes(termName)
+      ? prev.filter(t => t !== termName)
+      : [...prev, termName]
+  );
+};
+
+  const handleClearTermSelection = () => {
+    setSelectedTerm([]);
+  };
+
   return (
     <main className="min-h-screen bg-foreground pt-5">
       <Navbar/>
@@ -204,10 +224,19 @@ export default function Catalogue() {
                   }}
                   onClearSelection={handleClearTypeSelection}
                 />
+                <ProgramSelector
+                  label="Term"
+                  programs={termOptions}
+                  selectedPrograms={selectedTerm}
+                  onProgramToggle={(termName) => {
+                    handleTermToggle(termName);
+                  }}
+                  onClearSelection={handleClearTermSelection}
+                />
             </div>
             }
             belowSearchContent={
-              (selectedDepartments.length > 0 || selectedTypes.length > 0) && (
+              (selectedDepartments.length > 0 || selectedTypes.length > 0 || selectedTerm.length > 0) && (
                 <div className="mb-4 p-3 bg-blue-900/30 rounded-lg border border-blue-700">
                   <div className="flex flex-wrap gap-2 items-center">
                     <span className="text-sm text-blue-200 font-semibold mr-2">Selected:</span>
@@ -235,13 +264,25 @@ export default function Catalogue() {
                         <X className="h-3 w-3 group-hover:text-red-600 transition-colors" />
                       </Badge>
                     ))}
-                    {(selectedDepartments.length > 0 || selectedTypes.length > 0) && (
+                    {selectedTerm.map(term => (
+                      <Badge
+                        key={term}
+                        variant="secondary"
+                        className="bg-[#60a5fa] text-black hover:bg-[#38bdf8]/80 border-[#60a5fa] cursor-pointer group flex items-center gap-1"
+                        onClick={() => setSelectedTerm(selectedTerm.filter(t => t !== term))}
+                      >
+                        {term}
+                        <X className="h-3 w-3 group-hover:text-red-600 transition-colors" />
+                      </Badge>
+                    ))}
+                    {(selectedDepartments.length > 0 || selectedTypes.length > 0 || selectedTerm.length > 0) && (
                       <Badge
                         variant="outline"
                         className="bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-red-800/50 hover:border-red-600 hover:text-white cursor-pointer"
                         onClick={() => {
                           handleClearSelection();
                           handleClearTypeSelection();
+                          handleClearTermSelection();
                         }}
                       >
                         Clear All

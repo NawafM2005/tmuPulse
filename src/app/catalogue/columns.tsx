@@ -30,6 +30,7 @@ export type Course = {
     antirequisites: string
     "custom requisites": string
     liberal: string
+    term: string[]
 }
 
 
@@ -39,29 +40,11 @@ export const columns: ColumnDef<Course>[] = [
         header: "Course Code",
         cell: ({ row }) => {
             const code = row.getValue("code") as string
-            const description = row.original?.description || "No description available"
             return (
                 <div className="flex items-center justify-center gap-2">
                     <Badge className="bg-secondary text-black hover:bg-secondary/80 p-2 text-sm font-semibold">
                         {code}
                     </Badge>
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Info className="h-10 w-5 cursor-pointer text-gray-500 hover:text-gray-700 transition-colors" />
-                        </PopoverTrigger>
-                        <PopoverContent className="w-80 p-0 bg-white border shadow-lg">
-                            <Card className="bg-white border-0">
-                                <CardHeader className="bg-white">
-                                    <CardTitle className="text-gray-900">{code}</CardTitle>
-                                </CardHeader>
-                                <CardContent className="bg-white">
-                                    <CardDescription className="text-sm text-gray-700">
-                                        {description}
-                                    </CardDescription>
-                                </CardContent>
-                            </Card>
-                        </PopoverContent>
-                    </Popover>
                 </div>
             )
         }
@@ -71,16 +54,34 @@ export const columns: ColumnDef<Course>[] = [
         header: "Course Name"
     },
     {
-        accessorKey: "gpa weight",
-        header: "GPA Weight",
-         cell: ({ row }) => {
-            const gpa = row.getValue("gpa weight") as string
+        accessorKey: "term",
+        header: "Term",
+        cell: ({ row }) => {
+            const rawTerm = row.getValue("term");
+            const term = rawTerm ? String(rawTerm) : "";
+            const terms = term.match(/([A-Z][a-z]+)/g) || [term];
+
+            // Badge color function
+            const getBadgeClass = (t: string) => {
+                if (t.toLowerCase() === "fall") return "bg-secondary text-black";
+                if (t.toLowerCase() === "winter") return "bg-accent text-black";
+                return "bg-primary/20 text-white";
+            };
+
             return (
-                <Badge className="bg-[#3375C2] text-white hover:bg-[#3375C2]/80">
-                    {gpa}
-                </Badge>
-            )
-         }
+                <div className="flex justify-center items-center gap-2 w-full">
+                    {terms.map((t, i) => (
+                        <Badge
+                            key={i}
+                            className={getBadgeClass(t) + " hover:opacity-80"}
+                        >
+                            {t || "N/A"}
+                        </Badge>
+                    ))}
+                </div>
+            );
+        }
+
     },
     {
         accessorKey: "prerequisites",
