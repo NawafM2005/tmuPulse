@@ -65,7 +65,7 @@ export const columns: ColumnDef<Course>[] = [
             const getBadgeClass = (t: string) => {
                 if (t.toLowerCase() === "fall") return "bg-secondary text-black";
                 if (t.toLowerCase() === "winter") return "bg-accent text-black";
-                return "bg-primary/20 text-white";
+                return "bg-primary/80 text-white";
             };
 
             return (
