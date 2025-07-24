@@ -78,28 +78,30 @@ export function DataTable<TData, TValue>({
 
     return (
         <div className="flex flex-col items-center">
-            <div className="flex flex-col justify-center items-center w-full max-w-3xl mt-5 mb-5 gap-6">
-                <div className="relative w-full">
+            <div className="flex flex-row justify-center items-center w-full max-w-7xl mt-5 mb-5 gap-6">
+                <div className="relative flex-grow">
                     <img
                         src={search.src}
                         alt="TMU Logo"
                         className="absolute left-5 top-1/2 transform -translate-y-1/2 h-6 w-6 pointer-events-none"
                     />
                     <Input
-                        className="pl-12 text-secondary bg-black/20 w-full font-semibold h-14 border-4"
+                        className="pl-12 text-secondary bg-black/20 w-full font-semibold h-10 border-1"
                         placeholder="Search courses by code or name..."
                         value={globalFilter ?? ""}
                         onChange={(event) => setGlobalFilter(event.target.value)}
                     />
                 </div>
-            {topContent}
+                <div className="flex-shrink-0 min-w-[180px]">
+                    {topContent}
+                </div>
         </div>
             {belowSearchContent}
-            <div className="rounded-md border border-gray-700 bg-black/50 p-5 w-full max-w-7xl">
+            <div className="rounded-md border-1 border-secondary bg-black/50 p-5 w-full max-w-7xl">
                 <Table className="table-fixed w-full overflow-hidden">
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id} className="border-gray-700 hover:bg-gray-800/50 ">
+                            <TableRow key={headerGroup.id} className="border-red-400">
                                 {headerGroup.headers.map((header) => (
                                     <TableHead key={header.id} className="text-secondary text-center font-[600] text-[18px] p-5">
                                         {header.isPlaceholder
@@ -119,7 +121,7 @@ export function DataTable<TData, TValue>({
                                 <TableRow 
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
-                                    className="border-gray-700 hover:bg-gray-800/30 hover:cursor-pointer transition-colors hover:scale-101"
+                                    className="border-gray-700 hover:bg-gray-800/80 hover:cursor-pointer transition-colors hover:scale-101"
                                     onClick={() => {
                                         setPopupRowData(row.original);
                                         setShowPopup(true);
@@ -139,7 +141,7 @@ export function DataTable<TData, TValue>({
                             <TableRow>
                                 <TableCell 
                                     colSpan={columns.length} 
-                                    className="h-24 text-center"
+                                    className="h-24 text-center text-red-500 text-lg"
                                 >
                                     No results.
                                 </TableCell>

@@ -29,3 +29,17 @@
     --foreground: #151617;
   }
 } 
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+  margin-left: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #F9DD4A;
+  border-radius: 8px;
+}
+
+

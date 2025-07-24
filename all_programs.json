@@ -1,0 +1,8257 @@
+[
+  {
+    "program": "Arts and Contemporary Studies",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "ACS 100"
+          },
+          {
+            "code": "ACS 103"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ACS 210"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "option": [
+              "ACS 106",
+              "ARB ***",
+              "ASL ***",
+              "CHN ***",
+              "FRE ***",
+              "MHK ***",
+              "SPN ***"
+            ]
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "ACS 220"
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "ACS 300"
+          },
+          {
+            "code": "ACS 401"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "ACS 400"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "ACS 500"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Criminology",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CRM 100"
+          },
+          {
+            "code": "CRM 102"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CRM 204"
+          },
+          {
+            "code": "CRM 400"
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "option": [
+              "CRM 202",
+              "CRM 205",
+              "CRM 206",
+              "CRM 250",
+              "CRM 402"
+            ]
+          },
+          {
+            "option": [
+              "CRM 202",
+              "CRM 205",
+              "CRM 206",
+              "CRM 250",
+              "CRM 402"
+            ]
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "CRM 322"
+          },
+          {
+            "option": [
+              "CRM 200",
+              "CRM 300",
+              "CRM 306",
+              "CRM 308"
+            ]
+          },
+          {
+            "option": [
+              "CRM 200",
+              "CRM 300",
+              "CRM 306",
+              "CRM 308"
+            ]
+          },
+          {
+            "option": [
+              "CRM 310",
+              "CRM 315"
+            ]
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "CRM 406"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Criminology and History",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CRM 100"
+          },
+          {
+            "code": "CRM 102"
+          },
+          {
+            "code": "HIS 101"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "option": [
+              "HST 100-499",
+              "HIS 104",
+              "HIS 105",
+              "HIS 106",
+              "HIS 107",
+              "HIS 238",
+              "HIS 248",
+              "HIS 265",
+              "HIS 275",
+              "HIS 277",
+              "HIS 279",
+              "HIS 338",
+              "HIS 348",
+              "HIS 350",
+              "HIS 377",
+              "HIS 379",
+              "HIS 392",
+              "HIS 461",
+              "HIS 462",
+              "HIS 475",
+              "HIS 490"
+            ]
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CRM 204"
+          },
+          {
+            "code": "CRM 400"
+          },
+          {
+            "code": "HIS 401"
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "option": [
+              "HST 100-499",
+              "HIS 104",
+              "HIS 105",
+              "HIS 106",
+              "HIS 107",
+              "HIS 238",
+              "HIS 248",
+              "HIS 265",
+              "HIS 275",
+              "HIS 277",
+              "HIS 279",
+              "HIS 338",
+              "HIS 348",
+              "HIS 350",
+              "HIS 377",
+              "HIS 379",
+              "HIS 392",
+              "HIS 461",
+              "HIS 462",
+              "HIS 475",
+              "HIS 490"
+            ]
+          },
+          {
+            "option": [
+              "HST 100-499",
+              "HIS 104",
+              "HIS 105",
+              "HIS 106",
+              "HIS 107",
+              "HIS 238",
+              "HIS 248",
+              "HIS 265",
+              "HIS 275",
+              "HIS 277",
+              "HIS 279",
+              "HIS 338",
+              "HIS 348",
+              "HIS 350",
+              "HIS 377",
+              "HIS 379",
+              "HIS 392",
+              "HIS 461",
+              "HIS 462",
+              "HIS 475",
+              "HIS 490"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "CRM 322"
+          },
+          {
+            "code": "HIS 505"
+          },
+          {
+            "option": [
+              "HIS 500",
+              "HIS 501",
+              "HIS 502",
+              "HIS 755"
+            ]
+          },
+          {
+            "option": [
+              "CRM 310",
+              "CRM 315"
+            ]
+          },
+          {
+            "option": [
+              "CRM 200",
+              "CRM 300",
+              "CRM 306",
+              "CRM 308"
+            ]
+          },
+          {
+            "option": [
+              "CRM 200",
+              "CRM 300",
+              "CRM 306",
+              "CRM 308"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "CRM 406"
+          },
+          {
+            "option": [
+              "HIS 902",
+              "HIS 903",
+              "HIS 916",
+              "HIS 931",
+              "HIS 956",
+              "HIS 957",
+              "HIS 958",
+              "HIS 976",
+              "HIS 990"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Criminology and Politics and Governance",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CRM 100"
+          },
+          {
+            "code": "CRM 102"
+          },
+          {
+            "code": "POG 100"
+          },
+          {
+            "code": "POG 110"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CRM 400"
+          },
+          {
+            "option": [
+              "SSH 301",
+              "POG 231"
+            ]
+          },
+          {
+            "option": [
+              "CRM 204",
+              "POG 230"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "option": [
+              "POG 210",
+              "POG 214",
+              "POG 225",
+              "POG 235",
+              "POG 240"
+            ]
+          },
+          {
+            "option": [
+              "POG 210",
+              "POG 214",
+              "POG 225",
+              "POG 235",
+              "POG 240"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "CRM 322"
+          },
+          {
+            "option": [
+              "CRM 310",
+              "CRM 315"
+            ]
+          },
+          {
+            "option": [
+              "CRM 200",
+              "CRM 300",
+              "CRM 306",
+              "CRM 308"
+            ]
+          },
+          {
+            "option": [
+              "CRM 200",
+              "CRM 300",
+              "CRM 306",
+              "CRM 308"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "CRM 406"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Criminology and Sociology",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CRM 100"
+          },
+          {
+            "code": "CRM 102"
+          },
+          {
+            "code": "SOC 105"
+          },
+          {
+            "code": "SOC 107"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CRM 400"
+          },
+          {
+            "code": "SOC 470"
+          },
+          {
+            "code": "SOC 473"
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "option": [
+              "CRM 204",
+              "SOC 411"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "CRM 322"
+          },
+          {
+            "code": "SOC 475"
+          },
+          {
+            "code": "SOC 481"
+          },
+          {
+            "option": [
+              "CRM 310",
+              "CRM 315"
+            ]
+          },
+          {
+            "option": [
+              "CRM 200",
+              "CRM 300",
+              "CRM 306",
+              "CRM 308"
+            ]
+          },
+          {
+            "option": [
+              "SOC 482",
+              "SOC 483"
+            ]
+          },
+          {
+            "option": [
+              "SOC 300",
+              "SOC 420",
+              "SOC 525",
+              "SOC 608"
+            ]
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "CRM 406"
+          },
+          {
+            "code": "SOC 490"
+          },
+          {
+            "code": "SOC 427"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "English",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "ENG 110"
+          },
+          {
+            "code": "ENG 208"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ENG 810"
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "option": [
+              "ENG 302",
+              "ENG 304",
+              "ENG 306",
+              "ENG 307",
+              "ENG 308",
+              "ENG 340",
+              "ENG 390"
+            ]
+          },
+          {
+            "option": [
+              "ENG 421",
+              "ENG 422",
+              "ENG 531",
+              "ENG 632",
+              "ENG 634",
+              "ENG 635"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "ENG 400"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "option": [
+              "ENG 421",
+              "ENG 422",
+              "ENG 531",
+              "ENG 632",
+              "ENG 634",
+              "ENG 635"
+            ]
+          },
+          {
+            "option": [
+              "ENG 223",
+              "ENG 413",
+              "ENG 620",
+              "ENG 623",
+              "ENG 640",
+              "ENG 650",
+              "ENG 653",
+              "ENG 942"
+            ]
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "ENG 910"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "English and Philosophy",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "ENG 110"
+          },
+          {
+            "code": "ENG 208"
+          },
+          {
+            "code": "PHL 102"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "option": [
+              "PHL 101",
+              "PHL 110",
+              "PHL 187",
+              "PHL 201",
+              "PHL 212",
+              "PHL 306",
+              "PHL 333",
+              "PHL 365",
+              "PHL 366",
+              "PHL 406"
+            ]
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ENG 810"
+          },
+          {
+            "code": "PHL 402"
+          },
+          {
+            "code": "PHL 403"
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "option": [
+              "ENG 302",
+              "ENG 304",
+              "ENG 306",
+              "ENG 307",
+              "ENG 308",
+              "ENG 340",
+              "ENG 390"
+            ]
+          },
+          {
+            "option": [
+              "PHL 404",
+              "PHL 405"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "ENG 400"
+          },
+          {
+            "option": [
+              "PHL 210",
+              "PHL 220",
+              "PHL 535",
+              "PHL 547",
+              "PHL 570",
+              "PHL 622"
+            ]
+          },
+          {
+            "option": [
+              "PHL 505",
+              "PHL 513",
+              "PHL 605",
+              "PHL 607",
+              "PHL 661"
+            ]
+          },
+          {
+            "option": [
+              "PHL 516",
+              "PHL 550",
+              "PHL 551",
+              "PHL 552",
+              "PHL 561",
+              "PHL 611"
+            ]
+          },
+          {
+            "option": [
+              "ENG 421",
+              "ENG 422",
+              "ENG 531",
+              "ENG 632",
+              "ENG 634",
+              "ENG 635"
+            ]
+          },
+          {
+            "option": [
+              "ENG 223",
+              "ENG 413",
+              "ENG 620",
+              "ENG 623",
+              "ENG 640",
+              "ENG 650",
+              "ENG 653",
+              "ENG 942"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "ENG 910"
+          },
+          {
+            "option": [
+              "ENG 421",
+              "ENG 422",
+              "ENG 531",
+              "ENG 632",
+              "ENG 634",
+              "ENG 635"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Environment and Urban Sustainability",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "EUS 102"
+          },
+          {
+            "code": "EUS 202"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "EUS 301"
+          },
+          {
+            "code": "EUS 401"
+          },
+          {
+            "code": "EUS 402"
+          },
+          {
+            "code": "GEO 313"
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "option": [
+              "BLG 143",
+              "GEO 131"
+            ]
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "EUS 501"
+          },
+          {
+            "code": "EUS 601"
+          },
+          {
+            "code": "GEO 513"
+          },
+          {
+            "code": "POL 377"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "EUS 701"
+          },
+          {
+            "code": "EUS 801"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "History and Philosophy",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "HIS 101"
+          },
+          {
+            "code": "PHL 102"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "option": [
+              "HST 100-499",
+              "HIS 104",
+              "HIS 105",
+              "HIS 106",
+              "HIS 107",
+              "HIS 238",
+              "HIS 248",
+              "HIS 265",
+              "HIS 275",
+              "HIS 277",
+              "HIS 279",
+              "HIS 338",
+              "HIS 348",
+              "HIS 350",
+              "HIS 377",
+              "HIS 379",
+              "HIS 392",
+              "HIS 461",
+              "HIS 462",
+              "HIS 475",
+              "HIS 490"
+            ]
+          },
+          {
+            "option": [
+              "PHL 101",
+              "PHL 110",
+              "PHL 187",
+              "PHL 201",
+              "PHL 212",
+              "PHL 306",
+              "PHL 333",
+              "PHL 365",
+              "PHL 366",
+              "PHL 406"
+            ]
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "HIS 401"
+          },
+          {
+            "code": "PHL 402"
+          },
+          {
+            "code": "PHL 403"
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "option": [
+              "PHL 404",
+              "PHL 405"
+            ]
+          },
+          {
+            "option": [
+              "HST 100-499",
+              "HIS 104",
+              "HIS 105",
+              "HIS 106",
+              "HIS 107",
+              "HIS 238",
+              "HIS 248",
+              "HIS 265",
+              "HIS 275",
+              "HIS 277",
+              "HIS 279",
+              "HIS 338",
+              "HIS 348",
+              "HIS 350",
+              "HIS 377",
+              "HIS 379",
+              "HIS 392",
+              "HIS 461",
+              "HIS 462",
+              "HIS 475",
+              "HIS 490"
+            ]
+          },
+          {
+            "option": [
+              "HST 100-499",
+              "HIS 104",
+              "HIS 105",
+              "HIS 106",
+              "HIS 107",
+              "HIS 238",
+              "HIS 248",
+              "HIS 265",
+              "HIS 275",
+              "HIS 277",
+              "HIS 279",
+              "HIS 338",
+              "HIS 348",
+              "HIS 350",
+              "HIS 377",
+              "HIS 379",
+              "HIS 392",
+              "HIS 461",
+              "HIS 462",
+              "HIS 475",
+              "HIS 490"
+            ]
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "HIS 505"
+          },
+          {
+            "option": [
+              "PHL 210",
+              "PHL 220",
+              "PHL 535",
+              "PHL 547",
+              "PHL 570",
+              "PHL 622"
+            ]
+          },
+          {
+            "option": [
+              "PHL 505",
+              "PHL 513",
+              "PHL 605",
+              "PHL 607",
+              "PHL 661"
+            ]
+          },
+          {
+            "option": [
+              "PHL 516",
+              "PHL 550",
+              "PHL 551",
+              "PHL 552",
+              "PHL 561",
+              "PHL 611"
+            ]
+          },
+          {
+            "option": [
+              "HIS 500",
+              "HIS 501",
+              "HIS 502",
+              "HIS 755"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "option": [
+              "HIS 902",
+              "HIS 903",
+              "HIS 916",
+              "HIS 931",
+              "HIS 956",
+              "HIS 957",
+              "HIS 958",
+              "HIS 976",
+              "HIS 990"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "History and Sociology",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "HIS 101"
+          },
+          {
+            "code": "SOC 105"
+          },
+          {
+            "code": "SOC 107"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "option": [
+              "HST 100-499",
+              "HIS 104",
+              "HIS 105",
+              "HIS 106",
+              "HIS 107",
+              "HIS 238",
+              "HIS 248",
+              "HIS 265",
+              "HIS 275",
+              "HIS 277",
+              "HIS 279",
+              "HIS 338",
+              "HIS 348",
+              "HIS 350",
+              "HIS 377",
+              "HIS 379",
+              "HIS 392",
+              "HIS 461",
+              "HIS 462",
+              "HIS 475",
+              "HIS 490"
+            ]
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "HIS 401"
+          },
+          {
+            "code": "SOC 470"
+          },
+          {
+            "code": "SOC 473"
+          },
+          {
+            "option": [
+              "SOC 411",
+              "equivalent"
+            ]
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "option": [
+              "HST 100-499",
+              "HIS 104",
+              "HIS 105",
+              "HIS 106",
+              "HIS 107",
+              "HIS 238",
+              "HIS 248",
+              "HIS 265",
+              "HIS 275",
+              "HIS 277",
+              "HIS 279",
+              "HIS 338",
+              "HIS 348",
+              "HIS 350",
+              "HIS 377",
+              "HIS 379",
+              "HIS 392",
+              "HIS 461",
+              "HIS 462",
+              "HIS 475",
+              "HIS 490"
+            ]
+          },
+          {
+            "option": [
+              "HST 100-499",
+              "HIS 104",
+              "HIS 105",
+              "HIS 106",
+              "HIS 107",
+              "HIS 238",
+              "HIS 248",
+              "HIS 265",
+              "HIS 275",
+              "HIS 277",
+              "HIS 279",
+              "HIS 338",
+              "HIS 348",
+              "HIS 350",
+              "HIS 377",
+              "HIS 379",
+              "HIS 392",
+              "HIS 461",
+              "HIS 462",
+              "HIS 475",
+              "HIS 490"
+            ]
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "HIS 505"
+          },
+          {
+            "code": "SOC 475"
+          },
+          {
+            "code": "SOC 481"
+          },
+          {
+            "option": [
+              "HIS 500",
+              "HIS 501",
+              "HIS 502",
+              "HIS 755"
+            ]
+          },
+          {
+            "option": [
+              "SOC 482",
+              "SOC 483"
+            ]
+          },
+          {
+            "option": [
+              "SOC 300",
+              "SOC 420",
+              "SOC 525",
+              "SOC 608"
+            ]
+          },
+          {
+            "table": "Table II (History)"
+          },
+          {
+            "table": "Table II (History)"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "SOC 490"
+          },
+          {
+            "code": "SOC 427"
+          },
+          {
+            "option": [
+              "HIS 902",
+              "HIS 903",
+              "HIS 916",
+              "HIS 931",
+              "HIS 956",
+              "HIS 957",
+              "HIS 958",
+              "HIS 976",
+              "HIS 990"
+            ]
+          },
+          {
+            "table": "Table II (History)"
+          },
+          {
+            "table": "Table II (History)"
+          },
+          {
+            "table": "Table II (History)"
+          },
+          {
+            "table": "Table II (Sociology)"
+          },
+          {
+            "table": "Table II (Sociology)"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Philosophy",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "code": "PHL 102"
+          },
+          {
+            "option": [
+              "PHL 101",
+              "PHL 110",
+              "PHL 187",
+              "PHL 201",
+              "PHL 212",
+              "PHL 306",
+              "PHL 333",
+              "PHL 365",
+              "PHL 366",
+              "PHL 406"
+            ]
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "PHL 402"
+          },
+          {
+            "code": "PHL 403"
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "option": [
+              "PHL 404",
+              "PHL 405"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "option": [
+              "PHL 210",
+              "PHL 220",
+              "PHL 535",
+              "PHL 547",
+              "PHL 570",
+              "PHL 622"
+            ]
+          },
+          {
+            "option": [
+              "PHL 505",
+              "PHL 513",
+              "PHL 605",
+              "PHL 607",
+              "PHL 661"
+            ]
+          },
+          {
+            "option": [
+              "PHL 516",
+              "PHL 550",
+              "PHL 551",
+              "PHL 552",
+              "PHL 561",
+              "PHL 611"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "option": [
+              "PHL 600",
+              "PHL 601"
+            ]
+          },
+          {
+            "option": [
+              "PHL 802",
+              "PHL 803",
+              "PHL 700"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Politics and Governance and Sociology",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "POG 100"
+          },
+          {
+            "code": "POG 110"
+          },
+          {
+            "code": "SOC 105"
+          },
+          {
+            "code": "SOC 107"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "SOC 470"
+          },
+          {
+            "code": "SOC 473"
+          },
+          {
+            "option": [
+              "SSH 301",
+              "POG 231"
+            ]
+          },
+          {
+            "option": [
+              "POG 230",
+              "SOC 411"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "option": [
+              "POG 210",
+              "POG 214",
+              "POG 225",
+              "POG 235",
+              "POG 240"
+            ]
+          },
+          {
+            "option": [
+              "POG 210",
+              "POG 214",
+              "POG 225",
+              "POG 235",
+              "POG 240"
+            ]
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "SOC 475"
+          },
+          {
+            "code": "SOC 481"
+          },
+          {
+            "option": [
+              "SOC 482",
+              "SOC 483"
+            ]
+          },
+          {
+            "option": [
+              "SOC 300",
+              "SOC 420",
+              "SOC 525",
+              "SOC 608"
+            ]
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "SOC 490"
+          },
+          {
+            "code": "SOC 427"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Psychology",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "PSY 102"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "PSY 202"
+          },
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "PSY 124"
+          },
+          {
+            "code": "PSY 302"
+          },
+          {
+            "code": "SSH 301"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "PSY 324"
+          },
+          {
+            "code": "PSY 411"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "PSY 325"
+          },
+          {
+            "code": "PSY 511"
+          },
+          {
+            "code": "PSY 654"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "PSY 731"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Undeclared Arts",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "SSH 205"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "SSH 105"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Disability Studies",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "DST 501"
+          },
+          {
+            "code": "DST 502"
+          },
+          {
+            "code": "DST 504"
+          },
+          {
+            "code": "DST 506"
+          },
+          {
+            "code": "DST 507"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "DST 525"
+          },
+          {
+            "code": "DST 613"
+          },
+          {
+            "code": "DST 725"
+          },
+          {
+            "code": "DST 727"
+          },
+          {
+            "code": "DST 80A"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "DST 88A"
+          },
+          {
+            "code": "DST 99A"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "upperlib": "upper"
+          },
+          {
+            "option": [
+              "ASL 101",
+              "ASL 201",
+              "CLD 435",
+              "CLD 445",
+              "DST 503",
+              "DST 509",
+              "DST 603",
+              "DST 604",
+              "DST 614",
+              "DST 620",
+              "DST 630",
+              "DST 640",
+              "FCS 101",
+              "FCS 120",
+              "FCS 200",
+              "FCS 400",
+              "FNF 100",
+              "FNF 400",
+              "INT 900",
+              "INT 901",
+              "INT 905",
+              "INT 906",
+              "INT 907",
+              "INT 908",
+              "INT 910",
+              "INT 911",
+              "INT 912",
+              "INT 913",
+              "INT 914",
+              "INT 915",
+              "INT 916",
+              "INT 920",
+              "INT 921",
+              "INT 922",
+              "INT 923",
+              "SWP 903"
+            ]
+          },
+          {
+            "option": [
+              "ASL 101",
+              "ASL 201",
+              "CLD 435",
+              "CLD 445",
+              "DST 503",
+              "DST 509",
+              "DST 603",
+              "DST 604",
+              "DST 614",
+              "DST 620",
+              "DST 630",
+              "DST 640",
+              "FCS 101",
+              "FCS 120",
+              "FCS 200",
+              "FCS 400",
+              "FNF 100",
+              "FNF 400",
+              "INT 900",
+              "INT 901",
+              "INT 905",
+              "INT 906",
+              "INT 907",
+              "INT 908",
+              "INT 910",
+              "INT 911",
+              "INT 912",
+              "INT 913",
+              "INT 914",
+              "INT 915",
+              "INT 916",
+              "INT 920",
+              "INT 921",
+              "INT 922",
+              "INT 923",
+              "SWP 903"
+            ]
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Nursing",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "BLG 101"
+          },
+          {
+            "code": "NSE 101"
+          },
+          {
+            "code": "NSE 111"
+          },
+          {
+            "code": "PPN 101"
+          },
+          {
+            "code": "PSY 102"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "BLG 111"
+          },
+          {
+            "code": "NSE 103"
+          },
+          {
+            "code": "NSE 121"
+          },
+          {
+            "code": "PPN 102"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "NSE 203"
+          },
+          {
+            "code": "NSE 211"
+          },
+          {
+            "code": "NSE 212"
+          },
+          {
+            "code": "PAT 201"
+          },
+          {
+            "code": "PPN 201"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "BLG 131"
+          },
+          {
+            "code": "NSE 221"
+          },
+          {
+            "code": "NSE 222"
+          },
+          {
+            "code": "PAT 202"
+          },
+          {
+            "code": "PPN 202"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "NSE 311"
+          },
+          {
+            "code": "NSE 321"
+          },
+          {
+            "code": "PPN 301"
+          },
+          {
+            "code": "PPN 302"
+          },
+          {
+            "code": "PPN 303"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "NSE 311"
+          },
+          {
+            "code": "NSE 321"
+          },
+          {
+            "code": "PPN 301"
+          },
+          {
+            "code": "PPN 302"
+          },
+          {
+            "code": "PPN 303"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "NSE 411"
+          },
+          {
+            "code": "PAT 401"
+          },
+          {
+            "code": "PPN 401"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "NSE 421"
+          },
+          {
+            "code": "PPN 402"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Nursing Post-Diploma",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "NUR 100"
+          },
+          {
+            "code": "NUR 105"
+          },
+          {
+            "code": "NUR 120"
+          },
+          {
+            "code": "NUR 125"
+          },
+          {
+            "code": "NUR 130"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "NUR 200"
+          },
+          {
+            "code": "NUR 220"
+          },
+          {
+            "code": "NUR 225"
+          },
+          {
+            "code": "NUR 240"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "NCL 300"
+          },
+          {
+            "code": "NUR 350"
+          },
+          {
+            "code": "NUR 320"
+          },
+          {
+            "code": "NUR 375"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "NCL 400"
+          },
+          {
+            "code": "NUR 361"
+          },
+          {
+            "code": "NUR 336"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Nutrition and Food",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CHY 123"
+          },
+          {
+            "code": "FNN 100"
+          },
+          {
+            "code": "FNP 100"
+          },
+          {
+            "code": "PLN 103"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CHY 200"
+          },
+          {
+            "code": "FND 100"
+          },
+          {
+            "code": "FNF 100"
+          },
+          {
+            "code": "PLN 203"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "FNN 200"
+          },
+          {
+            "code": "FNR 100"
+          },
+          {
+            "code": "FNS 200"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "FNN 201"
+          },
+          {
+            "code": "FNN 302"
+          },
+          {
+            "code": "FNR 201"
+          },
+          {
+            "code": "FNS 250"
+          },
+          {
+            "code": "MKT 100"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "FND 300"
+          },
+          {
+            "code": "FNN 202"
+          },
+          {
+            "code": "FNR 310"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "FNP 300"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "FND 401"
+          },
+          {
+            "option": [
+              "FNP 250",
+              "FNY 404"
+            ]
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Occupational Health and Safety",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "OHS 208"
+          },
+          {
+            "code": "OHS 477"
+          },
+          {
+            "code": "OHS 508"
+          },
+          {
+            "code": "OHS 523"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "OHS 301"
+          },
+          {
+            "code": "OHS 322"
+          },
+          {
+            "code": "OHS 421"
+          },
+          {
+            "code": "OHS 477"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "OHS 301"
+          },
+          {
+            "code": "OHS 322"
+          },
+          {
+            "code": "OHS 421"
+          },
+          {
+            "code": "OHS 477"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "OHS 301"
+          },
+          {
+            "code": "OHS 322"
+          },
+          {
+            "code": "OHS 421"
+          },
+          {
+            "code": "OHS 477"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "OHS 301"
+          },
+          {
+            "code": "OHS 322"
+          },
+          {
+            "code": "OHS 421"
+          },
+          {
+            "code": "OHS 477"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "OHS 301"
+          },
+          {
+            "code": "OHS 322"
+          },
+          {
+            "code": "OHS 421"
+          },
+          {
+            "code": "OHS 477"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "OHS 301"
+          },
+          {
+            "code": "OHS 322"
+          },
+          {
+            "code": "OHS 421"
+          },
+          {
+            "code": "OHS 477"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "OHS 301"
+          },
+          {
+            "code": "OHS 322"
+          },
+          {
+            "code": "OHS 421"
+          },
+          {
+            "code": "OHS 477"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Occupational Health and Safety Degree Completion Pathway",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "ENH 121"
+          },
+          {
+            "code": "ENH 220"
+          },
+          {
+            "code": "CHY 152"
+          },
+          {
+            "code": "OHS 301"
+          },
+          {
+            "code": "OHS 314"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ENH 122"
+          },
+          {
+            "code": "ENH 440"
+          },
+          {
+            "code": "OHS 322"
+          },
+          {
+            "code": "OHS 709"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "ENH 522"
+          },
+          {
+            "code": "ENH 825"
+          },
+          {
+            "code": "OHS 509"
+          },
+          {
+            "code": "OHS 523"
+          },
+          {
+            "code": "POH 705"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "OHS 422"
+          },
+          {
+            "code": "OHS 621"
+          },
+          {
+            "code": "OHS 623"
+          },
+          {
+            "code": "OHS 800"
+          },
+          {
+            "code": "OHS 806"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Public Health",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "POH 103"
+          },
+          {
+            "code": "POH 105"
+          },
+          {
+            "code": "CHY 104"
+          },
+          {
+            "code": "MTH 131"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "POH 201"
+          },
+          {
+            "code": "POH 203"
+          },
+          {
+            "code": "CHY 152"
+          },
+          {
+            "code": "MTH 231"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "POH 301"
+          },
+          {
+            "code": "POH 303"
+          },
+          {
+            "code": "CHY 253"
+          },
+          {
+            "code": "MTH 330"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "POH 401"
+          },
+          {
+            "code": "POH 403"
+          },
+          {
+            "code": "CHY 354"
+          },
+          {
+            "code": "MTH 430"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "POH 501"
+          },
+          {
+            "code": "POH 503"
+          },
+          {
+            "code": "CHY 455"
+          },
+          {
+            "code": "MTH 530"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "POH 601"
+          },
+          {
+            "code": "POH 603"
+          },
+          {
+            "code": "CHY 556"
+          },
+          {
+            "code": "MTH 630"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "POH 701"
+          },
+          {
+            "code": "POH 703"
+          },
+          {
+            "code": "CHY 657"
+          },
+          {
+            "code": "MTH 730"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "POH 801"
+          },
+          {
+            "code": "POH 803"
+          },
+          {
+            "code": "CHY 758"
+          },
+          {
+            "code": "MTH 830"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Public Health",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CHY 104"
+          },
+          {
+            "code": "ENH 121"
+          },
+          {
+            "code": "ENH 220"
+          },
+          {
+            "code": "POH 100"
+          },
+          {
+            "code": "POH 103"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CMN 100"
+          },
+          {
+            "code": "ENH 440"
+          },
+          {
+            "code": "OHS 322"
+          },
+          {
+            "code": "POH 201"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "ENH 333"
+          },
+          {
+            "code": "OHS 508"
+          },
+          {
+            "code": "PUB 301"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "ENH 122"
+          },
+          {
+            "code": "ENH 325"
+          },
+          {
+            "code": "ENH 610"
+          },
+          {
+            "code": "POH 407"
+          },
+          {
+            "code": "PUB 501"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "ENH 522"
+          },
+          {
+            "code": "PUB 409"
+          },
+          {
+            "code": "PUB 508"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "ENH 324"
+          },
+          {
+            "code": "PUB 607"
+          },
+          {
+            "code": "PUB 609"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "ENH 505"
+          },
+          {
+            "code": "ENH 524"
+          },
+          {
+            "code": "ENH 825"
+          },
+          {
+            "code": "POH 705"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "ENH 721"
+          },
+          {
+            "code": "PUB 800"
+          },
+          {
+            "code": "PUB 808"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Urban and Regional Planning",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "FCS 100"
+          },
+          {
+            "code": "PLG 100"
+          },
+          {
+            "code": "PLG 120"
+          },
+          {
+            "code": "POL 123"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ECN 104"
+          },
+          {
+            "code": "PLG 200"
+          },
+          {
+            "code": "PLG 220"
+          },
+          {
+            "code": "PLG 240"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "PLG 300"
+          },
+          {
+            "code": "PLG 310"
+          },
+          {
+            "code": "PLG 320"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "PLG 400"
+          },
+          {
+            "code": "PLG 410"
+          },
+          {
+            "code": "PLG 420"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "PLG 500"
+          },
+          {
+            "code": "PLG 510"
+          },
+          {
+            "code": "PLG 520"
+          },
+          {
+            "option": [
+              "PLE 885",
+              "PLG 531",
+              "PLG 532",
+              "PLG 533",
+              "PLG 534",
+              "PLG 734",
+              "PLG 735",
+              "PLG 736"
+            ]
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "PLG 600"
+          },
+          {
+            "code": "PLG 610"
+          },
+          {
+            "code": "PLG 620"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "PLG 710"
+          },
+          {
+            "code": "PLG 720"
+          },
+          {
+            "option": [
+              "PLE 885",
+              "PLG 731",
+              "PLG 732",
+              "PLG 733",
+              "PLG 734",
+              "PLG 735",
+              "PLG 736"
+            ]
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "PLG 800"
+          },
+          {
+            "code": "PLG 810"
+          },
+          {
+            "code": "PLG 830"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Biomedical Engineering",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CEN 100"
+          },
+          {
+            "code": "CEN 199"
+          },
+          {
+            "code": "CHY 102"
+          },
+          {
+            "code": "MTH 140"
+          },
+          {
+            "code": "MTH 141"
+          },
+          {
+            "code": "PCS 211"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "BME 100"
+          },
+          {
+            "code": "CPS 188"
+          },
+          {
+            "code": "ECN 801"
+          },
+          {
+            "code": "ELE 202"
+          },
+          {
+            "code": "MTH 240"
+          },
+          {
+            "code": "PCS 125"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "BLG 143"
+          },
+          {
+            "code": "BME 229"
+          },
+          {
+            "code": "BME 323"
+          },
+          {
+            "code": "BME 328"
+          },
+          {
+            "code": "MTH 425"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "BLG 601"
+          },
+          {
+            "code": "BME 406"
+          },
+          {
+            "code": "BME 423"
+          },
+          {
+            "code": "BME 434"
+          },
+          {
+            "code": "CMN 432"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "BLG 701"
+          },
+          {
+            "code": "BME 501"
+          },
+          {
+            "code": "BME 506"
+          },
+          {
+            "code": "BME 516"
+          },
+          {
+            "code": "BME 532"
+          },
+          {
+            "code": "BME 538"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "BME 632"
+          },
+          {
+            "code": "BME 634"
+          },
+          {
+            "code": "BME 639"
+          },
+          {
+            "code": "BME 674"
+          },
+          {
+            "code": "MTH 410"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "BME 70A"
+          },
+          {
+            "option": [
+              "ENG 503",
+              "GEO 702",
+              "HST 701",
+              "PHL 709",
+              "POL 507"
+            ]
+          },
+          {
+            "option": [
+              "BME 703",
+              "BME 704",
+              "BME 705",
+              "BME 714",
+              "BME 772",
+              "BME 777"
+            ]
+          },
+          {
+            "option": [
+              "BME 703",
+              "BME 704",
+              "BME 705",
+              "BME 714",
+              "BME 772",
+              "BME 777"
+            ]
+          },
+          {
+            "option": [
+              "BME 703",
+              "BME 704",
+              "BME 705",
+              "BME 714",
+              "BME 772",
+              "BME 777"
+            ]
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "BME 70B"
+          },
+          {
+            "code": "CEN 800"
+          },
+          {
+            "option": [
+              "BME 802",
+              "BME 803",
+              "BME 809",
+              "BME 872"
+            ]
+          },
+          {
+            "option": [
+              "BME 802",
+              "BME 803",
+              "BME 809",
+              "BME 872"
+            ]
+          },
+          {
+            "option": [
+              "BME 804",
+              "BME 808",
+              "CEN 810"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Electrical Engineering",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CEN 100"
+          },
+          {
+            "code": "CEN 199"
+          },
+          {
+            "code": "CHY 102"
+          },
+          {
+            "code": "MTH 140"
+          },
+          {
+            "code": "MTH 141"
+          },
+          {
+            "code": "PCS 211"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CPS 188"
+          },
+          {
+            "code": "ECN 801"
+          },
+          {
+            "code": "ELE 202"
+          },
+          {
+            "code": "MTH 240"
+          },
+          {
+            "code": "PCS 125"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "COE 318"
+          },
+          {
+            "code": "COE 328"
+          },
+          {
+            "code": "ELE 302"
+          },
+          {
+            "code": "MTH 425"
+          },
+          {
+            "code": "PCS 224"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "CMN 432"
+          },
+          {
+            "code": "COE 428"
+          },
+          {
+            "code": "ELE 401"
+          },
+          {
+            "code": "ELE 404"
+          },
+          {
+            "code": "MTH 314"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "COE 538"
+          },
+          {
+            "code": "ELE 504"
+          },
+          {
+            "code": "ELE 531"
+          },
+          {
+            "code": "ELE 532"
+          },
+          {
+            "code": "MTH 514"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "ELE 632"
+          },
+          {
+            "code": "ELE 635"
+          },
+          {
+            "code": "ELE 637"
+          },
+          {
+            "code": "ELE 639"
+          },
+          {
+            "code": "MEC 511"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "ELE 70A"
+          },
+          {
+            "option": [
+              "ENG 503",
+              "GEO 702",
+              "HST 701",
+              "PHL 709",
+              "POL 507"
+            ]
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "CEN 800"
+          },
+          {
+            "code": "ELE 70A"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Mechatronics Engineering",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CEN 100"
+          },
+          {
+            "code": "CEN 199"
+          },
+          {
+            "code": "CHY 102"
+          },
+          {
+            "code": "MTH 140"
+          },
+          {
+            "code": "MTH 141"
+          },
+          {
+            "code": "PCS 211"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CPS 188"
+          },
+          {
+            "code": "ECN 801"
+          },
+          {
+            "code": "MEC 222"
+          },
+          {
+            "code": "MTH 240"
+          },
+          {
+            "code": "MTL 200"
+          },
+          {
+            "code": "PCS 125"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "CMN 432"
+          },
+          {
+            "code": "MEC 323"
+          },
+          {
+            "code": "MEC 325"
+          },
+          {
+            "code": "MTE 301"
+          },
+          {
+            "code": "MTH 425"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "MEC 311"
+          },
+          {
+            "code": "MEC 322"
+          },
+          {
+            "code": "MEC 511"
+          },
+          {
+            "code": "MTE 401"
+          },
+          {
+            "code": "MTH 410"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "EES 612"
+          },
+          {
+            "code": "MEC 713"
+          },
+          {
+            "code": "MTE 501"
+          },
+          {
+            "code": "MTE 502"
+          },
+          {
+            "code": "MTH 510"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "MEC 709"
+          },
+          {
+            "code": "MTE 601"
+          },
+          {
+            "code": "MTE 602"
+          },
+          {
+            "code": "MTE 603"
+          },
+          {
+            "code": "MTE 604"
+          },
+          {
+            "code": "MTE 751"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "MTE 70A"
+          },
+          {
+            "code": "MTE 701"
+          },
+          {
+            "option": [
+              "MEC 617",
+              "MTE 711",
+              "MTE 712",
+              "MTE 792",
+              "MTE 829"
+            ]
+          },
+          {
+            "option": [
+              "MEC 617",
+              "MTE 711",
+              "MTE 712",
+              "MTE 792",
+              "MTE 829"
+            ]
+          },
+          {
+            "option": [
+              "ENG 503",
+              "GEO 702",
+              "HST 701",
+              "PHL 709",
+              "POL 507"
+            ]
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "CEN 800"
+          },
+          {
+            "code": "MTE 70A"
+          },
+          {
+            "code": "MTE 801"
+          },
+          {
+            "option": [
+              "CEN 810",
+              "MTE 811",
+              "MTE 812",
+              "MTE 819",
+              "MTE 882",
+              "MTE 888"
+            ]
+          },
+          {
+            "option": [
+              "CEN 810",
+              "MTE 811",
+              "MTE 812",
+              "MTE 819",
+              "MTE 882",
+              "MTE 888"
+            ]
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Undeclared Engineering",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CEN 100"
+          },
+          {
+            "code": "CEN 199"
+          },
+          {
+            "code": "CHY 102"
+          },
+          {
+            "code": "MTH 140"
+          },
+          {
+            "code": "MTH 141"
+          },
+          {
+            "code": "PCS 211"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ECN 801"
+          },
+          {
+            "code": "MTH 240"
+          },
+          {
+            "code": "PCS 125"
+          },
+          {
+            "option": [
+              "AER 222",
+              "BME 100",
+              "CHE 200",
+              "CVL 207",
+              "CPS 125",
+              "CPS 188",
+              "ELE 202",
+              "MEC 222",
+              "MTL 200"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Biology",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "SCI 180"
+          },
+          {
+            "option": [
+              "PCS 111",
+              "BLG 181",
+              "BMS 150"
+            ]
+          },
+          {
+            "option": [
+              "CHY 182",
+              "CHY 183"
+            ]
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "SCI 180"
+          },
+          {
+            "option": [
+              "PCS 111",
+              "BLG 181",
+              "BMS 150"
+            ]
+          },
+          {
+            "option": [
+              "CHY 182",
+              "CHY 183"
+            ]
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Biology",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "BLG 143"
+          },
+          {
+            "code": "CHY 103"
+          },
+          {
+            "code": "MTH 131"
+          },
+          {
+            "code": "PCS 120"
+          },
+          {
+            "code": "SCI 180"
+          },
+          {
+            "option": [
+              "CPS 109",
+              "CPS 118"
+            ]
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "BLG 144"
+          },
+          {
+            "code": "CHY 113"
+          },
+          {
+            "code": "MTH 231"
+          },
+          {
+            "code": "PCS 130"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "BLG 151"
+          },
+          {
+            "code": "BLG 230"
+          },
+          {
+            "code": "BLG 311"
+          },
+          {
+            "code": "CHY 142"
+          },
+          {
+            "code": "MTH 380"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "BCH 261"
+          },
+          {
+            "code": "BLG 316"
+          },
+          {
+            "code": "BLG 400"
+          },
+          {
+            "code": "BLG 567"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Biology",
+    "semesters": [
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "BCH 361"
+          },
+          {
+            "code": "BLG 307"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "BCH 463"
+          },
+          {
+            "code": "BLG 315"
+          },
+          {
+            "option": [
+              "BCH 880",
+              "BLG 888"
+            ]
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "CMN 600"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Biophysics Option",
+    "semesters": [
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "BCH 361"
+          },
+          {
+            "code": "MTH 330"
+          },
+          {
+            "code": "PCS 229"
+          },
+          {
+            "code": "PCS 300"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "BCH 463"
+          },
+          {
+            "code": "BLG 315"
+          },
+          {
+            "code": "PCS 227"
+          },
+          {
+            "code": "PCS 401"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "BLG 307"
+          },
+          {
+            "code": "PCS 354"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table III"
+          },
+          {
+            "table": "Table III"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "CMN 600"
+          },
+          {
+            "code": "PCS 352"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table III"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Bioinformatics and Computational Biology",
+    "semesters": [
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "BCH 361"
+          },
+          {
+            "code": "BLG 307"
+          },
+          {
+            "code": "MTH 110"
+          },
+          {
+            "code": "MTH 330"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "BLG 315"
+          },
+          {
+            "code": "MTH 607"
+          },
+          {
+            "option": [
+              "CPS 209",
+              "MTH 500"
+            ]
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "BLG 800"
+          },
+          {
+            "code": "CPS 305"
+          },
+          {
+            "code": "CPS 501"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "BLG 888"
+          },
+          {
+            "code": "CMN 600"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Environmental Biology",
+    "semesters": [
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "BCH 361"
+          },
+          {
+            "code": "BLG 351"
+          },
+          {
+            "code": "BLG 409"
+          },
+          {
+            "code": "BLG 803"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "BLG 315"
+          },
+          {
+            "code": "BLG 340"
+          },
+          {
+            "code": "CHY 423"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "BLG 401"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table V"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "CMN 600"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table V"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Biomedical Sciences",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "BLG 143"
+          },
+          {
+            "code": "CHY 103"
+          },
+          {
+            "code": "MTH 131"
+          },
+          {
+            "code": "PCS 120"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "BLG 144"
+          },
+          {
+            "code": "CHY 113"
+          },
+          {
+            "code": "PCS 130"
+          },
+          {
+            "code": "PSY 102"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "BLG 151"
+          },
+          {
+            "code": "BLG 311"
+          },
+          {
+            "code": "CHY 142"
+          },
+          {
+            "code": "MTH 380"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "BCH 261"
+          },
+          {
+            "code": "BLG 400"
+          },
+          {
+            "code": "BLG 411"
+          },
+          {
+            "code": "BMS 600"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "BCH 361"
+          },
+          {
+            "code": "BLG 307"
+          },
+          {
+            "code": "BLG 856"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "BLG 888"
+          },
+          {
+            "code": "BMS 650"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "BMS 760"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Financial Mathematics",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "ACC 110"
+          },
+          {
+            "code": "CPS 118"
+          },
+          {
+            "code": "ECN 104"
+          },
+          {
+            "code": "MTH 207"
+          },
+          {
+            "code": "SCI 180"
+          },
+          {
+            "option": [
+              "BLG 143",
+              "CHY 103",
+              "PCS 120"
+            ]
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CMN 279"
+          },
+          {
+            "code": "FIN 300"
+          },
+          {
+            "code": "MTH 310"
+          },
+          {
+            "option": [
+              "BLG 144",
+              "CHY 113",
+              "PCS 130"
+            ]
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "FIN 401"
+          },
+          {
+            "code": "FIN 501"
+          },
+          {
+            "code": "MTH 108"
+          },
+          {
+            "code": "MTH 304"
+          },
+          {
+            "code": "MTH 350"
+          },
+          {
+            "code": "MTH 404"
+          },
+          {
+            "code": "MTH 430"
+          },
+          {
+            "code": "MTH 719"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "MTH 500"
+          },
+          {
+            "code": "MTH 501"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "MTH 600"
+          },
+          {
+            "code": "MTH 712"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "FIN 601"
+          },
+          {
+            "code": "FIN 800"
+          },
+          {
+            "code": "FIN 801"
+          },
+          {
+            "code": "MTH 700"
+          },
+          {
+            "code": "MTH 800"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Mathematics and Its Applications",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "SCI 180"
+          },
+          {
+            "code": "MTH 110"
+          },
+          {
+            "code": "MTH 131"
+          },
+          {
+            "code": "CPS 118"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "MTH 210"
+          },
+          {
+            "code": "MTH 231"
+          },
+          {
+            "code": "CPS 213"
+          },
+          {
+            "code": "PCS 211"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "MTH 310"
+          },
+          {
+            "code": "MTH 330"
+          },
+          {
+            "code": "CPS 310"
+          },
+          {
+            "code": "CHY 103"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "MTH 410"
+          },
+          {
+            "code": "MTH 430"
+          },
+          {
+            "code": "CPS 412"
+          },
+          {
+            "code": "BLG 143"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "MTH 510"
+          },
+          {
+            "code": "MTH 530"
+          },
+          {
+            "code": "CPS 510"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "MTH 610"
+          },
+          {
+            "code": "MTH 630"
+          },
+          {
+            "code": "CPS 610"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "MTH 710"
+          },
+          {
+            "code": "MTH 730"
+          },
+          {
+            "code": "CPS 710"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "MTH 810"
+          },
+          {
+            "code": "MTH 830"
+          },
+          {
+            "code": "CPS 810"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Mathematics and Its Applications",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CPS 109"
+          },
+          {
+            "code": "MTH 110"
+          },
+          {
+            "code": "MTH 207"
+          },
+          {
+            "code": "SCI 180"
+          },
+          {
+            "option": [
+              "BLG 143",
+              "BLG 144",
+              "CHY 103",
+              "CHY 113",
+              "CPS 209",
+              "PCS 120",
+              "PCS 130"
+            ]
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "MTH 108"
+          },
+          {
+            "code": "MTH 210"
+          },
+          {
+            "code": "MTH 310"
+          },
+          {
+            "option": [
+              "BLG 143",
+              "BLG 144",
+              "CHY 103",
+              "CHY 113",
+              "CPS 209",
+              "PCS 120",
+              "PCS 130"
+            ]
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Mathematics",
+    "semesters": [
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "MTH 260"
+          },
+          {
+            "code": "MTH 304"
+          },
+          {
+            "code": "MTH 350"
+          },
+          {
+            "code": "MTH 404"
+          },
+          {
+            "code": "MTH 430"
+          },
+          {
+            "code": "MTH 719"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "MTH 501"
+          },
+          {
+            "code": "MTH 525"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "MTH 617"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "MTH 640"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Computer Science",
+    "semesters": [
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "CPS 209"
+          },
+          {
+            "code": "CPS 213"
+          },
+          {
+            "code": "MTH 260"
+          },
+          {
+            "code": "MTH 304"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "MTH 350"
+          },
+          {
+            "code": "MTH 404"
+          },
+          {
+            "code": "MTH 430"
+          },
+          {
+            "code": "MTH 719"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "MTH 501"
+          },
+          {
+            "code": "MTH 525"
+          },
+          {
+            "code": "CPS 305"
+          },
+          {
+            "code": "CPS 393"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "MTH 617"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "MTH 640"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Economics",
+    "semesters": [
+      {
+        "semester": "Semester 3 & 4",
+        "requirements": [
+          {
+            "code": "ECN 104"
+          },
+          {
+            "code": "ECN 204"
+          },
+          {
+            "code": "MTH 260"
+          },
+          {
+            "code": "MTH 304"
+          },
+          {
+            "code": "MTH 350"
+          },
+          {
+            "code": "MTH 404"
+          },
+          {
+            "code": "MTH 430"
+          },
+          {
+            "code": "MTH 719"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "ECN 301"
+          },
+          {
+            "code": "ECN 504"
+          },
+          {
+            "code": "MTH 501"
+          },
+          {
+            "code": "MTH 525"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "MTH 617"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table III"
+          },
+          {
+            "table": "Table III"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7 & 8",
+        "requirements": [
+          {
+            "code": "MTH 640"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table III"
+          },
+          {
+            "table": "Table III"
+          },
+          {
+            "table": "Table III"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Medical Physics",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "BLG 143"
+          },
+          {
+            "code": "CHY 103"
+          },
+          {
+            "code": "MTH 131"
+          },
+          {
+            "code": "PCS 120"
+          },
+          {
+            "code": "SCI 180"
+          },
+          {
+            "option": [
+              "CPS 109",
+              "CPS 118"
+            ]
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "BLG 144"
+          },
+          {
+            "code": "CHY 113"
+          },
+          {
+            "code": "MTH 231"
+          },
+          {
+            "code": "PCS 130"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "MTH 108"
+          },
+          {
+            "code": "MTH 330"
+          },
+          {
+            "code": "PCS 229"
+          },
+          {
+            "code": "PCS 300"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "MTH 430"
+          },
+          {
+            "code": "PCS 227"
+          },
+          {
+            "code": "PCS 228"
+          },
+          {
+            "code": "PCS 401"
+          },
+          {
+            "code": "PCS 521"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "BLG 311"
+          },
+          {
+            "code": "PCS 230"
+          },
+          {
+            "code": "PCS 622"
+          },
+          {
+            "code": "PCS 623"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "PCS 352"
+          },
+          {
+            "code": "PCS 335"
+          },
+          {
+            "code": "PCS 405"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "option": [
+              "table",
+              "Table I"
+            ]
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "PCS 40A"
+          },
+          {
+            "code": "PCS 354"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "option": [
+              "upperlib",
+              "Table I"
+            ]
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "PCS 40A"
+          },
+          {
+            "code": "PCS 407"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Accounting and Finance",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "AFA 100"
+          },
+          {
+            "code": "QMS 130"
+          },
+          {
+            "code": "AFF 210"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "AFA 200"
+          },
+          {
+            "code": "AFF 310"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Accounting and Finance - First Two Years Common",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "BUS 221"
+          },
+          {
+            "code": "CAF 199"
+          },
+          {
+            "code": "GMS 200"
+          },
+          {
+            "code": "MHR 405"
+          },
+          {
+            "code": "QMS 130"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "AFA 100"
+          },
+          {
+            "code": "AFF 210"
+          },
+          {
+            "code": "CMN 279"
+          },
+          {
+            "code": "QMS 230"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "AFA 200"
+          },
+          {
+            "code": "AFF 310"
+          },
+          {
+            "code": "AFF 420"
+          },
+          {
+            "code": "ECN 104"
+          },
+          {
+            "code": "ECN 204"
+          },
+          {
+            "code": "LAW 122"
+          },
+          {
+            "code": "MKT 100"
+          },
+          {
+            "option": [
+              "AFA 300",
+              "AFA 350"
+            ]
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Accounting and Finance",
+    "semesters": [
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "AFA 400"
+          },
+          {
+            "code": "AFA 511"
+          },
+          {
+            "code": "AFA 708"
+          },
+          {
+            "code": "AFF 713"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "AFA 500"
+          },
+          {
+            "code": "AFA 615"
+          },
+          {
+            "code": "AFA 619"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "AFA 518"
+          },
+          {
+            "code": "AFA 706"
+          },
+          {
+            "code": "AFA 717"
+          },
+          {
+            "code": "BUS 800"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "AFA 716"
+          },
+          {
+            "code": "AFA 817"
+          },
+          {
+            "code": "AFA 819"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Accounting & Finance",
+    "semesters": [
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "AFF 501"
+          },
+          {
+            "code": "AFF 514"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "AFF 410"
+          },
+          {
+            "code": "AFF 604"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "AFF 704"
+          },
+          {
+            "code": "CMN 314"
+          },
+          {
+            "table": "Table III"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "BUS 800"
+          },
+          {
+            "table": "Table III"
+          },
+          {
+            "table": "Table III"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Business Management",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "ACC 100"
+          },
+          {
+            "code": "BUS 100"
+          },
+          {
+            "code": "ECN 104"
+          },
+          {
+            "code": "GMS 200"
+          },
+          {
+            "code": "QMS 110"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ACC 406"
+          },
+          {
+            "code": "BUS 200"
+          },
+          {
+            "code": "ECN 204"
+          },
+          {
+            "code": "GMS 401"
+          },
+          {
+            "code": "QMS 210"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Business Management",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "ECN 104"
+          },
+          {
+            "code": "ENT 101"
+          },
+          {
+            "code": "GMS 200"
+          },
+          {
+            "code": "QMS 110"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ACC 100"
+          },
+          {
+            "code": "ECN 204"
+          },
+          {
+            "code": "MHR 523"
+          },
+          {
+            "code": "MKT 100"
+          },
+          {
+            "code": "QMS 210"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Business Technology Management",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "ITM 100"
+          },
+          {
+            "code": "ITM 102"
+          },
+          {
+            "code": "ITM 107"
+          },
+          {
+            "code": "ITM 200"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ITM 207"
+          },
+          {
+            "code": "ITM 301"
+          },
+          {
+            "code": "ITM 305"
+          },
+          {
+            "code": "ITM 315"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "ITM 410"
+          },
+          {
+            "code": "ITM 500"
+          },
+          {
+            "code": "ITM 505"
+          },
+          {
+            "code": "ITM 600"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "ITM 605"
+          },
+          {
+            "code": "ITM 610"
+          },
+          {
+            "code": "ITM 615"
+          },
+          {
+            "code": "ITM 620"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "ITM 700"
+          },
+          {
+            "code": "ITM 705"
+          },
+          {
+            "code": "ITM 710"
+          },
+          {
+            "code": "ITM 715"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "ITM 800"
+          },
+          {
+            "code": "ITM 805"
+          },
+          {
+            "code": "ITM 810"
+          },
+          {
+            "code": "ITM 815"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Business Technology Management",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "BUS 221"
+          },
+          {
+            "code": "ITM 107"
+          },
+          {
+            "code": "ITM 207"
+          },
+          {
+            "code": "ITM 301"
+          },
+          {
+            "code": "ITM 305"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ITM 200"
+          },
+          {
+            "code": "ITM 415"
+          },
+          {
+            "code": "ITM 500"
+          },
+          {
+            "code": "ITM 820"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "ITM 618"
+          },
+          {
+            "code": "ITM 706"
+          },
+          {
+            "code": "ITM 707"
+          },
+          {
+            "code": "ITM 750"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "ITM 900"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Health Administration",
+    "semesters": [
+      {
+        "semester": "Level 1",
+        "requirements": [
+          {
+            "code": "ACC 100"
+          },
+          {
+            "code": "HIM 301"
+          },
+          {
+            "code": "HIM 305"
+          },
+          {
+            "code": "HIM 408"
+          },
+          {
+            "code": "HSM 301"
+          },
+          {
+            "code": "HSM 305"
+          },
+          {
+            "code": "HSM 330"
+          },
+          {
+            "code": "LAW 326"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Level 2",
+        "requirements": [
+          {
+            "code": "HIM 404"
+          },
+          {
+            "code": "HSM 407"
+          },
+          {
+            "code": "HSM 408"
+          },
+          {
+            "code": "HSM 417"
+          },
+          {
+            "code": "HSM 418"
+          },
+          {
+            "code": "HSM 419"
+          },
+          {
+            "code": "HSM 437"
+          },
+          {
+            "code": "PHL 302"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Retail Management",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "ENT 101"
+          },
+          {
+            "code": "GMS 200"
+          },
+          {
+            "code": "MHR 523"
+          },
+          {
+            "code": "QMS 110"
+          },
+          {
+            "code": "RMG 100"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "ACC 100"
+          },
+          {
+            "code": "ITM 102"
+          },
+          {
+            "code": "MKT 100"
+          },
+          {
+            "code": "QMS 210"
+          },
+          {
+            "code": "RMG 200"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "ACC 406"
+          },
+          {
+            "code": "LAW 122"
+          },
+          {
+            "code": "RMG 301"
+          },
+          {
+            "code": "RMG 400"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "ECN 104"
+          },
+          {
+            "code": "RMG 300"
+          },
+          {
+            "code": "RMG 303"
+          },
+          {
+            "code": "RMG 700"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "ECN 204"
+          },
+          {
+            "code": "FIN 300"
+          },
+          {
+            "code": "RMG 434"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "table": "Table I"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "RMG 302"
+          },
+          {
+            "code": "RMG 452"
+          },
+          {
+            "code": "RMG 79A"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "RMG 500"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "RMG 908"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Graphic Communications Management",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "GCM 110"
+          },
+          {
+            "code": "GCM 120"
+          },
+          {
+            "code": "GCM 130"
+          },
+          {
+            "code": "MKT 100"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CMN 279"
+          },
+          {
+            "code": "GCM 111"
+          },
+          {
+            "code": "GCM 121"
+          },
+          {
+            "code": "GMS 200"
+          },
+          {
+            "code": "SSH 105"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "GCM 230"
+          },
+          {
+            "code": "GCM 240"
+          },
+          {
+            "code": "GCM 250"
+          },
+          {
+            "code": "MKT 300"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "ACC 100"
+          },
+          {
+            "code": "GCM 210"
+          },
+          {
+            "code": "GCM 220"
+          },
+          {
+            "code": "GCM 260"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "GCM 350"
+          },
+          {
+            "code": "GCM 360"
+          },
+          {
+            "code": "GCM 370"
+          },
+          {
+            "code": "GCM 375"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "GCM 320"
+          },
+          {
+            "code": "GCM 362"
+          },
+          {
+            "code": "GCM 372"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "GCM 420"
+          },
+          {
+            "code": "GCM 460"
+          },
+          {
+            "code": "WKT 608"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "GCM 461"
+          },
+          {
+            "option": [
+              "GCM 470",
+              "GCM 490"
+            ]
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Journalism",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "JRN 103"
+          },
+          {
+            "code": "JRN 104"
+          },
+          {
+            "code": "JRN 105"
+          },
+          {
+            "code": "JRN 106"
+          },
+          {
+            "option": [
+              "ECN 104",
+              "ECN 204",
+              "ENG 110",
+              "ENG 208",
+              "HIS 490",
+              "HST 407",
+              "POG 100",
+              "POG 110"
+            ]
+          },
+          {
+            "option": [
+              "ECN 104",
+              "ECN 204",
+              "ENG 110",
+              "ENG 208",
+              "HIS 490",
+              "HST 407",
+              "POG 100",
+              "POG 110"
+            ]
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "JRN 270"
+          },
+          {
+            "code": "JRN 271"
+          },
+          {
+            "code": "JRN 272"
+          },
+          {
+            "code": "JRN 273"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "JRN 344"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table II"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "option": [
+              "JRN 851",
+              "JRN 850"
+            ]
+          },
+          {
+            "option": [
+              "JRN 851",
+              {
+                "table": "Table IV"
+              },
+              {
+                "table": "Table IV"
+              }
+            ]
+          },
+          {
+            "option": [
+              "JRN 850",
+              {
+                "table": "Table IV"
+              },
+              {
+                "table": "Table IV"
+              }
+            ]
+          },
+          {
+            "option": [
+              "JRN 825",
+              "JRN 826"
+            ]
+          },
+          {
+            "option": [
+              "JRN 840",
+              {
+                "table": "Table IV"
+              },
+              {
+                "table": "Table IV"
+              },
+              {
+                "table": "Table IV"
+              }
+            ]
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Media Production",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "RTA 101"
+          },
+          {
+            "code": "RTA 102"
+          },
+          {
+            "code": "RTA 103"
+          },
+          {
+            "code": "RTA 104"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "RTA 210"
+          },
+          {
+            "code": "RTA 211"
+          },
+          {
+            "code": "RTA 212"
+          },
+          {
+            "code": "RTA 213"
+          },
+          {
+            "code": "RTA 243"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "RTA 315"
+          },
+          {
+            "code": "RTA 316"
+          },
+          {
+            "lowerlib": "lower"
+          },
+          {
+            "option": [
+              "RTA 311",
+              "RTA 313",
+              "RTA 314"
+            ]
+          },
+          {
+            "option": [
+              "NMA 320",
+              "NMA 321",
+              "NMA 925",
+              "NMA 928",
+              "NMA 934",
+              "NMA 958",
+              "NMA 962",
+              "NMA 965",
+              "NMA 968",
+              "RTA 312",
+              "RTA 317",
+              "RTA 963"
+            ]
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "RTA 310"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "RTA 912"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "RTA 503"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "option": [
+              "RTA 701",
+              "RTA 702",
+              "RTA 703",
+              "Table I",
+              "Table I"
+            ]
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "RTA 711"
+          },
+          {
+            "option": [
+              "Table I",
+              "RTA 704",
+              "RTA 705",
+              "Table I",
+              "Table I"
+            ]
+          },
+          {
+            "option": [
+              "Table I",
+              "RTA 888",
+              "Table I"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "New Media",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "NMA 107"
+          },
+          {
+            "code": "NMA 111"
+          },
+          {
+            "code": "NMA 928"
+          },
+          {
+            "code": "RTA 104"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "NMA 201"
+          },
+          {
+            "code": "NMA 221"
+          },
+          {
+            "code": "NMA 222"
+          },
+          {
+            "code": "NMA 223"
+          },
+          {
+            "code": "NMA 962"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "NMA 321"
+          },
+          {
+            "code": "NMA 322"
+          },
+          {
+            "code": "NMA 867"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "NMA 220"
+          },
+          {
+            "code": "NMA 886"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "option": [
+              "NMA 520",
+              "NMA 807",
+              "NMA 928"
+            ]
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "option": [
+              "NMA 323",
+              "NMA 501",
+              "NMA 814",
+              "NMA 856",
+              "NMA 997",
+              "NMA 891"
+            ]
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "NMA 82A/B"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "NMA 82A/B"
+          },
+          {
+            "code": "NMA 821"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Professional Communication",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "CMN 200"
+          },
+          {
+            "code": "CMN 210"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "CMN 211"
+          },
+          {
+            "code": "CMN 216"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "CMN 215"
+          },
+          {
+            "code": "CMN 222"
+          },
+          {
+            "code": "CMN 314"
+          },
+          {
+            "code": "CMN 448"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "The Creative School Core Elective Table"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "CMN 315"
+          },
+          {
+            "code": "CMN 323"
+          },
+          {
+            "code": "CMN 324"
+          },
+          {
+            "code": "CMN 325"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "The Creative School Core Elective Table"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "CMN 402"
+          },
+          {
+            "code": "CMN 480"
+          },
+          {
+            "code": "CMN 490"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "table": "The Creative School Core Elective Table"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Professional Music",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "BPM 101"
+          },
+          {
+            "code": "BPM 201"
+          },
+          {
+            "code": "CSE 100"
+          },
+          {
+            "table": "Creative Industries Table I"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "BPM 102"
+          },
+          {
+            "code": "BPM 202"
+          },
+          {
+            "code": "BSM 100"
+          },
+          {
+            "code": "CRI 200"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "BPM 301"
+          },
+          {
+            "code": "BPM 927"
+          },
+          {
+            "code": "CSE 200"
+          },
+          {
+            "table": "Creative Industries Table I"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "BPM 302"
+          },
+          {
+            "table": "Creative Industries Table I"
+          },
+          {
+            "table": "Creative Industries Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "option": [
+              "CSE 300",
+              "CSE 310"
+            ]
+          },
+          {
+            "code": "FCD 800"
+          },
+          {
+            "table": "Business Core Elective Table V"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "BPM 937"
+          },
+          {
+            "code": "CRI 620"
+          },
+          {
+            "code": "MKT 100"
+          },
+          {
+            "table": "Business Core Elective Table V"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "BPM 401"
+          },
+          {
+            "code": "CRI 670"
+          },
+          {
+            "table": "Creative Industries Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "BPM 402"
+          },
+          {
+            "code": "CRI 800"
+          },
+          {
+            "table": "Creative Industries Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "program": "Sport Media",
+    "semesters": [
+      {
+        "semester": "Semester 1",
+        "requirements": [
+          {
+            "code": "BSM 100"
+          },
+          {
+            "code": "RTA 103"
+          },
+          {
+            "code": "RTA 104"
+          },
+          {
+            "code": "RTA 108"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 2",
+        "requirements": [
+          {
+            "code": "RTA 105"
+          },
+          {
+            "code": "RTA 106"
+          },
+          {
+            "code": "RTA 211"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 3",
+        "requirements": [
+          {
+            "code": "RTA 231"
+          },
+          {
+            "code": "RTA 233"
+          },
+          {
+            "code": "RTA 234"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "lowerlib": "lower"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 4",
+        "requirements": [
+          {
+            "code": "RTA 232"
+          },
+          {
+            "code": "RTA 235"
+          },
+          {
+            "code": "RTA 236"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 5",
+        "requirements": [
+          {
+            "code": "BSM 200"
+          },
+          {
+            "code": "RTA 330"
+          },
+          {
+            "code": "RTA 331"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 6",
+        "requirements": [
+          {
+            "code": "RTA 332"
+          },
+          {
+            "code": "RTA 994"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "upperlib": "upper"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 7",
+        "requirements": [
+          {
+            "code": "RTA 431"
+          },
+          {
+            "code": "RTA 433"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      },
+      {
+        "semester": "Semester 8",
+        "requirements": [
+          {
+            "code": "RTA 430"
+          },
+          {
+            "code": "RTA 440"
+          },
+          {
+            "table": "Table I"
+          },
+          {
+            "open": "open"
+          },
+          {
+            "open": "open"
+          }
+        ]
+      }
+    ]
+  }
+]

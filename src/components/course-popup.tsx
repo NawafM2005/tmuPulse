@@ -17,6 +17,13 @@ function formatTermCommas(term?: string | string[]): string {
   return "N/A";
 }
 
+function formatLiberal(lib?: string): string {
+  if (lib != "None") {
+    return lib === "UL" ? "Upper" : "Lower";
+  }
+  return "Core";
+}
+
 export default function PopUp({ open, onClose, course }: popup_types) {
   return (
     <AnimatePresence>
@@ -30,11 +37,11 @@ export default function PopUp({ open, onClose, course }: popup_types) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col justify-left p-8 w-full max-w-3xl mt-8 gap-4 text-left bg-black text-white rounded-lg shadow-lg border-4 border-secondary text-[15px] hover:cursor-auto"
+            className="flex flex-col justify-left p-8 w-full max-w-6xl mt-8 gap-4 text-left bg-black text-white rounded-lg shadow-lg border-4 border-secondary text-[15px] hover:cursor-auto"
             onClick={e => e.stopPropagation()}
           >
             {course && (
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-3 max-h-[600px] overflow-y-auto">
                 <h1
                   className="font-bold text-[30px] text-white"
                   style={{
@@ -45,43 +52,39 @@ export default function PopUp({ open, onClose, course }: popup_types) {
                 </h1>
                 <p>{course.description}</p>
 
-
-                <div>
+                <div className="flex flex-col gap-5 ml-5">
                   <p className="font-[800] text-[18px] mb-3">Course Details</p>
-                    <div className="flex flex-row gap-10 mb-1 ml-5">
-                      <span className="text-[15px]">Liberal: <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2 ml-2"
-                      >{course.liberal || "N/A"}</button></span>
+                    <div className="flex flex-row gap-10 mb-1">
+                      <span className="text-[15px]">Liberal: <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2"
+                      >{formatLiberal(course.liberal)}</button></span>
 
-                      <span className="text-[15px]">Term:  <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2 ml-2"
+                      <span className="text-[15px]">Term:  <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2"
                       >{formatTermCommas(course.term)}</button></span>
                     </div>
-                </div>
-
-                <div className="flex flex-col gap-5 ml-5">
-                  <span className="text-[15px]">
+                    <span className="text-[15px]">
                     Instructional Time: 
                     <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2 ml-3">
                       {course["weekly contact"] || "N/A"}
                     </button>
-                  </span>
-                  <span className="text-[15px]">
-                    GPA Weight: 
-                    <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2 ml-3">
-                      {course["gpa weight"] || "N/A"}
-                    </button>
-                  </span>
-                  <span className="text-[15px]">
-                    Billing Unit: 
-                    <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2 ml-3">
-                      {course["billing unit"] || "N/A"}
-                    </button>
-                  </span>
-                  <span className="text-[15px]">
-                    Course Count: 
-                    <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2 ml-3">
-                      {course["course count"] || "N/A"}
-                    </button>
-                  </span>
+                    </span>
+                    <span className="text-[15px]">
+                      GPA Weight: 
+                      <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2 ml-3">
+                        {course["gpa weight"] || "N/A"}
+                      </button>
+                    </span>
+                    <span className="text-[15px]">
+                      Billing Unit: 
+                      <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2 ml-3">
+                        {course["billing unit"] || "N/A"}
+                      </button>
+                    </span>
+                    <span className="text-[15px]">
+                      Course Count: 
+                      <button className="bg-secondary text-black font-bold rounded-[10px] py-1 px-2 ml-3">
+                        {course["course count"] || "N/A"}
+                      </button>
+                    </span>
                 </div>
 
                 <div className="flex flex-col gap-5">

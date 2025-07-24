@@ -81,13 +81,13 @@ export function ProgramSelector({ label = "Programs", programs, selectedPrograms
         <DropdownMenuTrigger asChild>
           <Button 
             variant="outline" 
-            className="bg-black/30 border-secondary border-2 text-white hover:bg-gray-800 hover:text-white hover:cursor-pointer"
+            className="bg-black/30 border-secondary border-1 text-white hover:bg-gray-800 hover:text-white hover:cursor-pointer"
           >
             {getButtonText()}
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-100 bg-black border-accent border-4 max-h-80 overflow-y-auto" side="bottom">
+        <DropdownMenuContent className="w-100 bg-black border-accent border-1 max-h-80 overflow-y-auto" side="bottom">
           <DropdownMenuLabel className="text-gray-300">{`Select ${label}`}</DropdownMenuLabel>
           <DropdownMenuSeparator className="bg-gray-700" />
           {programs.map((program) => (
