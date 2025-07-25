@@ -45,9 +45,7 @@ export default function Catalogue() {
   const [departments, setDepartments] = useState<Department[]>([]);
   const [selectedDepartments, setSelectedDepartments] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
-  const typeOptions = ["Lower liberal", "Upper liberal"];
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const termOptions = ["Fall", "Winter"];
   const [selectedTerm, setSelectedTerm] = useState<string[]>([]);
 
 
@@ -192,7 +190,7 @@ const handleTermToggle = (termName: string) => {
     <main className="min-h-screen bg-foreground pt-5">
       <Navbar/>
       <div className="flex flex-col items-center mb-10">
-        <div className="flex flex-col items-center justify-center p-8 w-full max-w-6xl mt-30 gap-4 text-center">
+        <div className="flex flex-col items-center justify-center p-8 w-full max-w-8xl mt-30 gap-4 text-center">
             <h1 className="text-[70px] font-[800] text-secondary" >Course Catalogue</h1>
             <p className="text-[20px] font-[400] text-white">Browse all current courses at TMU. Search, filter, and discover classes by course code, department, or keyword.</p>
         </div>        
@@ -215,24 +213,46 @@ const handleTermToggle = (termName: string) => {
                   }}
                   onClearSelection={handleClearSelection}
                 />
-                <ProgramSelector
-                  label="Type"
-                  programs={typeOptions}
-                  selectedPrograms={selectedTypes}
-                  onProgramToggle={(typeName) => {
-                    handleTypeToggle(typeName);
-                  }}
-                  onClearSelection={handleClearTypeSelection}
-                />
-                <ProgramSelector
-                  label="Term"
-                  programs={termOptions}
-                  selectedPrograms={selectedTerm}
-                  onProgramToggle={(termName) => {
-                    handleTermToggle(termName);
-                  }}
-                  onClearSelection={handleClearTermSelection}
-                />
+                <div className="flex flex-row text-white text-sm items-center bg-black/30 border-secondary border-2 p-2 rounded-lg">
+                  <p className="mr-3">Type: </p>
+                  <div className="flex flex-row gap-3">                    
+                    <button
+                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer
+                        ${selectedTypes.includes("Lower liberal") ? "bg-blue-400  text-black" : "bg-white text-black"}`}
+                      onClick={() => handleTypeToggle("Lower liberal")}
+                    >
+                      Lower
+                    </button>
+
+                    <button
+                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer
+                        ${selectedTypes.includes("Upper liberal") ? "bg-blue-400  text-black" : "bg-white text-black"}`}
+                      onClick={() => handleTypeToggle("Upper liberal")}
+                    >
+                      Upper
+                    </button>
+                  </div>
+                </div>
+                <div className="flex flex-row text-white text-sm items-center bg-black/30 border-secondary border-2 p-2 rounded-lg">
+                  <p className="mr-3">Term: </p>
+                  <div className="flex flex-row gap-3">
+                   <button
+                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer
+                        ${selectedTerm.includes("Fall") ? "bg-blue-400  text-black" : "bg-white text-black"}`}
+                      onClick={() => handleTermToggle("Fall")}
+                    >
+                      Fall
+                    </button>
+
+                    <button
+                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer
+                        ${selectedTerm.includes("Winter") ? "bg-blue-400 text-black" : "bg-white text-black"}`}
+                      onClick={() => handleTermToggle("Winter")}
+                    >
+                      Winter
+                    </button>
+                  </div>
+                </div>
             </div>
             }
             belowSearchContent={

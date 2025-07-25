@@ -77,13 +77,14 @@ export function DataTable<TData, TValue>({
         };
 
     return (
-        <div className="flex flex-col items-center">
-            <div className="flex flex-row justify-center items-center w-full max-w-7xl mt-5 mb-5 gap-6">
-                <div className="relative flex-grow">
+        <div className="flex flex-col items-center text-center">
+            <div className="flex justify-center items-center w-full mt-5 mb-5">
+                <div className="flex gap-4 w-full max-w-6xl items-center">
+                    <div className="relative flex-grow">
                     <img
                         src={search.src}
-                        alt="TMU Logo"
-                        className="absolute left-5 top-1/2 transform -translate-y-1/2 h-6 w-6 pointer-events-none"
+                        alt="Search"
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 pointer-events-none"
                     />
                     <Input
                         className="pl-12 text-secondary bg-black/20 w-full font-semibold h-10 border-1"
@@ -91,11 +92,14 @@ export function DataTable<TData, TValue>({
                         value={globalFilter ?? ""}
                         onChange={(event) => setGlobalFilter(event.target.value)}
                     />
-                </div>
-                <div className="flex-shrink-0 min-w-[180px]">
+                    </div>
+
+                    <div className="flex-shrink-0">
                     {topContent}
+                    </div>
                 </div>
-        </div>
+            </div>
+
             {belowSearchContent}
             <div className="rounded-md border-1 border-secondary bg-black/50 p-5 w-full max-w-7xl">
                 <Table className="table-fixed w-full overflow-hidden">
@@ -121,8 +125,9 @@ export function DataTable<TData, TValue>({
                                 <TableRow 
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
-                                    className="border-gray-700 hover:bg-gray-800/80 hover:cursor-pointer transition-colors hover:scale-101"
-                                    onClick={() => {
+                                    className="border-gray-700 hover:bg-gray-800/50 hover:cursor-pointer transition-colors hover:scale-101 font-bold"
+                                    onClick={(e) => {
+                                        if ((e.target as HTMLElement).closest(".no-popup")) return;
                                         setPopupRowData(row.original);
                                         setShowPopup(true);
                                     }}

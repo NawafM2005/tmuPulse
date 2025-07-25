@@ -68,7 +68,7 @@ export function ProgramSelector({ label = "Programs", programs, selectedPrograms
     if (selectedPrograms.length === 0) {
       return `${label}`
     } else if (selectedPrograms.length === 1) {
-      return selectedPrograms[0]
+      return '1 Program Selected'
     } else {
       return `${selectedPrograms.length} ${label} Selected`
     }
@@ -81,13 +81,13 @@ export function ProgramSelector({ label = "Programs", programs, selectedPrograms
         <DropdownMenuTrigger asChild>
           <Button 
             variant="outline" 
-            className="bg-black/30 border-secondary border-1 text-white hover:bg-gray-800 hover:text-white hover:cursor-pointer"
+            className="bg-black/30 border-secondary border-1 text-white hover:bg-gray-800 hover:text-white hover:cursor-pointer p-5 w-full max-w-sm min-w-[200px]"
           >
             {getButtonText()}
-            <ChevronDown className="ml-2 h-4 w-4" />
+            <ChevronDown className="ml-2 h-4 w-4"/>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-100 bg-black border-accent border-1 max-h-80 overflow-y-auto" side="bottom">
+        <DropdownMenuContent className="bg-black border-accent border-1 max-h-80 overflow-y-auto" side="bottom">
           <DropdownMenuLabel className="text-gray-300">{`Select ${label}`}</DropdownMenuLabel>
           <DropdownMenuSeparator className="bg-gray-700" />
           {programs.map((program) => (

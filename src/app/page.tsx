@@ -49,7 +49,7 @@ export default function Home() {
 
         <div className="flex flex-wrap gap-8 justify-center mt-10 mb-20">
           <Link href="/catalogue" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer 
-          hover:opacity-90 transition-all duration-100 hover:bg-black hover:scale-105 hover:border-1 border-secondary" 
+          hover:opacity-90 transition-all duration-100 hover:bg-black hover:scale-105 hover:border-4 border-secondary" 
           style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.75)), url(${courses.src})`,
                   backgroundSize: "cover",
@@ -62,7 +62,7 @@ export default function Home() {
             </p>
           </Link>
           <Link href="/planner" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
-           hover:opacity-90 transition-all duration-200 hover:bg-black hover:scale-105 hover:border-1 border-secondary"
+           hover:opacity-90 transition-all duration-200 hover:bg-black hover:scale-105 hover:border-4 border-secondary"
            style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.75)), url(${degree.src})`,
                   backgroundSize: "cover",
@@ -75,7 +75,7 @@ export default function Home() {
             </p>
           </Link>
           <Link href="/schedule" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
-           hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-secondary"
+           hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-4 border-secondary"
            style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.75)), url(${schedule.src})`,
                   backgroundSize: "cover",
@@ -88,7 +88,7 @@ export default function Home() {
             </p>
           </Link>
           <Link href="/transcript" className="bg-black/30 rounded-lg shadow-md p-8 w-80 h-100 flex flex-col items-center justify-center text-white hover:cursor-pointer
-           hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-1 border-secondary"
+           hover:opacity-90 transition-all duration-300 hover:bg-black hover:scale-105 hover:border-4 border-secondary"
            style={{
                   backgroundImage: `linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.75)), url(${transcript.src})`,
                   backgroundSize: "cover",
