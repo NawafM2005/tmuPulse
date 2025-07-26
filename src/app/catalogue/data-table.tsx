@@ -59,7 +59,7 @@ export function DataTable<TData, TValue>({
             
             const codeNoSpaces = code.toLowerCase().replace(/\s+/g, "");
             const nameNoSpaces = name.toLowerCase().replace(/\s+/g, "");
-            const searchNoSpaces = searchValue.replace(/\s+/g, "");
+            const searchNoSpaces = searchValue.replace(/\s+/g, "");     
 
             return codeNoSpaces.includes(searchNoSpaces) ||
                 nameNoSpaces.includes(searchNoSpaces);
@@ -71,6 +71,9 @@ export function DataTable<TData, TValue>({
         onGlobalFilterChange: setGlobalFilter,
         onPaginationChange: setPagination,
     })
+
+    const pageIndex = table.getState().pagination.pageIndex;
+    const pageCount = table.getPageCount(); 
 
     const scrollToTop = () => {
         window.scrollTo({ top: 200, behavior: "smooth" });
@@ -169,6 +172,9 @@ export function DataTable<TData, TValue>({
                 >
                     Previous
                 </Button>
+                <p className="text-sm font-semibold text-white">
+                    {pageCount === 0 ? "0 / 0" : `${pageIndex + 1} / ${pageCount}`}
+                </p>
                 <Button
                 variant="outline"
                 size="sm"
