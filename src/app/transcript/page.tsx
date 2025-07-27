@@ -24,6 +24,7 @@ interface TranscriptData {
   program: string | null;
   semesters: Semester[];
   cumulative_gpa: number | null;
+  transfer_courses?: Course[];
 }
 
 export default function Transcript() {
@@ -92,14 +93,60 @@ export default function Transcript() {
     const cumulativeMatch = rawText.match(/Cum GPA:\s+(\d\.\d{3})/);
     const cumulative_gpa = cumulativeMatch ? parseFloat(cumulativeMatch[1]) : null;
 
+    const transferCourses: Course[] = [];
+    const transferBlockMatch = rawText.match(/Transfer Credits[\s\S]*?(?=Beginning of Undergraduate Record)/);
+    if (transferBlockMatch) {
+      const transferBlock = transferBlockMatch[0];
+      // This regex looks for [course code] [course name] [credits] CRT [points]
+      // Handles extra/multiple spaces
+      const lineRegex = /([A-Z]{3}(?:\s+[A-Z]+)?(?:\s+\d{3})?(?:\s+\d)?)(?:\s+)([A-Za-z\-&\s]+?)\s+(\d\.\d{3})\s+CRT\s+(\d\.\d{3})/g;
+      let match;
+      while ((match = lineRegex.exec(transferBlock)) !== null) {
+        transferCourses.push({
+          code: match[1].replace(/\s+/g, " ").trim(), // Normalize spaces in code
+          name: match[2].replace(/\s+/g, " ").trim(),
+          credits: parseFloat(match[3]),
+          grade: "CRT",
+          grade_points: parseFloat(match[4])
+        });
+      }
+    }
+
+    const uniqueSemestersMap = new Map<string, Semester>();
+
+    for (const semester of semesters) {
+      if (!semester.term) continue;
+
+      if (!uniqueSemestersMap.has(semester.term)) {
+        // Deduplicate courses within the same semester by code
+        const uniqueCoursesMap = new Map<string, Course>();
+        for (const course of semester.courses) {
+          if (!uniqueCoursesMap.has(course.code)) {
+            uniqueCoursesMap.set(course.code, course);
+          }
+        }
+
+        uniqueSemestersMap.set(semester.term, {
+          ...semester,
+          courses: Array.from(uniqueCoursesMap.values()),
+        });
+      }
+    }
+
+    const uniqueSemesters = Array.from(uniqueSemestersMap.values());
+
     return {
       program,
-      semesters,
+      semesters: uniqueSemesters,
       cumulative_gpa,
+      transfer_courses: transferCourses
     };
   }
 
-  const allCourses = json?.semesters.flatMap(s => s.courses) || [];
+  const allCourses = [
+    ...(json?.semesters.flatMap(s => s.courses) || []),
+    ...(json?.transfer_courses || [])
+  ];  
   const totalCourses = allCourses.length;
   const courseCodes = allCourses.map(c => c.code);
 
@@ -127,22 +174,13 @@ export default function Transcript() {
           className="hidden"
           multiple
           accept="application/pdf"
-          onChange={e => {
-            setFileName(
-              e.target.files && e.target.files.length
-                ? Array.from(e.target.files).map(file => file.name).join(", ")
-                : "No file chosen."
-            );
-            setFiles(e.target.files);
-          }}
-        />
-        <span className="italic text-[16px]">{fileName}</span>
+          onChange={async (e) => {
+            const files = e.target.files;
+            if (files && files.length > 0) {
+              const fileNames = Array.from(files).map(file => file.name).join(", ");
+              setFileName(fileNames);
+              setFiles(files);
 
-        {files && files.length > 0 && (
-          <button
-            className="bg-red-200 text-black font-semibold px-2 py-1 rounded-xl cursor-pointer hover:bg-red-400 transition border-1 border-white"
-            type="button"
-            onClick={async () => {
               let result = "";
               for (let i = 0; i < files.length; i++) {
                 const file = files[i];
@@ -150,18 +188,35 @@ export default function Transcript() {
                 const parsed = await parsePDF(file);
                 result += `\n\nFile: ${file.name}\n` + parsed;
               }
+
               setText(result);
               setJson(extractTranscriptData(result));
-            }}
-          >
-            Process Transcript
-          </button>
-        )}
+            } else {
+              setFileName("No file chosen.");
+              setFiles(null);
+              setText("");
+              setJson(null);
+            }
+          }}></input>
+        <span className="italic text-[16px]">{fileName}</span>
       </form>
       {json && (
         <div className="bg-black/30 text-white mt-10 rounded-xl p-6 max-w-4xl w-full space-y-6 mb-20">
           <h2 className="text-3xl font-bold flex flex-row gap-1">Program: <p className="text-secondary">{json.program}</p></h2>
           <h3 className="text-xl font-semibold flex flex-row gap-1">Cumulative GPA: <p className="text-yellow-500">{json.cumulative_gpa}</p></h3>
+          {json.transfer_courses && json.transfer_courses.length > 0 && (
+            <div className="bg-white/10 p-4 rounded-lg border-1 border-white">
+              <h4 className="text-xl font-bold text-blue-300 mb-5">Transfer Credits</h4>
+              <div className="grid grid-cols-2 gap-2">
+                {json.transfer_courses.map((course, cIndex) => (
+                  <div key={cIndex} className="bg-black/80 p-3 rounded border-1 border-secondary">
+                    <p><strong>{course.code}</strong> – {course.name}</p>
+                    <p>Grade: {course.grade} | Grade Points: {course.grade_points} | Credits: {course.credits}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="grid gap-6 grid-cols-2 w-full">
             {json.semesters.map((semester, index) => (
@@ -170,7 +225,7 @@ export default function Transcript() {
                 <p className="text-md mb-2 font-semibold">Term GPA: {semester.cgpa ?? "N/A"}</p>
                 <div className="grid gap-2">
                   {semester.courses.map((course, cIndex) => (
-                    <div key={cIndex} className="bg-white/5 p-3 rounded border-1 border-secondary">
+                    <div key={cIndex} className="bg-black/80 p-3 rounded border-1 border-secondary">
                       <p><strong>{course.code}</strong> – {course.name}</p>
                       <p>Grade: {course.grade} | Grade Points: {course.grade_points} | Credits: {course.credits}</p>
                     </div>
@@ -182,7 +237,7 @@ export default function Transcript() {
         </div>
       )}
       {json && (
-        <Stats totalCourses={totalCourses} courseCodes={courseCodes} program={json?.program || ""} cgpa={json?.cumulative_gpa || 0}/>
+        <Stats totalCourses={totalCourses} courseCodes={courseCodes} program={json?.program || ""} cgpa={json?.cumulative_gpa || 0} allCourses={allCourses}/>
       )}
     </main>
   );
