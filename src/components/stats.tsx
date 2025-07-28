@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
 import { ChartPieLegend } from "./piechart";
+import LineChartGeneric from "./linechart";
 
 
 interface Course {
@@ -17,6 +18,7 @@ interface StatsProps {
   program: string;
   cgpa: number;
   allCourses: Course[];
+  termGpas: { term: string; gpa: number }[];
 }
 
 export type UserStats = {
@@ -33,7 +35,7 @@ export type UserStats = {
   unknown: number
 };
 
-export default function Stats({ totalCourses, courseCodes, program, cgpa, allCourses }: StatsProps) {
+export default function Stats({ totalCourses, courseCodes, program, cgpa, allCourses, termGpas }: StatsProps) {
   const [courseTypeMap, setCourseTypeMap] = useState<Record<string, string>>({});
   const [userStats, setUserStats] = useState<UserStats | null>(null);
   const [gpaByType, setGpaByType] = useState<{ name: string; avgGpa: number }[]>([]);
@@ -142,6 +144,11 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
         }
     }, [courseCodes, program, totalCourses, cgpa]);
 
+    const termGpaChartData = termGpas.map(({ term, gpa }) => ({
+      label: term,
+      gpa,
+    }));
+
   return (
     <main className="flex flex-col items-center text-center">
       <div className="bg-black/20 p-6 rounded-xl text-white max-w-7xl w-full space-y-6 flex flex-col gap-2 mb-20">
@@ -159,37 +166,46 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
 
         <div className="pt-4">
           <h3 className="text-lg font-semibold mb-2">Course Types:</h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center">
             {courseCodes.map((code, i) => (
-              <span key={i} className="bg-white/10 px-3 py-1 rounded text-sm border border-white/20">
+              <span key={i} className="bg-white/20 px-3 py-1 rounded text-sm border border-secondary">
                 {code} - {courseTypeMap[code]}
               </span>
             ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pb-20">
-          {userStats && (
-            <ChartPieLegend
-                mode="breakdown"  
-                lower={userStats.lower_libs_done}
-                upper={userStats.upper_libs_done}
-                other={userStats.unknown}
-                core_open={userStats.other_done}
-            />
-          )}
+        <div className="flex flex-col gap-25 pb-20 items-center">
 
-          {userStats && (
-            <ChartPieLegend
-                mode="completion"  
-                completed={userStats.total_courses_done}
-                total={userStats.total_courses_required}
-            />
-          )}
+          <div className="flex flex-row gap-10 w-full">
+            {userStats && (
+              <ChartPieLegend
+                  mode="breakdown"  
+                  lower={userStats.lower_libs_done}
+                  upper={userStats.upper_libs_done}
+                  other={userStats.unknown}
+                  core_open={userStats.other_done}
+              />
+            )}
+
+            {userStats && (
+              <ChartPieLegend
+                  mode="completion"  
+                  completed={userStats.total_courses_done}
+                  total={userStats.total_courses_required}
+              />
+            )}
+          </div>
 
           <ChartPieLegend
             mode="gpa_by_type"
             gpaData={gpaByType}
+          />
+
+          <LineChartGeneric
+            data={termGpaChartData}
+            dataKeys={[{ key: "gpa", label: "Term GPA" }]}
+            title="Term GPA Over Time"
           />
         </div>
       </div>

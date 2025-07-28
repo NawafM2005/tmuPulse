@@ -150,6 +150,11 @@ export default function Transcript() {
   const totalCourses = allCourses.length;
   const courseCodes = allCourses.map(c => c.code);
 
+  const termGpaChartData = json?.semesters.map(sem => ({
+    term: sem.term ?? "Unknown",
+    gpa: sem.cgpa ?? 0,
+  })) || [];
+
   return (
     <main className="min-h-screen bg-foreground pt-5 flex flex-col items-center">
       <Navbar />
@@ -200,7 +205,7 @@ export default function Transcript() {
           }}></input>
         <span className="italic text-[16px]">{fileName}</span>
       </form>
-      {json && (
+      {json && allCourses.length > 0 && (
         <div className="bg-black/30 text-white mt-10 rounded-xl p-6 max-w-4xl w-full space-y-6 mb-20">
           <h2 className="text-3xl font-bold flex flex-row gap-1">Program: <p className="text-secondary">{json.program}</p></h2>
           <h3 className="text-xl font-semibold flex flex-row gap-1">Cumulative GPA: <p className="text-yellow-500">{json.cumulative_gpa}</p></h3>
@@ -218,6 +223,7 @@ export default function Transcript() {
             </div>
           )}
 
+          {json && allCourses.length > 0 && (
           <div className="grid gap-6 grid-cols-2 w-full">
             {json.semesters.map((semester, index) => (
               <div key={index} className="bg-white/10 p-4 rounded-lg border-1 border-white">
@@ -234,10 +240,20 @@ export default function Transcript() {
               </div>
             ))}
           </div>
+          )}
         </div>
       )}
-      {json && (
-        <Stats totalCourses={totalCourses} courseCodes={courseCodes} program={json?.program || ""} cgpa={json?.cumulative_gpa || 0} allCourses={allCourses}/>
+      {json && allCourses.length > 0 && (
+        <Stats totalCourses={totalCourses} 
+        courseCodes={courseCodes} 
+        program={json?.program || ""} 
+        cgpa={json?.cumulative_gpa || 0} 
+        allCourses={allCourses} 
+        termGpas={termGpaChartData}/>
+      )}
+
+      {json !== null && allCourses.length === 0 && (
+        <h1 className="text-red-500 font-bold mt-30 animate-pulse">Please Upload Valid Transcript!</h1>
       )}
     </main>
   );

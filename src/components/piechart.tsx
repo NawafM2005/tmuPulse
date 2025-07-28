@@ -58,7 +58,7 @@ export function ChartPieLegend(props: Props) {
   }
 
   return (
-    <div className="w-full h-[400px] max-w-2xl mx-auto text-center font-bold mt-5 mb-5">
+    <div className="w-full h-[400px] max-w-2xl mx-auto text-center font-bold mt-5 mb-5 text-sm">
       <h3 className="text-2xl mb-2">{title}</h3>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
