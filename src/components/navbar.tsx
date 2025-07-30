@@ -29,9 +29,12 @@ export default function Navbar() {
             </li>
         </ul>
 
-        <ul>
+        <ul className='flex flex-row gap-4'>
             <li>
-            <Link href="/login" className="px-5 py-2 rounded-[5px] bg-red-500 hover:bg-red-800 transition-all duration-100 hover:scale-101 font-bold text-[15px]">Login</Link>
+                <Link href="/feedback" className="px-5 py-2 rounded-[5px] bg-secondary text-black hover:opacity-80 transition-all duration-100 hover:scale-101 font-bold text-sm">Feedback</Link>
+            </li>
+            <li>
+              <Link href="/login" className="px-5 py-2 rounded-[5px] bg-red-500 hover:bg-red-800 transition-all duration-100 hover:scale-101 font-bold text-[15px]">Login</Link>
             </li>
         </ul>
     </nav>

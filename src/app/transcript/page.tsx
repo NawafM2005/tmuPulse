@@ -52,8 +52,9 @@ export default function Transcript() {
   }
 
   function extractTranscriptData(rawText: string): TranscriptData {
-    const programMatch = rawText.match(/Program:\s+(.*?)\s+\d{2}\/\d{2}\/\d{4}/);
-    const program = programMatch ? programMatch[1] : null;
+    const programMatch = rawText.match(/Program\s+([A-Z\s&\-]+Major)/i);
+    let program = programMatch?.[1] ?? null;
+    program = program?.replace(/\s+Major$/i, "") ?? null;
 
     const termRegex = /(Fall|Winter|Spring|Summer) \d{4}[\s\S]*?(?=(Fall|Winter|Spring|Summer) \d{4}|End of Transcript)/g;
     const terms = [];
@@ -169,7 +170,7 @@ export default function Transcript() {
           htmlFor="transcript-upload"
           className="bg-yellow-500 text-black font-bold px-6 py-3 rounded-xl cursor-pointer hover:bg-yellow-400 transition border-2 border-white"
         >
-          Choose Transcript File(s)
+          Choose Transcript File
         </label>
         <input
           type="file"
@@ -177,7 +178,6 @@ export default function Transcript() {
           name="transcript-upload"
           ref={inputRef}
           className="hidden"
-          multiple
           accept="application/pdf"
           onChange={async (e) => {
             const files = e.target.files;

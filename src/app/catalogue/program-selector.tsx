@@ -68,7 +68,7 @@ export function ProgramSelector({ label = "Programs", programs, selectedPrograms
     if (selectedPrograms.length === 0) {
       return `${label}`
     } else if (selectedPrograms.length === 1) {
-      return '1 Program Selected'
+      return `${selectedPrograms[0]}`
     } else {
       return `${selectedPrograms.length} ${label} Selected`
     }
