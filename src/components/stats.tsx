@@ -89,7 +89,7 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
         const { data: programData, error: programError } = await supabase
             .from("programs")
             .select("total_courses, total_lowerlib, total_upperlib, total_open, total_core")
-            .eq("program", program)
+            .ilike("program", program)
             .single();
 
         if (programError || !programData) {
