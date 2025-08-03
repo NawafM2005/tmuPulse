@@ -30,19 +30,19 @@ export default function FAQ() {
 
   return (
     <div className="p-6 max-w-8xl mx-auto mb-10 mt-10 bg-foreground rounded-2xl shadow-lg">
-      <h2 className="text-[55px] font-[600] text-white text-center mb-10">Frequently Asked Questions</h2>
+      <h2 className="text-4xl font-[600] text-background text-center mb-10">Frequently Asked Questions</h2>
       {faqs.map((item, i) => (
         <div key={i} className="mb-3 bg-white rounded-xl shadow-sm max-w-3xl">
           <button
             className={`font-semibold w-full text-left flex items-center justify-between px-4 py-3 rounded-xl
-              focus:outline-none transition-colors duration-150
-              ${open === i ? "bg-yellow-100 text-accent" : "text-gray-800"}
+              focus:outline-none transition-colors duration-150 bg-background
+              ${open === i ? "bg-yellow-200 text-black" : "bg-background text-black"}
             `}
             onClick={() => setOpen(open === i ? null : i)}
             aria-expanded={open === i}
             aria-controls={`faq-panel-${i}`}
           >
-            <span>{item.q}</span>
+            <span className={open === i ? "text-black" : "text-foreground"}>{item.q}</span>
             <span className="ml-2 text-primary">
               {open === i ? "▲" : "▼"}
             </span>
@@ -51,7 +51,7 @@ export default function FAQ() {
             id={`faq-panel-${i}`}
             className={`
               px-6
-              transition-all duration-300 ease-in-out overflow-hidden text-gray-700 font-semibold
+              transition-all duration-300 ease-in-out overflow-hidden text-foreground font-semibold bg-background
               ${open === i ? "max-h-40 opacity-100 py-2" : "max-h-0 opacity-0 py-0"}
             `}
             style={{}}

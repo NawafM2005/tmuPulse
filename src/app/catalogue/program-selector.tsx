@@ -81,28 +81,28 @@ export function ProgramSelector({ label = "Programs", programs, selectedPrograms
         <DropdownMenuTrigger asChild>
           <Button 
             variant="outline" 
-            className="bg-black/30 border-secondary border-1 text-white hover:bg-gray-800 hover:text-white hover:cursor-pointer p-5 w-full max-w-sm min-w-[200px]"
+            className="text-foreground bg-background border-2 border-secondary hover:bg-gray-800 hover:text-white hover:cursor-pointer p-5 w-full max-w-sm min-w-[200px]"
           >
             {getButtonText()}
             <ChevronDown className="ml-2 h-4 w-4"/>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-black border-accent border-1 max-h-80 overflow-y-auto" side="bottom">
-          <DropdownMenuLabel className="text-gray-300">{`Select ${label}`}</DropdownMenuLabel>
-          <DropdownMenuSeparator className="bg-gray-700" />
+        <DropdownMenuContent className="bg-background border-accent border-2 max-h-80 overflow-y-auto" side="bottom">
+          <DropdownMenuLabel className="text-foreground">{`Select ${label}`}</DropdownMenuLabel>
+          <DropdownMenuSeparator className="bg-foreground" />
           {programs.map((program) => (
             <DropdownMenuCheckboxItem
               key={program}
               checked={selectedPrograms.includes(program)}
               onCheckedChange={() => handleProgramToggle(program)}
-              className="text-white hover:bg-gray-800 focus:bg-gray-800 hover:cursor-pointer"
+              className="text-foreground bg-background hover:bg-background focus:bg-foreground/20 hover:cursor-pointer"
             >
               {program}
             </DropdownMenuCheckboxItem>
           ))}
           {selectedPrograms.length > 0 && (
             <>
-              <DropdownMenuSeparator className="bg-gray-700" />
+              <DropdownMenuSeparator className="bg-foreground" />
               <DropdownMenuCheckboxItem
                 checked={false}
                 onCheckedChange={handleClearSelection}

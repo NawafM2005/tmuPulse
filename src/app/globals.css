@@ -1,45 +1,84 @@
 /* globals.css */
 @import "tailwindcss";
 
-/* 1️⃣ Regular CSS variables */
+/* 1️⃣ Light mode CSS variables */
 :root {
   --primary: #1E4B96;
-  --secondary: #F9DD4A;
-  --accent: #3375C2;
-  --background: #9ec5e98c;
+  --secondary: #3375C2;
+  --accent: #4e83bf;
+  --background: #fafbfc;
   --foreground: #171717;
+  --borders: #ef4444;
+
+  --card-bg: #ffffff;
+  --card-hover: #f3f4f6;
+  --input-bg: #f5f7fa;
+  --input-border: #d1d5db;
+  --input-focus: #1E4B96;
+  --muted: #9ca3af;
+  --danger: #ef4444;
+  --success: #10b981;
+  --warning: #f59e42;
+  --highlight: #f9dd4a33;
+  --shadow: 0 2px 8px 0 #1717170d;
+  --overlay: #00000020;
 }
 
-/* 2️⃣ Link CSS vars to Tailwind theme utilities */
+.dark {
+  --primary: #3B82F6;
+  --secondary: #f5d60b;
+  --accent: #60A5FA;
+  --background: #101217;
+  --foreground: #f4f4f4;
+  --borders: #F9DD4A;
+
+  --card-bg: #181b21;
+  --card-hover: #22262e;
+  --input-bg: #1a1d23;
+  --input-border: #23262e;
+  --input-focus: #3B82F6;
+  --muted: #6b7280;
+  --danger: #ef4444;
+  --success: #22d3ee;
+  --warning: #fde68a;
+  --highlight: #f9dd4a22;
+  --shadow: 0 2px 8px 0 #00000040;
+  --overlay: #00000080;
+}
+
+
+
+/* 3️⃣ Link CSS vars to Tailwind theme utilities */
 @theme inline {
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-borders: var(--borders);
+  --color-card-bg: var(--card-bg);
+  --color-card-hover: var(--card-hover);
+  --color-input-bg: var(--input-bg);
+  --color-input-border: var(--input-border);
+  --color-input-focus: var(--input-focus);
+  --color-muted: var(--muted);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-highlight: var(--highlight);
+  --color-shadow: var(--shadow);
+  --color-overlay: var(--overlay);
 }
-
-/* 3️⃣ Dark mode overrides */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #1E4B96;
-    --secondary: #F9DD4A;
-    --accent: #3375C2;
-    --background: #9ec5e98c;
-    --foreground: #151617;
-  }
-} 
 
 /* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
-  margin-left: 5px;
+  width: 3px;              /* scrollbar width */
+  height: 3px;             /* horizontal scrollbar */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #F9DD4A;
-  border-radius: 8px;
+  background: #F9DD4A;        /* scrollbar color */
+  border-radius: 8px;      /* roundness */
 }
 
 

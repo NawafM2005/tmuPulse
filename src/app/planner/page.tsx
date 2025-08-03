@@ -66,7 +66,7 @@ export default function Planner() {
   const selectedProgramData = programs.find((p) => p.id === selectedProgram);
 
   return (
-    <main className="flex flex-col min-h-screen items-center justify-center bg-foreground">
+    <main className="min-h-screen bg-foreground pt-5 flex flex-col items-center">
       <Navbar />
 
       <div className="flex flex-col items-center justify-center p-8 w-full max-w-6xl mt-30 gap-4 text-center">
@@ -74,7 +74,7 @@ export default function Planner() {
         <p className="text-[20px] font-[400] text-white">
           Take control of your academic journey. Use the degree planner to map out
           future semesters, organize required courses, and stay on track for
-          graduation. Visualize your progress and plan what’s next with clarity.
+          graduation. Visualize your progress and plan what's next with clarity.
         </p>
       </div>
 

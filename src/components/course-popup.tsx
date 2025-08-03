@@ -29,7 +29,7 @@ export default function PopUp({ open, onClose, course }: popup_types) {
     <AnimatePresence>
       {open && (
         <div
-          className="fixed inset-0 flex items-center justify-center z-50 bg-black/90 hover:cursor-pointer"
+          className="fixed inset-0 flex items-center justify-center z-50 bg-black/80 hover:cursor-pointer"
           onClick={onClose}
         >
           <motion.div 
@@ -37,16 +37,13 @@ export default function PopUp({ open, onClose, course }: popup_types) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col justify-left p-8 w-full max-w-6xl mt-8 gap-4 text-left bg-black text-white rounded-lg shadow-lg border-4 border-secondary text-[15px] hover:cursor-auto"
+            className="flex flex-col justify-left p-8 w-full max-w-6xl m-10 gap-4 text-left bg-background text-foreground rounded-lg shadow-lg border-4 border-borders text-sm hover:cursor-auto"
             onClick={e => e.stopPropagation()}
           >
             {course && (
               <div className="flex flex-col gap-3 max-h-[600px] overflow-y-auto">
                 <h1
-                  className="font-bold text-[30px] text-white"
-                  style={{
-                    textShadow: "2px 2px 8px #000, 2px 2px 5px #6af3daff",
-                  }}
+                  className="font-bold text-2xl text-foreground"
                 >
                   {course.code} - {course.name}
                 </h1>

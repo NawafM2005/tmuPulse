@@ -157,18 +157,18 @@ export default function Transcript() {
   })) || [];
 
   return (
-    <main className="min-h-screen bg-foreground pt-5 flex flex-col items-center">
+    <main className="min-h-screen bg-background pt-5 flex flex-col items-center">
       <Navbar />
-      <div className="flex flex-col items-center justify-center p-8 w-full max-w-6xl mt-30 gap-4 text-center">
-        <h1 className="text-[70px] font-[800] text-secondary">Transcript Parser</h1>
-        <p className="text-[20px] font-[400] text-white">
+      <div className="flex flex-col items-center justify-center p-8 w-full max-w-6xl mt-20 gap-4 text-center">
+        <h1 className="text-7xl font-[800] text-secondary">Transcript Analyser</h1>
+        <p className="text-1xl font-[400] text-foreground">
           Effortlessly upload your academic transcript and let our parser automatically extract your courses, grades, and credits. Instantly see a clean summary, track your progress, and save time on manual entry—perfect for students who want all their academic info in one place!
         </p>
       </div>
       <form className="text-white flex flex-col items-center gap-4">
         <label
           htmlFor="transcript-upload"
-          className="bg-yellow-500 text-black font-bold px-6 py-3 rounded-xl cursor-pointer hover:bg-yellow-400 transition border-2 border-white"
+          className="bg-secondary text-background font-bold px-6 py-3 rounded-xl cursor-pointer hover:bg-secondary/80 transition border-2 border-foreground"
         >
           Choose Transcript File
         </label>
@@ -203,18 +203,18 @@ export default function Transcript() {
               setJson(null);
             }
           }}></input>
-        <span className="italic text-[16px]">{fileName}</span>
+        <span className="italic text-sm text-foreground">{fileName}</span>
       </form>
       {json && allCourses.length > 0 && (
-        <div className="bg-black/30 text-white mt-10 rounded-xl p-6 max-w-4xl w-full space-y-6 mb-20">
-          <h2 className="text-3xl font-bold flex flex-row gap-1">Program: <p className="text-secondary">{json.program}</p></h2>
-          <h3 className="text-xl font-semibold flex flex-row gap-1">Cumulative GPA: <p className="text-yellow-500">{json.cumulative_gpa}</p></h3>
+        <div className="bg-background text-foreground mt-10 rounded-xl p-6 max-w-4xl w-full space-y-6 mb-20">
+          <h2 className="text-2xl font-bold flex flex-row gap-1">Program: <p className="text-borders">{json.program}</p></h2>
+          <h3 className="text-2xl font-semibold flex flex-row gap-1">Cumulative GPA: <p className="text-yellow-500">{json.cumulative_gpa}</p></h3>
           {json.transfer_courses && json.transfer_courses.length > 0 && (
-            <div className="bg-white/10 p-4 rounded-lg border-1 border-white">
+            <div className="bg-foreground p-4 rounded-lg border-1 border-white">
               <h4 className="text-xl font-bold text-blue-300 mb-5">Transfer Credits</h4>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {json.transfer_courses.map((course, cIndex) => (
-                  <div key={cIndex} className="bg-black/80 p-3 rounded border-1 border-secondary">
+                  <div key={cIndex} className="bg-background text-foreground  p-3 rounded border-1 border-secondary text-sm">
                     <p><strong>{course.code}</strong> – {course.name}</p>
                     <p>Grade: {course.grade} | Grade Points: {course.grade_points} | Credits: {course.credits}</p>
                   </div>
@@ -224,14 +224,14 @@ export default function Transcript() {
           )}
 
           {json && allCourses.length > 0 && (
-          <div className="grid gap-6 grid-cols-2 w-full">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 w-full">
             {json.semesters.map((semester, index) => (
-              <div key={index} className="bg-white/10 p-4 rounded-lg border-1 border-white">
-                <h4 className="text-xl font-bold text-blue-300">{semester.term}</h4>
+              <div key={index} className="bg-foreground/20 p-4 rounded-lg border-2 border-foreground">
+                <h4 className="text-xl font-bold text-secondary">{semester.term}</h4>
                 <p className="text-md mb-2 font-semibold">Term GPA: {semester.cgpa ?? "N/A"}</p>
                 <div className="grid gap-2">
                   {semester.courses.map((course, cIndex) => (
-                    <div key={cIndex} className="bg-black/80 p-3 rounded border-1 border-secondary">
+                    <div key={cIndex} className="bg-background text-foreground p-3 rounded border-1 border-secondary">
                       <p><strong>{course.code}</strong> – {course.name}</p>
                       <p>Grade: {course.grade} | Grade Points: {course.grade_points} | Credits: {course.credits}</p>
                     </div>

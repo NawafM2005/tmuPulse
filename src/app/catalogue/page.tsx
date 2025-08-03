@@ -187,18 +187,22 @@ const handleTermToggle = (termName: string) => {
   };
 
   return (
-    <main className="min-h-screen bg-foreground pt-5">
+    <main className="min-h-screen bg-background pt-5">
       <Navbar/>
-      <div className="flex flex-col items-center mb-10">
-        <div className="flex flex-col items-center justify-center p-8 w-full max-w-8xl mt-30 gap-4 text-center">
-            <h1 className="text-[70px] font-[800] text-secondary" >Course Catalogue</h1>
-            <p className="text-[20px] font-[400] text-white">Browse all current courses at TMU. Search, filter, and discover classes by course code, department, or keyword.</p>
+      <div className="flex flex-col items-center mb-10 p-5">
+        <div className="flex flex-col items-center justify-center p-8 w-full max-w-8xl mt-10 gap-4 text-center">
+            <h1 className="text-7xl font-[800] text-secondary">Course Catalogue</h1>
+            <p className="text-1xl font-[400] text-foreground">Browse all current courses at TMU. Search, filter, and discover classes by course code, department, or keyword.</p>
         </div>        
           <DataTable 
             columns={columns} 
             data={courses} 
             topContent={
-              <div className="flex flex-row items-center w-full max-w-3xl gap-10">
+              <div className="flex flex-col md:flex-row flex-wrap
+                  items-center
+                  w-full max-w-3xl
+                  gap-2 md:gap-10
+                ">
                 <ProgramSelector 
                   programs={departments.map(dept => dept.name)} 
                   selectedPrograms={departments
@@ -213,11 +217,11 @@ const handleTermToggle = (termName: string) => {
                   }}
                   onClearSelection={handleClearSelection}
                 />
-                <div className="flex flex-row text-white text-sm items-center bg-black/30 border-secondary border-2 p-2 rounded-lg">
+                <div className="flex flex-row text-foreground text-sm items-center bg-background border-secondary border-2 p-2 rounded-lg">
                   <p className="mr-3">Type: </p>
                   <div className="flex flex-row gap-3">                    
                     <button
-                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer
+                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer border-2 border-secondary
                         ${selectedTypes.includes("Lower liberal") ? "bg-blue-400  text-black" : "bg-white text-black"}`}
                       onClick={() => handleTypeToggle("Lower liberal")}
                     >
@@ -225,7 +229,7 @@ const handleTermToggle = (termName: string) => {
                     </button>
 
                     <button
-                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer
+                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer border-2 border-secondary
                         ${selectedTypes.includes("Upper liberal") ? "bg-blue-400  text-black" : "bg-white text-black"}`}
                       onClick={() => handleTypeToggle("Upper liberal")}
                     >
@@ -233,11 +237,11 @@ const handleTermToggle = (termName: string) => {
                     </button>
                   </div>
                 </div>
-                <div className="flex flex-row text-white text-sm items-center bg-black/30 border-secondary border-2 p-2 rounded-lg">
+                <div className="flex flex-row text-foreground text-sm items-center bg-background border-secondary border-2 p-2 rounded-lg">
                   <p className="mr-3">Term: </p>
                   <div className="flex flex-row gap-3">
                    <button
-                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer
+                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer border-2 border-secondary
                         ${selectedTerm.includes("Fall") ? "bg-blue-400  text-black" : "bg-white text-black"}`}
                       onClick={() => handleTermToggle("Fall")}
                     >
@@ -245,7 +249,7 @@ const handleTermToggle = (termName: string) => {
                     </button>
 
                     <button
-                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer
+                      className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer border-2 border-secondary
                         ${selectedTerm.includes("Winter") ? "bg-blue-400 text-black" : "bg-white text-black"}`}
                       onClick={() => handleTermToggle("Winter")}
                     >
@@ -257,16 +261,16 @@ const handleTermToggle = (termName: string) => {
             }
             belowSearchContent={
               (selectedDepartments.length > 0 || selectedTypes.length > 0 || selectedTerm.length > 0) && (
-                <div className="mb-4 p-3 bg-blue-900/30 rounded-lg border border-blue-700">
+                <div className="mb-4 p-3 bg-secondary text-background rounded-lg border border-blue-700">
                   <div className="flex flex-wrap gap-2 items-center">
-                    <span className="text-sm text-blue-200 font-semibold mr-2">Selected:</span>
+                    <span className="text-sm font-semibold mr-2">Selected:</span>
                     {departments
                       .filter(dept => selectedDepartments.includes(dept.id))
                       .map(dept => (
                         <Badge
                           key={dept.id}
                           variant="secondary"
-                          className="bg-[#F9DD4A] text-black hover:bg-[#F9DD4A]/80 border-[#F9DD4A] cursor-pointer group flex items-center gap-1"
+                          className="bg-foreground text-background hover:bg-foreground/80 cursor-pointer group flex items-center gap-1"
                           onClick={() => handleDepartmentRemove(dept.name)}
                         >
                           {dept.name}
@@ -298,7 +302,7 @@ const handleTermToggle = (termName: string) => {
                     {(selectedDepartments.length > 0 || selectedTypes.length > 0 || selectedTerm.length > 0) && (
                       <Badge
                         variant="outline"
-                        className="bg-gray-800/50 text-gray-300 border-gray-600 hover:bg-red-800/50 hover:border-red-600 hover:text-white cursor-pointer"
+                        className="bg-red-400 text-black border-gray-600 hover:bg-red-800/50 hover:border-red-600 hover:text-white cursor-pointer"
                         onClick={() => {
                           handleClearSelection();
                           handleClearTypeSelection();

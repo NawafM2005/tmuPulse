@@ -151,8 +151,8 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
 
   return (
     <main className="flex flex-col items-center text-center">
-      <div className="bg-black/20 p-6 rounded-xl text-white max-w-7xl w-full space-y-6 flex flex-col gap-2 mb-20">
-        <h2 className="text-3xl font-bold tex-secondary">Transcript Stats</h2>
+      <div className="bg-foreground/20 p-6 rounded-xl max-w-7xl w-full space-y-6 flex flex-col gap-2 mb-20 text-foreground">
+        <h2 className="text-3xl font-bold">Transcript Stats</h2>
 
         {userStats && (
           <div className="space-y-2">
@@ -168,16 +168,16 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
           <h3 className="text-lg font-semibold mb-2">Course Types:</h3>
           <div className="flex flex-wrap gap-2 justify-center">
             {courseCodes.map((code, i) => (
-              <span key={i} className="bg-white/20 px-3 py-1 rounded text-sm border border-secondary">
+              <span key={i} className="bg-white/20 px-3 py-1 rounded text-sm border-1 border-secondary">
                 {code} - {courseTypeMap[code]}
               </span>
             ))}
           </div>
         </div>
 
-        <div className="flex flex-col gap-25 pb-20 items-center">
+        <div className="flex flex-col gap-25 pb-20 items-center bg-black/60 p-10 rounded-lg">
 
-          <div className="flex flex-row gap-10 w-full">
+          <div className="flex flex-col xl:flex-row gap-2 w-full">
             {userStats && (
               <ChartPieLegend
                   mode="breakdown"  

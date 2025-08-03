@@ -43,7 +43,7 @@ export function DataTable<TData, TValue>({
     const [popupRowData, setPopupRowData] = React.useState<any>(null);
     const [pagination, setPagination] = React.useState({
         pageIndex: 0,
-        pageSize: 15,
+        pageSize: 20,
     });
     
     const table = useReactTable({
@@ -80,37 +80,45 @@ export function DataTable<TData, TValue>({
         };
 
     return (
-        <div className="flex flex-col items-center text-center">
-            <div className="flex justify-center items-center w-full mt-5 mb-5">
-                <div className="flex gap-4 w-full max-w-6xl items-center">
-                    <div className="relative flex-grow">
+        <div className="flex flex-col items-center text-center bg-background">
+            <div className="flex flex-col items-center text-center bg-background w-full">
+                <div className="flex justify-center items-center w-full mt-5 mb-5">
+                <div className="
+                    flex flex-col md:flex-row flex-wrap
+                    gap-4 md:gap-6
+                    w-full max-w-6xl items-center
+                ">
+                    {/* Search input section */}
+                    <div className="relative flex-grow min-w-[200px] w-full md:w-auto">
                     <img
                         src={search.src}
                         alt="Search"
                         className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 pointer-events-none"
                     />
                     <Input
-                        className="pl-12 text-secondary bg-black/20 w-full font-semibold h-10 border-1"
+                        className="pl-12 text-foreground bg-background border-secondary w-full font-semibold h-10 border-2"
                         placeholder="Search courses by code or name..."
                         value={globalFilter ?? ""}
                         onChange={(event) => setGlobalFilter(event.target.value)}
                     />
                     </div>
-
-                    <div className="flex-shrink-0">
+                    {/* Filter section */}
+                    <div className="flex-shrink-0 min-w-[180px] w-full md:w-auto">
                     {topContent}
                     </div>
                 </div>
+                </div>
             </div>
 
+
             {belowSearchContent}
-            <div className="rounded-md border-1 border-secondary bg-black/50 p-5 w-full max-w-7xl">
-                <Table className="table-fixed w-full overflow-hidden">
-                    <TableHeader>
+            <div className="rounded-md text-foreground bg-background border-4 border-secondary p-5 w-full max-w-7xl">
+                <Table className="overflow-hidden min-w-full w-full table-auto sm:table-fixed">
+                    <TableHeader >
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id} className="border-red-400">
                                 {headerGroup.headers.map((header) => (
-                                    <TableHead key={header.id} className="text-secondary text-center font-[600] text-[18px] p-5">
+                                    <TableHead key={header.id} className="text-secondary text-center font-bold text-sm sm:text-lg p-1">
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
@@ -128,7 +136,7 @@ export function DataTable<TData, TValue>({
                                 <TableRow 
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
-                                    className="border-gray-700 hover:bg-gray-800/50 hover:cursor-pointer transition-colors hover:scale-101 font-bold"
+                                    className="border-gray-700 hover:bg-gray-800/50 hover:cursor-pointer transition-colors hover:scale-101"
                                     onClick={(e) => {
                                         if ((e.target as HTMLElement).closest(".no-popup")) return;
                                         setPopupRowData(row.original);
@@ -136,7 +144,7 @@ export function DataTable<TData, TValue>({
                                     }}
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id} className="text-white whitespace-normal break-words max-w-[600px] text-center p-5">
+                                        <TableCell key={cell.id} className="text-foreground whitespace-normal break-words max-w-[600px] text-center p-2 text-xs sm:text-sm">
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext()
@@ -168,11 +176,11 @@ export function DataTable<TData, TValue>({
                     scrollToTop();
                 }}
                 disabled={!table.getCanPreviousPage()}
-                className="border-gray-700 text-white hover:bg-gray-800 hover:cursor-pointer"
+                className="border-gray-700 text-white hover:bg-gray-800 hover:cursor-pointer bg-black"
                 >
                     Previous
                 </Button>
-                <p className="text-sm font-semibold text-white">
+                <p className="text-sm font-semibold text-foreground">
                     {pageCount === 0 ? "0 / 0" : `${pageIndex + 1} / ${pageCount}`}
                 </p>
                 <Button
@@ -183,7 +191,7 @@ export function DataTable<TData, TValue>({
                     scrollToTop();
                 }}
                 disabled={!table.getCanNextPage()}
-                className="border-gray-700 text-white hover:bg-gray-800 hover:cursor-pointer"
+                className="border-gray-700 text-white hover:bg-gray-800 hover:cursor-pointer bg-black"
                 >
                     Next
                 </Button>
