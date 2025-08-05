@@ -175,7 +175,7 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
           </div>
         </div>
 
-        <div className="flex flex-col gap-25 pb-20 items-center bg-black/60 p-10 rounded-lg">
+        <div className="flex flex-col gap-25 pb-20 items-center bg-background p-10 rounded-lg">
 
           <div className="flex flex-col xl:flex-row gap-2 w-full">
             {userStats && (

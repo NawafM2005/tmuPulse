@@ -111,39 +111,38 @@ export default function Home() {
       <h1 className="text-3xl font-[600] text-foreground p-3">Trusted by Students Across TMU...</h1>
 
       <div className="flex flex-row flex-wrap gap-4 mb-10 mt-2 p-5">
-        <div className="bg-white rounded-2xl p-6 shadow flex-1 max-w-[700px] border-2 border-foreground text-black">
+        <div className="bg-white rounded-2xl p-6 shadow flex-1 max-w-[700px] border-2 border-foreground text-black text-left">
           <div className="flex items-center gap-2 mt-4">
             <img
-              src={logo.src}
-              className="w-10 h-10 rounded-full object-cover border"
-              alt="Anna Liu"
-            />
-            <div>
-              <span className="block font-semibold">Anna Liu</span>
-              <span className="block text-sm text-gray-500">Business Technology Management, TMU</span>
-            </div>
-            <span className="ml-auto text-yellow-500 text-lg">★★★★★</span>
-          </div>
-           <p className="italic text-gray-700 mt-5">
-            "This platform helped me streamline my group projects and manage my schedule more effectively. The interface is intuitive and makes collaboration so much easier."
-          </p>
-        </div>
-        <div className="bg-white rounded-2xl p-6 shadow flex-1 max-w-[700px] border-2 border-foreground text-black">
-
-          <div className="flex items-center gap-2 mt-4">
-            <img
-              src={logo.src}
+              src="https://media.licdn.com/dms/image/v2/D5635AQH9J59jI99__Q/profile-framedphoto-shrink_400_400/B56ZWIqYWKGQAg-/0/1741754566475?e=1755025200&v=beta&t=bbSNDQuPh_pRqXy7RNBqNiX823JHypxMTv0t3HK8xuw"
               className="w-10 h-10 rounded-full object-cover border"
               alt="Omar Hassan"
             />
             <div>
-              <span className="block font-semibold">Omar Hassan</span>
-              <span className="block text-sm text-gray-500">Economics, TMU</span>
+              <span className="block font-semibold">Sonal Perera</span>
+              <span className="block text-sm text-gray-500">Business Technology Management, TMU</span>
             </div>
             <span className="ml-auto text-yellow-500 text-lg">★★★★★</span>
           </div>
           <p className="italic text-gray-700 mt-5">
-            "As a TMU student balancing academics and extracurriculars, this app has made it easy to keep everything organized. Highly recommend to anyone looking to boost their productivity."
+            "As a TMU student juggling classes, clubs, and campus life, this app has seriously helped me stay on track. It's made organizing my schedule way less stressful, and I actually feel more on top of my work now. Definitely recommend for any students who want to stop feeling lost and start getting things done!"
+          </p>
+        </div>
+        <div className="bg-white rounded-2xl p-6 shadow flex-1 max-w-[700px] border-2 border-foreground text-black text-left">
+          <div className="flex items-center gap-2 mt-4">
+            <img
+              src={"https://media.licdn.com/dms/image/v2/D4D03AQFgXpfr1cAwhg/profile-displayphoto-shrink_400_400/B4DZaIdTwIH4Ao-/0/1746046107001?e=1757548800&v=beta&t=OT7RBgfCrpeCre9wH5v9sQXauydG7ccxjWegB3ZbYLQ"}
+              className="w-10 h-10 rounded-full object-cover border"
+              alt="Omar Hassan"
+            />
+            <div>
+              <span className="block font-semibold">Sahibjeet Sidhu</span>
+              <span className="block text-sm text-gray-500">Computer Science, TMU</span>
+            </div>
+            <span className="ml-auto text-yellow-500 text-lg">★★★★★</span>
+          </div>
+          <p className="italic text-gray-700 mt-5">
+            "As a TMU student, I've always found it challenging to track my academic progress across different semesters. The transcript parser completely changed that for me. It automatically extracts my course details and GPA from my transcript and organizes them in a clear, easy-to-understand dashboard. This has made degree planning and keeping track of my graduation requirements so much simpler. I highly recommend it to anyone who wants a smarter, stress-free way to manage their academic journey."
           </p>
         </div>
       </div>

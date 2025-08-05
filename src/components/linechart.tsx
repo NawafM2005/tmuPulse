@@ -25,22 +25,22 @@ export default function LineChartGeneric({
   title,
 }: LineChartGenericProps) {
   return (
-    <div className="p-2 w-2/3 text-background mt-5 mb-5">
+    <div className="p-2 w-2/3 text-foreground mt-5 mb-5">
       {title && <h3 className="text-xl font-bold mb-4">{title}</h3>}
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 64, 64, 0.2)" />
           <XAxis
             dataKey="label"
-            tick={{ fill: "yellow", fontSize: 12 }}
-            axisLine={{ stroke: "white" }}
-            tickLine={{ stroke: "white" }}
+            tick={{ fill: "red", fontSize: 12 }}
+            axisLine={{ stroke: "red" }}
+            tickLine={{ stroke: "red" }}
           />
           <YAxis
             domain={yDomain}
-            tick={{ fill: "white", fontSize: 12 }}
-            axisLine={{ stroke: "white" }}
-            tickLine={{ stroke: "white" }}
+            tick={{ fill: "red", fontSize: 12 }}
+            axisLine={{ stroke: "red" }}
+            tickLine={{ stroke: "red" }}
           />
           <Tooltip
             contentStyle={{ backgroundColor: "#1E1E1E", border: "1px solid white" }}

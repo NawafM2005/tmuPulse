@@ -39,10 +39,10 @@ export default function ProgramSelector({
 
   return (
     <div className="relative">
-      <Card className="bg-black/90 border-gray-700 p-2 backdrop-blur-sm items-center gap-1">
+      <Card className="bg-background border-gray-700 p-2 backdrop-blur-sm items-center gap-1 text-foreground">
         <div className="flex items-center gap-3">
-          <BookOpen className="h-5 w-5 text-[#F9DD4A]" />
-          <h3 className="text-white font-semibold">Select Program</h3>
+          <BookOpen className="h-5 w-5 text-foreground" />
+          <h3 className="text-foreground font-semibold">Select Program</h3>
         </div>
         
         <div className="p-3">
@@ -50,19 +50,33 @@ export default function ProgramSelector({
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
-              placeholder="Search programs..."
+              placeholder="Search program..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onFocus={() => setIsOpen(true)}
-              className="pl-10 bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-[#F9DD4A]"
+              className="
+                pl-12 pr-6 py-3 w-full rounded-2xl 
+                bg-white/10 border-0 shadow-lg 
+                ring-1 ring-[#3375C2]/30 focus:ring-2 focus:ring-[#F9DD4A]/80 
+                text-base text-foreground font-semibold transition-all duration-300
+                placeholder:text-foreground
+                focus:bg-white/20
+                outline-none
+                mb-5
+              "
+              style={{
+                boxShadow: "0 6px 24px 0 rgba(50,100,220,0.15)",
+                WebkitBackdropFilter: "blur(4px)"
+              }}
             />
+
           </div>
 
           {/* Current Selection */}
           {selectedProgram && (
-            <div className="p-3 bg-[#3375C2]/20 border border-[#3375C2]/50 rounded-lg mt-5">
-              <p className="text-sm text-gray-300 mb-1">Current Program:</p>
-              <p className="text-white font-medium text-sm">{selectedProgram}</p>
+            <div className="p-3 bg-background border border-[#3375C2]/50 rounded-lg mt-5">
+              <p className="text-sm text-foreground mb-1">Current Program:</p>
+              <p className="text-foreground font-medium text-sm">{selectedProgram}</p>
             </div>
           )}
 
@@ -74,13 +88,13 @@ export default function ProgramSelector({
                   <button
                     key={program}
                     onClick={() => handleProgramSelect(program)}
-                    className={`w-full text-left p-3 hover:bg-gray-700 transition-colors border-b border-gray-700 last:border-b-0 ${
-                      selectedProgram === program 
-                        ? 'bg-[#3375C2]/30 border-l-4 border-l-[#F9DD4A]' 
+                    className={`w-full text-left p-3 text-foreground bg-background hover:bg-background/50 hover:cursor-pointer transition-colors border-b border-gray-700 last:border-b-0 ${
+                      selectedProgram === program
+                        ? 'bg-background border-l-4 border-l-[#F9DD4A]'
                         : ''
                     }`}
                   >
-                    <span className="text-white text-sm block truncate">{program}</span>
+                    <span className="text-foreground text-sm block truncate">{program}</span>
                   </button>
                 ))
               ) : (
@@ -97,7 +111,7 @@ export default function ProgramSelector({
               variant="outline"
               size="sm"
               onClick={() => setIsOpen(false)}
-              className="w-full bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600"
+              className="w-full bg-background border-gray-600 text-foreground hover:bg-gray-600 cursor-pointer"
             >
               Close
             </Button>

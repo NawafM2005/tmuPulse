@@ -58,10 +58,10 @@ export default function Navbar() {
               <Link href="/planner" className="p-1 md:p-2 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-200">Degree Planner</Link>
             </li>
             <li>
-              <Link href="/schedule" className="p-1 md:p-2 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-200">Schedule Builder</Link>
+              <Link href="/transcript" className="p-1 md:p-2 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-200">Transcript Analyser</Link>
             </li>
             <li>
-              <Link href="/transcript" className="p-1 md:p-2 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-200">Transcript Analyser</Link>
+              <Link href="" className="p-1 md:p-2 rounded-[10px] hover:bg-gray-500 hover:cursor-not-allowed transition-colors duration-200">Schedule Builder</Link>
             </li>
         </ul>
 

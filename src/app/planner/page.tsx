@@ -15,7 +15,7 @@ export default function Planner() {
           future semesters, organize required courses, and stay on track for
           graduation. Visualize your progress and plan what's next with clarity.
         </p>
-        <div className="mt-[72px] bg-background">
+        <div className="mt-5 bg-background">
           <DegreePlanner />
         </div>
       </div>
