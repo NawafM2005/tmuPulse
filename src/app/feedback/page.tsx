@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Navbar from "@/components/navbar";
 import { supabase } from "@/lib/supabaseClient";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function Feedback() {
   const [name, setName] = useState("");
@@ -19,10 +21,10 @@ export default function Feedback() {
 
     if (error) {
       console.error("🚨 Error submitting feedback:", error);
-      alert("Uh-oh! Something went wrongski. Try again?");
+      toast.error("Uh-oh! Something went wrongski. Try again?");
     } else {
       console.log("✅ Feedback submitted successfully!");
-      alert("Thanks for your feedback!!!");
+      toast.success("Thanks for your feedback!!!");
       setName("");
       setProblem("");
     }
@@ -31,6 +33,7 @@ export default function Feedback() {
   return (
     <main className="flex flex-col min-h-screen items-center justify-center bg-background">
       <Navbar/>
+      <Toaster />
       <div className="flex flex-col items-center justify-center p-8 w-full max-w-6xl gap-6 text-center">
         <h1 className="text-[70px] font-[800] text-secondary">Feedback</h1>
 
