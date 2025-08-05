@@ -39,13 +39,13 @@ export default function ProgramSelector({
 
   return (
     <div className="relative">
-      <Card className="bg-black/90 border-gray-700 p-4 backdrop-blur-sm">
-        <div className="flex items-center gap-3 mb-3">
+      <Card className="bg-black/90 border-gray-700 p-2 backdrop-blur-sm items-center gap-1">
+        <div className="flex items-center gap-3">
           <BookOpen className="h-5 w-5 text-[#F9DD4A]" />
           <h3 className="text-white font-semibold">Select Program</h3>
         </div>
         
-        <div className="space-y-3">
+        <div className="p-3">
           {/* Search Input */}
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -60,7 +60,7 @@ export default function ProgramSelector({
 
           {/* Current Selection */}
           {selectedProgram && (
-            <div className="p-3 bg-[#3375C2]/20 border border-[#3375C2]/50 rounded-lg">
+            <div className="p-3 bg-[#3375C2]/20 border border-[#3375C2]/50 rounded-lg mt-5">
               <p className="text-sm text-gray-300 mb-1">Current Program:</p>
               <p className="text-white font-medium text-sm">{selectedProgram}</p>
             </div>

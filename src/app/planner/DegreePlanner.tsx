@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useMemo } from 'react';
+import { useEffect } from 'react';
+import { supabase } from '@/lib/supabaseClient';
 import { DndContext, DragEndEvent, DragOverEvent, DragStartEvent, DragOverlay, useDraggable, useDroppable } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import programsData from '../../../all_programs.json';
@@ -42,6 +44,10 @@ export default function DegreePlanner() {
   const [completedCourses, setCompletedCourses] = useState<Set<string>>(new Set());
   const [semesterPlans, setSemesterPlans] = useState<SemesterPlan[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [selectedTerm, setSelectedTerm] = useState<string[]>([]);
 
   // Program data
   const selectedProgramData = useMemo(() => 
@@ -54,74 +60,62 @@ export default function DegreePlanner() {
     []
   );
 
-  // Available courses for the course catalogue (extracted from all programs)
-  const availableCourses = useMemo(() => {
-    if (!selectedProgramData) return [];
-    
-    const courses: Course[] = [];
-    let courseId = 0;
+  // Fetch courses from Supabase (like catalogue)
+  useEffect(() => {
+    const fetchCourses = async () => {
+      setLoading(true);
+      try {
+        let query = supabase
+          .from('courses')
+          .select('*')
+          .order('code');
 
-    selectedProgramData.semesters.forEach((semester) => {
-      semester.requirements?.forEach((req) => {
-        if (req.code) {
-          courses.push({
-            id: `course-${courseId++}`,
-            code: req.code,
-            title: `Course ${req.code}`,
-            credits: 3,
-            category: 'core'
-          });
-        } else if (req.table) {
-          courses.push({
-            id: `course-${courseId++}`,
-            table: req.table,
-            title: req.table,
-            credits: 3,
-            category: 'table'
-          });
-        } else if (req.option) {
-          req.option.forEach((opt) => {
-            courses.push({
-              id: `course-${courseId++}`,
-              code: opt,
-              title: `Course ${opt}`,
-              credits: 3,
-              category: 'elective'
-            });
-          });
-        } else if (req.open) {
-          courses.push({
-            id: `course-${courseId++}`,
-            open: req.open,
-            title: 'Open Elective',
-            credits: 3,
-            category: 'open'
-          });
+        const typeMap = {
+          "Lower liberal": "LL",
+          "Upper liberal": "UL"
+        };
+        const supabaseTypes = selectedTypes.map(t => typeMap[t as keyof typeof typeMap]);
+        if (supabaseTypes.length > 0) {
+          query = query.in('liberal', supabaseTypes);
         }
-      });
-    });
+        if (selectedTerm.length > 0) {
+          query = query.overlaps('term', selectedTerm);
+        }
 
-    // Remove duplicates
-    const uniqueCourses = courses.filter((course, index, self) => 
-      index === self.findIndex((c) => 
-        (c.code && course.code && c.code === course.code) ||
-        (c.table && course.table && c.table === course.table) ||
-        (c.open && course.open)
-      )
-    );
-
-    return uniqueCourses;
-  }, [selectedProgramData]);
+        const { data, error } = await query;
+        if (error) {
+          setCourses([]);
+        } else {
+          // Transform to minimal Course type
+          const transformedCourses: Course[] = (data || []).map((course: any, idx: number) => ({
+            id: `course-${idx}`,
+            code: course.code,
+            title: course.name,
+            credits: course.billing_unit ? Number(course.billing_unit) : 3,
+            category: course.liberal === 'LL' || course.liberal === 'UL' ? 'liberal' : 'core',
+          }));
+          setCourses(transformedCourses);
+        }
+      } catch {
+        setCourses([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCourses();
+  }, [selectedTypes, selectedTerm]);
 
   // Filtered courses based on search
   const filteredCourses = useMemo(() => {
-    if (!searchQuery) return availableCourses;
-    return availableCourses.filter(course =>
-      (course.code?.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (course.table?.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (course.title?.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
-  }, [availableCourses, searchQuery]);
+    if (!searchQuery) return courses;
+    // Normalize code: remove spaces, lowercase
+    const normalizedQuery = searchQuery.replace(/\s+/g, '').toLowerCase();
+    return courses.filter(course => {
+      const normalizedCode = (course.code || '').replace(/\s+/g, '').toLowerCase();
+      const normalizedTitle = (course.title || '').toLowerCase();
+      return normalizedCode.includes(normalizedQuery) || normalizedTitle.includes(searchQuery.toLowerCase());
+    });
+  }, [courses, searchQuery]);
 
   // Initialize semester plans when program is selected
   const handleProgramSelect = (programName: string) => {
@@ -132,10 +126,9 @@ export default function DegreePlanner() {
     if (!program) return;
 
     const plans: SemesterPlan[] = program.semesters.map((semester, semesterIndex) => {
-      const requirements: RequirementSlot[] = semester.requirements?.map((req, reqIndex) => {
+      const requirements: RequirementSlot[] = semester.requirements?.map((req: any, reqIndex: number) => {
         const slotId = `semester-${semesterIndex}-req-${reqIndex}`;
-        
-        if (req.code) {
+        if ('code' in req && req.code) {
           // Fixed course - pre-populate it
           return {
             id: slotId,
@@ -149,7 +142,7 @@ export default function DegreePlanner() {
               category: 'core'
             }
           };
-        } else if (req.table) {
+        } else if ('table' in req && req.table) {
           // Table requirement - empty slot for user to fill
           return {
             id: slotId,
@@ -157,7 +150,7 @@ export default function DegreePlanner() {
             requirement: req,
             course: undefined
           };
-        } else if (req.option) {
+        } else if ('option' in req && Array.isArray(req.option)) {
           // Option requirement - empty slot with accepted courses list
           return {
             id: slotId,
@@ -166,7 +159,7 @@ export default function DegreePlanner() {
             course: undefined,
             acceptedCourses: req.option
           };
-        } else if (req.open) {
+        } else if ('open' in req && req.open) {
           // Open elective - empty slot
           return {
             id: slotId,
@@ -175,7 +168,7 @@ export default function DegreePlanner() {
             course: undefined
           };
         }
-        
+        // Fallback for unknown requirement type
         return {
           id: slotId,
           type: 'open' as const,
@@ -207,7 +200,7 @@ export default function DegreePlanner() {
       return;
     }
 
-    const draggedCourse = availableCourses.find(c => c.id === active.id);
+    const draggedCourse = courses.find((c: Course) => c.id === active.id);
     const targetSlotId = over.id as string;
 
     if (draggedCourse && targetSlotId.includes('-req-')) {
@@ -367,7 +360,7 @@ export default function DegreePlanner() {
     return (
       <div
         ref={setNodeRef}
-        className={`relative group p-3 rounded-lg min-h-[60px] flex items-center justify-between transition-colors ${getSlotColor()} ${
+        className={`relative group p-3 rounded-lg min-h-[60px] flex items-center justify-between transition-colors min-w-[200px] max-w-[200px] ${getSlotColor()} ${
           isDroppable ? 'hover:border-solid hover:bg-opacity-30' : ''
         } ${isOver && isDroppable ? 'border-solid bg-opacity-50 scale-105' : ''}`}
       >
@@ -395,7 +388,6 @@ export default function DegreePlanner() {
             </div>
           )}
         </div>
-        
         {requirement.course && requirement.type !== 'code' && (
           <Button
             size="sm"
@@ -419,54 +411,85 @@ export default function DegreePlanner() {
       transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
     } : undefined;
 
+    // Only show course code/table/open, nothing else, in the catalogue sidebar
     return (
       <div 
         ref={setNodeRef}
         style={style}
         {...listeners}
         {...attributes}
-        className={`p-3 rounded-lg cursor-grab active:cursor-grabbing transition-all duration-200 ${getCourseColor(course.category)} ${
+        className={`p-3 rounded-lg cursor-grab active:cursor-grabbing transition-all duration-200 bg-gray-800 text-white border border-gray-700 ${
           isDragging ? 'opacity-50 scale-95' : 'hover:scale-105 hover:shadow-lg'
         }`}
       >
-      <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <GripVertical className="h-4 w-4 opacity-60" />
-          <div>
-            <p className="font-semibold text-sm">
-              {course.code || course.table || course.open || 'Course'}
-            </p>
-            <p className="text-xs opacity-80">{course.credits} credits</p>
-          </div>
+          <span className="text-xs">
+            {course.code || course.table || course.open || 'Course'}
+          </span>
         </div>
-        <Badge variant="secondary" className="text-xs">
-          {course.category}
-        </Badge>
       </div>
-    </div>
     );
   };
 
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <div className="min-h-full bg-black flex">
+      <div className="min-h-full bg-background flex flex-col w-full items-center">
         {/* Left Sidebar - Program Info */}
-        <div className="w-80 bg-black/60 border-r border-gray-700 flex flex-col">
+        <div className="w-full bg-background flex flex-col">
           {/* Program Selector */}
-          <div className="p-4 border-b border-gray-700">
-            <h3 className="text-white font-bold mb-3">Select Program</h3>
-            <ProgramSelector
-              programs={programOptions}
-              selectedProgram={selectedProgram}
-              onProgramSelect={handleProgramSelect}
-            />
+          <div className="p-4 flex flex-col text-center items-center">
+            <div style={{ width: 300}}>
+              <ProgramSelector
+                programs={programOptions}
+                selectedProgram={selectedProgram}
+                onProgramSelect={handleProgramSelect}
+              />
+            </div>
           </div>
 
-          {/* Program Overview */}
+          {/* Legend */}
+          <div className="p-4 bg-background flex flex-col justify-center">
+            <h3 className="text-foreground font-bold mb-2 text-sm">Legend</h3>
+            <div className="space-y-2 text-xs flex flex-col text-center items-center">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-[#3375C2] rounded"></div>
+                <span className="text-muted-foreground">Core Courses</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-red-500 rounded"></div>
+                <span className="text-muted-foreground">Open Electives</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-gray-600 rounded"></div>
+                <span className="text-muted-foreground">Liberal Studies</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-purple-500 rounded"></div>
+                <span className="text-muted-foreground">Tables & Options</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Instructions */}
+          <div className="p-4 flex-1 bg-background">
+            <h3 className="text-foreground font-bold mb-2 text-sm">How to Use</h3>
+            <div className="text-xs text-muted-foreground space-y-1 flex flex-col text-center">
+              <p>• <span className="text-red-500">Fixed courses</span> are pre-filled (blue)</p>
+              <p>• <span className="text-purple-400">Table requirements</span> need specific courses</p>
+              <p>• <span className="text-red-500">Option requirements</span> have multiple choices</p>
+              <p>• <span className="text-green-400">Open electives</span> accept any course</p>
+              <p>• <span className="text-red-500">Drag courses</span> from catalogue to empty slots</p>
+              <p>• <span className="text-red-500">Click courses</span> to mark as completed</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Program Overview */}
           {selectedProgramData && (
-            <div className="p-4 border-b border-gray-700">
-              <div className="bg-gradient-to-br from-[#3375C2] to-[#1E4B96] border-[#F9DD4A] border-2 shadow-2xl rounded-xl p-4 text-white">
-                <h2 className="text-lg font-bold text-[#F9DD4A] mb-3 text-center">{selectedProgram}</h2>
+            <div className="p-4 w-full bg-background">
+              <div className="bg-gradient-to-br from-[#3375C2] to-[#1E4B96] rounded-xl p-4 text-white border-3 border-borders">
+                <h2 className="text-lg font-bold text-white mb-3 text-center">{selectedProgram}</h2>
                 <div className="grid grid-cols-2 gap-2 text-xs mb-3">
                   <div className="bg-white/10 rounded-md px-2 py-1 text-center">
                     <span className="text-[#F9DD4A] font-semibold">{selectedProgramData.total_courses}</span><br/>Total
@@ -485,8 +508,8 @@ export default function DegreePlanner() {
                 {/* Progress Bar */}
                 <div className="mt-3">
                   <div className="flex justify-between text-xs mb-1">
-                    <span>Planning Progress</span>
-                    <span>{progressStats.percentage}%</span>
+                    <span className="text-white">Planning Progress</span>
+                    <span className="text-white">{progressStats.percentage}%</span>
                   </div>
                   <div className="w-full bg-white/20 rounded-full h-2">
                     <div 
@@ -494,15 +517,15 @@ export default function DegreePlanner() {
                       style={{ width: `${progressStats.percentage}%` }}
                     ></div>
                   </div>
-                  <div className="text-xs text-center mt-1">
+                  <div className="text-xs text-center mt-1 text-white">
                     {progressStats.filled} / {progressStats.total} requirements filled
                   </div>
                   
                   {progressStats.filled > 0 && (
                     <>
                       <div className="flex justify-between text-xs mb-1 mt-2">
-                        <span>Completion Progress</span>
-                        <span>{progressStats.completedPercentage}%</span>
+                        <span className="text-white">Completion Progress</span>
+                        <span className="text-white">{progressStats.completedPercentage}%</span>
                       </div>
                       <div className="w-full bg-white/20 rounded-full h-2">
                         <div 
@@ -510,7 +533,7 @@ export default function DegreePlanner() {
                           style={{ width: `${progressStats.completedPercentage}%` }}
                         ></div>
                       </div>
-                      <div className="text-xs text-center mt-1">
+                      <div className="text-xs text-center mt-1 text-white">
                         {progressStats.completed} / {progressStats.filled} courses completed
                       </div>
                     </>
@@ -520,55 +543,18 @@ export default function DegreePlanner() {
             </div>
           )}
 
-          {/* Legend */}
-          <div className="p-4 border-b border-gray-700">
-            <h3 className="text-white font-bold mb-2 text-sm">Legend</h3>
-            <div className="space-y-2 text-xs">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-[#3375C2] rounded border border-[#F9DD4A]"></div>
-                <span className="text-gray-300">Core Courses</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-[#F9DD4A] rounded"></div>
-                <span className="text-gray-300">Open Electives</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-gray-600 rounded"></div>
-                <span className="text-gray-300">Liberal Studies</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-purple-500 rounded"></div>
-                <span className="text-gray-300">Tables & Options</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Instructions */}
-          <div className="p-4 flex-1">
-            <h3 className="text-white font-bold mb-2 text-sm">How to Use</h3>
-            <div className="text-xs text-gray-400 space-y-1">
-              <p>• <span className="text-[#F9DD4A]">Fixed courses</span> are pre-filled (blue)</p>
-              <p>• <span className="text-purple-400">Table requirements</span> need specific courses</p>
-              <p>• <span className="text-[#F9DD4A]">Option requirements</span> have multiple choices</p>
-              <p>• <span className="text-green-400">Open electives</span> accept any course</p>
-              <p>• <span className="text-[#F9DD4A]">Drag courses</span> from catalogue to empty slots</p>
-              <p>• <span className="text-[#F9DD4A]">Click courses</span> to mark as completed</p>
-            </div>
-          </div>
-        </div>
-
         {/* Main Content Area */}
-        <div className="flex-1 flex">
-          {/* Semester Cards */}
-          <div className="flex-1 p-6 overflow-y-auto bg-black">
-            {selectedProgram ? (
+        {selectedProgram && (
+          <div className="flex-1 flex bg-background">
+            {/* Semester Cards */}
+            <div className="flex-1 pt-8 pb-8 px-6 overflow-y-auto">
               <div className="space-y-6">
-                <h1 className="text-2xl font-bold text-white mb-6">Degree Planner</h1>
+                <h1 className="text-1xl font-bold text-foreground mb-6">Degree Planner</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {semesterPlans.map((semester, semesterIndex) => (
                     <Card 
                       key={semester.id}
-                      className="bg-gray-900 border-gray-700 hover:border-[#F9DD4A]/50 transition-colors"
+                      className="bg-gray-900 transition-colors border-2 border-borders"
                     >
                       <CardHeader className="pb-3">
                         <CardTitle className="text-white flex justify-between items-center">
@@ -591,83 +577,45 @@ export default function DegreePlanner() {
                   ))}
                 </div>
               </div>
-            ) : (
-              <div className="flex items-center justify-center h-full">
-                <div className="text-center">
-                  <div className="mb-8">
-                    <div className="mx-auto w-24 h-24 bg-gradient-to-br from-[#3375C2] to-[#1E4B96] rounded-full flex items-center justify-center mb-6 shadow-2xl">
-                      <svg
-                        className="h-12 w-12 text-[#F9DD4A]"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <h2 className="text-3xl font-bold text-white mb-4">
-                    TMU Degree Planner
-                  </h2>
-                  <p className="text-gray-400 text-base mb-6">
-                    Select a program from the sidebar to start planning your degree
-                  </p>
-                  <div className="bg-[#F9DD4A]/10 border border-[#F9DD4A]/30 rounded-lg p-4 max-w-md mx-auto">
-                    <p className="text-[#F9DD4A] text-sm">
-                      ✨ <strong>New Card-Based Interface:</strong><br/>
-                      🎯 Drag and drop courses<br/>
-                      📊 Visual semester planning<br/>
-                      🔍 Search course catalogue<br/>
-                      📅 Clean card layout<br/>
-                      🎮 Interactive course management
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+            </div>
 
-          {/* Right Sidebar - Course Catalogue */}
-          {selectedProgram && (
-            <div className="w-80 bg-black/60 border-l border-gray-700 flex flex-col">
-              <div className="p-4 border-b border-gray-700">
-                <h3 className="text-white font-bold mb-3">Course Catalogue</h3>
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            {/* Right Sidebar - Course Catalogue */}
+            <div className="w-1/5 bg-background flex flex-col pt-8 pb-8">
+              <div className="px-4">
+                <h3 className="text-foreground font-bold mb-3 text-1xl">Course Catalogue</h3>
+                <div className="relative mb-5">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white" />
                   <Input
-                    placeholder="Search courses..."
+                    placeholder="Search..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-10 bg-gray-800 border-gray-600 text-white placeholder-gray-400"
                   />
                 </div>
               </div>
-              
-              <div className="flex-1 overflow-y-auto p-4">
+
+              <div className="flex-1 overflow-y-auto px-4">
                 <div className="space-y-3">
-                  {filteredCourses.map((course) => (
+                  {filteredCourses.slice(0, 25).map((course) => (
                     <CourseCard key={course.id} course={course} />
                   ))}
                   {filteredCourses.length === 0 && (
-                    <div className="text-center text-gray-500 py-8">
+                    <div className="text-center text-muted-foreground py-8">
                       <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                      <p>No courses found</p>
+                      <p className="text-foreground">No courses found</p>
                     </div>
                   )}
                 </div>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Drag Overlay */}
         <DragOverlay>
           {activeId && (
             <CourseCard 
-              course={availableCourses.find(c => c.id === activeId)!} 
+              course={courses.find((c: Course) => c.id === activeId)!} 
               isDragging 
             />
           )}
