@@ -331,9 +331,7 @@ export default function Transcript() {
           <h3 className="text-xl font-[800] text-danger mb-2">Invalid Transcript</h3>
           <p className="text-muted font-[600]">Please upload a valid TMU transcript PDF file.</p>
         </div>
-      )}
-      
-      <Footer />
+      )}      
     </main>
   );
 }
