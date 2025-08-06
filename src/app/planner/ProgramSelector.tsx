@@ -38,8 +38,8 @@ export default function ProgramSelector({
   };
 
   return (
-    <div className="relative">
-      <Card className="bg-background border-gray-700 p-2 backdrop-blur-sm items-center gap-1 text-foreground">
+    <div className="relative w-xs sm:w-sm mx-auto">
+      <Card className="bg-background border-gray-700 p-2 backdrop-blur-sm items-center gap-1 text-foreground w-full">
         <div className="flex items-center gap-3">
           <BookOpen className="h-5 w-5 text-foreground" />
           <h3 className="text-foreground font-semibold">Select Program</h3>
@@ -63,10 +63,13 @@ export default function ProgramSelector({
                 focus:bg-white/20
                 outline-none
                 mb-5
+                min-w-0
+                box-border
               "
               style={{
                 boxShadow: "0 6px 24px 0 rgba(50,100,220,0.15)",
-                WebkitBackdropFilter: "blur(4px)"
+                WebkitBackdropFilter: "blur(4px)",
+                width: "100%"
               }}
             />
 
@@ -82,7 +85,7 @@ export default function ProgramSelector({
 
           {/* Program List */}
           {(isOpen || searchTerm) && (
-            <div className="max-h-60 overflow-y-auto bg-gray-800 border border-gray-600 rounded-lg">
+            <div className="max-h-60 overflow-y-auto bg-gray-800 border border-gray-600 rounded-lg w-full">
               {filteredPrograms.length > 0 ? (
                 filteredPrograms.map((program) => (
                   <button

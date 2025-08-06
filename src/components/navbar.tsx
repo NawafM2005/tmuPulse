@@ -39,7 +39,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-black backdrop-blur-xl text-white px-4 md:px-8 lg:px-20 h-[64px] flex flex-row justify-between items-center fixed top-0 left-0 w-full text-[13px] md:text-[15px] border-b-4 border-secondary z-50">
+      <nav className="backdrop-blur-xl text-foreground px-4 md:px-8 lg:px-20 h-[64px] flex flex-row justify-between items-center fixed top-0 left-0 w-full text-[13px] md:text-[15px] border-b-4 border-secondary z-50">
 
         <Link href='/'>
             <div className="text-lg md:text-xl font-bold flex flex-row hover:cursor-pointer items-center">
@@ -78,7 +78,7 @@ export default function Navbar() {
               className="rounded-xl text-xl md:text-2xl font-bold p-1 md:p-2 transition-all duration-200 hover:cursor-pointer"
               aria-label="Toggle dark mode"
             >
-              {darkMode ? <img src={lightIcon.src} alt="Light Mode" width={18} height={18} className="md:w-5 md:h-5" /> : <Moon size={18} className="text-white md:w-5 md:h-5" />}
+              {darkMode ? <img src={lightIcon.src} alt="Light Mode" width={18} height={18} className="md:w-5 md:h-5" /> : <Moon size={18} className="text-foreground md:w-5 md:h-5" />}
             </button>
 
             {/* Mobile menu button */}

@@ -1,13 +1,16 @@
 import Navbar from "@/components/navbar";
-import homeBanner from '@/assets/home-banner-transparent.png';
 import logo from '@/assets/tmu-monkey-logo.png';
 import Footer from "@/components/footer";
 import FAQ from "@/components/faq";
 import Link from 'next/link';
 import degree from '@/assets/degree.png';
 import schedule from '@/assets/schedule.png';
-import transcript from '@/assets/transcript.png';
+import transcript from '@/assets/transcript-main.png';
 import courses from '@/assets/courses.png';
+import lineChart from '@/assets/line-chart.png';
+import pieChart from '@/assets/pie-chart.png';
+import progress from '@/assets/progress.png';
+import catalogue from '@/assets/catalogue.png';
 
 export default function Home() {
   return (
@@ -38,8 +41,51 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex flex-row gap-10 mt-10 p-3">
-          <img src={homeBanner.src} alt="Home Banner" className="h-2xl w-220" />
+        <div className="flex flex-col gap-8 mt-10 p-3">
+          <div className="relative flex items-center justify-center w-full max-w-7xl">
+            {/* Top row - 3 images */}
+            <div className="flex items-center justify-center relative">
+              {/* Line Chart - left */}
+              <img 
+                src={lineChart.src} 
+                alt="Line Chart Screenshot" 
+                className="max-w-96 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-2 hover:rotate-0 transition-transform duration-300 z-10"
+              />
+              
+              {/* Progress - center, highest z-index */}
+              <img 
+                src={progress.src} 
+                alt="Progress Screenshot" 
+                className="max-w-[28rem] h-auto rounded-lg shadow-xl border-4 border-gray-300 transform hover:scale-105 transition-transform duration-300 z-30 -ml-16"
+              />
+              
+              {/* Pie Chart - right */}
+              <img 
+                src={pieChart.src} 
+                alt="Pie Chart Screenshot" 
+                className="max-w-96 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform rotate-2 hover:rotate-0 transition-transform duration-300 z-10 -ml-16"
+              />
+            </div>
+          </div>
+          
+          <div className="relative flex items-center justify-center w-full max-w-7xl">
+            {/* Bottom row - 2 images */}
+            <div className="flex items-center justify-center relative">
+              {/* Transcript - left */}
+              <img 
+                src={transcript.src} 
+                alt="Transcript Screenshot" 
+                className="max-w-96 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-1 hover:rotate-0 transition-transform duration-300 z-20"
+              />
+              
+              {/* Catalogue - right */}
+              <img 
+                src={catalogue.src} 
+                alt="Catalogue Screenshot" 
+                className="max-w-96 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform rotate-1 hover:rotate-0 transition-transform duration-300 z-20 -ml-20"
+              />
+            </div>
+          </div>
         </div>
       </div>
 

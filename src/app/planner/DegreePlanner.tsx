@@ -675,7 +675,7 @@ export default function DegreePlanner() {
     return (
       <div
         ref={setNodeRef}
-        className={`relative group p-3 rounded-lg min-h-[60px] flex items-center justify-between transition-colors max-w-full ${getSlotColor()} ${
+        className={`relative group p-2 sm:p-3 rounded-lg min-h-[50px] sm:min-h-[60px] flex items-center justify-between transition-colors max-w-full ${getSlotColor()} ${
           isDroppable ? "hover:border-solid hover:bg-opacity-30" : ""
         } ${isOver && isDroppable ? "border-solid bg-opacity-50 scale-105" : ""}`}
       >
@@ -689,7 +689,7 @@ export default function DegreePlanner() {
               }
             >
               <p
-                className={`font-semibold text-sm ${
+                className={`font-semibold text-xs sm:text-sm ${
                   requirement.course.code &&
                   completedCourses.has(requirement.course.code)
                     ? "line-through opacity-75"
@@ -707,9 +707,9 @@ export default function DegreePlanner() {
             </div>
           ) : (
             <div className="text-center">
-              <p className="text-sm font-medium">{getSlotLabel(requirement)}</p>
+              <p className="text-xs sm:text-sm font-medium">{getSlotLabel(requirement)}</p>
               {isDroppable && (
-                <p className="text-xs opacity-60 mt-1">Drag course here</p>
+                <p className="text-xs opacity-60 mt-1 hidden sm:block">Drag course here</p>
               )}
             </div>
           )}
@@ -718,10 +718,10 @@ export default function DegreePlanner() {
           <Button
             size="sm"
             variant="ghost"
-            className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="h-5 w-5 sm:h-6 sm:w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
             onClick={() => removeCourseFromSlot(requirement.id)}
           >
-            <X className="h-4 w-4" />
+            <X className="h-3 w-3 sm:h-4 sm:w-4" />
           </Button>
         )}
       </div>
@@ -750,22 +750,22 @@ export default function DegreePlanner() {
       <div
         ref={setNodeRef}
         style={style}
-        className={`p-3 rounded-lg transition-all duration-200 bg-gray-800 text-white border-2 border-gray-600 font-bold relative ${
+        className={`p-2 sm:p-3 rounded-lg transition-all duration-200 bg-background text-foreground border-2 border-gray-600 font-bold relative ${
           isDragging
             ? "opacity-50 scale-95"
-            : "hover:scale-105 hover:shadow-lg hover:bg-gray-700"
+            : "hover:scale-105 hover:shadow-lg hover:bg-card-hover"
         }`}
       >
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col gap-1 sm:gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             {/* Draggable handle area */}
             <div 
-              className="flex items-center gap-2 flex-1 cursor-grab active:cursor-grabbing"
+              className="flex items-center gap-1 sm:gap-2 flex-1 cursor-grab active:cursor-grabbing"
               {...listeners}
               {...attributes}
             >
-              <GripVertical className="h-4 w-4 opacity-60" />
-              <span className="text-xs font-bold">
+              <GripVertical className="h-3 w-3 sm:h-4 sm:w-4 opacity-60" />
+              <span className="text-xs font-bold truncate">
                 {course.code || "Course"}
               </span>
             </div>
@@ -773,11 +773,11 @@ export default function DegreePlanner() {
             {/* Non-draggable info button */}
             <button
               onClick={(e) => handleShowCourseInfo(course, e)}
-              className="p-1.5 hover:bg-gray-600 rounded-full transition-colors hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-gray-600 flex-shrink-0 hover:cursor-pointer"
+              className="p-1 sm:p-1.5 hover:bg-card-hover rounded-full transition-colors hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-card-hover flex-shrink-0 hover:cursor-pointer"
               title="Course Info"
               type="button"
             >
-              <Info className="h-4 w-4 text-blue-400 hover:text-blue-300 transition-colors" />
+              <Info className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400 hover:text-blue-300 transition-colors" />
             </button>
           </div>
           
@@ -785,24 +785,24 @@ export default function DegreePlanner() {
           <div className="flex flex-wrap gap-1">
             {/* Liberal Type Badge */}
             {course.category === "lowerlib" && (
-              <Badge className="bg-blue-400 text-black text-xs px-1 py-0 h-4">
+              <Badge className="bg-blue-400 text-black text-xs px-1 py-0 h-3 sm:h-4">
                 Lower
               </Badge>
             )}
             {course.category === "upperlib" && (
-              <Badge className="bg-blue-400 text-black text-xs px-1 py-0 h-4">
+              <Badge className="bg-blue-400 text-black text-xs px-1 py-0 h-3 sm:h-4">
                 Upper
               </Badge>
             )}
             
             {/* Term Badges */}
             {course.term?.includes('Fall') && (
-              <Badge className="bg-blue-400 text-black text-xs px-1 py-0 h-4">
+              <Badge className="bg-blue-400 text-black text-xs px-1 py-0 h-3 sm:h-4">
                 Fall
               </Badge>
             )}
             {course.term?.includes('Winter') && (
-              <Badge className="bg-blue-400 text-black text-xs px-1 py-0 h-4">
+              <Badge className="bg-blue-400 text-black text-xs px-1 py-0 h-3 sm:h-4">
                 Winter
               </Badge>
             )}
@@ -816,11 +816,11 @@ export default function DegreePlanner() {
   return (
     <>
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <div className="min-h-screen bg-background flex flex-col w-7xl">
+      <div className="min-h-screen bg-background flex flex-col w-full">
         {/* INSTRUCTIONS */}
-        <div className="w-full flex justify-center mt-8">
-          <div className="bg-card-bg border-2 border-borders rounded-2xl shadow-lg max-w-xl w-full p-6 flex flex-col items-center">
-            <h3 className="text-primary font-extrabold mb-3 text-2xl flex items-center gap-2 tracking-wide drop-shadow-sm">
+        <div className="w-full flex justify-center mt-4 sm:mt-6 md:mt-8 px-4">
+          <div className="bg-card-bg border-2 border-borders rounded-2xl shadow-lg max-w-xl w-full p-4 sm:p-6 flex flex-col items-center">
+            <h3 className="text-primary font-extrabold mb-3 text-lg sm:text-xl md:text-2xl flex items-center gap-2 tracking-wide drop-shadow-sm">
               <span role="img" aria-label="banana">
                 🍌
               </span>
@@ -829,7 +829,7 @@ export default function DegreePlanner() {
                 🦍
               </span>
             </h3>
-            <div className="text-base text-foreground space-y-3 font-medium">
+            <div className="text-sm sm:text-base text-foreground space-y-2 sm:space-y-3 font-medium">
               <div>
                 <span className="font-bold text-secondary">Fixed Courses:</span>{" "}
                 Pre-filled (blue)
@@ -861,7 +861,7 @@ export default function DegreePlanner() {
         </div>
 
         {/* PROGRAM SELECTOR */}
-        <div className="w-full flex justify-center mt-8">
+        <div className="w-full flex justify-center mt-4 sm:mt-6 md:mt-8 px-4">
           <div className="bg-card-bg border-2 border-borders rounded-2xl shadow-lg p-4 max-w-xl w-full">
             <ProgramSelector
               programs={programOptions}
@@ -873,32 +873,32 @@ export default function DegreePlanner() {
 
         {/* PROGRAM OVERVIEW */}
         {selectedProgramData && (
-          <div className="w-full flex justify-center mt-8">
-            <div className="bg-card-bg border-2 border-borders rounded-2xl shadow-lg max-w-4xl w-full p-6">
-              <h2 className="text-primary text-2xl font-black text-center mb-3 tracking-wide drop-shadow">
+          <div className="w-full flex justify-center mt-4 sm:mt-6 md:mt-8 px-4">
+            <div className="bg-card-bg border-2 border-borders rounded-2xl shadow-lg max-w-4xl w-full p-4 sm:p-6">
+              <h2 className="text-primary text-xl sm:text-2xl font-black text-center mb-3 tracking-wide drop-shadow">
                 🎓 {selectedProgram}
               </h2>
-              <div className="grid grid-cols-2 gap-4 text-base mb-3">
-                <div className="bg-card-hover rounded-md px-4 py-2 text-center font-bold text-secondary">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 text-sm sm:text-base mb-3">
+                <div className="bg-card-hover rounded-md px-2 sm:px-4 py-2 text-center font-bold text-secondary">
                   {selectedProgramData.total_courses}
                   <br />
-                  <span className="text-foreground font-medium">Total</span>
+                  <span className="text-foreground font-medium text-xs sm:text-sm">Total</span>
                 </div>
-                <div className="bg-card-hover rounded-md px-4 py-2 text-center font-bold text-primary">
+                <div className="bg-card-hover rounded-md px-2 sm:px-4 py-2 text-center font-bold text-primary">
                   {selectedProgramData.total_core}
                   <br />
-                  <span className="text-foreground font-medium">Core</span>
+                  <span className="text-foreground font-medium text-xs sm:text-sm">Core</span>
                 </div>
-                <div className="bg-card-hover rounded-md px-4 py-2 text-center font-bold text-success">
+                <div className="bg-card-hover rounded-md px-2 sm:px-4 py-2 text-center font-bold text-success">
                   {selectedProgramData.total_open}
                   <br />
-                  <span className="text-foreground font-medium">Open</span>
+                  <span className="text-foreground font-medium text-xs sm:text-sm">Open</span>
                 </div>
-                <div className="bg-card-hover rounded-md px-4 py-2 text-center font-bold text-accent">
+                <div className="bg-card-hover rounded-md px-2 sm:px-4 py-2 text-center font-bold text-accent">
                   {selectedProgramData.total_lowerlib +
                     selectedProgramData.total_upperlib}
                   <br />
-                  <span className="text-foreground font-medium">Liberal</span>
+                  <span className="text-foreground font-medium text-xs sm:text-sm">Liberal</span>
                 </div>
               </div>
               {/* Progress Bars */}
@@ -945,20 +945,20 @@ export default function DegreePlanner() {
         )}
 
         {selectedProgram && (
-          <div className="flex-1 flex flex-row w-full mx-auto gap-10 pt-12 pb-24 px-8">
+          <div className="flex-1 flex flex-col lg:flex-row w-full mx-auto gap-4 lg:gap-6 xl:gap-10 pt-6 md:pt-8 lg:pt-12 pb-12 lg:pb-24 px-4 lg:px-8">
             {/* SEMESTER CARDS */}
-            <div className="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-10">
+            <div className="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 xl:gap-10">
               {semesterPlans.map((semester, semesterIndex) => (
                 <Card
                   key={semester.id}
                   className="bg-card-bg border-2 border-borders rounded-2xl shadow-lg"
                 >
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-primary font-bold flex justify-between items-center text-lg">
+                    <CardTitle className="text-primary font-bold flex justify-between items-center text-base sm:text-lg">
                       <span>{semester.title}</span>
                       <Badge
                         variant="secondary"
-                        className="bg-warning text-foreground shadow"
+                        className="bg-warning text-foreground shadow text-xs"
                       >
                         {
                           semester.requirements.filter((req) => req.course)
@@ -968,7 +968,7 @@ export default function DegreePlanner() {
                       </Badge>
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
+                  <CardContent className="space-y-2 sm:space-y-3">
                     {semester.requirements.map((requirement) => (
                       <RequirementSlotComponent
                         key={requirement.id}
@@ -981,16 +981,16 @@ export default function DegreePlanner() {
               ))}
             </div>
 
-            {/* RIGHT SIDEBAR - CATALOGUE - STICKY POSITION */}
-            <div className="w-1/5 sticky top-20 self-start bg-card-bg border-2 border-borders rounded-2xl shadow-lg p-6 flex flex-col gap-4 h-[calc(100vh-6rem)]">
-              <h3 className="text-primary font-extrabold mb-4 text-lg text-center">
+            {/* RIGHT SIDEBAR - CATALOGUE */}
+            <div className="w-full lg:w-80 xl:w-96 lg:sticky lg:top-20 lg:self-start bg-card-bg border-2 border-borders rounded-2xl shadow-lg p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 lg:h-[calc(100vh-6rem)]">
+              <h3 className="text-primary font-extrabold mb-2 sm:mb-4 text-base sm:text-lg text-center">
                 Course Catalogue
               </h3>
               
               {/* Filter Badges */}
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {/* Type Filters */}
-                <div className="flex flex-col gap-2 items-center">
+                <div className="flex flex-col gap-1 sm:gap-2 items-center">
                   <p className="text-foreground text-xs font-semibold">Type:</p>
                   <div className="flex flex-wrap gap-1 justify-center">
                     <button
@@ -1011,7 +1011,7 @@ export default function DegreePlanner() {
                 </div>
 
                 {/* Term Filters */}
-                <div className="flex flex-col gap-2 items-center">
+                <div className="flex flex-col gap-1 sm:gap-2 items-center">
                   <p className="text-foreground text-xs font-semibold">Term:</p>
                   <div className="flex flex-wrap gap-1 justify-center">
                     <button
@@ -1073,24 +1073,24 @@ export default function DegreePlanner() {
                 )}
               </div>
 
-              <div className="relative mb-6">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" />
+              <div className="relative mb-4 sm:mb-6">
+                <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-muted" />
                 <Input
                   placeholder="Search courses..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 bg-input-bg border-2 border-input-border rounded-xl text-foreground font-bold placeholder:text-muted focus:border-input-focus transition-all"
+                  className="pl-10 sm:pl-12 bg-input-bg border-2 border-input-border rounded-xl text-foreground font-bold placeholder:text-muted focus:border-input-focus transition-all text-sm"
                 />
               </div>
-              <div className="flex-1 overflow-y-auto px-2">
-                <div className="space-y-3">
+              <div className="flex-1 overflow-y-auto px-1 sm:px-2 lg:max-h-96">
+                <div className="space-y-2 sm:space-y-3">
                   {paginatedCourses.map((course) => (
                     <CourseCard key={course.id} course={course} />
                   ))}
                   {filteredCourses.length === 0 && (
-                    <div className="text-center text-muted py-8">
-                      <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                      <p className="font-bold">No courses found</p>
+                    <div className="text-center text-muted py-4 sm:py-8">
+                      <Search className="h-8 w-8 sm:h-12 sm:w-12 mx-auto mb-2 sm:mb-4 opacity-50" />
+                      <p className="font-bold text-sm">No courses found</p>
                     </div>
                   )}
                 </div>
@@ -1098,7 +1098,7 @@ export default function DegreePlanner() {
 
               {/* Pagination Controls */}
               {filteredCourses.length > 0 && (
-                <div className="flex items-center justify-between px-2 py-3 border-t border-borders">
+                <div className="flex items-center justify-between px-1 sm:px-2 py-2 sm:py-3 border-t border-borders">
                   <Button
                     variant="outline"
                     size="sm"

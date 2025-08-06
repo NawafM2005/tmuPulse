@@ -151,10 +151,12 @@ export default function Transcript() {
   const totalCourses = allCourses.length;
   const courseCodes = allCourses.map(c => c.code);
 
-  const termGpaChartData = json?.semesters.map(sem => ({
-    term: sem.term ?? "Unknown",
-    gpa: sem.cgpa ?? 0,
-  })) || [];
+  const termGpaChartData = json?.semesters
+    .filter(sem => (sem.cgpa ?? 0) > 0) // Exclude semesters with 0 GPA
+    .map(sem => ({
+      term: sem.term ?? "Unknown",
+      gpa: sem.cgpa ?? 0,
+    })) || [];
 
   return (
     <main className="min-h-screen bg-background pt-5 flex flex-col items-center">
@@ -225,7 +227,9 @@ export default function Transcript() {
 
           {json && allCourses.length > 0 && (
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 w-full">
-            {json.semesters.map((semester, index) => (
+            {json.semesters
+              .filter(semester => (semester.cgpa ?? 0) > 0) // Exclude semesters with 0 GPA
+              .map((semester, index) => (
               <div key={index} className="bg-foreground/20 p-4 rounded-lg border-2 border-foreground">
                 <h4 className="text-xl font-bold text-secondary">{semester.term}</h4>
                 <p className="text-md mb-2 font-semibold">Term GPA: {semester.cgpa ?? "N/A"}</p>
