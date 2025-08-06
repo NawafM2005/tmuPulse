@@ -150,63 +150,126 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
     }));
 
   return (
-    <main className="flex flex-col items-center text-center">
-      <div className="bg-foreground/20 p-6 rounded-xl max-w-7xl w-full space-y-6 flex flex-col gap-2 mb-20 text-foreground">
-        <h2 className="text-3xl font-bold">Transcript Stats</h2>
+    <main className="flex flex-col items-center px-8 md:px-16 lg:px-24 w-full max-w-6xl">
+      <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg p-8 w-full space-y-8 mb-20">
+        {/* Header */}
+        <div className="text-center">
+          <h2 className="text-3xl font-[900] text-foreground mb-2">Academic Analytics</h2>
+          <p className="text-muted font-[600]">Comprehensive breakdown of your academic progress and performance</p>
+        </div>
 
+        {/* Progress Overview */}
         {userStats && (
-          <div className="space-y-2">
-            <p>Total Courses: {userStats.total_courses_done} / {userStats.total_courses_required}</p>
-            <p>Lower Libs: {userStats.lower_libs_done} / {userStats.lower_libs_required}</p>
-            <p>Upper Libs: {userStats.upper_libs_done} / {userStats.upper_libs_required}</p>
-            <p>Other (Core): {userStats.other_done} / {userStats.other_required}</p>
-            <p>GPA: {userStats.cumulative_gpa?.toFixed(2) ?? "N/A"}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-primary/10 border-2 border-primary/30 rounded-lg p-6 text-center">
+              <h3 className="text-sm font-[800] text-primary uppercase tracking-wide mb-2">Total Courses</h3>
+              <p className="text-3xl font-[900] text-foreground">{userStats.total_courses_done}</p>
+              <p className="text-sm text-muted font-[600]">of {userStats.total_courses_required} required</p>
+            </div>
+            
+            <div className="bg-accent/10 border-2 border-accent/30 rounded-lg p-6 text-center">
+              <h3 className="text-sm font-[800] text-accent uppercase tracking-wide mb-2">Lower Liberals</h3>
+              <p className="text-3xl font-[900] text-foreground">{userStats.lower_libs_done}</p>
+              <p className="text-sm text-muted font-[600]">of {userStats.lower_libs_required} required</p>
+            </div>
+            
+            <div className="bg-success/10 border-2 border-success/30 rounded-lg p-6 text-center">
+              <h3 className="text-sm font-[800] text-success uppercase tracking-wide mb-2">Upper Liberals</h3>
+              <p className="text-3xl font-[900] text-foreground">{userStats.upper_libs_done}</p>
+              <p className="text-sm text-muted font-[600]">of {userStats.upper_libs_required} required</p>
+            </div>
+            
+            <div className="bg-[#f5d60b]/10 border-2 border-[#f5d60b]/30 rounded-lg p-6 text-center">
+              <h3 className="text-sm font-[800] text-[#f5d60b] uppercase tracking-wide mb-2">Core/Open</h3>
+              <p className="text-3xl font-[900] text-foreground">{userStats.other_done}</p>
+              <p className="text-sm text-muted font-[600]">of {userStats.other_required} required</p>
+            </div>
           </div>
         )}
 
-        <div className="pt-4">
-          <h3 className="text-lg font-semibold mb-2">Course Types:</h3>
-          <div className="flex flex-wrap gap-2 justify-center">
-            {courseCodes.map((code, i) => (
-              <span key={i} className="bg-white/20 px-3 py-1 rounded text-sm border-1 border-secondary">
-                {code} - {courseTypeMap[code]}
-              </span>
-            ))}
+        {/* GPA Display */}
+        {userStats && (
+          <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/30 rounded-lg p-8 text-center">
+            <h3 className="text-xl font-[800] text-primary mb-4">Cumulative Grade Point Average</h3>
+            <p className="text-6xl font-[900] text-foreground mb-2">{userStats.cumulative_gpa?.toFixed(2) ?? "N/A"}</p>
+            <p className="text-muted font-[600]">out of 4.33 TMU scale</p>
+          </div>
+        )}
+
+        {/* Course Types */}
+        <div className="bg-card-hover border border-input-border rounded-lg p-6">
+          <h3 className="text-xl font-[800] text-foreground mb-4 flex items-center gap-2">
+            <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            Course Classification
+          </h3>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {courseCodes.map((code, i) => {
+              const type = courseTypeMap[code];
+              const colorClass = 
+                type === "LL" ? "bg-accent/20 text-accent border-accent/30" :
+                type === "UL" ? "bg-success/20 text-success border-success/30" :
+                type === "Core/Open" ? "bg-primary/20 text-primary border-primary/30" :
+                "bg-muted/20 text-muted border-muted/30";
+              
+              return (
+                <span key={i} className={`${colorClass} px-3 py-2 rounded-lg text-sm font-[600] border-2`}>
+                  {code} - {type}
+                </span>
+              );
+            })}
           </div>
         </div>
 
-        <div className="flex flex-col gap-25 pb-20 items-center bg-background p-10 rounded-lg">
-
-          <div className="flex flex-col xl:flex-row gap-2 w-full">
+        {/* Charts Section */}
+        <div className="bg-card-bg border border-input-border rounded-lg p-8 space-y-8">
+          <h3 className="text-2xl font-[800] text-foreground text-center mb-6">Performance Analytics</h3>
+          
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
             {userStats && (
-              <ChartPieLegend
-                  mode="breakdown"  
-                  lower={userStats.lower_libs_done}
-                  upper={userStats.upper_libs_done}
-                  other={userStats.unknown}
-                  core_open={userStats.other_done}
-              />
+              <div className="bg-black/30 border border-input-border rounded-lg p-6">
+                <h4 className="text-lg font-[700] text-foreground mb-4 text-center">Course Breakdown</h4>
+                <ChartPieLegend
+                    mode="breakdown"  
+                    lower={userStats.lower_libs_done}
+                    upper={userStats.upper_libs_done}
+                    other={userStats.unknown}
+                    core_open={userStats.other_done}
+                />
+              </div>
             )}
 
             {userStats && (
-              <ChartPieLegend
-                  mode="completion"  
-                  completed={userStats.total_courses_done}
-                  total={userStats.total_courses_required}
-              />
+              <div className="bg-black/30 border border-input-border rounded-lg p-6">
+                <h4 className="text-lg font-[700] text-foreground mb-4 text-center">Degree Completion</h4>
+                <ChartPieLegend
+                    mode="completion"  
+                    completed={userStats.total_courses_done}
+                    total={userStats.total_courses_required}
+                />
+              </div>
             )}
           </div>
 
-          <ChartPieLegend
-            mode="gpa_by_type"
-            gpaData={gpaByType}
-          />
+          <div className="bg-black/30 border border-input-border rounded-lg p-6">
+            <h4 className="text-lg font-[700] text-foreground mb-4 text-center">GPA by Course Type</h4>
+            <ChartPieLegend
+              mode="gpa_by_type"
+              gpaData={gpaByType}
+            />
+          </div>
 
-          <LineChartGeneric
-            data={termGpaChartData}
-            dataKeys={[{ key: "gpa", label: "Term GPA" }]}
-            title="Term GPA Over Time"
-          />
+          <div className="bg-black/30 border border-input-border rounded-lg p-6">
+            <h4 className="text-lg font-[700] text-foreground mb-4 text-center">Academic Progress Over Time</h4>
+            <div className="flex justify-center">
+              <LineChartGeneric
+                data={termGpaChartData}
+                dataKeys={[{ key: "gpa", label: "Term GPA" }]}
+                title="Term GPA Over Time"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </main>

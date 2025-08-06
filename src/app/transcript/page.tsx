@@ -159,91 +159,156 @@ export default function Transcript() {
     })) || [];
 
   return (
-    <main className="min-h-screen bg-background pt-5 flex flex-col items-center">
+    <main className="min-h-screen bg-background flex flex-col items-center">
       <Navbar />
-      <div className="flex flex-col items-center justify-center p-8 w-full max-w-6xl mt-20 gap-4 text-center">
-        <h1 className="text-7xl font-[800] text-secondary">Transcript Analyser</h1>
-        <p className="text-1xl font-[400] text-foreground">
-          Effortlessly upload your academic transcript and let our parser automatically extract your courses, grades, and credits. Instantly see a clean summary, track your progress, and save time on manual entry—perfect for students who want all their academic info in one place!
+      <div className="flex flex-col items-center justify-center px-8 md:px-16 lg:px-24 py-8 w-full max-w-6xl mt-20 gap-6 text-center">
+        <h1 className="text-5xl md:text-7xl font-[900] text-foreground mb-4">
+          <span className="text-accent">T</span><span className="text-[#f5d60b]">M</span><span className="text-primary">U</span> Transcript Analyser
+        </h1>
+        <p className="text-lg font-[600] text-muted max-w-4xl leading-relaxed">
+          Effortlessly upload your academic transcript and let our parser automatically extract your courses, grades, and credits. 
+          Instantly see a clean summary, track your progress, and save time on manual entry—perfect for students who want all their academic info in one place!
         </p>
+        
+        {/* Upload Section */}
+        <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg p-8 w-full max-w-md mt-6">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-2">
+              <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+            </div>
+            <label
+              htmlFor="transcript-upload"
+              className="bg-primary text-white font-[700] px-8 py-3 rounded-lg cursor-pointer hover:opacity-90 transition-all duration-200 border-2 border-primary hover:scale-105 shadow-md"
+            >
+              Choose Transcript File
+            </label>
+            <input
+              type="file"
+              id="transcript-upload"
+              name="transcript-upload"
+              ref={inputRef}
+              className="hidden"
+              accept="application/pdf"
+              onChange={async (e) => {
+                const files = e.target.files;
+                if (files && files.length > 0) {
+                  const fileNames = Array.from(files).map(file => file.name).join(", ");
+                  setFileName(fileNames);
+                  setFiles(files);
+
+                  let result = "";
+                  for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    if (!file) continue;
+                    const parsed = await parsePDF(file);
+                    result += `\n\nFile: ${file.name}\n` + parsed;
+                  }
+
+                  setText(result);
+                  setJson(extractTranscriptData(result));
+                } else {
+                  setFileName("No file chosen.");
+                  setFiles(null);
+                  setText("");
+                  setJson(null);
+                }
+              }}
+            />
+            {fileName && (
+              <span className="text-sm text-muted font-[600] bg-highlight px-3 py-1 rounded-full">
+                {fileName}
+              </span>
+            )}
+          </div>
+        </div>
       </div>
-      <form className="text-white flex flex-col items-center gap-4">
-        <label
-          htmlFor="transcript-upload"
-          className="bg-secondary text-background font-bold px-6 py-3 rounded-xl cursor-pointer hover:bg-secondary/80 transition border-2 border-foreground"
-        >
-          Choose Transcript File
-        </label>
-        <input
-          type="file"
-          id="transcript-upload"
-          name="transcript-upload"
-          ref={inputRef}
-          className="hidden"
-          accept="application/pdf"
-          onChange={async (e) => {
-            const files = e.target.files;
-            if (files && files.length > 0) {
-              const fileNames = Array.from(files).map(file => file.name).join(", ");
-              setFileName(fileNames);
-              setFiles(files);
-
-              let result = "";
-              for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                if (!file) continue;
-                const parsed = await parsePDF(file);
-                result += `\n\nFile: ${file.name}\n` + parsed;
-              }
-
-              setText(result);
-              setJson(extractTranscriptData(result));
-            } else {
-              setFileName("No file chosen.");
-              setFiles(null);
-              setText("");
-              setJson(null);
-            }
-          }}></input>
-        <span className="italic text-sm text-foreground">{fileName}</span>
-      </form>
       {json && allCourses.length > 0 && (
-        <div className="bg-background text-foreground mt-10 rounded-xl p-6 max-w-4xl w-full space-y-6 mb-20">
-          <h2 className="text-2xl font-bold flex flex-row gap-1">Program: <p className="text-borders">{json.program}</p></h2>
-          <h3 className="text-2xl font-semibold flex flex-row gap-1">Cumulative GPA: <p className="text-yellow-500">{json.cumulative_gpa}</p></h3>
+        <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg px-8 md:px-16 lg:px-24 py-8 max-w-6xl w-full space-y-8 mb-20">
+          {/* Header Info */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-primary/10 border-2 border-primary/30 rounded-lg p-6">
+              <h2 className="text-xl font-[800] text-primary mb-2">Program</h2>
+              <p className="text-2xl font-[700] text-foreground">{json.program}</p>
+            </div>
+            <div className="bg-[#f5d60b]/10 border-2 border-[#f5d60b]/30 rounded-lg p-6">
+              <h2 className="text-xl font-[800] text-[#f5d60b] mb-2">Cumulative GPA</h2>
+              <p className="text-2xl font-[700] text-foreground">{json.cumulative_gpa}</p>
+            </div>
+          </div>
+
+          {/* Transfer Credits */}
           {json.transfer_courses && json.transfer_courses.length > 0 && (
-            <div className="bg-foreground p-4 rounded-lg border-1 border-white">
-              <h4 className="text-xl font-bold text-blue-300 mb-5">Transfer Credits</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="bg-success/10 border-2 border-success/30 rounded-lg p-6">
+              <h4 className="text-xl font-[800] text-success mb-4 flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Transfer Credits
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {json.transfer_courses.map((course, cIndex) => (
-                  <div key={cIndex} className="bg-background text-foreground  p-3 rounded border-1 border-secondary text-sm">
-                    <p><strong>{course.code}</strong> – {course.name}</p>
-                    <p>Grade: {course.grade} | Grade Points: {course.grade_points} | Credits: {course.credits}</p>
+                  <div key={cIndex} className="bg-card-bg border border-input-border rounded-lg p-4">
+                    <p className="font-[700] text-foreground text-lg">{course.code}</p>
+                    <p className="text-muted font-[600] mb-2">{course.name}</p>
+                    <div className="flex gap-4 text-sm">
+                      <span className="bg-success/20 text-success px-2 py-1 rounded font-[600]">
+                        {course.grade}
+                      </span>
+                      <span className="text-muted font-[600]">
+                        {course.grade_points} pts | {course.credits} credits
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
+          {/* Semesters */}
           {json && allCourses.length > 0 && (
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 w-full">
-            {json.semesters
-              .filter(semester => (semester.cgpa ?? 0) > 0) // Exclude semesters with 0 GPA
-              .map((semester, index) => (
-              <div key={index} className="bg-foreground/20 p-4 rounded-lg border-2 border-foreground">
-                <h4 className="text-xl font-bold text-secondary">{semester.term}</h4>
-                <p className="text-md mb-2 font-semibold">Term GPA: {semester.cgpa ?? "N/A"}</p>
-                <div className="grid gap-2">
-                  {semester.courses.map((course, cIndex) => (
-                    <div key={cIndex} className="bg-background text-foreground p-3 rounded border-1 border-secondary">
-                      <p><strong>{course.code}</strong> – {course.name}</p>
-                      <p>Grade: {course.grade} | Grade Points: {course.grade_points} | Credits: {course.credits}</p>
+            <div className="space-y-6">
+              <h3 className="text-2xl font-[800] text-foreground">Academic History</h3>
+              <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
+                {json.semesters
+                  .filter(semester => (semester.cgpa ?? 0) > 0)
+                  .map((semester, index) => (
+                  <div key={index} className="bg-card-hover border-2 border-input-border rounded-lg p-6 hover:border-accent transition-colors duration-200">
+                    <div className="flex justify-between items-center mb-4">
+                      <h4 className="text-xl font-[800] text-accent">{semester.term}</h4>
+                      <span className="bg-accent/20 text-accent px-3 py-1 rounded-full font-[700] text-sm">
+                        GPA: {semester.cgpa ?? "N/A"}
+                      </span>
                     </div>
-                  ))}
-                </div>
+                    <div className="space-y-3">
+                      {semester.courses.map((course, cIndex) => (
+                        <div key={cIndex} className="bg-card-bg border border-input-border rounded-lg p-4">
+                          <p className="font-[700] text-foreground text-lg">{course.code}</p>
+                          <p className="text-muted font-[600] mb-2">{course.name}</p>
+                          <div className="flex gap-4 text-sm">
+                            <span className={`px-2 py-1 rounded font-[600] ${
+                              course.grade === 'A+' || course.grade === 'A' || course.grade === 'A-' 
+                                ? 'bg-success/20 text-success'
+                                : course.grade === 'B+' || course.grade === 'B' || course.grade === 'B-'
+                                ? 'bg-primary/20 text-primary' 
+                                : course.grade === 'C+' || course.grade === 'C' || course.grade === 'C-'
+                                ? 'bg-warning/20 text-warning'
+                                : 'bg-danger/20 text-danger'
+                            }`}>
+                              {course.grade}
+                            </span>
+                            <span className="text-muted font-[600]">
+                              {course.grade_points} pts | {course.credits} credits
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
           )}
         </div>
       )}
@@ -257,8 +322,18 @@ export default function Transcript() {
       )}
 
       {json !== null && allCourses.length === 0 && (
-        <h1 className="text-red-500 font-bold mt-30 animate-pulse">Please Upload Valid Transcript!</h1>
+        <div className="bg-danger/10 border-2 border-danger/30 rounded-lg p-8 max-w-md w-full mx-auto mt-8 text-center">
+          <div className="w-16 h-16 bg-danger/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-[800] text-danger mb-2">Invalid Transcript</h3>
+          <p className="text-muted font-[600]">Please upload a valid TMU transcript PDF file.</p>
+        </div>
       )}
+      
+      <Footer />
     </main>
   );
 }

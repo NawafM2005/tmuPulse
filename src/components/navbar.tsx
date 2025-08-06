@@ -4,7 +4,13 @@ import tmuLogo from '../assets/tmu-monkey-logo.png';
 import Link from 'next/link';
 import { useEffect, useState } from "react";
 import lightIcon from '../assets/light.png';
-import { Moon, Menu, X } from 'lucide-react';
+import { Moon, Menu, X, ChevronDown } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 
 export default function Navbar() {
@@ -50,7 +56,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <ul className="hidden xl:flex space-x-1 xl:space-x-3 font-bold text-[15px]">
+        <ul className="hidden xl:flex space-x-1 xl:space-x-3 font-bold text-sm items-center">
             <li>
               <Link href="/catalogue" className="p-1 md:p-2 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-200">Catalogue</Link>
             </li>
@@ -61,7 +67,22 @@ export default function Navbar() {
               <Link href="/transcript" className="p-1 md:p-2 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-200">Transcript Analyser</Link>
             </li>
             <li>
-              <Link href="" className="p-1 md:p-2 rounded-[10px] hover:bg-gray-500 hover:cursor-not-allowed transition-colors duration-200">Schedule Builder</Link>
+              <Link href="/gpa-calculator" className="p-1 md:p-2 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-200">GPA Calculator</Link>
+            </li>
+            <li>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="p-1 md:p-2 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-200 flex items-center gap-1 font-bold text-[15px] hover:cursor-pointer">
+                  More <ChevronDown className="h-4 w-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-background border-accent border-2">
+                  <DropdownMenuItem 
+                    className="text-foreground bg-background hover:bg-background focus:bg-foreground/20 hover:cursor-not-allowed opacity-50"
+                    disabled
+                  >
+                    Schedule Builder (Coming Soon)
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </li>
         </ul>
 
@@ -87,7 +108,7 @@ export default function Navbar() {
               className="xl:hidden rounded-xl text-xl font-bold p-1 transition-all duration-200 hover:cursor-pointer"
               aria-label="Toggle mobile menu"
             >
-              {mobileMenuOpen ? <X size={20} className="text-white" /> : <Menu size={20} className="text-white" />}
+              {mobileMenuOpen ? <X size={20} className="text-foreground" /> : <Menu size={20} className="text-foreground" />}
             </button>
         </div>
       </nav>
@@ -111,19 +132,24 @@ export default function Navbar() {
               Degree Planner
             </Link>
             <Link 
-              href="/schedule" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-3 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-100 text-white font-bold text-center"
-            >
-              Schedule Builder
-            </Link>
-            <Link 
               href="/transcript" 
               onClick={() => setMobileMenuOpen(false)}
               className="p-3 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-100 text-white font-bold text-center"
             >
               Transcript Analyser
             </Link>
+            <Link 
+              href="/gpa-calculator" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-3 rounded-[10px] hover:bg-[#f5d60b] hover:text-black transition-colors duration-100 text-white font-bold text-center"
+            >
+              GPA Calculator
+            </Link>
+            <div 
+              className="p-3 rounded-[10px] hover:bg-gray-500 hover:cursor-not-allowed transition-colors duration-100 text-white font-bold text-center opacity-50"
+            >
+              Schedule Builder (Coming Soon)
+            </div>
             
             <div className="border-t border-gray-600 pt-4 space-y-3">
               <Link 
