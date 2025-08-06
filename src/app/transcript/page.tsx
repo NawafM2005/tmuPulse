@@ -162,10 +162,10 @@ export default function Transcript() {
     <main className="min-h-screen bg-background flex flex-col items-center">
       <Navbar />
       <div className="flex flex-col items-center justify-center px-8 md:px-16 lg:px-24 py-8 w-full max-w-6xl mt-20 gap-6 text-center">
-        <h1 className="text-5xl md:text-7xl font-[900] text-foreground mb-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[900] text-foreground mb-4">
           <span className="text-accent">T</span><span className="text-[#f5d60b]">M</span><span className="text-primary">U</span> Transcript Analyser
         </h1>
-        <p className="text-lg font-[600] text-muted max-w-4xl leading-relaxed">
+        <p className="text-sm sm:text-base md:text-lg font-[600] text-muted max-w-4xl leading-relaxed">
           Effortlessly upload your academic transcript and let our parser automatically extract your courses, grades, and credits. 
           Instantly see a clean summary, track your progress, and save time on manual entry—perfect for students who want all their academic info in one place!
         </p>

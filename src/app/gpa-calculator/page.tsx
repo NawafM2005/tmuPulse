@@ -83,10 +83,10 @@ export default function GPACalculator() {
     <main className="flex flex-col min-h-screen bg-background">
       <Navbar />
       
-      <div className="flex-1 container mx-auto px-8 md:px-30 lg:px-42 py-8 mt-28">
+      <div className="flex-1 container mx-auto px-8 md:px-30 lg:px-42 py-8 mt-20">
         {/* Header Section */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-[900] text-foreground mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[900] text-foreground mb-4">
             <span className="text-accent">T</span><span className="text-[#f5d60b]">M</span><span className="text-primary">U</span> GPA Calculator
           </h1>
           <p className="text-sm sm:text-base md:text-lg font-[600] text-foreground max-w-4xl mx-auto">
@@ -176,7 +176,7 @@ export default function GPACalculator() {
           <div className="mt-4 p-4 bg-highlight rounded-lg border border-primary">
             <p className="font-[600] text-foreground text-sm">
               <strong>Note:</strong> Percentage ranges based on official TMU grading scale. A+ (90-100%), A (85-89%), A- (80-84%), 
-              B+ (77-79%), B (73-76%), B- (70-72%), C+ (67-69%), C (63-66%), C- (60-62%), D+ (57-59%), D (53-56%), D- (50-52%), F (0-49%). 
+              B+ (77-79%), B (73-76%), B- (70-72%), C+ (67-69%), C (63-66%), C- (60-62%), D+ (57-59%), D (53-56%), D- (50-52%), F (0-49%). <br></br>
               Different programs may have varying admission requirements and academic standing criteria.
             </p>
           </div>
@@ -312,7 +312,7 @@ export default function GPACalculator() {
                   <th className="border border-input-border px-4 py-2 font-[800] text-foreground">Weight</th>
                   <th className="border border-input-border px-4 py-2 font-[800] text-foreground">Grade</th>
                   <th className="border border-input-border px-4 py-2 font-[800] text-foreground">Grade Points</th>
-                  <th className="border border-input-border px-4 py-2 font-[800] text-foreground">Grade Points × Weight</th>
+                  <th className="border border-input-border px-4 py-2 font-[800] text-foreground">Grade Points x Weight</th>
                 </tr>
               </thead>
               <tbody>
@@ -322,14 +322,14 @@ export default function GPACalculator() {
                 <tr><td className="border border-input-border px-4 py-2 font-[600] text-foreground">Course D</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">2.00</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">B+</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">3.33</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">6.66</td></tr>
                 <tr><td className="border border-input-border px-4 py-2 font-[600] text-foreground">Course E</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">1.00</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">A-</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">3.67</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">3.67</td></tr>
                 <tr><td className="border border-input-border px-4 py-2 font-[600] text-foreground">Course F</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">1.00</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">B-</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">2.67</td><td className="border border-input-border px-4 py-2 text-center font-[600] text-foreground">2.67</td></tr>
-                <tr className="bg-card-hover"><td className="border border-input-border px-4 py-2 font-[800] text-foreground">Total</td><td className="border border-input-border px-4 py-2 text-center font-[800] text-foreground">7.00</td><td className="border border-input-border px-4 py-2 text-center font-[800] text-foreground">N/A</td><td className="border border-input-border px-4 py-2 text-center font-[800] text-foreground">N/A</td><td className="border border-input-border px-4 py-2 text-center font-[800] text-foreground">21.67</td></tr>
+                <tr className="bg-card-hover"><td className="border border-input-border px-4 py-2 font-[800] text-foreground">Total</td><td className="border border-input-border px-4 py-2 text-center font-[800] text-foreground">7.00</td><td className="border border-input-border px-4 py-2 text-center font-[800] text-foreground">N/A</td><td className="border border-input-border px-4 py-2 text-center font-[800] text-foreground">18.34</td><td className="border border-input-border px-4 py-2 text-center font-[800] text-foreground">21.67</td></tr>
               </tbody>
             </table>
           </div>
           
           <div className="bg-highlight p-4 rounded-lg border border-primary">
             <p className="font-[700] text-foreground mb-2">Calculation:</p>
-            <p className="font-[600] text-foreground mb-1">CGPA = (Total Grade Points × Weight) ÷ (Total Course Weight)</p>
+            <p className="font-[600] text-foreground mb-1">CGPA = (Total Grade Points x Weight) ÷ (Total Course Weight)</p>
             <p className="font-[600] text-foreground mb-1">CGPA = 21.67 ÷ 7.00</p>
             <p className="font-[800] text-lg text-accent">CGPA = 3.10</p>
           </div>
@@ -341,9 +341,7 @@ export default function GPACalculator() {
           <ul className="space-y-2 font-[600] text-background">
             <li>• This calculator uses TMU's official 4.33 GPA scale</li>
             <li>• Course weights are typically 0.5, 1.0, 1.5, or 2.0 credits</li>
-            <li>• Repeated courses: only the most recent grade counts toward GPA</li>
             <li>• This is for estimation purposes - always verify with your official transcript</li>
-            <li>• GPA adjustments may be possible under certain conditions - contact the ServiceHub for details</li>
           </ul>
         </div>
       </div>

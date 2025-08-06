@@ -8,14 +8,13 @@ export default function Planner() {
     <main className="min-h-screen bg-background pt-5 flex flex-col items-center">
       <Navbar />
 
-      <div className="flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 w-full max-w-7xl mt-8 sm:mt-16 md:mt-30 gap-4 text-center">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[70px] font-[800] text-secondary leading-tight">
+            <div className="container mx-auto px-8 md:px-30 lg:px-42 py-8 mt-20">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[800] text-secondary leading-tight">
           Degree Planner
         </h1>
-        <p className="text-sm sm:text-base md:text-lg lg:text-[20px] font-[400] text-foreground max-w-4xl px-2">
+        <p className="text-sm sm:text-base md:text-lg text-secondary mt-4 mb-8">
           Take control of your academic journey. Use the degree planner to map out
-          future semesters, organize required courses, and stay on track for
-          graduation. Visualize your progress and plan what's next with clarity.
+          your courses by semester and visualize your path to graduation.
         </p>
         
         {/* Show message for small devices (mobile phones) */}

@@ -190,8 +190,11 @@ const handleTermToggle = (termName: string) => {
     <main className="min-h-screen bg-background pt-5">
       <Navbar/>
       <div className="flex flex-col items-center mb-10 p-5">
-        <div className="flex flex-col items-center justify-center p-8 w-full max-w-8xl mt-10 gap-4 text-center">
-            <h1 className="text-7xl font-[800] text-secondary">Course Catalogue</h1>
+        <div className="flex flex-col items-center justify-center p-8 w-full max-w-8xl mt-20 gap-4 text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[800] text-secondary">Course Catalogue</h1>
+            <p className="text-sm sm:text-base md:text-lg text-secondary">
+              Browse and search through TMU's comprehensive course offerings
+            </p>
             <p className="text-1xl font-[400] text-foreground">Browse all current courses at TMU. Search, filter, and discover classes by course code, department, or keyword.</p>
         </div>        
           <DataTable 
