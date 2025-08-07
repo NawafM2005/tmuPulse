@@ -78,9 +78,6 @@ export default function About() {
               <a href="https://www.linkedin.com/in/nawaf-m-08a9792a6/" target="_blank" className="p-2 sm:p-3 bg-accent/10 hover:bg-accent/20 rounded-full transition-colors hover:cursor-pointer">
                 <Linkedin className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
               </a>
-              <a href="#" target="_blank" className="p-2 sm:p-3 bg-success/10 hover:bg-success/20 rounded-full transition-colors hover:cursor-pointer">
-                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-success" />
-              </a>
             </div>
           </div>
 
@@ -119,9 +116,6 @@ export default function About() {
               </a>
               <a href="https://www.linkedin.com/in/chibuzor-okwusiuno-24041b271/" target="_blank" className="p-2 sm:p-3 bg-accent/10 hover:bg-accent/20 rounded-full transition-colors hover:cursor-pointer">
                 <Linkedin className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
-              </a>
-              <a href="#" target="_blank" className="p-2 sm:p-3 bg-success/10 hover:bg-success/20 rounded-full transition-colors hover:cursor-pointer">
-                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-success" />
               </a>
             </div>
           </div>

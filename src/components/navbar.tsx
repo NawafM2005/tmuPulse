@@ -51,7 +51,7 @@ export default function Navbar() {
             <div className="text-lg md:text-xl font-bold flex flex-row hover:cursor-pointer items-center group transition-all duration-300 hover:scale-105">
               <img src={tmuLogo.src} alt="TMU Logo" className="h-8 w-8 md:h-15 md:w-15 transition-transform duration-300 group-hover:rotate-12" />
               <p className="text-[#3375C2] transition-colors duration-300 group-hover:text-[#4285d4]">TMU</p>
-              <p className="text-[#f5d60b] transition-colors duration-300 group-hover:text-[#ffeb3b]">.planner</p>
+              <p className="text-[#b29b07] transition-colors duration-300">planner</p>
             </div>
         </Link>
 

@@ -11,7 +11,6 @@ import {
   useDroppable,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
-import programsData from "../../../all_programs.json";
 import ProgramSelector from "./ProgramSelector";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -62,6 +61,7 @@ export default function DegreePlanner() {
   const [semesterPlans, setSemesterPlans] = useState<SemesterPlan[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
+  const [programs, setPrograms] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedTerm, setSelectedTerm] = useState<string[]>([]);
@@ -73,16 +73,43 @@ export default function DegreePlanner() {
   });
   const [showPopup, setShowPopup] = useState(false);
   const [popupCourse, setPopupCourse] = useState<any>(null);
+  const [selectedStream, setSelectedStream] = useState<string>("");
+  const [availableStreams, setAvailableStreams] = useState<any>({});
+  const [originalSemesterPlans, setOriginalSemesterPlans] = useState<SemesterPlan[]>([]);
+
+  // Fetch programs from database
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("programs")
+          .select("*")
+          .order("program");
+        
+        if (error) {
+          console.error("Error fetching programs:", error);
+          setPrograms([]);
+        } else {
+          setPrograms(data || []);
+        }
+      } catch (error) {
+        console.error("Error fetching programs:", error);
+        setPrograms([]);
+      }
+    };
+    
+    fetchPrograms();
+  }, []);
 
   // Program data
   const selectedProgramData = useMemo(
-    () => programsData.find((p) => p.program === selectedProgram),
-    [selectedProgram]
+    () => programs.find((p: any) => p.program === selectedProgram),
+    [selectedProgram, programs]
   );
 
   const programOptions = useMemo(
-    () => programsData.map((p) => p.program).sort(),
-    []
+    () => programs.map((p: any) => p.program).sort(),
+    [programs]
   );
 
   // Fetch courses from Supabase (like catalogue)
@@ -195,95 +222,260 @@ export default function DegreePlanner() {
   const handleProgramSelect = (programName: string) => {
     setSelectedProgram(programName);
     setCompletedCourses(new Set());
+    setSelectedStream(""); // Reset stream selection
+    setAvailableStreams({}); // Reset available streams
+    setOriginalSemesterPlans([]); // Reset original plans
 
-    const program = programsData.find((p) => p.program === programName);
+    const program = programs.find((p: any) => p.program === programName);
     if (!program) return;
 
+    // First pass: collect all available streams from all semesters
+    const allStreams: any = {};
+    program.semesters.forEach((semester: any) => {
+      semester.requirements?.forEach((req: any) => {
+        // Check if requirement is a stream object (contains stream names as keys)
+        const streamKeys = Object.keys(req).filter(key => key.endsWith('_stream'));
+        if (streamKeys.length > 0) {
+          streamKeys.forEach(streamKey => {
+            const streamName = streamKey.replace('_stream', '').replace('_', ' ');
+            allStreams[streamKey] = {
+              name: streamName.charAt(0).toUpperCase() + streamName.slice(1),
+              requirements: req[streamKey]
+            };
+          });
+        }
+      });
+    });
+    setAvailableStreams(allStreams);
+
     const plans: SemesterPlan[] = program.semesters.map(
-      (semester, semesterIndex) => {
-        const requirements: RequirementSlot[] =
-          semester.requirements?.map((req: any, reqIndex: number) => {
-            const slotId = `semester-${semesterIndex}-req-${reqIndex}`;
-            if ("code" in req && req.code) {
-              // Fixed course - pre-populate it
-              return {
-                id: slotId,
-                type: "code" as const,
-                requirement: req,
-                course: {
-                  id: `${slotId}-course`,
-                  code: req.code,
-                  title: `Course ${req.code}`,
-                  credits: 3,
-                  category: "core",
-                },
-              };
-            } else if ("table" in req && req.table) {
-              // Table requirement
-              return {
-                id: slotId,
-                type: "table" as const,
-                requirement: req,
-                course: undefined,
-              };
-            } else if ("option" in req && Array.isArray(req.option)) {
-              // Option requirement
-              return {
-                id: slotId,
-                type: "option" as const,
-                requirement: req,
-                course: undefined,
-                acceptedCourses: req.option,
-              };
-            } else if ("lowerlib" in req && req.lowerlib) {
-              // Lower Liberal
-              return {
-                id: slotId,
-                type: "open" as const,
-                requirement: {
-                  ...req,
-                  label: "Lower Liberal",
-                  liberal: "LL",
-                },
-                course: undefined,
-              };
-            } else if ("upperlib" in req && req.upperlib) {
-              // Upper Liberal
-              return {
-                id: slotId,
-                type: "open" as const,
-                requirement: {
-                  ...req,
-                  label: "Upper Liberal",
-                  liberal: "UL",
-                },
-                course: undefined,
-              };
-            } else if ("open" in req && req.open) {
-              // Open elective
-              return {
-                id: slotId,
-                type: "open" as const,
-                requirement: { ...req, label: "Open Elective" },
-                course: undefined,
-              };
-            }
+      (semester: any, semesterIndex: number) => {
+        const regularRequirements: RequirementSlot[] = [];
+
+        semester.requirements?.forEach((req: any, reqIndex: number) => {
+          const slotId = `semester-${semesterIndex}-req-${reqIndex}`;
+          
+          // Check if this is a stream requirement object
+          const streamKeys = Object.keys(req).filter(key => key.endsWith('_stream'));
+          if (streamKeys.length > 0) {
+            // This is a stream requirement - add placeholder for now
+            streamKeys.forEach(streamKey => {
+              if (!allStreams[streamKey]) {
+                const streamName = streamKey.replace('_stream', '').replace('_', ' ');
+                allStreams[streamKey] = {
+                  name: streamName.charAt(0).toUpperCase() + streamName.slice(1),
+                  requirements: req[streamKey]
+                };
+              }
+            });
+            
+            regularRequirements.push({
+              id: `${slotId}-stream-placeholder`,
+              type: "open" as const,
+              requirement: { 
+                label: "Stream Requirement",
+                isStreamPlaceholder: true,
+                streamRequirements: req
+              },
+              course: undefined,
+            });
+          } else if ("code" in req && req.code) {
+            // Fixed course - pre-populate it
+            regularRequirements.push({
+              id: slotId,
+              type: "code" as const,
+              requirement: req,
+              course: {
+                id: `${slotId}-course`,
+                code: req.code,
+                title: `Course ${req.code}`,
+                credits: 3,
+                category: "core",
+              },
+            });
+          } else if ("table" in req && req.table) {
+            // Table requirement
+            regularRequirements.push({
+              id: slotId,
+              type: "table" as const,
+              requirement: req,
+              course: undefined,
+            });
+          } else if ("option" in req && Array.isArray(req.option)) {
+            // Option requirements
+            regularRequirements.push({
+              id: slotId,
+              type: "option" as const,
+              requirement: req,
+              course: undefined,
+              acceptedCourses: req.option,
+            });
+          } else if ("lowerlib" in req && req.lowerlib) {
+            // Lower Liberal
+            regularRequirements.push({
+              id: slotId,
+              type: "open" as const,
+              requirement: {
+                ...req,
+                label: "Lower Liberal",
+                liberal: "LL",
+              },
+              course: undefined,
+            });
+          } else if ("upperlib" in req && req.upperlib) {
+            // Upper Liberal
+            regularRequirements.push({
+              id: slotId,
+              type: "open" as const,
+              requirement: {
+                ...req,
+                label: "Upper Liberal",
+                liberal: "UL",
+              },
+              course: undefined,
+            });
+          } else if ("open" in req && req.open) {
+            // Open elective
+            regularRequirements.push({
+              id: slotId,
+              type: "open" as const,
+              requirement: { ...req, label: "Open Elective" },
+              course: undefined,
+            });
+          } else {
             // Fallback
-            return {
+            regularRequirements.push({
               id: slotId,
               type: "open" as const,
               requirement: req,
               course: undefined,
-            };
-          }) || [];
+            });
+          }
+        });
+
         return {
           id: `semester-${semesterIndex}`,
           title: semester.semester,
-          requirements,
+          requirements: regularRequirements,
         };
       }
     );
+    
+    // Update available streams after processing all semesters
+    setAvailableStreams(allStreams);
+    setOriginalSemesterPlans(plans); // Store original plans for stream switching
     setSemesterPlans(plans);
+  };
+
+  // Handle stream selection (now at program level)
+  const handleStreamSelect = (streamKey: string) => {
+    setSelectedStream(streamKey);
+
+    if (!streamKey) {
+      // If no stream selected, reset to original plans
+      setSemesterPlans(originalSemesterPlans);
+      return;
+    }
+
+    // Rebuild semester plans from original plans with selected stream requirements
+    const updatedPlans = originalSemesterPlans.map((plan) => {
+      const updatedRequirements: RequirementSlot[] = [];
+
+      plan.requirements.forEach((req) => {
+        if (req.requirement.isStreamPlaceholder) {
+          // Replace placeholder with actual stream requirements
+          const streamRequirements = req.requirement.streamRequirements[streamKey];
+          if (streamRequirements && Array.isArray(streamRequirements)) {
+            streamRequirements.forEach((streamReq: any, streamReqIndex: number) => {
+              const newSlotId = `${req.id}-expanded-${streamReqIndex}`;
+              
+              if ("code" in streamReq && streamReq.code) {
+                // Fixed course in stream
+                updatedRequirements.push({
+                  id: newSlotId,
+                  type: "code" as const,
+                  requirement: streamReq,
+                  course: {
+                    id: `${newSlotId}-course`,
+                    code: streamReq.code,
+                    title: `Course ${streamReq.code}`,
+                    credits: 3,
+                    category: "core" as const,
+                  },
+                });
+              } else if ("table" in streamReq && streamReq.table) {
+                // Table requirement in stream
+                updatedRequirements.push({
+                  id: newSlotId,
+                  type: "table" as const,
+                  requirement: streamReq,
+                  course: undefined,
+                });
+              } else if ("option" in streamReq && Array.isArray(streamReq.option)) {
+                // Option requirement in stream
+                updatedRequirements.push({
+                  id: newSlotId,
+                  type: "option" as const,
+                  requirement: streamReq,
+                  course: undefined,
+                  acceptedCourses: streamReq.option,
+                });
+              } else if ("lowerlib" in streamReq && streamReq.lowerlib) {
+                // Lower Liberal in stream
+                updatedRequirements.push({
+                  id: newSlotId,
+                  type: "open" as const,
+                  requirement: {
+                    ...streamReq,
+                    label: "Lower Liberal",
+                    liberal: "LL",
+                  },
+                  course: undefined,
+                });
+              } else if ("upperlib" in streamReq && streamReq.upperlib) {
+                // Upper Liberal in stream
+                updatedRequirements.push({
+                  id: newSlotId,
+                  type: "open" as const,
+                  requirement: {
+                    ...streamReq,
+                    label: "Upper Liberal",
+                    liberal: "UL",
+                  },
+                  course: undefined,
+                });
+              } else if ("open" in streamReq && streamReq.open) {
+                // Open elective in stream
+                updatedRequirements.push({
+                  id: newSlotId,
+                  type: "open" as const,
+                  requirement: { ...streamReq, label: "Open Elective" },
+                  course: undefined,
+                });
+              } else {
+                // Fallback for other stream requirement types
+                updatedRequirements.push({
+                  id: newSlotId,
+                  type: "open" as const,
+                  requirement: streamReq,
+                  course: undefined,
+                });
+              }
+            });
+          }
+        } else {
+          // Keep non-stream requirements as-is
+          updatedRequirements.push(req);
+        }
+      });
+
+      return {
+        ...plan,
+        requirements: updatedRequirements,
+      };
+    });
+
+    setSemesterPlans(updatedPlans);
   };
 
   // Drag and drop handlers
@@ -346,10 +538,22 @@ export default function DegreePlanner() {
         return true;
       case "option":
         // Option requirements accept any of the listed courses
+        // Also check if it's a table requirement (like "Table I", "Table II", etc.)
+        const isTableRequirement = requirement.acceptedCourses?.some(option => 
+          option.toLowerCase().includes('table')
+        );
+        if (isTableRequirement) {
+          // Table requirements accept any course
+          return true;
+        }
         return (
           requirement.acceptedCourses?.includes(course.code || "") || false
         );
       case "open":
+        // Stream placeholders are not droppable
+        if (requirement.requirement.isStreamPlaceholder) {
+          return false;
+        }
         // Open electives with specific liberal requirements
         if (requirement.requirement.liberal === "LL") {
           // Only accept lower liberal courses
@@ -610,16 +814,19 @@ export default function DegreePlanner() {
   const getSlotLabel = (requirement: RequirementSlot) => {
     if (requirement.type === "code") return requirement.requirement.code;
     if (requirement.type === "table") return requirement.requirement.table;
-    if (requirement.type === "option")
-      return `Choose from: ${requirement.acceptedCourses
-        ?.slice(0, 3)
-        .join(", ")}${
-        requirement.acceptedCourses &&
-        requirement.acceptedCourses.length > 3
-          ? "..."
-          : ""
-      }`;
+    if (requirement.type === "option") {
+      // Check if it's a table requirement
+      const isTableRequirement = requirement.acceptedCourses?.some(option => 
+        option.toLowerCase().includes('table')
+      );
+      if (isTableRequirement) {
+        return `Choose from: ${requirement.acceptedCourses?.join(", ") || ""}`;
+      }
+      return `Choose from: ${requirement.acceptedCourses?.join(", ") || ""}`;
+    }
     if (requirement.type === "open") {
+      if (requirement.requirement.isStreamPlaceholder)
+        return "Stream Requirement";
       if (requirement.requirement.label)
         return requirement.requirement.label;
       if (requirement.requirement.liberal === "LL") return "Lower Liberal";
@@ -654,6 +861,8 @@ export default function DegreePlanner() {
         case "option":
           return "bg-yellow-100 border-yellow-600 text-yellow-900 border-dashed border-2";
         case "open":
+          if (requirement.requirement.isStreamPlaceholder)
+            return "bg-orange-200 border-orange-400 text-orange-800 border-dashed border-2";
           if (
             requirement.requirement.liberal === "LL" ||
             requirement.requirement.label === "Lower Liberal"
@@ -664,13 +873,15 @@ export default function DegreePlanner() {
             requirement.requirement.label === "Upper Liberal"
           )
             return "bg-pink-100 border-pink-600 text-pink-900 border-dashed border-2";
+          if (requirement.requirement.stream || requirement.requirement.label?.includes("Stream"))
+            return "bg-orange-100 border-orange-600 text-orange-900 border-dashed border-2";
           return "bg-green-100 border-green-600 text-green-900 border-dashed border-2";
         default:
           return "bg-gray-100 border-gray-600 text-gray-900 border-dashed border-2";
       }
     };
 
-    const isDroppable = requirement.type !== "code" && !requirement.course;
+    const isDroppable = requirement.type !== "code" && !requirement.course && !requirement.requirement.isStreamPlaceholder;
 
     return (
       <div
@@ -714,12 +925,27 @@ export default function DegreePlanner() {
                     e.stopPropagation();
                     handleShowCourseInfo(requirement.course!, e);
                   }}
-                  className="p-1 hover:bg-white/20 rounded-full transition-colors hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400 flex-shrink-0 ml-1"
+                  className="p-1 hover:bg-white/20 rounded-full transition-colors hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400 flex-shrink-0 ml-1 cursor-pointer"
                   title="Course Info"
                   type="button"
                 >
                   <Info className="h-3 w-3 sm:h-4 sm:w-4 text-white/80 hover:text-white transition-colors" />
                 </button>
+              )}
+            </div>
+          ) : requirement.requirement.isStreamPlaceholder ? (
+            // Stream placeholder - shows when no stream is selected
+            <div className="text-center">
+              <p className="text-xs sm:text-sm font-medium text-orange-700">
+                {selectedStream 
+                  ? "Stream requirement will appear here" 
+                  : "Select a stream above to see requirements"
+                }
+              </p>
+              {!selectedStream && (
+                <p className="text-xs text-orange-600 mt-1 animate-pulse">
+                  👆 Choose your specialization stream
+                </p>
               )}
             </div>
           ) : (
@@ -735,7 +961,7 @@ export default function DegreePlanner() {
           <Button
             size="sm"
             variant="ghost"
-            className="h-5 w-5 sm:h-6 sm:w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="h-5 w-5 sm:h-6 sm:w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
             onClick={() => removeCourseFromSlot(requirement.id)}
           >
             <X className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -866,6 +1092,10 @@ export default function DegreePlanner() {
                 Accept any course, or Lower/Upper Liberal!
               </div>
               <div>
+                <span className="font-bold" style={{color: "#fb923c"}}>Stream Requirements:</span>{" "}
+                Program-specific tracks (Aircraft, Avionics, etc.)
+              </div>
+              <div>
                 <span className="font-bold text-warning">Drag courses</span> from
                 catalogue to empty slots
               </div>
@@ -918,6 +1148,7 @@ export default function DegreePlanner() {
                   <span className="text-foreground font-medium text-xs sm:text-sm">Liberal</span>
                 </div>
               </div>
+
               {/* Progress Bars */}
               <div className="mt-4 space-y-2">
                 <div className="flex justify-between text-xs font-bold text-muted">
@@ -962,7 +1193,48 @@ export default function DegreePlanner() {
         )}
 
         {selectedProgram && (
-          <div className="flex-1 flex flex-col lg:flex-row w-full mx-auto gap-4 lg:gap-6 xl:gap-10 pt-6 md:pt-8 lg:pt-12 pb-12 lg:pb-24 px-4 lg:px-8">
+          <div className="flex-1 flex flex-col w-full mx-auto gap-4 lg:gap-6 xl:gap-10 pt-6 md:pt-8 lg:pt-12 pb-12 lg:pb-24 px-4 lg:px-8">
+            {/* STREAM SELECTOR - Above semester cards */}
+            {Object.keys(availableStreams).length > 0 && (
+              <div className="w-full mb-6">
+                <div className="p-4 bg-gradient-to-r from-orange-100 to-orange-50 border-2 border-orange-300 rounded-xl max-w-4xl mx-auto">
+                  <div className="flex items-center justify-center mb-3">
+                    <div className="bg-orange-500 text-white px-3 py-1 rounded-md font-bold text-sm shadow-md">
+                      🎯 CHOOSE YOUR SPECIALIZATION STREAM
+                    </div>
+                  </div>
+                  <p className="text-center text-sm font-semibold mb-3 text-orange-800">
+                    Select your track to customize your degree requirements:
+                  </p>
+                  <div className="flex justify-center">
+                    <select
+                      className="px-4 py-2 text-sm bg-gradient-to-r from-orange-400 to-orange-500 text-white border-2 border-orange-600 rounded-lg font-bold shadow-lg hover:from-orange-500 hover:to-orange-600 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-300 min-w-64"
+                      value={selectedStream}
+                      onChange={(e) => handleStreamSelect(e.target.value)}
+                    >
+                      <option value="" className="bg-white text-gray-800">📋 Select Stream...</option>
+                      {Object.entries(availableStreams).map(([key, stream]: [string, any]) => (
+                        <option key={key} value={key} className="bg-white text-gray-800">
+                          📚 {stream.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {!selectedStream && (
+                    <p className="text-center text-xs text-orange-700 mt-2 font-medium animate-pulse">
+                      ⚠️ Please select a stream to see specialized course requirements
+                    </p>
+                  )}
+                  {selectedStream && (
+                    <p className="text-center text-xs text-green-700 mt-2 font-medium">
+                      ✅ Stream selected: {availableStreams[selectedStream]?.name}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div className="flex flex-col lg:flex-row w-full gap-4 lg:gap-6 xl:gap-10">
             {/* SEMESTER CARDS */}
             <div className="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 xl:gap-10">
               {semesterPlans.map((semester, semesterIndex) => (
@@ -1081,7 +1353,7 @@ export default function DegreePlanner() {
                 {(catalogueFilterTypes.length > 0 || catalogueFilterTerms.length > 0) && (
                   <div className="flex justify-center">
                     <button
-                      className="px-2 py-1 rounded-lg font-semibold text-xs bg-red-400 text-black hover:bg-red-500 transition-all border border-red-600"
+                      className="px-2 py-1 rounded-lg font-semibold text-xs bg-red-400 text-black hover:bg-red-500 transition-all border border-red-600 cursor-pointer"
                       onClick={handleClearCatalogueFilters}
                     >
                       Clear All
@@ -1139,6 +1411,7 @@ export default function DegreePlanner() {
                   </Button>
                 </div>
               )}
+            </div>
             </div>
           </div>
         )}
