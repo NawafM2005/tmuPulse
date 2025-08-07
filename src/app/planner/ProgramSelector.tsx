@@ -67,7 +67,7 @@ export default function ProgramSelector({
                 box-border
               "
               style={{
-                boxShadow: "0 6px 24px 0 rgba(50,100,220,0.15)",
+                boxShadow: "0px 6px 24px 10px rgba(0, 0, 0, 0.15)",
                 WebkitBackdropFilter: "blur(4px)",
                 width: "100%"
               }}

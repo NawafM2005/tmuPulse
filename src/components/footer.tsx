@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-background/80 backdrop-blur-xl text-foreground py-4 flex flex-col items-center gap-3 w-full text-[13px] sm:text-[12px] xs:text-[11px] border-t border-secondary/20 shadow-lg shadow-black/5 z-50">
+    <footer className="bg-background/80 backdrop-blur-xl text-foreground py-4 flex flex-col items-center gap-3 w-full text-[13px] sm:text-[12px] xs:text-[11px] border-t-2 border-secondary shadow-lg shadow-black/5 z-50">
       <div className="group cursor-pointer transition-all duration-300 hover:scale-105">
         <img src={logo.src} alt="TMU Logo" className="h-8 w-8 xs:h-6 xs:w-6 transition-transform duration-300 group-hover:rotate-12 drop-shadow-md" />
       </div>
@@ -31,12 +31,6 @@ export default function Footer() {
             <span className="relative z-10">GPA Calculator</span>
             <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-borders transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
           </Link>
-        </li>
-        <li>
-          <span className="relative p-1 xs:p-0.5 xs:text-[10px] text-muted cursor-not-allowed opacity-50 transition-opacity duration-300">
-            Schedule Builder
-            <span className="text-xs opacity-70 ml-1">(Coming Soon)</span>
-          </span>
         </li>
       </ul>
       <div className="w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent"></div>

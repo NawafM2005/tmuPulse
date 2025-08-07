@@ -34,10 +34,10 @@ export default function PopUp({ open, onClose, course }: popup_types) {
           onClick={onClose}
         >
           <motion.div 
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
             className="relative flex flex-col w-full max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-4xl max-h-[90vh] bg-card-bg text-foreground rounded-2xl shadow-2xl border-2 border-borders overflow-hidden"
             onClick={e => e.stopPropagation()}
           >

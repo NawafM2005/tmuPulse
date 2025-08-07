@@ -136,7 +136,7 @@ export function DataTable<TData, TValue>({
                                 <TableRow 
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
-                                    className="border-gray-700 hover:bg-gray-800/50 hover:cursor-pointer transition-colors hover:scale-101"
+                                    className="border-foreground/10 hover:bg-primary/10 hover:cursor-pointer transition-all duration-10 hover:scale-[1.01] hover:shadow-md"
                                     onClick={(e) => {
                                         if ((e.target as HTMLElement).closest(".no-popup")) return;
                                         setPopupRowData(row.original);
@@ -144,7 +144,7 @@ export function DataTable<TData, TValue>({
                                     }}
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id} className="text-foreground whitespace-normal break-words max-w-[600px] text-center p-2 text-xs sm:text-sm">
+                                        <TableCell key={cell.id} className="text-foreground whitespace-normal break-words max-w-[600px] text-center p-5 text-xs sm:text-sm">
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext()
@@ -176,7 +176,7 @@ export function DataTable<TData, TValue>({
                     scrollToTop();
                 }}
                 disabled={!table.getCanPreviousPage()}
-                className="border-gray-700 text-white hover:bg-gray-800 hover:cursor-pointer bg-black"
+                className="border-foreground/20 text-foreground hover:bg-primary/20 hover:cursor-pointer bg-card-bg font-[700] transition-all duration-200 hover:scale-105 shadow-md"
                 >
                     Previous
                 </Button>
@@ -191,7 +191,7 @@ export function DataTable<TData, TValue>({
                     scrollToTop();
                 }}
                 disabled={!table.getCanNextPage()}
-                className="border-gray-700 text-white hover:bg-gray-800 hover:cursor-pointer bg-black"
+                className="border-foreground/20 text-foreground hover:bg-primary/20 hover:cursor-pointer bg-card-bg font-[700] transition-all duration-200 hover:scale-105 shadow-md"
                 >
                     Next
                 </Button>

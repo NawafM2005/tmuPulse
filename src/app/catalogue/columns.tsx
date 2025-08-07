@@ -109,7 +109,7 @@ export const columns: ColumnDef<Course>[] = [
             <span className="hidden sm:table-cell text-center">Prerequisites</span>
         ),
         cell: ({ row }) => (
-            <span className="hidden sm:table-cell text-center break-words whitespace-normal max-w-lg w-full">
+            <span className="hidden sm:table-cell break-words whitespace-normal max-w-lg w-full text-start">
                 {row.getValue("prerequisites")}
             </span>
         )

@@ -836,8 +836,8 @@ export default function DegreePlanner() {
       <div className="min-h-screen bg-background flex flex-col w-full">
         {/* INSTRUCTIONS */}
         <div className="w-full flex justify-center mt-4 sm:mt-6 md:mt-8 px-4">
-          <div className="bg-card-bg border-2 border-borders rounded-2xl shadow-lg max-w-xl w-full p-4 sm:p-6 flex flex-col items-center">
-            <h3 className="text-primary font-extrabold mb-3 text-lg sm:text-xl md:text-2xl flex items-center gap-2 tracking-wide drop-shadow-sm">
+          <div className="bg-card-bg border-2 border-borders rounded-2xl shadow-lg max-w-xl w-full p-4 sm:p-6 flex flex-col items-center text-sm">
+            <h3 className="text-primary font-extrabold mb-3 flex items-center gap-2 tracking-wide drop-shadow-sm">
               <span role="img" aria-label="banana">
                 🍌
               </span>
@@ -846,7 +846,7 @@ export default function DegreePlanner() {
                 🦍
               </span>
             </h3>
-            <div className="text-sm sm:text-base text-foreground space-y-2 sm:space-y-3 font-medium">
+            <div className="text-foreground space-y-2 sm:space-y-3 font-medium">
               <div>
                 <span className="font-bold text-secondary">Fixed Courses:</span>{" "}
                 Pre-filled (blue)
@@ -879,7 +879,7 @@ export default function DegreePlanner() {
 
         {/* PROGRAM SELECTOR */}
         <div className="w-full flex justify-center mt-4 sm:mt-6 md:mt-8 px-4">
-          <div className="bg-card-bg border-2 border-borders rounded-2xl shadow-lg p-4 max-w-xl w-full">
+          <div className="bg-card-bg rounded-2xl shadow-lg p-4 max-w-xl w-full">
             <ProgramSelector
               programs={programOptions}
               selectedProgram={selectedProgram}

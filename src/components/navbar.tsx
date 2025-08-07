@@ -45,7 +45,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="backdrop-blur-xl bg-background/80 text-foreground px-4 md:px-8 lg:px-20 h-[64px] flex flex-row justify-between items-center fixed top-0 left-0 w-full text-[13px] md:text-[15px] border-b border-secondary/20 shadow-lg shadow-black/5 z-50">
+      <nav className="backdrop-blur-sm bg-background/80 text-foreground px-4 md:px-8 lg:px-20 h-[64px] flex flex-row justify-between items-center fixed top-0 left-0 w-full text-[13px] md:text-[15px] border-b-2 border-secondary shadow-lg shadow-black/5 z-50">
 
         <Link href='/'>
             <div className="text-lg md:text-xl font-bold flex flex-row hover:cursor-pointer items-center group transition-all duration-300 hover:scale-105">
@@ -101,7 +101,7 @@ export default function Navbar() {
                     className="text-foreground bg-transparent hover:bg-foreground/10 focus:bg-foreground/10 hover:cursor-not-allowed opacity-50 rounded-lg mx-1 my-1 transition-all duration-200"
                     disabled
                   >
-                    Schedule Builder (Coming Soon)
+                    Schedule Builder
                   </DropdownMenuItem>
   
                 </DropdownMenuContent>

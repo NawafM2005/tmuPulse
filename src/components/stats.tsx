@@ -196,37 +196,11 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
           </div>
         )}
 
-        {/* Course Types */}
-        <div className="bg-card-hover border border-input-border rounded-lg p-6">
-          <h3 className="text-xl font-[800] text-foreground mb-4 flex items-center gap-2">
-            <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-            </svg>
-            Course Classification
-          </h3>
-          <div className="flex flex-wrap gap-3 justify-center">
-            {courseCodes.map((code, i) => {
-              const type = courseTypeMap[code];
-              const colorClass = 
-                type === "LL" ? "bg-accent/20 text-accent border-accent/30" :
-                type === "UL" ? "bg-success/20 text-success border-success/30" :
-                type === "Core/Open" ? "bg-primary/20 text-primary border-primary/30" :
-                "bg-muted/20 text-muted border-muted/30";
-              
-              return (
-                <span key={i} className={`${colorClass} px-3 py-2 rounded-lg text-sm font-[600] border-2`}>
-                  {code} - {type}
-                </span>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Charts Section */}
-        <div className="bg-card-bg border border-input-border rounded-lg p-8 space-y-8">
+        <div className="hidden md:block bg-card-bg border border-input-border rounded-lg p-8 space-y-8">
           <h3 className="text-2xl font-[800] text-foreground text-center mb-6">Performance Analytics</h3>
           
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 xl:grid-cols-1 gap-8">
             {userStats && (
               <div className="bg-black/30 border border-input-border rounded-lg p-6">
                 <h4 className="text-lg font-[700] text-foreground mb-4 text-center">Course Breakdown</h4>
