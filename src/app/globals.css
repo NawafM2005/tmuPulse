@@ -72,13 +72,14 @@
 
 /* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
-  width: 3px;              /* scrollbar width */
-  height: 3px;             /* horizontal scrollbar */
+  width: 7px;              /* scrollbar width */
+  height: 7px;             /* horizontal scrollbar */
 }
 
 ::-webkit-scrollbar-thumb {
   background: #F9DD4A;        /* scrollbar color */
   border-radius: 8px;      /* roundness */
+  border: 1px solid #1c1c1c71; 
 }
 
 

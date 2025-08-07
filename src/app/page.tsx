@@ -29,35 +29,35 @@ export default function Home() {
                 <img 
                   src={lineChart.src} 
                   alt="Line Chart Screenshot" 
-                  className="w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-2 hover:rotate-0 transition-transform duration-300 z-10"
+                  className="screenshot w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-2 hover:rotate-0 transition-transform duration-300 z-10"
                 />
                 
                 {/* Pie Chart - overlapping */}
                 <img 
                   src={pieChart.src} 
                   alt="Pie Chart Screenshot" 
-                  className="w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform rotate-2 hover:rotate-0 transition-transform duration-300 z-20 -mt-12"
+                  className="screenshot w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform rotate-2 hover:rotate-0 transition-transform duration-300 z-20 -mt-12"
                 />
                 
                 {/* Progress - center, highest z-index */}
                 <img 
                   src={progress.src} 
                   alt="Progress Screenshot" 
-                  className="w-72 h-auto rounded-lg shadow-xl border-4 border-gray-300 transform hover:scale-105 transition-transform duration-300 z-30 -mt-16"
+                  className="screenshot w-72 h-auto rounded-lg shadow-xl border-4 border-gray-300 transform hover:scale-105 transition-transform duration-300 z-30 -mt-16"
                 />
                 
                 {/* Transcript - overlapping */}
                 <img 
                   src={transcriptmain.src} 
                   alt="Transcript Screenshot" 
-                  className="w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-1 hover:rotate-0 transition-transform duration-300 z-20 -mt-12"
+                  className="screenshot w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-1 hover:rotate-0 transition-transform duration-300 z-20 -mt-12"
                 />
                 
                 {/* Catalogue - bottom */}
                 <img 
                   src={catalogue.src} 
                   alt="Catalogue Screenshot" 
-                  className="w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform rotate-1 hover:rotate-0 transition-transform duration-300 z-10 -mt-12"
+                  className="screenshot w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform rotate-1 hover:rotate-0 transition-transform duration-300 z-10 -mt-12"
                 />
               </div>
             </div>
@@ -71,21 +71,21 @@ export default function Home() {
                   <img 
                     src={lineChart.src} 
                     alt="Line Chart Screenshot" 
-                    className="max-w-96 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-2 hover:rotate-0 transition-transform duration-300 z-10"
+                    className="screenshot max-w-96 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-2 hover:rotate-0 transition-transform duration-300 z-10"
                   />
                   
                   {/* Progress - center, highest z-index */}
                   <img 
                     src={progress.src} 
                     alt="Progress Screenshot" 
-                    className="max-w-[28rem] h-auto rounded-lg shadow-xl border-4 border-gray-300 transform hover:scale-105 transition-transform duration-300 z-30 -ml-20"
+                    className="screenshot max-w-[28rem] h-auto rounded-lg shadow-xl border-4 border-gray-300 transform hover:scale-105 transition-transform duration-300 z-30 -ml-20"
                   />
                   
                   {/* Pie Chart - right */}
                   <img 
                     src={pieChart.src} 
                     alt="Pie Chart Screenshot" 
-                    className="max-w-96 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform rotate-2 hover:rotate-0 transition-transform duration-300 z-10 -ml-20"
+                    className="screenshot max-w-96 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform rotate-2 hover:rotate-0 transition-transform duration-300 z-10 -ml-20"
                   />
                 </div>
               </div>
@@ -188,7 +188,7 @@ export default function Home() {
               </div>
               <h2 className="font-[800] text-xl mb-3 text-foreground group-hover:text-success transition-colors duration-300">Transcript Parser</h2>
               <p className="text-sm text-muted font-[600] leading-relaxed">
-                Upload your transcript to automatically extract completed courses and update your planner.
+                Upload your transcript to instantly get detailed stats about your courses—track completions, view GPA trends, and power up your degree planning all in one place!
               </p>
             </Link>
             

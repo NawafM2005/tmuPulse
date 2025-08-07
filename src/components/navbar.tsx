@@ -89,13 +89,21 @@ export default function Navbar() {
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-[#f5d60b]/0 to-[#ffeb3b]/0 group-hover:from-[#f5d60b]/20 group-hover:to-[#ffeb3b]/20 transition-all duration-300 rounded-xl"></div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-background/95 backdrop-blur-xl border-accent/30 border-2 shadow-xl shadow-black/10 rounded-xl">
+                <DropdownMenuContent className="bg-background/95 backdrop-blur-xl border-accent/30 border-2 shadow-xl shadow-black/10 rounded-xl flex flex-col items-center">
+                  <DropdownMenuItem 
+                      className="p-1 md:p-2 rounded-xl hover:cursor-pointer hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md hover:scale-105 relative overflow-hidden group"
+                  >
+                    <Link href="/about">
+                      <span className="relative z-10">About Us</span>
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem 
                     className="text-foreground bg-transparent hover:bg-foreground/10 focus:bg-foreground/10 hover:cursor-not-allowed opacity-50 rounded-lg mx-1 my-1 transition-all duration-200"
                     disabled
                   >
                     Schedule Builder (Coming Soon)
                   </DropdownMenuItem>
+  
                 </DropdownMenuContent>
               </DropdownMenu>
             </li>
@@ -141,7 +149,6 @@ export default function Navbar() {
       </nav>
 
       <div className={`fixed top-0 right-0 h-full w-full z-40 xl:hidden pointer-events-none`}>
-        <div className="absolute top-0 left-0 h-full w-1/2 bg-transparent pointer-events-auto" onClick={() => setMobileMenuOpen(false)} />
         <div className={`absolute top-0 right-0 h-full w-1/2 min-w-[220px] max-w-[400px] bg-black/80 backdrop-blur-xl border-l border-secondary/30 shadow-2xl transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'} pointer-events-auto`}>
           <div className="pt-25 px-6 flex flex-col space-y-4 text-sm">
             <Link 

@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
 type popup_types = {
   open: boolean;
@@ -29,66 +30,132 @@ export default function PopUp({ open, onClose, course }: popup_types) {
     <AnimatePresence>
       {open && (
         <div
-          className="fixed inset-0 flex items-center justify-center z-50 bg-black/80 hover:cursor-pointer"
+          className="fixed inset-0 flex items-center justify-center z-50 bg-black/60 backdrop-blur-sm p-2 sm:p-4"
           onClick={onClose}
         >
           <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="flex flex-col justify-left p-8 w-full max-w-6xl m-10 gap-4 text-left bg-background text-foreground rounded-lg shadow-lg border-4 border-borders text-sm hover:cursor-auto"
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="relative flex flex-col w-full max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-4xl max-h-[90vh] bg-card-bg text-foreground rounded-2xl shadow-2xl border-2 border-borders overflow-hidden"
             onClick={e => e.stopPropagation()}
           >
-            {course && (
-              <div className="flex flex-col gap-3 max-h-[600px] overflow-y-auto">
-                <h1
-                  className="font-bold text-2xl text-foreground"
+            {/* Header with close button */}
+            <div className="sticky top-0 bg-card-bg border-b border-borders p-4 sm:p-6 flex items-start justify-between">
+              <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
+                <button
+                  onClick={onClose}
+                  className="flex-shrink-0 p-2 hover:bg-card-hover rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
+                  aria-label="Close"
                 >
-                  {course.code} - {course.name}
-                </h1>
-                <p>{course.description}</p>
-
-                <div className="flex flex-col gap-5 mt-3">
-                  <p className="font-[800] text-[18px] mb-1">Course Details</p>
-                  <div className="flex flex-row gap-10 mb-1 ml-15">
-                    <span className="text-[15px]">Liberal: {formatLiberal(course.liberal)}</span>
-                    <span className="text-[15px]">Term: {formatTermCommas(course.term)}</span>
-                  </div>
-                  <span className="text-[15px] ml-15">
-                    Instructional Time: {course["weekly contact"] || "N/A"}
-                  </span>
-                  <span className="text-[15px] ml-15">
-                    GPA Weight: {course["gpa weight"] || "N/A"}
-                  </span>
-                  <span className="text-[15px ml-15">
-                    Billing Unit: {course["billing unit"] || "N/A"}
-                  </span>
-                  <span className="text-[15px] ml-15">
-                    Course Count: {course["course count"] || "N/A"}
-                  </span>
-                </div>
-
-                <div className="flex flex-col gap-5">
-                  <p className="font-[800] text-[18px] mb-1">Requirements & Restrictions</p>
-                  <div className="flex flex-col gap-5 ml-15">
-                    <span className="text-[15px]">
-                      Prerequisites: {course.prerequisites || "None"}
-                    </span>
-                    <span className="text-[15px]">
-                      Corequisites: {course.corequisites || "None"}
-                    </span>
-                    <span className="text-[15px]">
-                      Antirequisites: {course.antirequisites || "None"}
-                    </span>
-                    <span className="text-[15px]">
-                      Custom Requisites: {course.custom_requisites || "None"}
-                    </span>
-                  </div>
-                </div>
-
+                  <X className="h-5 w-5 sm:h-6 sm:w-6 text-muted hover:text-foreground hover:cursor-pointer" />
+                </button>
               </div>
-            )}
+              <div className="w-full text-center">
+                <h1 className="font-[900] text-lg sm:text-xl md:text-2xl text-foreground leading-tight">
+                  {course?.code}
+                </h1>
+                <h2 className="font-[600] text-sm sm:text-base md:text-lg text-muted mt-1">
+                  {course?.name}
+                </h2>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+              {course && (
+                <>
+                  {/* Description */}
+                  <div className="bg-card-hover rounded-xl p-4 border border-input-border">
+                    <h3 className="font-[800] text-sm sm:text-base text-foreground mb-3">Description</h3>
+                    <p className="text-xs sm:text-sm md:text-base text-foreground leading-relaxed">
+                      {course.description || "No description available"}
+                    </p>
+                  </div>
+
+                  {/* Course Details */}
+                  <div className="bg-card-hover rounded-xl p-4 border border-input-border">
+                    <h3 className="font-[800] text-sm sm:text-base text-foreground mb-4">Course Details</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                      <div className="flex flex-col space-y-3">
+                        <div className="flex items-center justify-between py-2 border-b border-input-border">
+                          <span className="font-[600] text-xs sm:text-sm text-muted">Liberal:</span>
+                          <span className="text-xs sm:text-sm text-foreground font-[600]">
+                            {formatLiberal(course.liberal)}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between py-2 border-b border-input-border">
+                          <span className="font-[600] text-xs sm:text-sm text-muted">Term:</span>
+                          <span className="text-xs sm:text-sm text-foreground font-[600]">
+                            {formatTermCommas(course.term)}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between py-2 border-b border-input-border">
+                          <span className="font-[600] text-xs sm:text-sm text-muted">Weekly Contact:</span>
+                          <span className="text-xs sm:text-sm text-foreground font-[600]">
+                            {course["weekly contact"] || "N/A"}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex flex-col space-y-3">
+                        <div className="flex items-center justify-between py-2 border-b border-input-border">
+                          <span className="font-[600] text-xs sm:text-sm text-muted">GPA Weight:</span>
+                          <span className="text-xs sm:text-sm text-foreground font-[600]">
+                            {course["gpa weight"] || "N/A"}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between py-2 border-b border-input-border">
+                          <span className="font-[600] text-xs sm:text-sm text-muted">Billing Unit:</span>
+                          <span className="text-xs sm:text-sm text-foreground font-[600]">
+                            {course["billing unit"] || "N/A"}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between py-2 border-b border-input-border">
+                          <span className="font-[600] text-xs sm:text-sm text-muted">Course Count:</span>
+                          <span className="text-xs sm:text-sm text-foreground font-[600]">
+                            {course["course count"] || "N/A"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Requirements */}
+                  <div className="bg-card-hover rounded-xl p-4 border border-input-border">
+                    <h3 className="font-[800] text-sm sm:text-base text-foreground mb-4">Requirements & Restrictions</h3>
+                    <div className="space-y-4">
+                      <div className="bg-card-bg rounded-lg p-3 border border-input-border">
+                        <h4 className="font-[700] text-xs sm:text-sm text-success mb-2">Prerequisites</h4>
+                        <p className="text-xs sm:text-sm text-foreground">
+                          {course.prerequisites || "None"}
+                        </p>
+                      </div>
+                      <div className="bg-card-bg rounded-lg p-3 border border-input-border">
+                        <h4 className="font-[700] text-xs sm:text-sm text-primary mb-2">Corequisites</h4>
+                        <p className="text-xs sm:text-sm text-foreground">
+                          {course.corequisites || "None"}
+                        </p>
+                      </div>
+                      <div className="bg-card-bg rounded-lg p-3 border border-input-border">
+                        <h4 className="font-[700] text-xs sm:text-sm text-danger mb-2">Antirequisites</h4>
+                        <p className="text-xs sm:text-sm text-foreground">
+                          {course.antirequisites || "None"}
+                        </p>
+                      </div>
+                      {course.custom_requisites && course.custom_requisites !== "None" && (
+                        <div className="bg-card-bg rounded-lg p-3 border border-input-border">
+                          <h4 className="font-[700] text-xs sm:text-sm text-warning mb-2">Custom Requisites</h4>
+                          <p className="text-xs sm:text-sm text-foreground">
+                            {course.custom_requisites}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           </motion.div>
         </div>
       )}

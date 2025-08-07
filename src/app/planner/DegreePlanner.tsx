@@ -681,29 +681,46 @@ export default function DegreePlanner() {
       >
         <div className="flex-1">
           {requirement.course ? (
-            <div
-              className="cursor-pointer"
-              onClick={() =>
-                requirement.course?.code &&
-                toggleCourseCompletion(requirement.course.code)
-              }
-            >
-              <p
-                className={`font-semibold text-xs sm:text-sm ${
-                  requirement.course.code &&
-                  completedCourses.has(requirement.course.code)
-                    ? "line-through opacity-75"
-                    : ""
-                }`}
+            <div className="flex items-center justify-between">
+              <div
+                className="cursor-pointer flex-1"
+                onClick={() =>
+                  requirement.course?.code &&
+                  toggleCourseCompletion(requirement.course.code)
+                }
               >
-                {requirement.course.code ||
-                  requirement.course.table ||
-                  requirement.course.open ||
-                  "Course"}
-              </p>
-              <p className="text-xs opacity-80">
-                {requirement.course.credits} credits
-              </p>
+                <p
+                  className={`font-semibold text-xs sm:text-sm ${
+                    requirement.course.code &&
+                    completedCourses.has(requirement.course.code)
+                      ? "line-through opacity-75"
+                      : ""
+                  }`}
+                >
+                  {requirement.course.code ||
+                    requirement.course.table ||
+                    requirement.course.open ||
+                    "Course"}
+                </p>
+                <p className="text-xs opacity-80">
+                  {requirement.course.credits} credits
+                </p>
+              </div>
+              
+              {/* Info button for planned courses */}
+              {requirement.course.code && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleShowCourseInfo(requirement.course!, e);
+                  }}
+                  className="p-1 hover:bg-white/20 rounded-full transition-colors hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400 flex-shrink-0 ml-1"
+                  title="Course Info"
+                  type="button"
+                >
+                  <Info className="h-3 w-3 sm:h-4 sm:w-4 text-white/80 hover:text-white transition-colors" />
+                </button>
+              )}
             </div>
           ) : (
             <div className="text-center">

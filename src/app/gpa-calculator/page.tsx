@@ -177,7 +177,6 @@ export default function GPACalculator() {
             <p className="font-[600] text-foreground text-sm">
               <strong>Note:</strong> Percentage ranges based on official TMU grading scale. A+ (90-100%), A (85-89%), A- (80-84%), 
               B+ (77-79%), B (73-76%), B- (70-72%), C+ (67-69%), C (63-66%), C- (60-62%), D+ (57-59%), D (53-56%), D- (50-52%), F (0-49%). <br></br>
-              Different programs may have varying admission requirements and academic standing criteria.
             </p>
           </div>
         </div>
@@ -189,13 +188,13 @@ export default function GPACalculator() {
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
               <button
                 onClick={addCourse}
-                className="bg-primary text-white font-[700] px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base rounded hover:opacity-90 transition-all duration-200 cursor-pointer"
+                className="bg-primary text-white font-[700] px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base rounded hover:opacity-90 transition-all duration-200 cursor-pointer touch-manipulation"
               >
                 Add Course
               </button>
               <button
                 onClick={clearAll}
-                className="bg-danger text-white font-[700] px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base rounded hover:opacity-90 transition-all duration-200 cursor-pointer"
+                className="bg-danger text-white font-[700] px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base rounded hover:opacity-90 transition-all duration-200 cursor-pointer touch-manipulation"
               >
                 Clear All
               </button>
@@ -207,31 +206,31 @@ export default function GPACalculator() {
             <table className="w-full border-collapse border border-input-border">
               <thead>
                 <tr className="bg-card-hover">
-                  <th className="border border-input-border px-4 py-3 text-left font-[800] text-foreground">Course Name</th>
-                  <th className="border border-input-border px-4 py-3 text-left font-[800] text-foreground">Weight</th>
-                  <th className="border border-input-border px-4 py-3 text-left font-[800] text-foreground">Grade</th>
-                  <th className="border border-input-border px-4 py-3 text-left font-[800] text-foreground">Grade Points</th>
-                  <th className="border border-input-border px-4 py-3 text-left font-[800] text-foreground">Weighted Points</th>
-                  <th className="border border-input-border px-4 py-3 text-left font-[800] text-foreground">Action</th>
+                  <th className="border border-input-border px-2 sm:px-4 py-2 sm:py-3 text-left font-[800] text-foreground text-xs sm:text-sm">Course Name</th>
+                  <th className="border border-input-border px-2 sm:px-4 py-2 sm:py-3 text-left font-[800] text-foreground text-xs sm:text-sm">Weight</th>
+                  <th className="border border-input-border px-2 sm:px-4 py-2 sm:py-3 text-left font-[800] text-foreground text-xs sm:text-sm">Grade</th>
+                  <th className="border border-input-border px-2 sm:px-4 py-2 sm:py-3 text-left font-[800] text-foreground text-xs sm:text-sm">Grade Points</th>
+                  <th className="border border-input-border px-2 sm:px-4 py-2 sm:py-3 text-left font-[800] text-foreground text-xs sm:text-sm">Weighted Points</th>
+                  <th className="border border-input-border px-2 sm:px-4 py-2 sm:py-3 text-left font-[800] text-foreground text-xs sm:text-sm">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {courses.map((course, index) => (
                   <tr key={course.id} className={index % 2 === 0 ? 'bg-card-bg' : 'bg-card-hover'}>
-                    <td className="border border-input-border px-4 py-3">
+                    <td className="border border-input-border px-1 sm:px-4 py-2 sm:py-3">
                       <input
                         type="text"
                         value={course.courseName}
                         onChange={(e) => updateCourse(course.id, 'courseName', e.target.value)}
                         placeholder="e.g. MTH110"
-                        className="w-full p-2 border border-input-border bg-input-bg text-foreground rounded font-[600] focus:border-input-focus focus:outline-none"
+                        className="w-full p-1 sm:p-2 border border-input-border bg-input-bg text-foreground rounded font-[600] focus:border-input-focus focus:outline-none text-xs sm:text-sm"
                       />
                     </td>
-                    <td className="border border-input-border px-4 py-3">
+                    <td className="border border-input-border px-1 sm:px-4 py-2 sm:py-3">
                       <select
                         value={course.courseWeight}
                         onChange={(e) => updateCourse(course.id, 'courseWeight', parseFloat(e.target.value))}
-                        className="w-full p-2 border border-input-border bg-input-bg text-foreground rounded font-[600] focus:border-input-focus focus:outline-none"
+                        className="w-full p-1 sm:p-2 border border-input-border bg-input-bg text-foreground rounded font-[600] focus:border-input-focus focus:outline-none text-xs sm:text-sm"
                       >
                         <option value={0.5}>0.5</option>
                         <option value={1.0}>1.0</option>
@@ -239,11 +238,11 @@ export default function GPACalculator() {
                         <option value={2.0}>2.0</option>
                       </select>
                     </td>
-                    <td className="border border-input-border px-4 py-3">
+                    <td className="border border-input-border px-1 sm:px-4 py-2 sm:py-3">
                       <select
                         value={course.grade}
                         onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
-                        className="w-full p-2 border border-input-border bg-input-bg text-foreground rounded font-[600] focus:border-input-focus focus:outline-none"
+                        className="w-full p-1 sm:p-2 border border-input-border bg-input-bg text-foreground rounded font-[600] focus:border-input-focus focus:outline-none text-xs sm:text-sm"
                       >
                         <option value="">Select Grade</option>
                         {Object.keys(gradeScale).map(grade => (
@@ -251,17 +250,17 @@ export default function GPACalculator() {
                         ))}
                       </select>
                     </td>
-                    <td className="border border-input-border px-4 py-3 text-center font-[600] text-foreground">
+                    <td className="border border-input-border px-1 sm:px-4 py-2 sm:py-3 text-center font-[600] text-foreground text-xs sm:text-sm">
                       {course.gradePoints.toFixed(2)}
                     </td>
-                    <td className="border border-input-border px-4 py-3 text-center font-[600] text-foreground">
+                    <td className="border border-input-border px-1 sm:px-4 py-2 sm:py-3 text-center font-[600] text-foreground text-xs sm:text-sm">
                       {(course.gradePoints * course.courseWeight).toFixed(2)}
                     </td>
-                    <td className="border border-input-border px-4 py-3 text-center">
+                    <td className="border border-input-border px-1 sm:px-4 py-2 sm:py-3 text-center">
                       <button
                         onClick={() => removeCourse(course.id)}
                         disabled={courses.length === 1}
-                        className="bg-danger text-white font-[700] px-2 py-1 sm:px-3 sm:py-1 text-xs sm:text-sm rounded hover:opacity-90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                        className="bg-danger text-white font-[700] px-1 py-1 sm:px-3 sm:py-1 text-xs rounded hover:opacity-90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer touch-manipulation min-h-[32px] min-w-[60px]"
                       >
                         Remove
                       </button>
