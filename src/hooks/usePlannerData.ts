@@ -219,7 +219,7 @@ export function usePlannerData() {
     let total = 0
     Object.values(selectedCourses).forEach(courses => {
       courses.forEach(course => {
-        total += course.credits || 3 // Default to 3 credits if not specified
+        total += course.credits || 1 // Default to 1 credit if not specified
       })
     })
     return total

@@ -961,6 +961,7 @@ export default function DegreePlanner() {
 
   // Calculate progress stats
   const progressStats = useMemo(() => {
+    const totalProgramCourses = 40 // Fixed total for all programs (1-credit system)
     const totalRequirements = semesterPlans.reduce(
       (acc, plan) => acc + plan.requirements.length,
       0
@@ -988,8 +989,8 @@ export default function DegreePlanner() {
           ? Math.round((filledRequirements / totalRequirements) * 100)
           : 0,
       completedPercentage:
-        filledRequirements > 0
-          ? Math.round((completedCount / filledRequirements) * 100)
+        totalProgramCourses > 0
+          ? Math.round((completedCount / totalProgramCourses) * 100)
           : 0,
     };
   }, [semesterPlans, completedCourses]);
@@ -1389,7 +1390,7 @@ export default function DegreePlanner() {
                       />
                     </div>
                     <div className="text-xs text-center text-muted font-semibold">
-                      {progressStats.completed} / {progressStats.filled} courses
+                      {progressStats.completed} / 40 courses
                       completed
                     </div>
                   </>

@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import Navbar from "@/components/navbar"
 import { supabase } from "@/lib/supabaseClient"
-import { User, Edit3, Save, X, Camera, Mail, Settings } from "lucide-react"
+import { User, Edit3, Save, X, Camera, Mail, Settings, BookOpen, TrendingUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -13,6 +13,7 @@ import { Toaster } from "@/components/ui/sonner"
 import Link from "next/link"
 import type { User as SupabaseUser } from '@supabase/supabase-js'
 import Footer from "@/components/footer"
+import { usePlannerData } from "@/hooks/usePlannerData"
 
 export default function Dashboard() {
   const router = useRouter()
@@ -21,6 +22,39 @@ export default function Dashboard() {
   const [username, setUsername] = useState("")
   const [profileImageUrl, setProfileImageUrl] = useState("")
   const [isEditing, setIsEditing] = useState(false)
+
+  // Get planner data for statistics
+  const { plannerData, isLoading: plannerLoading } = usePlannerData()
+
+  // Calculate course statistics from planner data
+  const courseStats = useMemo(() => {
+    const totalCoursesInProgram = 40 // Fixed total for all programs (1-credit system)
+    
+    if (!plannerData.selectedCourses) {
+      return {
+        totalCourses: totalCoursesInProgram,
+        completedCourses: 0,
+        totalCredits: totalCoursesInProgram,
+        completedCredits: 0,
+        completionPercentage: 0
+      }
+    }
+
+    // Count completed courses from the completed courses list
+    const completedCourseCodes = new Set(plannerData.completedCourses || [])
+    const completedCourses = completedCourseCodes.size
+    const completedCredits = completedCourses // 1 credit per course
+
+    const completionPercentage = totalCoursesInProgram > 0 ? Math.round((completedCourses / totalCoursesInProgram) * 100) : 0
+
+    return {
+      totalCourses: totalCoursesInProgram,
+      completedCourses,
+      totalCredits: totalCoursesInProgram,
+      completedCredits,
+      completionPercentage
+    }
+  }, [plannerData.selectedCourses, plannerData.completedCourses])
 
   useEffect(() => {
     const getUser = async () => {
@@ -290,14 +324,72 @@ export default function Dashboard() {
                 {/* Account Stats */}
                 <div className="grid grid-cols-2 gap-4 mt-6">
                   <div className="bg-background/50 rounded-xl p-4 text-center border border-border/30">
-                    <div className="text-2xl font-bold text-primary mb-1">0</div>
+                    <div className="flex items-center justify-center mb-2">
+                      <BookOpen className="h-5 w-5 text-blue-500" />
+                    </div>
+                    <div className="text-2xl font-bold text-primary mb-1">
+                      {plannerLoading ? "..." : `${courseStats.completedCourses}/${courseStats.totalCourses}`}
+                    </div>
                     <p className="text-sm text-muted-foreground">Courses</p>
                   </div>
                   <div className="bg-background/50 rounded-xl p-4 text-center border border-border/30">
-                    <div className="text-2xl font-bold text-green-500 mb-1">0.00</div>
-                    <p className="text-sm text-muted-foreground">GPA</p>
+                    <div className="flex items-center justify-center mb-2">
+                      <TrendingUp className="h-5 w-5 text-purple-500" />
+                    </div>
+                    <div className="text-2xl font-bold text-purple-500 mb-1">
+                      {plannerLoading ? "..." : `${courseStats.completionPercentage}%`}
+                    </div>
+                    <p className="text-sm text-muted-foreground">Progress</p>
                   </div>
                 </div>
+
+                {/* Progress Details */}
+                {!plannerLoading && courseStats.totalCourses > 0 && (
+                  <div className="mt-6 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl border border-primary/20">
+                    <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                      <BookOpen className="h-4 w-4" />
+                      Academic Progress
+                    </h4>
+                    <div className="space-y-3">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Credits Completed</span>
+                        <span className="font-medium text-foreground">
+                          {courseStats.completedCredits} / {courseStats.totalCredits}
+                        </span>
+                      </div>
+                      <div className="w-full bg-muted/30 rounded-full h-2">
+                        <div
+                          className="bg-gradient-to-r from-primary to-primary/80 h-2 rounded-full transition-all duration-500"
+                          style={{ width: `${courseStats.completionPercentage}%` }}
+                        />
+                      </div>
+                      {plannerData.selectedProgram && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">Program</span>
+                          <span className="font-medium text-foreground">
+                            {plannerData.selectedProgram}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Call to Action for New Users */}
+                {!plannerLoading && !plannerData.selectedProgram && (
+                  <div className="mt-6 p-4 bg-gradient-to-r from-accent/10 to-accent/5 rounded-xl border border-accent/20 text-center">
+                    <h4 className="font-semibold text-foreground mb-2">Get Started!</h4>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Start planning your degree to see your progress here.
+                    </p>
+                    <Link href="/planner">
+                      <Button className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-white rounded-xl transition-all duration-300 hover:scale-105 hover:cursor-pointer">
+                        <BookOpen className="h-4 w-4 mr-2" />
+                        Open Degree Planner
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
