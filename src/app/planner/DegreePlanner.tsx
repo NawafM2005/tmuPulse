@@ -18,6 +18,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, GripVertical, X, Info } from "lucide-react";
 import PopUp from "@/components/course-popup";
+import { usePlannerData } from "@/hooks/usePlannerData";
+import { SaveBadge } from "@/components/SaveBadge";
+import { Toaster } from "@/components/ui/sonner";
 
 interface Course {
   id: string;
@@ -53,6 +56,18 @@ interface SemesterPlan {
 }
 
 export default function DegreePlanner() {
+  // Planner data management
+  const {
+    plannerData,
+    savePlan,
+    isLoading: plannerLoading,
+    isSaving,
+    lastSaved,
+    hasUnsavedChanges,
+    user,
+    saveToDatabase
+  } = usePlannerData()
+
   const [selectedProgram, setSelectedProgram] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState("");
   const [completedCourses, setCompletedCourses] = useState<Set<string>>(
@@ -76,6 +91,128 @@ export default function DegreePlanner() {
   const [selectedStream, setSelectedStream] = useState<string>("");
   const [availableStreams, setAvailableStreams] = useState<any>({});
   const [originalSemesterPlans, setOriginalSemesterPlans] = useState<SemesterPlan[]>([]);
+
+  // Sync with saved planner data
+  useEffect(() => {
+    if (plannerData.selectedProgram) {
+      setSelectedProgram(plannerData.selectedProgram)
+    }
+    if (plannerData.selectedStream) {
+      setSelectedStream(plannerData.selectedStream)
+    }
+    if (plannerData.completedCourses) {
+      setCompletedCourses(new Set(plannerData.completedCourses))
+    }
+    
+    // Restore semester plans with saved courses when both programs and planner data are available
+    if (plannerData.selectedProgram && programs.length > 0 && plannerData.selectedCourses && Object.keys(plannerData.selectedCourses).length > 0) {
+      restoreSemesterPlansFromSavedData()
+    }
+  }, [plannerData, programs])
+
+  // Function to restore semester plans from saved data
+  const restoreSemesterPlansFromSavedData = async () => {
+    if (!plannerData.selectedProgram) return
+    
+    // Use handleProgramSelect but skip the data clearing and saving
+    const program = programs.find((p: any) => p.program === plannerData.selectedProgram)
+    if (!program) return
+
+    // Call handleProgramSelect with skipSave to set up the program structure without clearing saved data
+    await handleProgramSelect(plannerData.selectedProgram, true);
+    
+    // The rest of the restoration happens in the next effect cycle
+    // as handleProgramSelect will trigger setSemesterPlans
+  }
+
+  // Separate effect to handle saved course restoration after semester plans are set
+  useEffect(() => {
+    if (semesterPlans.length > 0 && plannerData.selectedCourses && Object.keys(plannerData.selectedCourses).length > 0) {
+      // Apply saved stream selection if available
+      if (plannerData.selectedStream && plannerData.selectedStream !== selectedStream) {
+        handleStreamSelect(plannerData.selectedStream, true); // Skip save during restoration
+        return; // Exit early, stream selection will trigger course restoration
+      }
+      
+      // Restore saved courses to their slots
+      const updatedPlans = semesterPlans.map((plan, semesterIndex) => {
+        const savedCourses = plannerData.selectedCourses[`semester-${semesterIndex}`] || [];
+        
+        const updatedRequirements = plan.requirements.map((req) => {
+          // Find if there's a saved course for this slot
+          const savedCourse = savedCourses.find((course: any) => course.slotId === req.id);
+          
+          if (savedCourse && req.type !== "code") {
+            return {
+              ...req,
+              course: {
+                id: savedCourse.id,
+                code: savedCourse.code,
+                title: savedCourse.title,
+                credits: savedCourse.credits,
+                category: savedCourse.category,
+              }
+            };
+          }
+          
+          return req;
+        });
+
+        return {
+          ...plan,
+          requirements: updatedRequirements,
+        };
+      });
+
+      setSemesterPlans(updatedPlans);
+    }
+  }, [semesterPlans.length, plannerData.selectedCourses])
+
+  // Handle course restoration after stream has been applied
+  useEffect(() => {
+    if (selectedStream === plannerData.selectedStream && semesterPlans.length > 0 && plannerData.selectedCourses && Object.keys(plannerData.selectedCourses).length > 0) {
+      // Check if courses need to be restored
+      const needsRestoration = semesterPlans.some((plan, semesterIndex) => {
+        const savedCourses = plannerData.selectedCourses[`semester-${semesterIndex}`] || [];
+        return savedCourses.some((savedCourse: any) => {
+          const slot = plan.requirements.find(req => req.id === savedCourse.slotId);
+          return slot && !slot.course;
+        });
+      });
+
+      if (needsRestoration) {
+        const updatedPlans = semesterPlans.map((plan, semesterIndex) => {
+          const savedCourses = plannerData.selectedCourses[`semester-${semesterIndex}`] || [];
+          
+          const updatedRequirements = plan.requirements.map((req) => {
+            const savedCourse = savedCourses.find((course: any) => course.slotId === req.id);
+            
+            if (savedCourse && req.type !== "code" && !req.course) {
+              return {
+                ...req,
+                course: {
+                  id: savedCourse.id,
+                  code: savedCourse.code,
+                  title: savedCourse.title,
+                  credits: savedCourse.credits,
+                  category: savedCourse.category,
+                }
+              };
+            }
+            
+            return req;
+          });
+
+          return {
+            ...plan,
+            requirements: updatedRequirements,
+          };
+        });
+
+        setSemesterPlans(updatedPlans);
+      }
+    }
+  }, [selectedStream, semesterPlans, plannerData.selectedStream, plannerData.selectedCourses])
 
   // Fetch programs from database
   useEffect(() => {
@@ -150,7 +287,7 @@ export default function DegreePlanner() {
                 title: course.name,
                 credits: course.billing_unit
                   ? Number(course.billing_unit)
-                  : 3,
+                  : 1,
                 term: course.term || [], // Include term data
                 category,
               };
@@ -219,12 +356,24 @@ export default function DegreePlanner() {
   const canNextPage = cataloguePagination.pageIndex < totalPages - 1;
 
   // === 🦍 UPDATED LOGIC FOR SEMESTER REQUIREMENTS ===
-  const handleProgramSelect = (programName: string) => {
+  const handleProgramSelect = async (programName: string, skipSave = false) => {
     setSelectedProgram(programName);
-    setCompletedCourses(new Set());
-    setSelectedStream(""); // Reset stream selection
-    setAvailableStreams({}); // Reset available streams
-    setOriginalSemesterPlans([]); // Reset original plans
+    
+    // Only reset data if this is a manual selection (not restoration)
+    if (!skipSave) {
+      setCompletedCourses(new Set());
+      setSelectedStream(""); // Reset stream selection
+      setAvailableStreams({}); // Reset available streams
+      setOriginalSemesterPlans([]); // Reset original plans
+
+      // Save program selection
+      await savePlan({
+        selectedProgram: programName,
+        selectedStream: "",
+        selectedCourses: {},
+        completedCourses: []
+      }, true) // Auto-save
+    }
 
     const program = programs.find((p: any) => p.program === programName);
     if (!program) return;
@@ -289,7 +438,7 @@ export default function DegreePlanner() {
                 id: `${slotId}-course`,
                 code: req.code,
                 title: `Course ${req.code}`,
-                credits: 3,
+                credits: 1,
                 category: "core",
               },
             });
@@ -368,8 +517,15 @@ export default function DegreePlanner() {
   };
 
   // Handle stream selection (now at program level)
-  const handleStreamSelect = (streamKey: string) => {
+  const handleStreamSelect = async (streamKey: string, skipSave = false) => {
     setSelectedStream(streamKey);
+
+    // Save stream selection only if not in restoration mode
+    if (!skipSave) {
+      await savePlan({
+        selectedStream: streamKey
+      }, true) // Auto-save
+    }
 
     if (!streamKey) {
       // If no stream selected, reset to original plans
@@ -399,7 +555,7 @@ export default function DegreePlanner() {
                     id: `${newSlotId}-course`,
                     code: streamReq.code,
                     title: `Course ${streamReq.code}`,
-                    credits: 3,
+                    credits: 1,
                     category: "core" as const,
                   },
                 });
@@ -483,7 +639,7 @@ export default function DegreePlanner() {
     setActiveId(event.active.id as string);
   };
 
-  const handleDragEnd = (event: DragEndEvent) => {
+  const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (!over) {
@@ -496,29 +652,52 @@ export default function DegreePlanner() {
 
     if (draggedCourse && targetSlotId.includes("-req-")) {
       // Find the target requirement slot
-      setSemesterPlans((prev) =>
-        prev.map((plan) => {
-          const updatedRequirements = plan.requirements.map((req) => {
-            if (req.id === targetSlotId && !req.course) {
-              // Validate if the course fits the requirement
-              const isValid = validateCourseForRequirement(draggedCourse, req);
+      const newSemesterPlans = semesterPlans.map((plan) => {
+        const updatedRequirements = plan.requirements.map((req) => {
+          if (req.id === targetSlotId && !req.course) {
+            // Validate if the course fits the requirement
+            const isValid = validateCourseForRequirement(draggedCourse, req);
 
-              if (isValid) {
-                return {
-                  ...req,
-                  course: { ...draggedCourse, id: `${req.id}-course` },
-                };
-              }
+            if (isValid) {
+              return {
+                ...req,
+                course: { ...draggedCourse, id: `${req.id}-course` },
+              };
             }
-            return req;
-          });
+          }
+          return req;
+        });
 
-          return {
-            ...plan,
-            requirements: updatedRequirements,
-          };
-        })
-      );
+        return {
+          ...plan,
+          requirements: updatedRequirements,
+        };
+      });
+
+      setSemesterPlans(newSemesterPlans);
+
+      // Save the updated semester plans
+      const selectedCourses: { [key: string]: any[] } = {};
+      newSemesterPlans.forEach((plan, index) => {
+        const planCourses: any[] = [];
+        plan.requirements.forEach((req) => {
+          if (req.course) {
+            planCourses.push({
+              id: req.course.id,
+              code: req.course.code,
+              title: req.course.title,
+              credits: req.course.credits,
+              category: req.course.category,
+              slotId: req.id
+            });
+          }
+        });
+        if (planCourses.length > 0) {
+          selectedCourses[`semester-${index}`] = planCourses;
+        }
+      });
+
+      await savePlan({ selectedCourses }, true); // Auto-save
     }
 
     setActiveId(null);
@@ -590,38 +769,65 @@ export default function DegreePlanner() {
   };
 
   // Remove course from requirement slot
-  const removeCourseFromSlot = (slotId: string) => {
-    setSemesterPlans((prev) =>
-      prev.map((plan) => {
-        const updatedRequirements = plan.requirements.map((req) => {
-          if (req.id === slotId && req.type !== "code") {
-            return {
-              ...req,
-              course: undefined,
-            };
-          }
-          return req;
-        });
+  const removeCourseFromSlot = async (slotId: string) => {
+    const newSemesterPlans = semesterPlans.map((plan) => {
+      const updatedRequirements = plan.requirements.map((req) => {
+        if (req.id === slotId && req.type !== "code") {
+          return {
+            ...req,
+            course: undefined,
+          };
+        }
+        return req;
+      });
 
-        return {
-          ...plan,
-          requirements: updatedRequirements,
-        };
-      })
-    );
+      return {
+        ...plan,
+        requirements: updatedRequirements,
+      };
+    });
+
+    setSemesterPlans(newSemesterPlans);
+
+    // Save the updated semester plans
+    const selectedCourses: { [key: string]: any[] } = {};
+    newSemesterPlans.forEach((plan, index) => {
+      const planCourses: any[] = [];
+      plan.requirements.forEach((req) => {
+        if (req.course) {
+          planCourses.push({
+            id: req.course.id,
+            code: req.course.code,
+            title: req.course.title,
+            credits: req.course.credits,
+            category: req.course.category,
+            slotId: req.id
+          });
+        }
+      });
+      if (planCourses.length > 0) {
+        selectedCourses[`semester-${index}`] = planCourses;
+      }
+    });
+
+    await savePlan({ selectedCourses }, true); // Auto-save
   };
 
   // Toggle course completion
-  const toggleCourseCompletion = (courseCode: string) => {
-    setCompletedCourses((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(courseCode)) {
-        newSet.delete(courseCode);
-      } else {
-        newSet.add(courseCode);
-      }
-      return newSet;
-    });
+  const toggleCourseCompletion = async (courseCode: string) => {
+    const newCompletedCourses = new Set(completedCourses);
+    if (newCompletedCourses.has(courseCode)) {
+      newCompletedCourses.delete(courseCode);
+    } else {
+      newCompletedCourses.add(courseCode);
+    }
+    
+    setCompletedCourses(newCompletedCourses);
+    
+    // Save completed courses
+    await savePlan({ 
+      completedCourses: Array.from(newCompletedCourses)
+    }, true); // Auto-save
   };
 
   // Catalogue filter handlers
@@ -1058,6 +1264,7 @@ export default function DegreePlanner() {
   // --- MAIN RENDER ---
   return (
     <>
+    <Toaster />
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="min-h-screen bg-background flex flex-col w-full">
         {/* INSTRUCTIONS */}
@@ -1431,6 +1638,17 @@ export default function DegreePlanner() {
       course={popupCourse} 
       onClose={handleClosePopup}
     />
+
+    {/* Save Badge */}
+    <SaveBadge
+      isLoading={plannerLoading}
+      isSaving={isSaving}
+      hasUnsavedChanges={hasUnsavedChanges}
+      lastSaved={lastSaved}
+      user={user}
+      onManualSave={saveToDatabase}
+    />
+
     </>
   );
 }

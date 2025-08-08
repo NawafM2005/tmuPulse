@@ -4,18 +4,44 @@ import tmuLogo from '../assets/tmu-monkey-logo.png';
 import Link from 'next/link';
 import { useEffect, useState } from "react";
 import lightIcon from '../assets/light.png';
-import { Moon, Menu, X, ChevronDown } from 'lucide-react';
+import { Moon, Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { supabase } from "@/lib/supabaseClient";
+import type { User as SupabaseUser } from '@supabase/supabase-js';
 
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Check auth state and listen for changes
+  useEffect(() => {
+    // Get initial session
+    const getInitialSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+      setLoading(false);
+    };
+
+    getInitialSession();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setUser(session?.user ?? null);
+        setLoading(false);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   // On mount, check localStorage or prefers-color-scheme
   useEffect(() => {
@@ -43,12 +69,17 @@ export default function Navbar() {
     });
   };
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setMobileMenuOpen(false);
+  };
+
   return (
     <>
       <nav className="backdrop-blur-sm bg-background/80 text-foreground px-4 md:px-8 lg:px-20 h-[64px] flex flex-row justify-between items-center fixed top-0 left-0 w-full text-[13px] md:text-[15px] border-b-2 border-secondary shadow-lg shadow-black/5 z-50">
 
         <Link href='/'>
-            <div className="text-lg md:text-xl font-bold flex flex-row hover:cursor-pointer items-center group transition-all duration-300 hover:scale-105">
+            <div className="text-lg md:text-xl font-bold flex flex-row hover:cursor-pointer items-center group transition-all duration-300">
               <img src={tmuLogo.src} alt="TMU Logo" className="h-8 w-8 md:h-15 md:w-15 transition-transform duration-300 group-hover:rotate-12" />
               <p className="text-[#3375C2] transition-colors duration-300 group-hover:text-[#4285d4]">TMU</p>
               <p className="text-[#b29b07] transition-colors duration-300">planner</p>
@@ -58,47 +89,47 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <ul className="hidden xl:flex space-x-1 xl:space-x-3 font-bold text-sm items-center">
             <li>
-              <Link href="/catalogue" className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md hover:scale-105 relative overflow-hidden group">
+              <Link href="/catalogue" className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md relative overflow-hidden group">
                 <span className="relative z-10">Catalogue</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#f5d60b]/0 to-[#ffeb3b]/0 group-hover:from-[#f5d60b]/20 group-hover:to-[#ffeb3b]/20 transition-all duration-300 rounded-xl"></div>
               </Link>
             </li>
             <li>
-              <Link href="/planner" className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md hover:scale-105 relative overflow-hidden group">
+              <Link href="/planner" className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md relative overflow-hidden group">
                 <span className="relative z-10">Degree Planner</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#f5d60b]/0 to-[#ffeb3b]/0 group-hover:from-[#f5d60b]/20 group-hover:to-[#ffeb3b]/20 transition-all duration-300 rounded-xl"></div>
               </Link>
             </li>
             <li>
-              <Link href="/transcript" className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md hover:scale-105 relative overflow-hidden group">
+              <Link href="/transcript" className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md relative overflow-hidden group">
                 <span className="relative z-10">Transcript Analyser</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#f5d60b]/0 to-[#ffeb3b]/0 group-hover:from-[#f5d60b]/20 group-hover:to-[#ffeb3b]/20 transition-all duration-300 rounded-xl"></div>
               </Link>
             </li>
             <li>
-              <Link href="/gpa-calculator" className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md hover:scale-105 relative overflow-hidden group">
+              <Link href="/gpa-calculator" className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md relative overflow-hidden group">
                 <span className="relative z-10">GPA Calculator</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#f5d60b]/0 to-[#ffeb3b]/0 group-hover:from-[#f5d60b]/20 group-hover:to-[#ffeb3b]/20 transition-all duration-300 rounded-xl"></div>
               </Link>
             </li>
             <li>
               <DropdownMenu>
-                <DropdownMenuTrigger className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md hover:scale-105 flex items-center gap-1 font-bold text-[15px] hover:cursor-pointer relative overflow-hidden group">
+                <DropdownMenuTrigger className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md flex items-center gap-1 font-bold text-[15px] hover:cursor-pointer relative overflow-hidden group">
                   <span className="relative z-10 flex items-center gap-1">
-                    More <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
+                    More <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180"/>
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-[#f5d60b]/0 to-[#ffeb3b]/0 group-hover:from-[#f5d60b]/20 group-hover:to-[#ffeb3b]/20 transition-all duration-300 rounded-xl"></div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-background/95 backdrop-blur-xl border-accent/30 border-2 shadow-xl shadow-black/10 rounded-xl flex flex-col items-center">
                   <DropdownMenuItem 
-                      className="p-1 md:p-2 rounded-xl hover:cursor-pointer hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md hover:scale-105 relative overflow-hidden group"
+                      className="p-2 rounded-xl hover:cursor-pointer hover:bg-blue-500/20 hover:text-blue-600 dark:hover:text-blue-400 focus:bg-blue-500/20 focus:text-blue-600 dark:focus:text-blue-400 transition-all duration-300 w-full"
                   >
-                    <Link href="/about">
+                    <Link href="/about" className="w-full text-center">
                       <span className="relative z-10">About Us</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
-                    className="text-foreground bg-transparent hover:bg-foreground/10 focus:bg-foreground/10 hover:cursor-not-allowed opacity-50 rounded-lg mx-1 my-1 transition-all duration-200"
+                    className="text-foreground bg-transparent hover:bg-gray-500/20 hover:text-gray-600 dark:hover:text-gray-400 focus:bg-gray-500/20 focus:text-gray-600 dark:focus:text-gray-400 hover:cursor-not-allowed opacity-50 rounded-lg mx-1 my-1 transition-all duration-200 w-full text-center"
                     disabled
                   >
                     Schedule Builder
@@ -112,20 +143,50 @@ export default function Navbar() {
         <div className='flex flex-row gap-2 md:gap-4 items-center'>
             {/* Desktop buttons */}
             <div className="hidden xl:flex gap-2 md:gap-4">
-              <Link href="/feedback" className="px-3 md:px-5 py-1 md:py-2 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 hover:scale-105 hover:shadow-lg font-bold text-xs md:text-sm relative overflow-hidden group">
+              <Link href="/feedback" className="px-3 md:px-5 py-1 md:py-2 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 hover:shadow-lg font-bold text-xs md:text-sm relative overflow-hidden group">
                 <span className="relative z-10">Feedback</span>
                 <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
-              <Link href="/login" className="px-3 md:px-5 py-1 md:py-2 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-105 hover:shadow-lg font-bold text-xs md:text-[15px] text-white relative overflow-hidden group">
-                <span className="relative z-10">Login</span>
-                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </Link>
+              
+              {!loading && (
+                user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white transition-all duration-300 hover:shadow-lg relative overflow-hidden group hover:cursor-pointer">
+                      <User size={18} className="relative z-10" />
+                      <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="bg-background/95 backdrop-blur-xl border-accent/30 border-2 shadow-xl shadow-black/10 rounded-xl min-w-[180px]">
+                      <DropdownMenuItem 
+                        asChild
+                        className="flex items-center gap-2 p-3 rounded-lg transition-all duration-200 cursor-pointer hover:bg-blue-500/20 hover:text-blue-600 dark:hover:text-blue-400 focus:bg-blue-500/20 focus:text-blue-600 dark:focus:text-blue-400"
+                      >
+                        <Link href="/dashboard">
+                          <User size={16} />
+                          Dashboard
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem 
+                        onClick={handleSignOut}
+                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-red-500/20 hover:text-red-600 dark:hover:text-red-400 focus:bg-red-500/20 focus:text-red-600 dark:focus:text-red-400 transition-all duration-200 cursor-pointer"
+                      >
+                        <LogOut size={16} />
+                        Sign Out
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Link href="/login" className="px-3 md:px-5 py-1 md:py-2 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:shadow-lg font-bold text-xs md:text-[15px] text-white relative overflow-hidden group">
+                    <span className="relative z-10">Login</span>
+                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </Link>
+                )
+              )}
             </div>
 
             {/* Theme toggle - always visible */}
             <button
               onClick={toggleDarkMode}
-              className="rounded-xl text-xl md:text-2xl font-bold p-2 md:p-3 transition-all duration-300 hover:cursor-pointer hover:bg-foreground/10 hover:scale-110 active:scale-95 group"
+              className="rounded-xl text-xl md:text-2xl font-bold p-2 md:p-3 transition-all duration-300 hover:cursor-pointer hover:bg-foreground/10 active:scale-95 group"
               aria-label="Toggle dark mode"
             >
               {darkMode ? 
@@ -137,7 +198,7 @@ export default function Navbar() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden rounded-xl text-xl font-bold p-2 transition-all duration-300 hover:cursor-pointer hover:bg-foreground/10 hover:scale-110 active:scale-95"
+              className="xl:hidden rounded-xl text-xl font-bold p-2 transition-all duration-300 hover:cursor-pointer hover:bg-foreground/10 active:scale-95"
               aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? 
@@ -154,7 +215,7 @@ export default function Navbar() {
             <Link 
               href="/catalogue" 
               onClick={() => setMobileMenuOpen(false)}
-              className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg hover:scale-105 relative overflow-hidden group"
+              className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
             >
               <span className="relative z-10">Catalogue</span>
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
@@ -162,7 +223,7 @@ export default function Navbar() {
             <Link 
               href="/planner" 
               onClick={() => setMobileMenuOpen(false)}
-              className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg hover:scale-105 relative overflow-hidden group"
+              className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
             >
               <span className="relative z-10">Degree Planner</span>
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
@@ -170,7 +231,7 @@ export default function Navbar() {
             <Link 
               href="/transcript" 
               onClick={() => setMobileMenuOpen(false)}
-              className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg hover:scale-105 relative overflow-hidden group"
+              className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
             >
               <span className="relative z-10">Transcript Analyser</span>
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
@@ -178,7 +239,7 @@ export default function Navbar() {
             <Link 
               href="/gpa-calculator" 
               onClick={() => setMobileMenuOpen(false)}
-              className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg hover:scale-105 relative overflow-hidden group"
+              className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
             >
               <span className="relative z-10">GPA Calculator</span>
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
@@ -193,19 +254,57 @@ export default function Navbar() {
               <Link 
                 href="/feedback" 
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 font-bold text-center hover:shadow-lg hover:scale-105 relative overflow-hidden group"
+                className="block px-4 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 font-bold text-center hover:shadow-lg relative overflow-hidden group"
               >
                 <span className="relative z-10">Feedback</span>
                 <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
               </Link>
-              <Link 
-                href="/login" 
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 font-bold text-center text-white hover:shadow-lg hover:scale-105 relative overflow-hidden group"
-              >
-                <span className="relative z-10">Login</span>
-                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-              </Link>
+              
+              {!loading && (
+                user ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-500/20 to-blue-600/20 border border-blue-500/30 text-white backdrop-blur-sm">
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500 text-white text-sm font-bold">
+                        {(user.email?.charAt(0) || 'U').toUpperCase()}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-medium text-sm">
+                          @{user.email?.split('@')[0] || 'user'}
+                        </span>
+                        <span className="text-xs text-blue-200 font-mono truncate">
+                          {user.email}
+                        </span>
+                      </div>
+                    </div>
+                    <Link 
+                      href="/dashboard" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-bold text-center text-white hover:shadow-lg relative overflow-hidden group"
+                    >
+                      <User size={16} className="relative z-10" />
+                      <span className="relative z-10">Dashboard</span>
+                      <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 font-bold text-center text-white hover:shadow-lg relative overflow-hidden group"
+                    >
+                      <LogOut size={16} className="relative z-10" />
+                      <span className="relative z-10">Sign Out</span>
+                      <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                    </button>
+                  </div>
+                ) : (
+                  <Link 
+                    href="/login" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-4 py-3 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 font-bold text-center text-white hover:shadow-lg relative overflow-hidden group"
+                  >
+                    <span className="relative z-10">Login</span>
+                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                  </Link>
+                )
+              )}
             </div>
           </div>
         </div>
