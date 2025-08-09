@@ -18,8 +18,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, GripVertical, X, Info } from "lucide-react";
 import PopUp from "@/components/course-popup";
-import { usePlannerData } from "@/hooks/usePlannerData";
-import { SaveBadge } from "@/components/SaveBadge";
 import { Toaster } from "@/components/ui/sonner";
 
 interface Course {
@@ -56,17 +54,6 @@ interface SemesterPlan {
 }
 
 export default function DegreePlanner() {
-  // Planner data management
-  const {
-    plannerData,
-    savePlan,
-    isLoading: plannerLoading,
-    isSaving,
-    lastSaved,
-    hasUnsavedChanges,
-    user,
-    saveToDatabase
-  } = usePlannerData()
 
   const [selectedProgram, setSelectedProgram] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -91,128 +78,6 @@ export default function DegreePlanner() {
   const [selectedStream, setSelectedStream] = useState<string>("");
   const [availableStreams, setAvailableStreams] = useState<any>({});
   const [originalSemesterPlans, setOriginalSemesterPlans] = useState<SemesterPlan[]>([]);
-
-  // Sync with saved planner data
-  useEffect(() => {
-    if (plannerData.selectedProgram) {
-      setSelectedProgram(plannerData.selectedProgram)
-    }
-    if (plannerData.selectedStream) {
-      setSelectedStream(plannerData.selectedStream)
-    }
-    if (plannerData.completedCourses) {
-      setCompletedCourses(new Set(plannerData.completedCourses))
-    }
-    
-    // Restore semester plans with saved courses when both programs and planner data are available
-    if (plannerData.selectedProgram && programs.length > 0 && plannerData.selectedCourses && Object.keys(plannerData.selectedCourses).length > 0) {
-      restoreSemesterPlansFromSavedData()
-    }
-  }, [plannerData, programs])
-
-  // Function to restore semester plans from saved data
-  const restoreSemesterPlansFromSavedData = async () => {
-    if (!plannerData.selectedProgram) return
-    
-    // Use handleProgramSelect but skip the data clearing and saving
-    const program = programs.find((p: any) => p.program === plannerData.selectedProgram)
-    if (!program) return
-
-    // Call handleProgramSelect with skipSave to set up the program structure without clearing saved data
-    await handleProgramSelect(plannerData.selectedProgram, true);
-    
-    // The rest of the restoration happens in the next effect cycle
-    // as handleProgramSelect will trigger setSemesterPlans
-  }
-
-  // Separate effect to handle saved course restoration after semester plans are set
-  useEffect(() => {
-    if (semesterPlans.length > 0 && plannerData.selectedCourses && Object.keys(plannerData.selectedCourses).length > 0) {
-      // Apply saved stream selection if available
-      if (plannerData.selectedStream && plannerData.selectedStream !== selectedStream) {
-        handleStreamSelect(plannerData.selectedStream, true); // Skip save during restoration
-        return; // Exit early, stream selection will trigger course restoration
-      }
-      
-      // Restore saved courses to their slots
-      const updatedPlans = semesterPlans.map((plan, semesterIndex) => {
-        const savedCourses = plannerData.selectedCourses[`semester-${semesterIndex}`] || [];
-        
-        const updatedRequirements = plan.requirements.map((req) => {
-          // Find if there's a saved course for this slot
-          const savedCourse = savedCourses.find((course: any) => course.slotId === req.id);
-          
-          if (savedCourse && req.type !== "code") {
-            return {
-              ...req,
-              course: {
-                id: savedCourse.id,
-                code: savedCourse.code,
-                title: savedCourse.title,
-                credits: savedCourse.credits,
-                category: savedCourse.category,
-              }
-            };
-          }
-          
-          return req;
-        });
-
-        return {
-          ...plan,
-          requirements: updatedRequirements,
-        };
-      });
-
-      setSemesterPlans(updatedPlans);
-    }
-  }, [semesterPlans.length, plannerData.selectedCourses])
-
-  // Handle course restoration after stream has been applied
-  useEffect(() => {
-    if (selectedStream === plannerData.selectedStream && semesterPlans.length > 0 && plannerData.selectedCourses && Object.keys(plannerData.selectedCourses).length > 0) {
-      // Check if courses need to be restored
-      const needsRestoration = semesterPlans.some((plan, semesterIndex) => {
-        const savedCourses = plannerData.selectedCourses[`semester-${semesterIndex}`] || [];
-        return savedCourses.some((savedCourse: any) => {
-          const slot = plan.requirements.find(req => req.id === savedCourse.slotId);
-          return slot && !slot.course;
-        });
-      });
-
-      if (needsRestoration) {
-        const updatedPlans = semesterPlans.map((plan, semesterIndex) => {
-          const savedCourses = plannerData.selectedCourses[`semester-${semesterIndex}`] || [];
-          
-          const updatedRequirements = plan.requirements.map((req) => {
-            const savedCourse = savedCourses.find((course: any) => course.slotId === req.id);
-            
-            if (savedCourse && req.type !== "code" && !req.course) {
-              return {
-                ...req,
-                course: {
-                  id: savedCourse.id,
-                  code: savedCourse.code,
-                  title: savedCourse.title,
-                  credits: savedCourse.credits,
-                  category: savedCourse.category,
-                }
-              };
-            }
-            
-            return req;
-          });
-
-          return {
-            ...plan,
-            requirements: updatedRequirements,
-          };
-        });
-
-        setSemesterPlans(updatedPlans);
-      }
-    }
-  }, [selectedStream, semesterPlans, plannerData.selectedStream, plannerData.selectedCourses])
 
   // Fetch programs from database
   useEffect(() => {
@@ -365,14 +230,6 @@ export default function DegreePlanner() {
       setSelectedStream(""); // Reset stream selection
       setAvailableStreams({}); // Reset available streams
       setOriginalSemesterPlans([]); // Reset original plans
-
-      // Save program selection
-      await savePlan({
-        selectedProgram: programName,
-        selectedStream: "",
-        selectedCourses: {},
-        completedCourses: []
-      }, true) // Auto-save
     }
 
     const program = programs.find((p: any) => p.program === programName);
@@ -520,13 +377,6 @@ export default function DegreePlanner() {
   const handleStreamSelect = async (streamKey: string, skipSave = false) => {
     setSelectedStream(streamKey);
 
-    // Save stream selection only if not in restoration mode
-    if (!skipSave) {
-      await savePlan({
-        selectedStream: streamKey
-      }, true) // Auto-save
-    }
-
     if (!streamKey) {
       // If no stream selected, reset to original plans
       setSemesterPlans(originalSemesterPlans);
@@ -534,7 +384,7 @@ export default function DegreePlanner() {
     }
 
     // Rebuild semester plans from original plans with selected stream requirements
-    const updatedPlans = originalSemesterPlans.map((plan) => {
+    const updatedPlans = originalSemesterPlans.map((plan, semesterIndex) => {
       const updatedRequirements: RequirementSlot[] = [];
 
       plan.requirements.forEach((req) => {
@@ -621,7 +471,9 @@ export default function DegreePlanner() {
           }
         } else {
           // Keep non-stream requirements as-is
-          updatedRequirements.push(req);
+          updatedRequirements.push({
+            ...req,
+          });
         }
       });
 
@@ -675,29 +527,6 @@ export default function DegreePlanner() {
       });
 
       setSemesterPlans(newSemesterPlans);
-
-      // Save the updated semester plans
-      const selectedCourses: { [key: string]: any[] } = {};
-      newSemesterPlans.forEach((plan, index) => {
-        const planCourses: any[] = [];
-        plan.requirements.forEach((req) => {
-          if (req.course) {
-            planCourses.push({
-              id: req.course.id,
-              code: req.course.code,
-              title: req.course.title,
-              credits: req.course.credits,
-              category: req.course.category,
-              slotId: req.id
-            });
-          }
-        });
-        if (planCourses.length > 0) {
-          selectedCourses[`semester-${index}`] = planCourses;
-        }
-      });
-
-      await savePlan({ selectedCourses }, true); // Auto-save
     }
 
     setActiveId(null);
@@ -788,29 +617,6 @@ export default function DegreePlanner() {
     });
 
     setSemesterPlans(newSemesterPlans);
-
-    // Save the updated semester plans
-    const selectedCourses: { [key: string]: any[] } = {};
-    newSemesterPlans.forEach((plan, index) => {
-      const planCourses: any[] = [];
-      plan.requirements.forEach((req) => {
-        if (req.course) {
-          planCourses.push({
-            id: req.course.id,
-            code: req.course.code,
-            title: req.course.title,
-            credits: req.course.credits,
-            category: req.course.category,
-            slotId: req.id
-          });
-        }
-      });
-      if (planCourses.length > 0) {
-        selectedCourses[`semester-${index}`] = planCourses;
-      }
-    });
-
-    await savePlan({ selectedCourses }, true); // Auto-save
   };
 
   // Toggle course completion
@@ -823,11 +629,6 @@ export default function DegreePlanner() {
     }
     
     setCompletedCourses(newCompletedCourses);
-    
-    // Save completed courses
-    await savePlan({ 
-      completedCourses: Array.from(newCompletedCourses)
-    }, true); // Auto-save
   };
 
   // Catalogue filter handlers
@@ -961,7 +762,6 @@ export default function DegreePlanner() {
 
   // Calculate progress stats
   const progressStats = useMemo(() => {
-    const totalProgramCourses = 40 // Fixed total for all programs (1-credit system)
     const totalRequirements = semesterPlans.reduce(
       (acc, plan) => acc + plan.requirements.length,
       0
@@ -989,8 +789,8 @@ export default function DegreePlanner() {
           ? Math.round((filledRequirements / totalRequirements) * 100)
           : 0,
       completedPercentage:
-        totalProgramCourses > 0
-          ? Math.round((completedCount / totalProgramCourses) * 100)
+        totalRequirements > 0
+          ? Math.round((completedCount / totalRequirements) * 100)
           : 0,
     };
   }, [semesterPlans, completedCourses]);
@@ -1390,7 +1190,7 @@ export default function DegreePlanner() {
                       />
                     </div>
                     <div className="text-xs text-center text-muted font-semibold">
-                      {progressStats.completed} / 40 courses
+                      {progressStats.completed} / {progressStats.total} courses
                       completed
                     </div>
                   </>
@@ -1638,16 +1438,6 @@ export default function DegreePlanner() {
       open={showPopup} 
       course={popupCourse} 
       onClose={handleClosePopup}
-    />
-
-    {/* Save Badge */}
-    <SaveBadge
-      isLoading={plannerLoading}
-      isSaving={isSaving}
-      hasUnsavedChanges={hasUnsavedChanges}
-      lastSaved={lastSaved}
-      user={user}
-      onManualSave={saveToDatabase}
     />
 
     </>
