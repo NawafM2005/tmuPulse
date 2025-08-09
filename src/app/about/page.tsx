@@ -3,7 +3,6 @@
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Github, Linkedin, Mail, Heart, Code, Coffee } from "lucide-react";
-import nawaf from '@/assets/nawaf.jpeg';
 
 export default function About() {
   return (
@@ -44,7 +43,7 @@ export default function About() {
           <div className="bg-card-bg rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-foreground hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
             <div className="text-center mb-6">
               <img className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-3xl sm:text-4xl font-[900]" 
-                src={nawaf.src}>
+                src="https://media.licdn.com/dms/image/v2/D4D03AQEZayxZqLHNrw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1715755598733?e=1757548800&v=beta&t=mYuOMR6y0rPh44liOh6Dk8UlUPLvBgN8rO7MuJF3S7Q">
               </img>
               <h3 className="text-xl sm:text-2xl font-[900] text-foreground mb-2">Nawaf Mahmood</h3>
               <p className="text-sm sm:text-base font-[600] text-accent mb-4">Full-Stack Developer & Software Engineer</p>
