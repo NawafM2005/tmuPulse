@@ -3,6 +3,7 @@
 import tmuLogo from '../assets/tmu-monkey-logo.png';
 import Link from 'next/link';
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import lightIcon from '../assets/light.png';
 import { Moon, Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
 import {
@@ -20,6 +21,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   // Check auth state and listen for changes
   useEffect(() => {
@@ -72,6 +74,7 @@ export default function Navbar() {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setMobileMenuOpen(false);
+    router.push('/');
   };
 
   return (
@@ -82,7 +85,7 @@ export default function Navbar() {
             <div className="text-lg md:text-xl font-bold flex flex-row hover:cursor-pointer items-center group transition-all duration-300">
               <img src={tmuLogo.src} alt="TMU Logo" className="h-8 w-8 md:h-15 md:w-15 transition-transform duration-300 group-hover:rotate-12" />
               <p className="text-[#3375C2] transition-colors duration-300 group-hover:text-[#4285d4]">TMU</p>
-              <p className="text-[#b29b07] transition-colors duration-300">planner</p>
+              <p className="text-[#d1b608] transition-colors duration-300">planner</p>
             </div>
         </Link>
 

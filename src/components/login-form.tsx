@@ -14,6 +14,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { supabase } from "@/lib/supabaseClient"
+import { toast } from "sonner"
+import { Toaster } from "./ui/sonner"
 
 export function LoginForm({
   className,
@@ -22,15 +24,13 @@ export function LoginForm({
   const router = useRouter()
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
-  const [message, setMessage] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setMessage("")
 
     if (!email || !password) {
-      setMessage("Email and password are required")
+      toast.error("Email and password are required")
       return
     }
 
@@ -42,14 +42,15 @@ export function LoginForm({
       })
       
       if (error) {
-        setMessage(error.message)
+        toast.error(error.message)
       } else {
         console.log("User logged in:", data)
+        toast.success("Successfully logged in!")
         // Redirect to main page after successful login
         router.push("/")
       }
     } catch (err) {
-      setMessage("An unexpected error occurred")
+      toast.error("An unexpected error occurred")
     } finally {
       setLoading(false)
     }
@@ -65,10 +66,10 @@ export function LoginForm({
         }
       })
       if (error) {
-        setMessage(error.message)
+        toast.error(error.message)
       }
     } catch (err) {
-      setMessage("Failed to start Google sign-in")
+      toast.error("Failed to start Google sign-in")
     } finally {
       setLoading(false)
     }
@@ -76,6 +77,7 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6 mb-10 mt-30 text-foreground rounded-[15px] min-w-sm", className)} {...props}>
+      <Toaster />
       <Card className="bg-background/10 border-2 border-foreground">
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Welcome back</CardTitle>
@@ -124,12 +126,6 @@ export function LoginForm({
                 <div className="grid gap-3">
                   <div className="flex items-center">
                     <Label htmlFor="password">Password</Label>
-                    <a
-                      href="#"
-                      className="ml-auto text-sm underline-offset-4 hover:underline"
-                    >
-                      Forgot your password?
-                    </a>
                   </div>
                   <Input 
                     id="password" 
@@ -147,10 +143,6 @@ export function LoginForm({
                 >
                   {loading ? "Signing in..." : "Login"}
                 </Button>
-
-                {message && (
-                  <p className="text-sm text-center text-destructive">{message}</p>
-                )}
               </div>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}

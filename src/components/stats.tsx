@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { useEffect, useState } from "react";
 import { ChartPieLegend } from "./piechart";
 import LineChartGeneric from "./linechart";
+import { toast } from "sonner";
 
 
 interface Course {
@@ -43,16 +44,26 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
 
   useEffect(() => {
     const fetchAndComputeStats = async () => {
-        // Fetch course liberal types
-        const { data: courseData, error: courseError } = await supabase
-            .from("courses")
-            .select("code, liberal")
-            .in("code", courseCodes);
+        try {
+            // Fetch course liberal types
+            const { data: courseData, error: courseError } = await supabase
+                .from("courses")
+                .select("code, liberal")
+                .in("code", courseCodes);
 
-        if (courseError || !courseData) {
-            console.error("Error fetching course types", courseError);
-            return;
-        }
+            if (courseError) {
+                if (courseError.message?.includes("No API key found")) {
+                    toast.error("Database connection error: API key missing");
+                } else {
+                    toast.error(`Error fetching course types: ${courseError.message}`);
+                }
+                return;
+            }
+
+            if (!courseData) {
+                toast.error("No course data received");
+                return;
+            }
 
         const normalizeLiberal = (value: string | null) => {
             const val = (value ?? "").trim().toUpperCase();
@@ -85,17 +96,74 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
             else core_open++;
         });
 
-        // Fetch program requirements
-        const { data: programData, error: programError } = await supabase
-            .from("programs")
-            .select("total_courses, total_lowerlib, total_upperlib, total_open, total_core")
-            .ilike("program", program)
-            .single();
+            // Fetch program requirements from JSON structure
+            const { data: programData, error: programError } = await supabase
+                .from("programs")
+                .select("semesters")
+                .ilike("program", program)
+                .single();
 
-        if (programError || !programData) {
-            console.error("Error fetching program data", programError);
-            return;
-        }
+            if (programError) {
+                if (programError.message?.includes("No API key found")) {
+                    toast.error("Database connection error: API key missing");
+                } else {
+                    toast.error(`Error fetching program data: ${programError.message}`);
+                }
+                return;
+            }
+
+            if (!programData || !programData.semesters) {
+                toast.error("No program data received");
+                return;
+            }
+
+            // Calculate program stats from JSON structure (similar to degree planner)
+            let totalCoursesRequired = 0;
+            let totalCore = 0;
+            let totalOpen = 0;
+            let totalLowerLib = 0;
+            let totalUpperLib = 0;
+
+            // Count requirements from all semesters
+            programData.semesters.forEach((semester: any) => {
+                semester.requirements?.forEach((req: any) => {
+                    // Check if this is a stream requirement object
+                    const streamKeys = Object.keys(req).filter(key => key.endsWith('_stream'));
+                    if (streamKeys.length > 0) {
+                        // For stream requirements, count as 1 for now (could be expanded to count actual stream requirements)
+                        totalCoursesRequired++;
+                        totalOpen++; // Stream requirements are typically electives
+                    } else if ("code" in req && req.code) {
+                        // Fixed course
+                        totalCoursesRequired++;
+                        totalCore++;
+                    } else if ("table" in req && req.table) {
+                        // Table requirement
+                        totalCoursesRequired++;
+                        totalCore++; // Tables are typically core requirements
+                    } else if ("option" in req && Array.isArray(req.option)) {
+                        // Option requirements
+                        totalCoursesRequired++;
+                        totalCore++; // Options are typically core requirements
+                    } else if ("lowerlib" in req && req.lowerlib) {
+                        // Lower Liberal
+                        totalCoursesRequired++;
+                        totalLowerLib++;
+                    } else if ("upperlib" in req && req.upperlib) {
+                        // Upper Liberal
+                        totalCoursesRequired++;
+                        totalUpperLib++;
+                    } else if ("open" in req && req.open) {
+                        // Open elective
+                        totalCoursesRequired++;
+                        totalOpen++;
+                    } else {
+                        // Fallback - count as open
+                        totalCoursesRequired++;
+                        totalOpen++;
+                    }
+                });
+            });
 
         const gpaBuckets: Record<string, number[]> = {
           LL: [],
@@ -125,24 +193,27 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
         const stats: UserStats = {
             program,
             cumulative_gpa: cgpa,
-            total_courses_done: totalCourses,
+            total_courses_done: totalCourses, // This is the user's actual completed courses count from props
             lower_libs_done: lower,
             upper_libs_done: upper,
             other_done: core_open,
-            total_courses_required: programData.total_courses,
-            lower_libs_required: programData.total_lowerlib,
-            upper_libs_required: programData.total_upperlib,
-            other_required: programData.total_open + programData.total_core,
+            total_courses_required: totalCoursesRequired, // This is the program's total required courses from JSON
+            lower_libs_required: totalLowerLib,
+            upper_libs_required: totalUpperLib,
+            other_required: totalOpen + totalCore,
             unknown: other
         };
 
         setUserStats(stats);
-        };
-
-        if (courseCodes.length > 0) {
-        fetchAndComputeStats();
+        } catch (error) {
+            toast.error("An unexpected error occurred while fetching data");
         }
-    }, [courseCodes, program, totalCourses, cgpa]);
+    };
+
+    if (courseCodes.length > 0) {
+        fetchAndComputeStats();
+    }
+}, [courseCodes, program, totalCourses, cgpa]);
 
     const termGpaChartData = termGpas.map(({ term, gpa }) => ({
       label: term,
