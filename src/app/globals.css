@@ -82,4 +82,18 @@
   border: 1px solid #1c1c1c71; 
 }
 
+/* Custom animations for loading page */
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-reverse {
+  animation: spin-reverse 1s linear infinite;
+}
+
 
