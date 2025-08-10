@@ -132,6 +132,13 @@ export default function Navbar() {
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
+                      className="p-2 rounded-xl hover:cursor-pointer hover:bg-purple-500/20 hover:text-purple-600 dark:hover:text-purple-400 focus:bg-purple-500/20 focus:text-purple-600 dark:focus:text-purple-400 transition-all duration-300 w-full"
+                  >
+                    <Link href="/releases" className="w-full text-center">
+                      <span className="relative z-10">Release Notes</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
                     className="text-foreground bg-transparent hover:bg-gray-500/20 hover:text-gray-600 dark:hover:text-gray-400 focus:bg-gray-500/20 focus:text-gray-600 dark:focus:text-gray-400 hover:cursor-not-allowed opacity-50 rounded-lg mx-1 my-1 transition-all duration-200 w-full text-center"
                     disabled
                   >
@@ -245,6 +252,22 @@ export default function Navbar() {
               className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
             >
               <span className="relative z-10">GPA Calculator</span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+            </Link>
+            <Link 
+              href="/about" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 hover:text-white transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
+            >
+              <span className="relative z-10">About Us</span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+            </Link>
+            <Link 
+              href="/releases" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-3 rounded-xl hover:bg-gradient-to-r hover:from-purple-400 hover:to-purple-500 hover:text-white transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
+            >
+              <span className="relative z-10">Release Notes</span>
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
             </Link>
             <div 
