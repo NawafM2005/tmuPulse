@@ -1812,7 +1812,7 @@ export default function DegreePlanner() {
         className={`p-2 sm:p-3 rounded-lg transition-all duration-200 bg-background text-foreground border-2 border-gray-600 font-bold relative ${
           isDragging
             ? "opacity-50 scale-95"
-            : "hover:scale-105 hover:shadow-lg hover:bg-card-hover"
+            : "hover:scale-101 hover:shadow-lg hover:bg-card-hover"
         }`}
       >
         <div className="flex flex-col gap-1 sm:gap-2">
@@ -2095,9 +2095,9 @@ export default function DegreePlanner() {
               </h3>
               
               {/* Filter Badges */}
-              <div className="space-y-2 sm:space-y-3">
+              <div className="space-y-2 sm:space-y-3 flex flex-col items-center">
                 {/* Type Filters */}
-                <div className="flex flex-col gap-1 sm:gap-2 items-center">
+                <div className="flex flex-row gap-1 sm:gap-2 items-center">
                   <p className="text-foreground text-xs font-semibold">Type:</p>
                   <div className="flex flex-wrap gap-1 justify-center">
                     <button
@@ -2118,7 +2118,7 @@ export default function DegreePlanner() {
                 </div>
 
                 {/* Term Filters */}
-                <div className="flex flex-col gap-1 sm:gap-2 items-center">
+                <div className="flex flex-row gap-1 sm:gap-2 items-center">
                   <p className="text-foreground text-xs font-semibold">Term:</p>
                   <div className="flex flex-wrap gap-1 justify-center">
                     <button
