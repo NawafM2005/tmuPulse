@@ -19,7 +19,7 @@ const releases: ReleaseNote[] = [
     version: '1.0.0',
     date: 'August 2025',
     title: 'Initial Release',
-    description: 'Welcome to TMU Planner! The ultimate academic planning tool built by TMU students, for TMU students.',
+    description: 'Welcome to TMU Planner! The ultimate academic planning tool built for TMU students.',
     type: 'major',
     features: [
       'Interactive Degree Planner with drag-and-drop course placement',
@@ -31,7 +31,6 @@ const releases: ReleaseNote[] = [
       'Program and stream selection with real-time requirements',
       'Dark/Light theme support',
       'Mobile-responsive design',
-      'Real-time course validation and prerequisite checking'
     ],
     improvements: [
     ]
