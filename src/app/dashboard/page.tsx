@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Navbar from "@/components/navbar"
 import { supabase } from "@/lib/supabaseClient"
@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
+import Image from "next/image"
 import { Toaster } from "@/components/ui/sonner"
 import type { User as SupabaseUser } from '@supabase/supabase-js'
 import Footer from "@/components/footer"
@@ -257,9 +258,11 @@ export default function Dashboard() {
                   <div className="flex justify-center mb-4">
                     {profileImageUrl ? (
                       <div className="relative group">
-                        <img
+                        <Image
                           src={profileImageUrl}
                           alt="Profile"
+                          width={128}
+                          height={128}
                           className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-primary/20 shadow-lg"
                           onError={(e) => {
                             e.currentTarget.style.display = 'none';
