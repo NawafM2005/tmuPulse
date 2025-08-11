@@ -90,7 +90,7 @@ export default function GPACalculator() {
             <span className="text-accent">T</span><span className="text-[#f5d60b]">M</span><span className="text-primary">U</span> GPA Calculator
           </h1>
           <p className="text-sm sm:text-base md:text-lg font-[600] text-foreground max-w-4xl mx-auto">
-            Calculate your cumulative grade point average using TMU's official 4.33 GPA scale. 
+            Calculate your cumulative grade point average using TMU&apos;s official 4.33 GPA scale. 
             Perfect for planning your academic goals and tracking your progress.
           </p>
         </div>
@@ -300,7 +300,7 @@ export default function GPACalculator() {
         <div className="bg-card-bg rounded-lg shadow-lg p-6 mb-8 border-2 border-foreground">
           <h2 className="text-2xl font-[800] text-foreground mb-4">Sample GPA Calculation</h2>
           <p className="font-[600] text-muted mb-4">
-            Here's an example of how to calculate your CGPA using TMU's official method:
+            Here&apos;s an example of how to calculate your CGPA using TMU&apos;s official method:
           </p>
           
           <div className="overflow-x-auto">
@@ -338,7 +338,7 @@ export default function GPACalculator() {
         <div className="bg-warning rounded-lg shadow-lg p-6 border-2 border-warning">
           <h2 className="text-2xl font-[800] text-background mb-4">Important Notes</h2>
           <ul className="space-y-2 font-[600] text-background">
-            <li>• This calculator uses TMU's official 4.33 GPA scale</li>
+            <li>• This calculator uses TMU&apos;s official 4.33 GPA scale</li>
             <li>• Course weights are typically 0.5, 1.0, 1.5, or 2.0 credits</li>
             <li>• This is for estimation purposes - always verify with your official transcript</li>
           </ul>
