@@ -169,6 +169,12 @@ export default function Transcript() {
           Effortlessly upload your academic transcript and let our parser automatically extract your courses, grades, and credits. 
           Instantly see a clean summary, track your progress, and save time on manual entry—perfect for students who want all their academic info in one place!
         </p>
+
+        <div className="bg-red-50 border border-red-200 rounded-lg p-3 max-w-2xl">
+          <p className="text-sm text-red-700 font-semibold">
+            All parsing is done locally in your browser. Your data stays secure and private.
+          </p>
+        </div>
         
         {/* Upload Section */}
         <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg p-8 w-full max-w-md mt-6">
