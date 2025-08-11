@@ -3,6 +3,7 @@
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Github, Linkedin, Mail, Heart, Code, Coffee } from "lucide-react";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -42,9 +43,14 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           <div className="bg-card-bg rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-foreground hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
             <div className="text-center mb-6">
-              <img className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-3xl sm:text-4xl font-[900]" 
-                src="https://media.licdn.com/dms/image/v2/D4D03AQEZayxZqLHNrw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1715755598733?e=1757548800&v=beta&t=mYuOMR6y0rPh44liOh6Dk8UlUPLvBgN8rO7MuJF3S7Q">
-              </img>
+              <Image
+                className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-3xl sm:text-4xl font-[900]"
+                src="https://media.licdn.com/dms/image/v2/D4D03AQEZayxZqLHNrw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1715755598733?e=1757548800&v=beta&t=mYuOMR6y0rPh44liOh6Dk8UlUPLvBgN8rO7MuJF3S7Q"
+                alt="Profile photo of Nawaf Mahmood"
+                width={128}
+                height={128}
+                sizes="(min-width: 640px) 8rem, 6rem"
+              />
               <h3 className="text-xl sm:text-2xl font-[900] text-foreground mb-2">Nawaf Mahmood</h3>
               <p className="text-sm sm:text-base font-[600] text-accent mb-4">Full-Stack Developer</p>
             </div>
@@ -78,14 +84,22 @@ export default function About() {
               <a href="https://www.linkedin.com/in/nawaf-m-08a9792a6/" target="_blank" className="p-2 sm:p-3 bg-accent/10 hover:bg-accent/20 rounded-full transition-colors hover:cursor-pointer">
                 <Linkedin className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
               </a>
+              <a href="mailto:nawaf.mahmood2005@gmail.com" target="_blank" className="p-2 sm:p-3 bg-foreground/10 hover:bg-foreground/20 rounded-full transition-colors hover:cursor-pointer">
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-foreground" />
+              </a>
             </div>
           </div>
 
           <div className="bg-card-bg rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-foreground hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
             <div className="text-center mb-6">
-              <img className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-3xl sm:text-4xl font-[900]" 
-                src="https://media.licdn.com/dms/image/v2/D5603AQFzyWqci0rZZg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1727276436094?e=1757548800&v=beta&t=I4jfg9DTw-asPOoqTD_DcTsMOSOMBeW4c90diP36INM">
-              </img>
+              <Image
+                className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-3xl sm:text-4xl font-[900]"
+                src="https://media.licdn.com/dms/image/v2/D5603AQFzyWqci0rZZg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1727276436094?e=1757548800&v=beta&t=I4jfg9DTw-asPOoqTD_DcTsMOSOMBeW4c90diP36INM"
+                alt="Profile photo of Samuel Okwusiuno"
+                width={128}
+                height={128}
+                sizes="(min-width: 640px) 8rem, 6rem"
+              />
               <h3 className="text-xl sm:text-2xl font-[900] text-foreground mb-2">Samuel Okwusiuno</h3>
               <p className="text-sm sm:text-base font-[600] text-accent mb-4">Backend Developer & Data Engineer</p>
             </div>
@@ -162,15 +176,15 @@ export default function About() {
               Help Us Land Internships!
             </h2>
             <p className="text-sm sm:text-base md:text-lg font-[600] text-foreground max-w-3xl mx-auto mb-6 leading-relaxed">
-              We're two passionate Computer Science students actively seeking internship opportunities! 
-              If you know of any openings or would like to connect, we'd love to hear from you.
+              We&apos;re two passionate Computer Science students actively seeking internship opportunities! 
+              If you know of any openings or would like to connect, we&apos;d love to hear from you.
             </p>
           </div>
           
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-2xl mx-auto mb-8">
             <div className="bg-card-bg rounded-xl p-4 sm:p-6 border-2 border-success">
               <Heart className="h-8 w-8 sm:h-10 sm:w-10 text-success mx-auto mb-3" />
-              <h3 className="font-[800] text-foreground mb-2">What We're Looking For</h3>
+              <h3 className="font-[800] text-foreground mb-2">What We&apos;re Looking For</h3>
               <p className="text-xs sm:text-sm font-[600] text-muted">
                 Software Development, Web Development, Data Analysis, 
                 UI/UX Design, or any tech-related opportunities!
