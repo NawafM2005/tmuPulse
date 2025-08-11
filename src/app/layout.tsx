@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TMU Planner",
+  title: "TMU Pulse",
   description: "Plan your TMU Journey",
 };
 
