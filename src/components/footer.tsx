@@ -36,7 +36,7 @@ export default function Footer() {
       </ul>
       <div className="w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent"></div>
       <p className="text-center text-foreground text-[12px] sm:text-[11px] xs:text-[10px] px-3 max-w-3xl">
-        © 2025 TMU Planner. All rights reserved. This planner is independently developed and is not officially affiliated with Toronto Metropolitan University.
+        © 2025 TMU Pulse. All rights reserved. This planner is independently developed and is not officially affiliated with Toronto Metropolitan University.
       </p>
     </footer>
   );

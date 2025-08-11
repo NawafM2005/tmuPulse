@@ -37,7 +37,7 @@ export default function Feedback() {
       <div className="flex flex-col items-center justify-center p-8 w-full max-w-6xl gap-6 text-center mt-20">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[800] text-secondary">Feedback</h1>
         <p className="text-sm sm:text-base md:text-lg text-secondary max-w-4xl mx-auto">
-          Help us improve the TMU Planner by sharing your feedback and suggestions
+          Help us improve TMU Pulse by sharing your feedback and suggestions
         </p>
 
         <form

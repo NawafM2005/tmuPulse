@@ -15,7 +15,7 @@ export default function Loading() {
           <div className="relative bg-background/80 backdrop-blur-sm rounded-full p-6 border border-primary/20 shadow-2xl">
             <Image 
               src={tmuLogo} 
-              alt="TMU Planner Logo" 
+              alt="TMU Pulse Logo" 
               width={80}
               height={80}
               className="h-16 w-16 sm:h-20 sm:w-20 animate-bounce" 
@@ -26,7 +26,7 @@ export default function Loading() {
         {/* Loading text with modern typography */}
         <div className="text-center space-y-3">
           <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
-            TMU Planner
+            TMU Pulse
           </h2>
           <p className="text-muted font-medium text-sm sm:text-base animate-pulse">
             Loading your academic journey...

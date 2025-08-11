@@ -19,7 +19,7 @@ const releases: ReleaseNote[] = [
     version: '1.0.0',
     date: 'August 2025',
     title: 'Initial Release',
-    description: 'Welcome to TMU Planner! The ultimate academic planning tool built for TMU students.',
+    description: 'Welcome to TMU Pulse! The ultimate academic planning tool built for TMU students.',
     type: 'major',
     features: [
       'Interactive Degree Planner with drag-and-drop course placement',
@@ -75,7 +75,7 @@ export default function ReleasesPage() {
             <Sparkles className="h-8 w-8 text-primary animate-pulse" />
           </div>
           <p className="text-lg text-muted font-medium max-w-2xl mx-auto">
-            Stay updated with the latest features, improvements, and bug fixes in TMU Planner.
+            Stay updated with the latest features, improvements, and bug fixes in TMU Pulse.
           </p>
         </div>
 
@@ -195,7 +195,7 @@ export default function ReleasesPage() {
             </div>
             <p className="text-muted font-medium mb-6 max-w-2xl mx-auto">
               Have suggestions for new features or found a bug? We&apos;d love to hear from you!
-              TMU Planner is continuously evolving based on student feedback.
+              TMU Pulse is continuously evolving based on student feedback.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
