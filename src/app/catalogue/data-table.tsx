@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import search from "@/assets/search.png"
 import PopUp from "@/components/course-popup"
+import Image from "next/image"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -90,9 +91,11 @@ export function DataTable<TData, TValue>({
                 ">
                     {/* Search input section */}
                     <div className="relative flex-grow min-w-[200px] w-full md:w-auto">
-                    <img
-                        src={search.src}
+                    <Image
+                        src={search}
                         alt="Search"
+                        width={20}
+                        height={20}
                         className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 pointer-events-none"
                     />
                     <Input
