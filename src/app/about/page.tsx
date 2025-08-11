@@ -46,28 +46,29 @@ export default function About() {
                 src="https://media.licdn.com/dms/image/v2/D4D03AQEZayxZqLHNrw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1715755598733?e=1757548800&v=beta&t=mYuOMR6y0rPh44liOh6Dk8UlUPLvBgN8rO7MuJF3S7Q">
               </img>
               <h3 className="text-xl sm:text-2xl font-[900] text-foreground mb-2">Nawaf Mahmood</h3>
-              <p className="text-sm sm:text-base font-[600] text-accent mb-4">Full-Stack Developer & Software Engineer</p>
+              <p className="text-sm sm:text-base font-[600] text-accent mb-4">Full-Stack Developer</p>
             </div>
             
             <div className="space-y-4 mb-6">
               <div className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full"></span>
-                <span className="text-sm sm:text-base font-[600] text-foreground">Computer Science @ TMU (Expected June 2027)</span>
+                <span className="text-sm sm:text-base font-[600] text-foreground">B.S. Computer Science @ TMU — CGPA 4.0 (Expected June 2027)</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-accent rounded-full"></span>
-                <span className="text-sm sm:text-base font-[600] text-foreground">React, TypeScript, Next.js & Modern Web Development</span>
+                <span className="text-sm sm:text-base font-[600] text-foreground">Node.js, Express, PostgreSQL, Web Scraping, REST APIs</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-success rounded-full"></span>
-                <span className="text-sm sm:text-base font-[600] text-foreground">Node.js, Express, PostgreSQL & API Architecture</span>
+                <span className="text-sm sm:text-base font-[600] text-foreground">React, TypeScript, Next.js, Firebase, SwiftUI (iOS)</span>
               </div>
             </div>
             
             <p className="text-xs sm:text-sm font-[600] text-muted mb-6 leading-relaxed">
-              Experienced full-stack developer specializing in modern web technologies and scalable system architecture. 
-              Proven track record in building complex applications with React, developing robust APIs, and implementing 
-              efficient database solutions. Passionate about clean code, performance optimization, and creating seamless user experiences.
+              Engineered TMU Courses API — a public REST API serving structured data for 1,500+ courses across 100+ programs,
+              powered by automated web scrapers and published as an NPM package. Mentored 120+ students as a STEM Robotics &
+              Coding Coach, designing curriculum and improving average assessment scores by 30%. Passionate about clean APIs,
+              scalable systems, and polished user experiences.
             </p>
             
             <div className="flex justify-center gap-4">

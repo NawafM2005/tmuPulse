@@ -1,17 +1,12 @@
 import Navbar from "@/components/navbar";
-import logo from '@/assets/tmu-monkey-logo.png';
 import Footer from "@/components/footer";
 import FAQ from "@/components/faq";
 import Link from 'next/link';
-import degree from '@/assets/degree.png';
-import schedule from '@/assets/schedule.png';
 import transcriptmain from '@/assets/transcript-main.png';
-import transcript from '@/assets/transcript.png';
-import courses from '@/assets/courses.png';
-import lineChart from '@/assets/line-chart.png';
 import pieChart from '@/assets/pie-chart.png';
 import progress from '@/assets/progress.png';
 import catalogue from '@/assets/catalogue.png';
+import degree_more from '@/assets/degree_more.png';
 
 export default function Home() {
   return (
@@ -27,7 +22,7 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center relative">
                 {/* Line Chart */}
                 <img 
-                  src={lineChart.src} 
+                  src={degree_more.src} 
                   alt="Line Chart Screenshot" 
                   className="screenshot w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-2 hover:rotate-0 transition-transform duration-300 z-10"
                 />
@@ -69,7 +64,7 @@ export default function Home() {
                 <div className="flex items-center justify-center relative">
                   {/* Line Chart - left */}
                   <img 
-                    src={lineChart.src} 
+                    src={degree_more.src} 
                     alt="Line Chart Screenshot" 
                     className="screenshot max-w-96 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-2 hover:rotate-0 transition-transform duration-300 z-10"
                   />

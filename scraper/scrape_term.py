@@ -1,7 +1,6 @@
 from supabase import create_client
 from dotenv import load_dotenv
 import os
-
 load_dotenv()
 
 url = os.getenv("NEXT_PUBLIC_SUPABASE_URL")
@@ -26,10 +25,17 @@ with sync_playwright() as p:
 
     code = 123456
 
-    page.wait_for_selector('input[name="token"]', timeout=150_000)
-    page.fill('input[name="token"]', str(code))
-    page.click('label[for="remember-me"]')
-    page.click('input[type="submit"]')
+    try:
+        page.wait_for_selector('input[name="token"]', timeout=150_000)
+        page.fill('input[name="token"]', str(code))
+        # remember-me may not exist always; ignore failure
+        try:
+            page.click('label[for="remember-me"]')
+        except:
+            pass
+        page.click('input[type="submit"]')
+    except:
+        print("No 2FA step appeared-ski.")
 
     with page.expect_popup() as popup_info:
             page.click('a#tabLink_u13l1s1000')
@@ -48,51 +54,150 @@ with sync_playwright() as p:
 
     if target_frame is None:
         raise Exception("No Frame Found!!!")
+
+    # Get a list of all departments prefixes which are lists and fill below one by one for each one
+    response = (
+        supabase
+        .table('departments')
+        .select('*')
+        .order('id', desc=False)
+        .range(0, 999999)
+        .execute()
+    )
+    prefixes = []
+    for row in response.data:
+        if row["prefixes"]:
+            prefixes.extend(row["prefixes"])
     
-    target_frame.select_option('#CLASS_SRCH_WRK2_STRM\\$35\\$', value="1259")
-    target_frame.wait_for_timeout(1000)
+    # Fill the subject input with each prefix
+    for prefix in prefixes:
+        # TERM select (no win6)
+        target_frame.select_option('select[id*="CLASS_SRCH_WRK2_STRM"]', value="1261")
+        target_frame.wait_for_timeout(500)
 
-    target_frame.select_option('select[id^="SSR_CLSRCH_WRK_SSR_EXACT_MATCH1"]', value="G")
-    target_frame.wait_for_timeout(1000)
+        target_frame.fill('input[name="SSR_CLSRCH_WRK_SUBJECT$0"]', prefix)
+        target_frame.select_option('select[id*="SSR_CLSRCH_WRK_SSR_EXACT_MATCH1"]', value="G")
+        target_frame.wait_for_timeout(300)
 
-    target_frame.fill('input[name="SSR_CLSRCH_WRK_CATALOG_NBR$1"]', '0')
-    target_frame.wait_for_timeout(1000)
+        target_frame.fill('input[name="SSR_CLSRCH_WRK_CATALOG_NBR$1"]', '0')
+        target_frame.wait_for_timeout(300)
 
-    target_frame.select_option('select[id^="SSR_CLSRCH_WRK_ACAD_CAREER$2"]', value="UGRD")
-    target_frame.wait_for_timeout(1000)
+        target_frame.select_option('select[id*="SSR_CLSRCH_WRK_ACAD_CAREER$2"]', value="UGRD")
+        target_frame.wait_for_timeout(300)
 
-    target_frame.click('label[for="SSR_CLSRCH_WRK_SSR_OPEN_ONLY$3"]')
-    target_frame.wait_for_timeout(1000)
+        # Open Classes Only (use role/name rather than label id)
+        try:
+            target_frame.get_by_role("checkbox", name="Open Classes Only").check()
+        except:
+            # fallback to input by name
+            try:
+                target_frame.check('input[name="SSR_CLSRCH_WRK_SSR_OPEN_ONLY$3"]')
+            except:
+                pass
+        target_frame.wait_for_timeout(300)
 
-    target_frame.click('#win6divCLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH a')
-    target_frame.wait_for_timeout(1000)
+        # Click Search (no win6 selector)
+        try:
+            target_frame.get_by_role("button", name="Search").click()
+        except:
+            target_frame.locator('a.PSPUSHBUTTON.PSPRIMARY:has-text("Search")').click()
+        target_frame.wait_for_timeout(2000)
 
-    target_frame.click('#win6divPSTOOLBAR .PSPUSHBUTTON.PSPRIMARY')
+        # Handle "View All" button if it appears (for >50 results)
+        try:
+            # Wait for either results or a toolbar to render
+            target_frame.wait_for_selector('a[name^="SSR_CLSRSLT_WRK_GROUPBOX2"], div[id*="PSTOOLBAR"]', timeout=10000)
 
-    target_frame.wait_for_selector('a[name^="SSR_CLSRSLT_WRK_GROUPBOX2"]', timeout=999999)
+            view_all_clicked = False
+            # Preferred: role-based
+            try:
+                vb = target_frame.get_by_role("button", name="View All")
+                if vb.is_visible():
+                    vb.click()
+                    view_all_clicked = True
+            except:
+                pass
 
-    course_title_divs = target_frame.query_selector_all('div[id^="win6divSSR_CLSRSLT_WRK_GROUPBOX2GP"]')
+            # Fallbacks: exact text on primary pushbutton
+            if not view_all_clicked:
+                try:
+                    target_frame.locator('a.PSPUSHBUTTON.PSPRIMARY:has-text("View All")').first.click()
+                    view_all_clicked = True
+                except:
+                    pass
 
-    course_codes = []
-    for div in course_title_divs:
-        full_text = div.inner_text().replace('\xa0', ' ').strip()
-        code = full_text.split('-')[0].strip()
-        course_codes.append(code)
-
-    for code in course_codes:
-        result = supabase.table('courses').select('*').eq('code', code).execute()
-        if result.data:
-            course = result.data[0]
-            terms = course.get("term", [])
-            if not terms:
-                terms = []
-            if "Fall" not in terms:
-                terms.append("Fall")
-                supabase.table('courses').update({'term': terms}).eq('code', code).execute()
-                print(f"Updated {code} with 'Fall'")
+            if not view_all_clicked:
+                print(f"No View All button for {prefix} (≤50 results)")
             else:
-                print(f"{code} already got 'Fall'—skipping")
-        else:
-            print(f"Course {code} not found in Supabase! 🦧")
+                print(f"Clicked View All for {prefix}")
+        except:
+            print(f"No View All button for {prefix} (≤50 results)")
+
+        # Check if results appear within 10 seconds, if not skip to next prefix
+        try:
+            target_frame.wait_for_selector('a[name^="SSR_CLSRSLT_WRK_GROUPBOX2"]', timeout=10000)
+        except:
+            print(f"No results found for prefix {prefix} after 10 seconds - skipping")
+            # Go back to search page and continue with next prefix
+            try:
+                target_frame.get_by_role("button", name="New Search").click()
+            except:
+                popup.click('a#SCC_LO_FL_WRK_SCC_VIEW_BTN\\$3')
+            popup.wait_for_timeout(3000)
+            
+            # Re-acquire the target frame after navigation
+            target_frame = None
+            for frame in popup.frames:
+                if "CLASS_SEARCH.GBL" in frame.url:
+                    target_frame = frame
+                    break
+            
+            if target_frame is None:
+                print("Warning: Could not re-acquire target frame")
+                break
+            continue
+
+        # Grab course cards (no win6 in selector)
+        course_title_divs = target_frame.query_selector_all('div[id*="SSR_CLSRSLT_WRK_GROUPBOX2GP"]')
+
+        course_codes = []
+        for div in course_title_divs:
+            full_text = div.inner_text().replace('\xa0', ' ').strip()
+            code = full_text.split('-')[0].strip()
+            course_codes.append(code)
+
+        for code in course_codes:
+            result = supabase.table('courses').select('*').eq('code', code).execute()
+            if result.data:
+                course = result.data[0]
+                terms = course.get("term", [])
+                if not terms:
+                    terms = []
+                if "Winter" not in terms:
+                    terms.append("Winter")
+                    supabase.table('courses').update({'term': terms}).eq('code', code).execute()
+                    print(f"Updated {code} with 'Winter'")
+                else:
+                    print(f"{code} already got 'Winter'—skipping")
+            else:
+                print(f"Course {code} not found in Supabase! 🦧")
+        
+        # Go back to search page (use the real 'New Search' button)
+        try:
+            target_frame.get_by_role("button", name="New Search").click()
+        except:
+            popup.click('a#SCC_LO_FL_WRK_SCC_VIEW_BTN\\$3')  # fallback
+        popup.wait_for_timeout(3000)
+        
+        # Re-acquire the target frame after navigation
+        target_frame = None
+        for frame in popup.frames:
+            if "CLASS_SEARCH.GBL" in frame.url:
+                target_frame = frame
+                break
+        
+        if target_frame is None:
+            print("Warning: Could not re-acquire target frame")
+            break
 
     browser.close()
