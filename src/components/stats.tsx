@@ -205,7 +205,7 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
         };
 
         setUserStats(stats);
-        } catch (error) {
+        } catch (_error) {
             toast.error("An unexpected error occurred while fetching data");
         }
     };

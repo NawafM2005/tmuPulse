@@ -102,7 +102,7 @@ export default function ProgramSelector({
                 ))
               ) : (
                 <div className="p-3 text-gray-400 text-sm">
-                  No programs found matching "{searchTerm}"
+                  No programs found matching &quot;{searchTerm}&quot;
                 </div>
               )}
             </div>

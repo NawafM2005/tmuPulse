@@ -49,7 +49,7 @@ export function LoginForm({
         // Redirect to main page after successful login
         router.push("/")
       }
-    } catch (err) {
+    } catch (_err) {
       toast.error("An unexpected error occurred")
     } finally {
       setLoading(false)
@@ -68,7 +68,7 @@ export function LoginForm({
       if (error) {
         toast.error(error.message)
       }
-    } catch (err) {
+    } catch (_err) {
       toast.error("Failed to start Google sign-in")
     } finally {
       setLoading(false)

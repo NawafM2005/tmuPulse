@@ -15,7 +15,7 @@ export default function Planner() {
         <p className="text-sm sm:text-base md:text-lg lg:text-[20px] font-[400] text-foreground max-w-4xl px-2">
           Take control of your academic journey. Use the degree planner to map out
           future semesters, organize required courses, and stay on track for
-          graduation. Visualize your progress and plan what's next with clarity.
+          graduation. Visualize your progress and plan what&apos;s next with clarity.
         </p>
         
         {/* Show message for small devices (mobile phones) */}

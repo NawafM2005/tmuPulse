@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { Cloud, CloudOff, Save, Loader2, Check, AlertCircle } from 'lucide-react'
+import { CloudOff, Save, Loader2, Check, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 

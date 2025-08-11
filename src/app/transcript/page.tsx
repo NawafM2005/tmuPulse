@@ -1,9 +1,9 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import Navbar from "@/components/navbar";
-// @ts-ignore
+// @ts-ignore: pdfjsLib types not fully compatible with current setup
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf";
-import Footer from "@/components/footer";
+import _Footer from "@/components/footer";
 import Stats from "@/components/stats";
 
 interface Course {

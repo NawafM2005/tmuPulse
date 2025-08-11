@@ -194,7 +194,7 @@ export default function ReleasesPage() {
               <h3 className="text-2xl font-bold text-foreground">Stay Connected</h3>
             </div>
             <p className="text-muted font-medium mb-6 max-w-2xl mx-auto">
-              Have suggestions for new features or found a bug? We'd love to hear from you!
+              Have suggestions for new features or found a bug? We&apos;d love to hear from you!
               TMU Planner is continuously evolving based on student feedback.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

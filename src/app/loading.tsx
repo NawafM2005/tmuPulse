@@ -1,4 +1,5 @@
 import tmuLogo from '@/assets/tmu-monkey-logo.png';
+import Image from 'next/image';
 
 export default function Loading() {
   return (
@@ -12,9 +13,11 @@ export default function Loading() {
         <div className="relative mb-8">
           <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full blur-xl opacity-30 animate-pulse"></div>
           <div className="relative bg-background/80 backdrop-blur-sm rounded-full p-6 border border-primary/20 shadow-2xl">
-            <img 
-              src={tmuLogo.src} 
+            <Image 
+              src={tmuLogo} 
               alt="TMU Planner Logo" 
+              width={80}
+              height={80}
               className="h-16 w-16 sm:h-20 sm:w-20 animate-bounce" 
             />
           </div>

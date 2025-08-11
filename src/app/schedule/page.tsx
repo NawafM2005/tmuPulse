@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
 import logo from '@/assets/tmu-monkey-logo.png';
+import Image from 'next/image';
 
 export default function Schedule() {
 
@@ -14,7 +15,7 @@ export default function Schedule() {
         <p className="text-[20px] font-[400] text-foreground animate-pulse">
           Coming s00n...
         </p>
-        <img src={logo.src} alt="TMU Logo" className="h-20 w-20 animate-bounce"/>
+        <Image src={logo} alt="TMU Logo" width={80} height={80} className="h-20 w-20 animate-bounce"/>
       </div>
     </main>
   );

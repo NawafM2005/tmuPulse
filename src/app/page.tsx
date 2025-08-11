@@ -195,7 +195,7 @@ export default function Home() {
               </div>
               <h2 className="font-[800] text-xl mb-3 text-foreground group-hover:text-[#f5d60b] transition-colors duration-300">GPA Calculator</h2>
               <p className="text-sm text-muted font-[600] leading-relaxed">
-                Calculate your cumulative GPA using TMU's official 4.33 scale with detailed grade conversions.
+                Calculate your cumulative GPA using TMU&apos;s official 4.33 scale with detailed grade conversions.
               </p>
             </Link>
           </div>
@@ -220,7 +220,7 @@ export default function Home() {
             <span className="ml-auto text-yellow-500 text-lg">★★★★★</span>
           </div>
           <p className="italic text-gray-700 mt-5 font-[600]">
-            "As a TMU student juggling classes, clubs, and campus life, this app has seriously helped me stay on track. It's made organizing my schedule way less stressful, and I actually feel more on top of my work now. Definitely recommend for any students who want to stop feeling lost and start getting things done!"
+            &quot;As a TMU student juggling classes, clubs, and campus life, this app has seriously helped me stay on track. It&apos;s made organizing my schedule way less stressful, and I actually feel more on top of my work now. Definitely recommend for any students who want to stop feeling lost and start getting things done!&quot;
           </p>
         </div>
         <div className="bg-white rounded-2xl p-6 shadow flex-1 max-w-[700px] border-2 border-foreground text-black text-left">
@@ -237,7 +237,7 @@ export default function Home() {
             <span className="ml-auto text-yellow-500 text-lg">★★★★★</span>
           </div>
           <p className="italic text-gray-700 mt-5 font-[600]">
-            "As a TMU student, I've always found it challenging to track my academic progress across different semesters. The transcript parser completely changed that for me. It automatically extracts my course details and GPA from my transcript and organizes them in a clear, easy-to-understand dashboard. This has made degree planning and keeping track of my graduation requirements so much simpler. I highly recommend it to anyone who wants a smarter, stress-free way to manage their academic journey."
+            &quot;As a TMU student, I&apos;ve always found it challenging to track my academic progress across different semesters. The transcript parser completely changed that for me. It automatically extracts my course details and GPA from my transcript and organizes them in a clear, easy-to-understand dashboard. This has made degree planning and keeping track of my graduation requirements so much simpler. I highly recommend it to anyone who wants a smarter, stress-free way to manage their academic journey.&quot;
           </p>
         </div>
       </div>

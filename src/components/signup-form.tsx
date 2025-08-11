@@ -14,7 +14,7 @@ import { Toaster } from "@/components/ui/sonner"
 type SignupFormProps = React.ComponentProps<"div">
 
 export function SignupForm({ className, ...props }: SignupFormProps) {
-  const router = useRouter()
+  const _router = useRouter()
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [cPassword, setCPassword] = useState<string>("")
@@ -45,7 +45,7 @@ export function SignupForm({ className, ...props }: SignupFormProps) {
         toast.success("Check your email to confirm your account.")
         console.log("User signed up:", data)
       }
-    } catch (err) {
+    } catch (_err) {
       toast.error("An unexpected error occurred")
     } finally {
       setLoading(false)
@@ -64,7 +64,7 @@ export function SignupForm({ className, ...props }: SignupFormProps) {
       if (error) {
         toast.error(error.message)
       }
-    } catch (err) {
+    } catch (_err) {
       toast.error("Failed to start Google sign-in")
     } finally {
       setLoading(false)

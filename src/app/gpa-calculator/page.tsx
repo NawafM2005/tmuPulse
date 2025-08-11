@@ -102,7 +102,7 @@ export default function GPACalculator() {
             <div>
               <h3 className="text-lg font-[700] text-foreground mb-2">Calculation Formula:</h3>
               <ol className="list-decimal list-inside space-y-2 font-[600] text-muted">
-                <li>Multiply each grade's points by the course weight</li>
+                <li>Multiply each grade&apos;s points by the course weight</li>
                 <li>Add all the products together</li>
                 <li>Add all course weights together</li>
                 <li>Divide total grade points by total weights</li>
