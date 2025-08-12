@@ -84,7 +84,7 @@ export default function Navbar() {
 
         <Link href='/'>
             <div className="text-base md:text-xl font-bold flex flex-row hover:cursor-pointer items-center group transition-all duration-300">
-              <Image src={tmuLogo} alt="TMU Logo" width={32} height={32} className="h-8 w-8 md:h-15 md:w-15 transition-transform duration-300 group-hover:rotate-12" />
+              <Image src={tmuLogo} alt="TMU Logo" width={32} height={32} className="h-8 w-8 md:h-10 md:w-10 transition-transform duration-300 group-hover:rotate-12" />
               <p className="text-[#3375C2] transition-colors duration-300 group-hover:text-[#4285d4]">TMU</p>
               <p className="text-[#d1b608] transition-colors duration-300">pulse</p>
             </div>
