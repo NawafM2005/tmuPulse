@@ -1,9 +1,10 @@
 "use client"
 
 import React from 'react'
-import { CloudOff, Save, Loader2, Check, AlertCircle } from 'lucide-react'
+import { CloudOff, Save, Loader2, Check, AlertCircle, Settings } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 interface SaveBadgeProps {
   isLoading: boolean
@@ -12,6 +13,7 @@ interface SaveBadgeProps {
   lastSaved: Date | null
   user: any
   onManualSave: () => void
+  allowDataSaving?: boolean
   className?: string
 }
 
@@ -22,6 +24,7 @@ export function SaveBadge({
   lastSaved,
   user,
   onManualSave,
+  allowDataSaving,
   className
 }: SaveBadgeProps) {
   const formatTime = (date: Date) => {
@@ -56,6 +59,17 @@ export function SaveBadge({
       }
     }
 
+    // Check if user has disabled data saving
+    if (user && !allowDataSaving) {
+      return {
+        icon: <Settings className="h-4 w-4" />,
+        text: 'Enable data saving in dashboard',
+        variant: 'warning' as const,
+        clickable: true,
+        isSettingsLink: true
+      }
+    }
+
     if (hasUnsavedChanges) {
       return {
         icon: <AlertCircle className="h-4 w-4" />,
@@ -82,7 +96,32 @@ export function SaveBadge({
     }
   }
 
-  const { icon, text, variant, clickable } = getBadgeContent()
+  const { icon, text, variant, clickable, isSettingsLink } = getBadgeContent()
+
+  // If it's a settings link, render as a Link component
+  if (isSettingsLink) {
+    return (
+      <div className={cn(
+        "fixed bottom-4 right-4 z-50 transition-all duration-300",
+        className
+      )}>
+        <Link href="/dashboard">
+          <Button
+            variant="outline"
+            size="sm"
+            className={cn(
+              "flex items-center gap-2 px-3 py-2 rounded-full shadow-lg backdrop-blur-sm border-2",
+              "transition-all duration-300 hover:scale-105 hover:cursor-pointer",
+              "bg-amber-500/10 border-amber-500/30 text-amber-600 hover:bg-amber-500/20"
+            )}
+          >
+            {icon}
+            <span className="text-xs font-medium">{text}</span>
+          </Button>
+        </Link>
+      </div>
+    )
+  }
 
   return (
     <div className={cn(
@@ -91,7 +130,7 @@ export function SaveBadge({
     )}>
       <Button
         onClick={clickable ? onManualSave : undefined}
-        variant={variant}
+        variant={variant === 'warning' ? 'outline' : variant}
         size="sm"
         disabled={!clickable || isSaving}
         className={cn(
@@ -101,6 +140,7 @@ export function SaveBadge({
           variant === 'default' && "bg-green-500/10 border-green-500/30 text-green-600 hover:bg-green-500/20",
           variant === 'outline' && "bg-background/80 border-border hover:bg-accent",
           variant === 'secondary' && "bg-muted/80 border-muted-foreground/20",
+          variant === 'warning' && "bg-amber-500/10 border-amber-500/30 text-amber-600 hover:bg-amber-500/20",
           !clickable && "cursor-not-allowed"
         )}
       >

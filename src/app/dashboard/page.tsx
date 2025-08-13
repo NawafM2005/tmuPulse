@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Navbar from "@/components/navbar"
 import { supabase } from "@/lib/supabaseClient"
-import { User, Edit3, Save, X, Camera, Mail, Settings } from "lucide-react"
+import { User, Edit3, Save, X, Camera, Mail, Settings, Trash2, AlertTriangle, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -21,6 +21,9 @@ export default function Dashboard() {
   const [username, setUsername] = useState("")
   const [profileImageUrl, setProfileImageUrl] = useState("")
   const [isEditing, setIsEditing] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false)
+  const [allowDataSaving, setAllowDataSaving] = useState(true)
 
 
 
@@ -35,6 +38,7 @@ export default function Dashboard() {
       // Load saved profile data from user metadata
       setUsername(session.user.user_metadata?.display_name || session.user.email?.split('@')[0] || 'User')
       setProfileImageUrl(session.user.user_metadata?.profile_image_url || '')
+      setAllowDataSaving(session.user.user_metadata?.allow_data_saving !== false)
       setLoading(false)
     }
 
@@ -49,6 +53,7 @@ export default function Dashboard() {
           // Load saved profile data from user metadata
           setUsername(session.user.user_metadata?.display_name || session.user.email?.split('@')[0] || 'User')
           setProfileImageUrl(session.user.user_metadata?.profile_image_url || '')
+          setAllowDataSaving(session.user.user_metadata?.allow_data_saving !== false)
           setLoading(false)
         }
       }
@@ -65,7 +70,8 @@ export default function Dashboard() {
       const { data, error } = await supabase.auth.updateUser({
         data: {
           display_name: username,
-          profile_image_url: profileImageUrl
+          profile_image_url: profileImageUrl,
+          allow_data_saving: allowDataSaving
         }
       })
       
@@ -95,7 +101,8 @@ export default function Dashboard() {
       const { data, error } = await supabase.auth.updateUser({
         data: {
           display_name: username,
-          profile_image_url: profileImageUrl
+          profile_image_url: profileImageUrl,
+          allow_data_saving: allowDataSaving
         }
       })
       
@@ -115,6 +122,40 @@ export default function Dashboard() {
     }
   }
 
+  const handleDataSavingChange = async (value: boolean) => {
+    if (!user) return
+    
+    setAllowDataSaving(value)
+    
+    try {
+      const { data, error } = await supabase.auth.updateUser({
+        data: {
+          display_name: username,
+          profile_image_url: profileImageUrl,
+          allow_data_saving: value
+        }
+      })
+      
+      if (error) {
+        console.error('Error updating data saving preference:', error)
+        toast.error("Failed to update preference. Please try again.")
+        // Revert the state if there was an error
+        setAllowDataSaving(!value)
+      } else {
+        toast.success(`Data saving ${value ? 'enabled' : 'disabled'}!`)
+        // Update the local user state with the new data
+        if (data.user) {
+          setUser(data.user)
+        }
+      }
+    } catch (error) {
+      console.error('Error saving data preference:', error)
+      toast.error("Failed to save preference. Please try again.")
+      // Revert the state if there was an error
+      setAllowDataSaving(!value)
+    }
+  }
+
   if (loading) {
     return (
       <main className="flex flex-col min-h-screen bg-gradient-to-br from-background via-background to-accent/5">
@@ -124,6 +165,48 @@ export default function Dashboard() {
         </div>
       </main>
     )
+  }
+
+  const handleDeleteAccount = async () => {
+    if (!user) return
+
+    try {
+      setDeleteLoading(true)
+      
+      // Get the current session token
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+      
+      if (sessionError || !session?.access_token) {
+        toast.error("Authentication error. Please try logging in again.")
+        return
+      }
+
+      // Call your delete endpoint
+      const response = await fetch('/api/delete-account', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        }
+      })
+      
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to delete account')
+      }
+      
+      // Sign out and redirect
+      await supabase.auth.signOut()
+      toast.success("Account deleted successfully")
+      router.push('/')
+      
+    } catch (error) {
+      console.error('Error deleting account:', error)
+      toast.error("Failed to delete account. Please try again.")
+    } finally {
+      setDeleteLoading(false)
+      setShowDeleteConfirm(false)
+    }
   }
 
   return (
@@ -239,6 +322,50 @@ export default function Dashboard() {
                     Enter a URL to display your custom profile image.
                   </p>
                 </div>
+
+                {/* Permission to save data*/}
+                <div className="pt-6 border-t border-border/20">
+                  <Label className="text-base font-semibold text-foreground flex items-center gap-2 mb-4">
+                    <CheckCircle className={`h-4 w-4 ${allowDataSaving ? 'text-green-500' : 'text-gray-400'}`} />
+                    Data Saving Preferences
+                  </Label>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Allow TMU Pulse to save your academic progress and course selections for a personalized experience.
+                  </p>
+                  
+                  {/* Toggle Switch */}
+                  <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-background/50 to-background/30 border border-border/50">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-3 h-3 rounded-full ${allowDataSaving ? 'bg-green-500' : 'bg-red-500'} animate-pulse`}></div>
+                      <div>
+                        <span className="text-sm font-medium text-foreground">Data Saving</span>
+                        <p className="text-xs text-muted-foreground">
+                          {allowDataSaving ? 'Your progress will be saved' : 'Operating in private mode'}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Custom Toggle Switch */}
+                    <button
+                      onClick={() => handleDataSavingChange(!allowDataSaving)}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full hover:cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 hover:scale-105 ${
+                        allowDataSaving
+                          ? 'bg-gradient-to-r from-green-500 to-green-600 shadow-lg shadow-green-500/25'
+                          : 'bg-gray-300 dark:bg-gray-600 shadow-inner'
+                      }`}
+                      role="switch"
+                      aria-checked={allowDataSaving}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-all duration-300 shadow-lg ${
+                          allowDataSaving 
+                            ? 'translate-x-6 shadow-green-200' 
+                            : 'translate-x-1 shadow-gray-400'
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -288,6 +415,42 @@ export default function Dashboard() {
                   <div className="flex items-center justify-center gap-2">
                     <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                     <span className="text-sm text-green-600 font-medium">Active Student</span>
+                  </div>
+
+                  {/* Delete Account Section */}
+                  <div className="pt-6 flex flex-col items-center">      
+                    {!showDeleteConfirm ? (
+                      <Button
+                        onClick={() => setShowDeleteConfirm(true)}
+                        variant="outline"
+                        className="w-full h-12 rounded-xl border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive transition-all duration-300 hover:cursor-pointer hover:bg-red-400 hover:text-white"
+                      >
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Delete Account
+                      </Button>
+                    ) : (
+                      <div className="space-y-4 p-4 bg-destructive/5 border border-destructive/20 rounded-xl">
+                        <p className="text-sm text-destructive font-medium text-red-500 animate-pulse">
+                          ⚠️ This action cannot be undone. This will permanently delete your account and all associated data.
+                        </p>
+                        <div className="flex gap-3">
+                          <Button
+                            onClick={handleDeleteAccount}
+                            className="flex-1 h-10 bg-red-400 text-white hover:bg-destructive/90 text-destructive-foreground hover:cursor-pointer hover:opacity-80"
+                            disabled={deleteLoading}
+                          >
+                            {deleteLoading ? "Deleting..." : "Yes, Delete Account"}
+                          </Button>
+                          <Button
+                            onClick={() => setShowDeleteConfirm(false)}
+                            variant="outline"
+                            className="flex-1 h-10 hover:cursor-pointer"
+                          >
+                            Cancel
+                          </Button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 

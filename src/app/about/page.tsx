@@ -16,10 +16,6 @@ export default function About() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[900] text-foreground mb-6">
             About the <span className="text-accent">Creators</span>
           </h1>
-          <p className="text-sm sm:text-base md:text-lg font-[600] text-foreground max-w-4xl mx-auto">
-            Meet the passionate students who built this platform to help fellow students 
-            navigate their academic journey with ease and style.
-          </p>
         </div>
 
         {/* Story Section */}

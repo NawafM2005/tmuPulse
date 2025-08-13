@@ -28,7 +28,7 @@ interface Course {
   open?: string;
   title?: string;
   credits?: number;
-  term?: string[]; // Add term data
+  term?: string[];
   category:
     | "core"
     | "elective"
@@ -79,6 +79,7 @@ export default function DegreePlanner() {
   const [availableStreams, setAvailableStreams] = useState<any>({});
   const [originalSemesterPlans, setOriginalSemesterPlans] = useState<SemesterPlan[]>([]);
   const [user, setUser] = useState<any>(null);
+  const [allowDataSaving, setAllowDataSaving] = useState<boolean>(false);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
@@ -90,8 +91,13 @@ export default function DegreePlanner() {
         // Check if user is logged in
         const { data: { user } } = await supabase.auth.getUser();
         setUser(user);
+        
+        // Set data saving preference from user metadata (default to true)
+        if (user?.user_metadata) {
+          setAllowDataSaving(user.user_metadata.allow_data_saving !== false);
+        }
 
-        if (user) {
+        if (user && user.user_metadata?.allow_data_saving !== false) {
           // Logged in: Fetch user's programs first, then merge with defaults
           const { data: userPrograms, error: userError } = await supabase
             .from("user_programs")
@@ -162,7 +168,7 @@ export default function DegreePlanner() {
     [programs]
   );
 
-  // Fetch courses from Supabase (like catalogue)
+  // Fetch courses from Supabase
   useEffect(() => {
     const fetchCourses = async () => {
       setLoading(true);
@@ -271,6 +277,12 @@ export default function DegreePlanner() {
   // Function to save user's program state (preserves stream structure)
   const saveUserProgram = async () => {
     if (!user || !selectedProgram) return;
+    
+    // Check if user has allowed data saving
+    if (!allowDataSaving) {
+      console.log('Data saving is disabled for this user');
+      return;
+    }
 
     try {
       setSaveStatus('saving');
@@ -461,8 +473,8 @@ export default function DegreePlanner() {
       const hasCompletedCourses = completedCourses.size > 0;
       const hasSelectedStream = selectedStream.length > 0;
       
-      // Only save if user has actually made changes to the planner
-      if (hasPlacedCourses || hasCompletedCourses || hasSelectedStream) {
+      // Only save if user has actually made changes to the planner AND has allowed data saving
+      if ((hasPlacedCourses || hasCompletedCourses || hasSelectedStream) && allowDataSaving) {
         setHasUnsavedChanges(true);
         const timeoutId = setTimeout(() => {
           saveUserProgram();
@@ -475,16 +487,33 @@ export default function DegreePlanner() {
 
   // Handle auto-save when unsaved changes are detected
   useEffect(() => {
-    if (hasUnsavedChanges && user && selectedProgram) {
+    if (hasUnsavedChanges && user && selectedProgram && allowDataSaving) {
       const timeoutId = setTimeout(() => {
         saveUserProgram();
       }, 1500); // Debounce saves by 1.5 seconds
 
       return () => clearTimeout(timeoutId);
     }
-  }, [hasUnsavedChanges]);
+  }, [hasUnsavedChanges, allowDataSaving]);
 
-  // === 🦍 UPDATED LOGIC FOR SEMESTER REQUIREMENTS ===
+  // Monitor auth state changes to update data saving preference
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (session?.user) {
+          setUser(session.user);
+          // Update data saving preference when user metadata changes
+          setAllowDataSaving(session.user.user_metadata?.allow_data_saving !== false);
+        } else {
+          setUser(null);
+          setAllowDataSaving(true); // Default for anonymous users
+        }
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   const handleProgramSelect = async (programName: string, skipSave = false) => {
     setSelectedProgram(programName);
     
@@ -503,7 +532,6 @@ export default function DegreePlanner() {
       setOriginalSemesterPlans([]);
     }
 
-    // For user programs with streams, we need to use the original structure to get stream info
     const sourceData = program.isUserCustomized && program.originalSemesters ? 
       { ...program, semesters: program.originalSemesters } : program;
 
@@ -526,9 +554,7 @@ export default function DegreePlanner() {
     });
     setAvailableStreams(allStreams);
 
-    // For user programs, if they have a selected stream, we need to build from original + expand stream
     if (program.isUserCustomized && program.selected_stream && program.originalSemesters) {
-      // Build original structure first BUT use the user's saved semesters data for placed courses
       const originalPlans: SemesterPlan[] = program.originalSemesters.map(
         (semester: any, semesterIndex: number) => {
           const regularRequirements: RequirementSlot[] = [];
@@ -2242,16 +2268,16 @@ export default function DegreePlanner() {
         </DragOverlay>
       </div>
     </DndContext>
-
-    {/* Save Badge Component */}
-    <SaveBadge
-      isLoading={loading}
-      isSaving={saveStatus === 'saving'}
-      hasUnsavedChanges={hasUnsavedChanges}
-      lastSaved={lastSaved}
-      user={user}
-      onManualSave={saveUserProgram}
-    />
+    
+      <SaveBadge
+        isLoading={loading}
+        isSaving={saveStatus === 'saving'}
+        hasUnsavedChanges={hasUnsavedChanges}
+        lastSaved={lastSaved}
+        user={user}
+        onManualSave={saveUserProgram}
+        allowDataSaving={allowDataSaving}
+      />
 
     {/* COURSE POPUP */}
     <PopUp open={showPopup} course={popupCourse} onClose={handleClosePopup} />
