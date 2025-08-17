@@ -67,7 +67,7 @@ export default function About() {
             </div>
             
             <p className="text-xs sm:text-sm font-[600] text-muted mb-6 leading-relaxed">
-             I'm skilled in full-stack development, with experience across Java, Python, JavaScript/TypeScript, Swift, SQL, and HTML/CSS. 
+             I&apos;m skilled in full-stack development, with experience across Java, Python, JavaScript/TypeScript, Swift, SQL, and HTML/CSS. 
              I work with frameworks and tools like React, Next.js, Node.js, Express, PostgreSQL, Firebase, Supabase, and Tailwind CSS, focusing on building scalable apps with clean design and real-time performance. 
              My strengths include developing responsive web and iOS applications, designing efficient databases and APIs, integrating external APIs, and applying strong foundations in algorithms, object-oriented programming, and statistics.
             </p>
