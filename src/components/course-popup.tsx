@@ -50,7 +50,7 @@ function parseTimeToMinutes(t?: string): number {
   // formats like "8:00AM" or "3:00PM"
   const m = t.match(/^(\d{1,2}):(\d{2})(AM|PM)$/i);
   if (!m) return 24 * 60;
-  let [_, hh, mm, ap] = m;
+  const [_, hh, mm, ap] = m;
   let H = parseInt(hh, 10) % 12;
   if (ap.toUpperCase() === "PM") H += 12;
   return H * 60 + parseInt(mm, 10);
