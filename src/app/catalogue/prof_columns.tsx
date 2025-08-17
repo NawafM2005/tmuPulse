@@ -27,7 +27,7 @@ export const professorColumns: ColumnDef<Professor>[] = [
             const first = row.getValue("first_name") as string;
             const last = row.original?.last_name || "";
             return (
-                <span className="font-medium">{first} {last}</span>
+                <span className="font-medium text-sm">{first} {last}</span>
             );
         },
     },
