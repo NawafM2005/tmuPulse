@@ -34,28 +34,27 @@ const releases: ReleaseNote[] = [
     improvements: []
   },
   {
-    version: '1.0.1',
-    date: 'August 2025',
-    title: 'Rate My Prof Integration',
-    description: 'Bringing professor insights directly into TMU Pulse! You can now see prof ratings, departments, and courses they have taught.',
-    type: 'major',
-    features: [
-      'Integrated Rate My Prof data with professor ratings and reviews',
-      'Each course now displays professors who have taught it',
-      'Professor profiles include average rating, difficulty, would-take-again %, and courses taught',
-    ],
-    improvements: [
-      'Performance optimizations when fetching course + professor data',
-      'Added option to share data with TMUpulse to save your degree plan',
-      'Added Delete Account Option'
-    ]
-  }
-];
+  version: '1.0.1',
+  date: 'August 2025',
+  title: 'Rate My Prof and Class Times Integration',
+  description: 'Professor insights, ratings, and class times are now built directly into TMU Pulse!',
+  type: 'major',
+  features: [
+    'New Professors section added to the Catalogue',
+    'Seamless Rate My Prof integration with ratings and written reviews',
+    'Courses now display the professors who have taught them',
+    'Detailed professor profiles with average rating, difficulty, would-take-again %, and full course history',
+    'Class times are now displayed directly in course popups',
+  ],
+  improvements: [
+    'Faster performance when loading course and professor data',
+    'Option to securely share data with TMU Pulse to save your degree plan',
+    'Added Delete Account option for full account control',
+  ]
+}
+]  
 
-/** --- helpers to ensure newest on top and pretty timeline --- */
 function parseLooseDate(input: string) {
-  // Handles "August 2025" or "Aug 16, 2025" etc.
-  // If month + year only, tack on day 1 for stable parsing.
   const needsDay = /^\w+\s+\d{4}$/.test(input);
   return new Date(needsDay ? `${input} 1` : input);
 }
@@ -164,7 +163,7 @@ export default function ReleasesPage() {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h2 className="text-2xl md:text-3xl font-black text-foreground">
+                            <h2 className="text-2xl md:text-2xl font-black text-foreground">
                               {release.title}
                             </h2>
                             <span

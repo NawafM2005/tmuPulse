@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Navbar from "@/components/navbar";
-import { Course, columns } from "./columns";
+import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { ProgramSelector } from "./department-selector";
 import { supabase } from "@/lib/supabaseClient";
@@ -12,6 +12,9 @@ import { X } from "lucide-react";
 import Footer from "@/components/footer";
 import { Professor, professorColumns } from "./prof_columns";
 import { ProfessorDataTable } from "./prof-table";
+import type { Course } from "@/types/course";
+import { Section } from "@/types/course";
+
 
 // Define the Supabase Course type
 type SupabaseCourse = {
@@ -30,6 +33,7 @@ type SupabaseCourse = {
   department_id: number;
   liberal: string;
   term: string[];
+  sections: Section[];
 }
 
 // Define the Department type
@@ -124,7 +128,8 @@ export default function Catalogue() {
           antirequisites: course.antirequisites,
           "custom requisites": course.custom_requisites,
           liberal: course.liberal,
-          term: course.term
+          term: course.term,
+          sections: course.sections || [],
         }));
           setCourses(transformedCourses);
         }
