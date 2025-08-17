@@ -1,11 +1,26 @@
+import { supabase } from "@/lib/supabaseClient";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import ProfPopUp from "@/components/prof-popup"
 
 type popup_types = {
   open: boolean;
   onClose: () => void;
   children?: React.ReactNode;
   course?: any;
+};
+
+export type Professor = {
+    rmf_id: string;
+    legacy_id: number;
+    first_name: string;
+    last_name: string;
+    department: string;
+    avg_rating: string;
+    num_ratings: number;
+    would_take_again_percent: string;
+    avg_difficulty: string;
 };
 
 function formatTermCommas(term?: string | string[]): string {
@@ -26,6 +41,67 @@ function formatLiberal(lib?: string): string {
 }
 
 export default function PopUp({ open, onClose, course }: popup_types) {
+  const [profs, setProfs] = useState<Professor[]>([]);
+  const [showPopup, setShowPopup] = React.useState(false);
+  const [popupRowData, setPopupRowData] = React.useState<any>(null);
+
+  useEffect(() => {
+      if (!course?.code) {
+        setProfs([]);
+        return;
+      }
+      const fetchProfs = async () => {
+        try {
+          const { data, error } = await supabase
+            .from('professors')
+            .select('*')
+            .contains('courses_taught', [course.code])
+            .order('avg_rating', { ascending: false });
+  
+          if (error) {
+            console.error('Error fetching professors:', error);
+            setProfs([]);
+          } else {
+            setProfs(data || []);
+          }
+        } catch (error) {
+          console.error('Error fetching professors:', error);
+          setProfs([]);
+        }
+      };
+
+      fetchProfs();
+    }, [course?.code]);
+
+    useEffect(() => {
+      if (!open) return;
+
+      // Remember current scroll, then lock the page
+      const scrollY = window.scrollY;
+      const prevOverflow = document.body.style.overflow;
+      const prevPosition = document.body.style.position;
+      const prevTop = document.body.style.top;
+      const prevWidth = document.body.style.width;
+      const prevOb = document.documentElement.style.overscrollBehavior;
+
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      // helps on mobile: stop bounce/overscroll propagation
+      document.documentElement.style.overscrollBehavior = 'contain';
+
+      return () => {
+        // Restore styles + scroll position
+        document.body.style.overflow = prevOverflow;
+        document.body.style.position = prevPosition;
+        document.body.style.top = prevTop;
+        document.body.style.width = prevWidth;
+        document.documentElement.style.overscrollBehavior = prevOb;
+        window.scrollTo(0, scrollY);
+      };
+    }, [open]);
+
   return (
     <AnimatePresence>
       {open && (
@@ -155,6 +231,42 @@ export default function PopUp({ open, onClose, course }: popup_types) {
                   </div>
                 </>
               )}
+              <div>
+                <h3 className="font-[800] text-sm sm:text-base text-foreground mb-4">Professors</h3>
+                {profs.length > 0 ? (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    {profs.map((prof) => (
+                      <div
+                        key={prof.rmf_id}
+                        className="bg-card-hover rounded-lg p-3 border border-input-border flex flex-col items-center text-center hover:cursor-pointer hover:shadow-md hover:scale-105 transition-all duration-200"
+                        onClick={() => {
+                          setShowPopup(true);
+                          setPopupRowData(prof);
+                        }}
+                      >
+                        <h4 className="font-[700] text-xs sm:text-sm text-foreground mb-1 truncate w-full">
+                          {prof.first_name} {prof.last_name}
+                        </h4>
+                        <p className="text-[10px] sm:text-xs text-muted mb-1 truncate w-full">
+                          {prof.department || "No dept"}
+                        </p>
+                        <div className="flex flex-col items-center">
+                          <span className="text-[10px] sm:text-xs text-muted">Avg Rating</span>
+                          <span className="text-[11px] sm:text-xs font-semibold text-foreground">
+                            {isNaN(parseFloat(prof.avg_rating))
+                              ? "N/A"
+                              : parseFloat(prof.avg_rating).toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                    <ProfPopUp open={showPopup} prof={popupRowData} onClose={() => setShowPopup(false)}></ProfPopUp>
+                  </div>
+                ) : (
+                  <p className="text-xs sm:text-sm text-muted">No professors available for this course</p>
+                )}
+                
+              </div>
             </div>
           </motion.div>
         </div>

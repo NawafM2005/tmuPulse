@@ -301,7 +301,7 @@ export default function Navbar() {
                     </Link>
                     <button
                       onClick={handleSignOut}
-                      className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 font-bold text-center text-white hover:shadow-lg relative overflow-hidden group"
+                      className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 font-bold text-center text-white hover:shadow-lg relative overflow-hidden group hover:cursor-pointer"
                     >
                       <LogOut size={16} className="relative z-10" />
                       <span className="relative z-10">Sign Out</span>

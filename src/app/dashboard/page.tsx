@@ -181,7 +181,6 @@ export default function Dashboard() {
         return
       }
 
-      // Call your delete endpoint
       const response = await fetch('/api/delete-account', {
         method: 'DELETE',
         headers: {
@@ -324,7 +323,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Permission to save data*/}
-                <div className="pt-6 border-t border-border/20">
+                <div className="pt-6">
                   <Label className="text-base font-semibold text-foreground flex items-center gap-2 mb-4">
                     <CheckCircle className={`h-4 w-4 ${allowDataSaving ? 'text-green-500' : 'text-gray-400'}`} />
                     Data Saving Preferences

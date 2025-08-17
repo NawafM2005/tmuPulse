@@ -21,7 +21,7 @@ interface ProgramSelectorProps {
   onClearSelection?: () => void
 }
 
-export function ProgramSelector({ label = "Programs", programs, selectedPrograms, onProgramToggle, onClearSelection }: ProgramSelectorProps) {
+export function ProgramSelector({ label = "Department", programs, selectedPrograms, onProgramToggle, onClearSelection }: ProgramSelectorProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 

@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-type Option = {
+export type Option = {
   value: string
   label: string
 }

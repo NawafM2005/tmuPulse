@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-background/80 backdrop-blur-xl text-foreground py-4 flex flex-col items-center gap-3 w-full text-[13px] sm:text-[12px] xs:text-[11px] border-t-2 border-secondary shadow-lg shadow-black/5 z-50">
+    <footer className="bg-background/80 backdrop-blur-xl text-foreground py-4 flex flex-col items-center gap-3 w-full text-[13px] sm:text-[12px] xs:text-[11px] border-t-2 border-secondary shadow-lg shadow-black/5 z-10">
       <div className="group cursor-pointer transition-all duration-300 hover:scale-105">
         <Image src={logo} alt="TMU Logo" width={32} height={32} className="h-8 w-8 xs:h-6 xs:w-6 transition-transform duration-300 group-hover:rotate-12 drop-shadow-md" />
       </div>

@@ -143,7 +143,7 @@ export default function Home() {
               </div>
               <h2 className="font-[800] text-xl mb-3 text-foreground group-hover:text-primary transition-colors duration-300">Course Catalogue</h2>
               <p className="text-sm text-muted font-[600] leading-relaxed">
-                Browse all TMU courses, prerequisites, and detailed descriptions in one organized place.
+                Browse all TMU courses and professors, including prerequisites, ratings, and detailed descriptions in one organized place.
               </p>
             </Link>
             
