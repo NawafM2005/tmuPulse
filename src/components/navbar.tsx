@@ -105,9 +105,9 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/transcript" className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 hover:shadow-md relative overflow-hidden group">
-                <span className="relative z-10">Transcript Analyser</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#f5d60b]/0 to-[#ffeb3b]/0 group-hover:from-[#f5d60b]/20 group-hover:to-[#ffeb3b]/20 transition-all duration-300 rounded-xl"></div>
+              <Link href="/schedule" className="p-1 md:p-2 rounded-xl hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:text-black transition-all duration-300 hover:shadow-md relative overflow-hidden group">
+                <span className="relative z-10">Schedule Builder</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 to-yellow-500/0 group-hover:from-yellow-400/20 group-hover:to-yellow-500/20 transition-all duration-300 rounded-xl"></div>
               </Link>
             </li>
             <li>
@@ -140,12 +140,12 @@ export default function Navbar() {
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
-                    className="text-foreground bg-transparent hover:bg-gray-500/20 hover:text-gray-600 dark:hover:text-gray-400 focus:bg-gray-500/20 focus:text-gray-600 dark:focus:text-gray-400 hover:cursor-not-allowed opacity-50 rounded-lg mx-1 my-1 transition-all duration-200 w-full text-center"
-                    disabled
+                    className="p-2 rounded-xl hover:cursor-pointer hover:bg-yellow-500/20 hover:text-yellow-600 dark:hover:text-yellow-400 focus:bg-yellow-500/20 focus:text-yellow-600 dark:focus:text-yellow-400 transition-all duration-300 w-full"
                   >
-                    Schedule Builder
+                    <Link href="/transcript" className="w-full text-center">
+                      <span className="relative z-10">Transcript Analyser</span>
+                    </Link>
                   </DropdownMenuItem>
-  
                 </DropdownMenuContent>
               </DropdownMenu>
             </li>
@@ -240,11 +240,11 @@ export default function Navbar() {
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
             </Link>
             <Link 
-              href="/transcript" 
+              href="/schedule" 
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
+              className="p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
             >
-              <span className="relative z-10">Transcript Analyser</span>
+              <span className="relative z-10">Schedule Builder</span>
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
             </Link>
             <Link 
@@ -271,12 +271,15 @@ export default function Navbar() {
               <span className="relative z-10">Release Notes</span>
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
             </Link>
-            <div 
-              className="p-2.5 rounded-xl hover:bg-gray-600/50 hover:cursor-not-allowed transition-all duration-300 text-white font-bold text-center opacity-50 relative"
+            <Link 
+              href="/transcript" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
             >
-              <span className="relative z-10">Schedule Builder (Coming Soon)</span>
-            </div>
-            
+              <span className="relative z-10">Transcript Analyser</span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+            </Link>
+
             <div className="border-t border-gray-500/50 pt-3 space-y-2 mt-4">
               <Link 
                 href="/feedback" 

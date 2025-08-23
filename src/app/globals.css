@@ -46,8 +46,6 @@
   --overlay: #00000080;
 }
 
-
-
 /* 3️⃣ Link CSS vars to Tailwind theme utilities */
 @theme inline {
   --color-primary: var(--primary);
@@ -72,28 +70,277 @@
 
 /* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
-  width: 7px;              /* scrollbar width */
-  height: 7px;             /* horizontal scrollbar */
+  width: 3px;
+  height: 7px;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #F9DD4A;        /* scrollbar color */
-  border-radius: 8px;      /* roundness */
-  border: 1px solid #1c1c1c71; 
+  background: #F9DD4A;
+  border-radius: 8px;
+  border: 1px solid #1c1c1c71;
 }
 
 /* Custom animations for loading page */
 @keyframes spin-reverse {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+.animate-reverse { animation: spin-reverse 1s linear infinite; }
+
+/* ======================== */
+/* FullCalendar: Base theme */
+/* ======================== */
+.tmupulse-cal .fc {
+  /* Typography & base */
+  --fc-bg: hsl(var(--background, 0 0% 100%));
+  --fc-fg: hsl(var(--foreground, 222 47% 11%));
+  --fc-muted: hsl(var(--muted-foreground, 215 16% 47%));
+  /* original fallback uses an undefined --border; we’ll override below anyway */
+  --fc-border: hsl(var(--border, 214 32% 91%));
+  --fc-primary: hsl(var(--primary, 221 83% 53%));
+  --fc-primary-weak: hsl(var(--primary, 221 83% 53%) / 0.08);
+
+  color: var(--fc-fg);
+  background: transparent;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 
-.animate-reverse {
-  animation: spin-reverse 1s linear infinite;
+.tmupulse-cal .fc { --fc-border: rgba(0, 0, 0, 0.26); }          /* bump to .30 for more contrast */
+.dark .tmupulse-cal .fc { --fc-border: rgba(255, 255, 255, 0.24); }
+
+/* Header / Toolbar */
+.tmupulse-cal .fc .fc-toolbar {
+  padding: 8px 8px 4px;
+  gap: 8px;
+  align-items: center;
+}
+.tmupulse-cal .fc .fc-toolbar-title {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+.tmupulse-cal .fc .fc-button {
+  background: var(--fc-primary-weak);
+  color: var(--fc-fg);
+  border: none;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-weight: 600;
+  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  transition: transform .12s ease, background .15s ease, box-shadow .15s ease;
+  cursor: pointer;
+}
+.tmupulse-cal .fc .fc-button:hover {
+  background: hsl(var(--primary, 221 83% 53%) / 0.14);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,.06);
+}
+.tmupulse-cal .fc .fc-button:active { transform: translateY(0); }
+.tmupulse-cal .fc .fc-button-primary:not(:disabled).fc-button-active,
+.tmupulse-cal .fc .fc-button-primary:not(:disabled):active {
+  background: hsl(var(--primary, 221 83% 53%) / 0.22);
+  color: var(--fc-fg);
+}
+
+/* Column headers (Mon–Sun) */
+.tmupulse-cal .fc .fc-col-header {
+  background: transparent;
+  border: 0;
+}
+.tmupulse-cal .fc .fc-col-header-cell {
+  padding: 6px 0 8px;
+  border-bottom: 1px solid var(--fc-border);
+  color: var(--fc-muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Grid & slot lines */
+.tmupulse-cal .fc .fc-timegrid-slot {
+  height: 40px;               /* super compact rowski */
+  border-bottom-color: var(--fc-border);
+  border-bottom-width: 1px;
+}
+.tmupulse-cal .fc .fc-timegrid-slots tr:nth-child(2n) td {
+  background-color: rgba(0,0,0,0.015);
+}
+
+/* Time labels on the left */
+.tmupulse-cal .fc .fc-timegrid-axis-cushion {
+  color: var(--fc-muted);
+  font-size: 12px;
+  padding-right: 6px;
+}
+
+/* Today highlight */
+.tmupulse-cal .fc .fc-day-today { background: hsl(var(--primary, 221 83% 53%) / 0.06); }
+.tmupulse-cal .fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number,
+.tmupulse-cal .fc .fc-col-header-cell.fc-day-today {
+  color: hsl(var(--primary, 221 83% 53%));
+}
+
+/* Now indicator */
+.tmupulse-cal .fc .fc-timegrid-now-indicator-line {
+  border-color: hsl(var(--primary, 221 83% 53%));
+  border-width: 2px;
+}
+.tmupulse-cal .fc .fc-timegrid-now-indicator-arrow {
+  border-color: transparent transparent hsl(var(--primary, 221 83% 53%)) transparent;
+}
+
+/* Events */
+.tmupulse-cal .fc .fc-event {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0,0,0,.08);
+}
+.tmupulse-cal .fc .fc-v-event .fc-event-main {
+  padding: 6px 8px;
+  font-size: 12px;
+  line-height: 1.15;
+}
+.tmupulse-cal .fc .fc-event:hover {
+  filter: saturate(1.05);
+  transform: translateY(-1px);
+  transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+  box-shadow: 0 10px 20px rgba(0,0,0,.10);
+}
+
+/* Make long titles wrap cleanly (generic) */
+.tmupulse-cal .fc .fc-event-title,
+.tmupulse-cal .fc .fc-event-time {
+  white-space: normal;
+}
+
+/* Scrollbars (webkit) */
+.tmupulse-cal .fc .fc-scroller-liquid-absolute::-webkit-scrollbar { width: 10px; }
+.tmupulse-cal .fc .fc-scroller-liquid-absolute::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground, 215 16% 47%) / 0.25);
+  border-radius: 8px;
+}
+.tmupulse-cal .fc .fc-scroller-liquid-absolute::-webkit-scrollbar-track { background: transparent; }
+
+/* Reduce borders across the grid for a cleaner feel (single source of truth) */
+.tmupulse-cal .fc .fc-scrollgrid,
+.tmupulse-cal .fc .fc-timegrid-divider,
+.tmupulse-cal .fc .fc-theme-standard td,
+.tmupulse-cal .fc .fc-theme-standard th {
+  border-color: var(--fc-border);
+}
+
+/* Tooltips from native title attributes, if you rely on them */
+.tmupulse-cal [title] { cursor: help; }
+
+/* ===================================== */
+/* Stacked, wrapping event card (column) */
+/* ===================================== */
+
+/* Event container class: add via classNames: ['sb-event'] in your event object */
+.tmupulse-cal .fc .sb-event {
+  border-radius: 14px;
+  padding: 8px 10px;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, .06);
+  border-width: 1px !important;
+}
+
+.tmupulse-cal .fc .fc-v-event .fc-event-main {
+  padding: 4px 6px;      /* was 6px 8px */
+  font-size: 11px;       /* was 12px */
+  line-height: 1.15;
+}
+
+.tmupulse-cal .fc .sb-evt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.2;
+}
+
+/* Title wraps instead of ellipsizing */
+.tmupulse-cal .fc .sb-evt-title {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .2px;
+  text-transform: uppercase;
+  color: black;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Sub-lines wrap too */
+.tmupulse-cal .fc .sb-evt-sub {
+  font-size: 11px;
+  opacity: .9;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-break: break-word;
+  hyphens: auto;
+  color: black;
+}
+
+/* Footer pill */
+.tmupulse-cal .fc .sb-evt-foot { margin-top: 6px; }
+.tmupulse-cal .fc .sb-evt-pill {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+/* Status colors for the pill */
+.tmupulse-cal .fc .sb-evt-pill.open {
+  background: rgba(16,185,129,.15);
+  color: #065f46;
+  border-color: rgba(16,185,129,.35);
+}
+.tmupulse-cal .fc .sb-evt-pill.wait {
+  background: rgba(245,158,11,.15);
+  color: #7c3e00;
+  border-color: rgba(245,158,11,.35);
+}
+.tmupulse-cal .fc .sb-evt-pill.closed {
+  background: rgba(244,63,94,.15);
+  color: #7f1d1d;
+  border-color: rgba(244,63,94,.35);
+}
+
+/* Smaller event content across the board */
+.tmupulse-cal .fc .fc-v-event .fc-event-main {
+  padding: 3px 5px;   /* was 6px 8px */
+  font-size: 10px;    /* base downsize */
+  line-height: 1.1;
+}
+
+/* Extra-tiny variant for our custom wrapper */
+.tmupulse-cal .fc .sb-evt--tiny .sb-evt-title {
+  font-size: 10px;    /* title */
+  line-height: 1.1;
+  letter-spacing: .2px;
+  font-weight: 700;
+}
+.tmupulse-cal .fc .sb-evt--tiny .sb-evt-sub {
+  font-size: 9.5px;   /* subline (room) */
+  opacity: .9;
+  line-height: 1.1;
+}
+.tmupulse-cal .fc .sb-evt--tiny .sb-evt-foot { margin-top: 4px; }
+.tmupulse-cal .fc .sb-evt--tiny .sb-evt-pill {
+  font-size: 9px;     /* status pill */
+  padding: 1px 6px;
+  border-radius: 9999px;
+}
+
+/* (optional) even smaller axis labels if you want the whole grid to feel compact-ski */
+.tmupulse-cal .fc .fc-timegrid-axis-cushion {
+  font-size: 11px; /* already small; set to 10px if you want extra tiny */
+  padding-right: 4px;
 }
 
 

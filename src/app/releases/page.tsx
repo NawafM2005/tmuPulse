@@ -34,7 +34,7 @@ const releases: ReleaseNote[] = [
     improvements: []
   },
   {
-  version: '1.0.1',
+  version: '2.0.0',
   date: 'August 2025',
   title: 'Rate My Prof and Class Times Integration',
   description: 'Professor insights, ratings, and class times are now built directly into TMU Pulse!',
@@ -51,6 +51,18 @@ const releases: ReleaseNote[] = [
     'Option to securely share data with TMU Pulse to save your degree plan',
     'Added Delete Account option for full account control',
   ]
+},
+{
+  version: '3.0.0',
+  date: 'August 2025',
+  title: 'Schedule Builder is Here!',
+  description: 'Build your perfect schedule with our new Schedule Builder feature!',
+  type: 'major',
+  features: [
+    "Intuitive schedule builder with a clean, streamlined interface",
+    "Real-time conflict detection to ensure no overlapping classes",
+    "Integrated course catalogue into Schedule Builder for fast, accurate course search and details"
+  ],
 }
 ]  
 

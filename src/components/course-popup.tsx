@@ -403,7 +403,7 @@ export default function PopUp({ open, onClose, course }: popup_types) {
                         <div className="mt-1 space-y-1.5">
                           <div className="flex items-center gap-2">
                             <Clock className="h-4 w-4" />
-                            <span className="text-xs">
+                            <span className="text-[8px]">
                               {s.day || "—"} {s.start || "—"}-{s.end || "—"}
                             </span>
                           </div>
