@@ -50,6 +50,7 @@ export function SignupForm({ className, ...props }: SignupFormProps) {
       if (normalized && tmuRegex.test(normalized)) {
         signInWithGoogle()
         return
+      }
     }
 
     if (password !== cPassword) {
@@ -181,5 +182,4 @@ export function SignupForm({ className, ...props }: SignupFormProps) {
       </Card>
     </div>
   )
-}
 }

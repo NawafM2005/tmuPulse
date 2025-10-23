@@ -55,6 +55,7 @@ export function LoginForm({
       if (normalized && tmuRegex.test(normalized)) {
         signInWithGoogle()
         return
+      }
     }
 
     if (!email || !password) {
@@ -165,5 +166,4 @@ export function LoginForm({
       </Card>
     </div>
   )
-}
 }
