@@ -26,8 +26,36 @@ export function LoginForm({
   const [password, setPassword] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
 
+
+  const signInWithGoogle = async () => {
+    try {
+      setLoading(true)
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        }
+      })
+      if (error) {
+        toast.error(error.message)
+      }
+    } catch (_err) {
+      toast.error("Failed to start Google sign-in")
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (email.trim().toLowerCase()) {
+      const normalized = email.trim().toLowerCase()
+      const tmuRegex = /^[^@]+@torontomu\.(ca|com)$/i
+      if (normalized && tmuRegex.test(normalized)) {
+        signInWithGoogle()
+        return
+    }
 
     if (!email || !password) {
       toast.error("Email and password are required")
@@ -51,26 +79,6 @@ export function LoginForm({
       }
     } catch (_err) {
       toast.error("An unexpected error occurred")
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const signInWithGoogle = async () => {
-    try {
-      setLoading(true)
-      const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
-        }
-      })
-      if (error) {
-        toast.error(error.message)
-      }
-    } catch (_err) {
-      toast.error("Failed to start Google sign-in")
     } finally {
       setLoading(false)
     }
