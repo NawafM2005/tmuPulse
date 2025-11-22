@@ -238,7 +238,7 @@ export default function CourseCatalogue({
         <section className="space-y-2">
             {/* Term */}
           <div className="flex items-center gap-2">
-            <p className="text-foreground text-lg font-semibold">Term: Fall 2025</p>
+            <p className="text-foreground text-lg font-semibold">Term: Winter 2026</p>
           </div>
           {/* Type */}
           <div className="flex items-center gap-2">

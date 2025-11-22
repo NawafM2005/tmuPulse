@@ -189,7 +189,6 @@ export default function PopUp({ open, onClose, course }: popup_types) {
     const raw = normalizeSections(course?.sections);
     const cleaned = dedupeSections(raw);
     const enhanced = enhanceSections(cleaned);
-    // Sort by class_number (numerically if possible)
     return enhanced.slice().sort((a, b) => {
       const aNum = parseInt(a.class_number || "");
       const bNum = parseInt(b.class_number || "");
