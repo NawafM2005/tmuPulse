@@ -118,7 +118,7 @@ export function ProfessorDataTable<TData, TValue>({
               </div>
               <Slider
                 aria-label="Minimum average rating"
-                className="w-full max-w-full touch-pan-x select-none sm:py-0 py-1"
+                className="w-full max-w-full touch-pan-x select-none sm:py-0 py-1 cursor-pointer"
                 min={0}
                 max={5}
                 step={0.1}
@@ -141,7 +141,7 @@ export function ProfessorDataTable<TData, TValue>({
               </div>
               <Slider
                 aria-label="Maximum average difficulty"
-                className="w-full max-w-full touch-pan-x select-none sm:py-0 py-1"
+                className="w-full max-w-full touch-pan-x select-none sm:py-0 py-1 cursor-pointer"
                 min={1}
                 max={5}
                 step={0.1}

@@ -32,20 +32,64 @@ export default function ScheduleCalendar({
     if (!calWrapRef.current || downloading) return;
     setDownloading(true);
     try {
-      const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
-        import("html2canvas"),
-        import("jspdf"),
+      const [{ default: jsPDF }] = await Promise.all([
+        import('jspdf')
       ]);
-      const canvas = await html2canvas(calWrapRef.current, { scale: 2, useCORS: true });
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("landscape", "pt", "a4");
+
+      // Attempt html-to-image first
+      let toPngFn: ((node: HTMLElement, opts: any) => Promise<string>) | null = null;
+      try {
+        const mod: any = await import('html-to-image');
+        toPngFn = (mod as any).toPng;
+      } catch {
+        console.warn('html-to-image unavailable, trying dom-to-image-more');
+      }
+
+      // Fallback to dom-to-image-more
+      if (!toPngFn) {
+        try {
+          const mod2: any = await import('dom-to-image-more');
+          toPngFn = (mod2 as any).toPng;
+        } catch {
+          console.error('dom-to-image-more also unavailable');
+        }
+      }
+
+      if (!toPngFn) throw new Error('No capture library could be loaded');
+
+      // Remove transitions temporarily for crisp capture
+      const originalTransition = calWrapRef.current.style.transition;
+      calWrapRef.current.style.transition = 'none';
+
+      const dataUrl = await toPngFn(calWrapRef.current, {
+        cacheBust: true,
+        pixelRatio: 2,
+        filter: (node: any) => {
+          if (node.tagName) {
+            const tag = node.tagName.toLowerCase();
+            if (['script','meta','link'].includes(tag)) return false;
+          }
+          return true;
+        }
+      });
+
+      calWrapRef.current.style.transition = originalTransition;
+
+      const img = new Image();
+      img.src = dataUrl;
+      await new Promise(res => { img.onload = res; });
+
+      const pdf = new jsPDF('landscape', 'pt', 'a4');
       const pageW = pdf.internal.pageSize.getWidth();
       const pageH = pdf.internal.pageSize.getHeight();
-      const ratio = Math.min(pageW / canvas.width, pageH / canvas.height);
-      const imgW = canvas.width * ratio;
-      const imgH = canvas.height * ratio;
-      pdf.addImage(imgData, "PNG", (pageW - imgW) / 2, (pageH - imgH) / 2, imgW, imgH);
-      pdf.save("schedule.pdf");
+      const ratio = Math.min(pageW / img.width, pageH / img.height);
+      const imgW = img.width * ratio;
+      const imgH = img.height * ratio;
+      pdf.addImage(dataUrl, 'PNG', (pageW - imgW)/2, (pageH - imgH)/2, imgW, imgH);
+      pdf.save('schedule.pdf');
+    } catch (err) {
+      console.error('Image capture failed, falling back to browser print.', err);
+      window.print();
     } finally {
       setDownloading(false);
     }
@@ -117,6 +161,7 @@ export default function ScheduleCalendar({
           editable={false}
           eventOverlap
           navLinks
+          slotEventOverlap={false}
           events={events}
           eventClassNames={(arg) => {
             const s = ((arg.event.extendedProps as any)?.status || "").toString().toLowerCase();
@@ -129,29 +174,15 @@ export default function ScheduleCalendar({
           }}
           eventContent={(arg: EventContentArg) => {
             const ext = arg.event.extendedProps as any;
-            const statusRaw: string = (ext?.status || "").toString();
-            const status = statusRaw.toLowerCase();
-            const pillClass =
-              status.startsWith("open") ? "open" :
-              status.startsWith("wait") ? "wait" :
-              status.startsWith("closed") ? "closed" : "";
+            
             return (
-              <div className="sb-evt sb-evt--tiny text-foreground">
-                <div className="sb-evt-title text-foreground">
-                  {arg.timeText} — {arg.event.title}
+              <div className="h-full flex flex-col justify-center overflow-hidden px-1">
+                <div className="font-semibold text-xs leading-tight text-foreground break-words">
+                  {arg.event.title}
                 </div>
-                {ext?.room && <div className="sb-evt-sub text-foreground/70">{ext.room}</div>}
-                {statusRaw && (
-                  <div className="sb-evt-foot">
-                    <span
-                      className={`sb-evt-pill ${pillClass} text-xs px-2 py-0.5 rounded-full font-semibold
-                        ${pillClass === "open" ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200" : ""}
-                        ${pillClass === "wait" ? "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200" : ""}
-                        ${pillClass === "closed" ? "bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200" : ""}
-                      `}
-                    >
-                      {statusRaw}
-                    </span>
+                {ext?.room && (
+                  <div className="text-[10px] text-foreground/70 leading-tight mt-1 break-words">
+                    📍 {ext.room}
                   </div>
                 )}
               </div>

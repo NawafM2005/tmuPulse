@@ -295,15 +295,20 @@ export default function Schedule() {
     const conflicts = findOverlaps(calendarEvents);
     if (conflicts.length > 0) {
       const { a, b } = conflicts[0];
-      const msg =
-        `Schedule overlap detected:\n` +
-        `• ${(a.course || "")} ${a.ev.title ?? "Event A"} — ${fmtDay(a.start)} ${fmtTime(a.start)}–${fmtTime(a.end)}\n` +
-        `• ${(b.course || "")} ${b.ev.title ?? "Event B"} — ${fmtDay(b.start)} ${fmtTime(b.start)}–${fmtTime(b.end)}\n` +
-        (conflicts.length > 1 ? `(+ ${conflicts.length - 1} more)` : "");
+      const msg = `${a.course || ""} conflicts with ${b.course || ""}`;
       toast.error(msg, {
         id: "overlap",
         duration: Infinity,
         closeButton: true,
+        style: {
+          border: '2px solid #fbbf24',
+          background: '#dc2626',
+          color: '#ffffff',
+          fontWeight: 'bold',
+        },
+        classNames: {
+          closeButton: '!bg-black hover:!bg-black',
+        },
       });
     } else {
       toast.dismiss("overlap");
