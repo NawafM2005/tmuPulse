@@ -22,7 +22,7 @@ export default function ScheduleCalendar({
   initialView = "timeGridWeek",
   className = "",
 }: ScheduleCalendarProps) {
-  const SEMESTER_START = "2025-09-08";
+  const SEMESTER_START = "2026-01-12";
   const [calApi, setCalApi] = useState<CalendarApi | null>(null);
 
   const calWrapRef = useRef<HTMLDivElement>(null);
@@ -58,10 +58,10 @@ export default function ScheduleCalendar({
         <div className="flex items-center gap-2">
           <button
             onClick={() => calApi?.gotoDate(SEMESTER_START)}
-            aria-label="Jump to Fall Start"
+            aria-label="Jump to Winter Start"
             className="px-3 py-1.5 rounded-xl border bg-background hover:bg-muted transition shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer"
           >
-            Fall Start
+            Winter Start
           </button>
         </div>
 

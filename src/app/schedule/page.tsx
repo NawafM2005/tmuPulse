@@ -10,8 +10,6 @@ import CourseCatalogue, { CourseRow as CatalogueCourseRow } from "./course_catal
 import type { Section } from "@/types/course";
 import Loading from "../loading";
 import type { EventInput } from "@fullcalendar/core";
-
-// ✅ Sonner toaster
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 
