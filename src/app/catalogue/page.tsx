@@ -281,46 +281,20 @@ const filteredProfessors =
                     }}
                     onClearSelection={handleClearSelection}
                   />
-                  <div className="flex flex-row text-foreground text-sm items-center bg-background border-secondary border-2 p-2 rounded-lg">
-                    <p className="mr-3">Type: </p>
-                    <div className="flex flex-row gap-3">                    
-                      <button
-                        className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer border-2 border-secondary
-                          ${selectedTypes.includes("Lower liberal") ? "bg-blue-400  text-black" : "bg-white text-black"}`}
-                        onClick={() => handleTypeToggle("Lower liberal")}
-                      >
-                        Lower
-                      </button>
-
-                      <button
-                        className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer border-2 border-secondary
-                          ${selectedTypes.includes("Upper liberal") ? "bg-blue-400  text-black" : "bg-white text-black"}`}
-                        onClick={() => handleTypeToggle("Upper liberal")}
-                      >
-                        Upper
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-row text-foreground text-sm items-center bg-background border-secondary border-2 p-2 rounded-lg">
-                    <p className="mr-3">Term: </p>
-                    <div className="flex flex-row gap-3">
-                     <button
-                        className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer border-2 border-secondary
-                          ${selectedTerm.includes("Fall") ? "bg-blue-400  text-black" : "bg-white text-black"}`}
-                        onClick={() => handleTermToggle("Fall")}
-                      >
-                        Fall
-                      </button>
-
-                      <button
-                        className={`px-4 py-1 rounded-lg font-semibold text-sm hover:opacity-80 hover:cursor-pointer border-2 border-secondary
-                          ${selectedTerm.includes("Winter") ? "bg-blue-400 text-black" : "bg-white text-black"}`}
-                        onClick={() => handleTermToggle("Winter")}
-                      >
-                        Winter
-                      </button>
-                    </div>
-                  </div>
+                  <ProgramSelector
+                    label="Type"
+                    programs={["Lower liberal", "Upper liberal"]}
+                    selectedPrograms={selectedTypes}
+                    onProgramToggle={handleTypeToggle}
+                    onClearSelection={handleClearTypeSelection}
+                  />
+                  <ProgramSelector
+                    label="Term"
+                    programs={["Fall", "Winter"]}
+                    selectedPrograms={selectedTerm}
+                    onProgramToggle={handleTermToggle}
+                    onClearSelection={handleClearTermSelection}
+                  />
               </div>
               }
               belowSearchContent={

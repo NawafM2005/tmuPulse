@@ -115,13 +115,25 @@ export function DataTable<TData, TValue>({
 
 
             {belowSearchContent}
-            <div className="rounded-md text-foreground bg-background border-4 border-secondary p-5 w-full max-w-7xl">
-                <Table className="overflow-hidden min-w-full w-full table-auto sm:table-fixed">
-                    <TableHeader >
-                        {table.getHeaderGroups().map((headerGroup) => (
+            <div className="w-full overflow-x-auto px-2">
+                <div className="rounded-md text-foreground bg-background border-4 border-secondary p-2 sm:p-3 md:p-5 w-full max-w-7xl mx-auto">
+                    <Table className="min-w-[360px] xl:min-w-[900px] w-full table-fixed">
+                        <TableHeader >
+                            {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id} className="border-red-400">
-                                {headerGroup.headers.map((header) => (
-                                    <TableHead key={header.id} className="text-secondary text-center font-bold text-sm sm:text-lg p-1">
+                                {headerGroup.headers.map((header) => {
+                                    const colId = header.column.id
+                                    const alwaysShow = ["code", "name"]
+                                    return (
+                                    <TableHead 
+                                        key={header.id} 
+                                        className={`
+                                            text-secondary text-center font-bold 
+                                            text-[10px] sm:text-xs xl:text-sm 
+                                            p-1 sm:p-2 xl:p-3
+                                            ${!alwaysShow.includes(colId) ? "hidden xl:table-cell" : ""}
+                                        `}
+                                    >
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
@@ -129,7 +141,7 @@ export function DataTable<TData, TValue>({
                                                 header.getContext()
                                             )}
                                     </TableHead>
-                                ))}
+                                )})}
                             </TableRow>
                         ))}
                     </TableHeader>
@@ -146,14 +158,28 @@ export function DataTable<TData, TValue>({
                                         setShowPopup(true);
                                     }}
                                 >
-                                    {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id} className="text-foreground whitespace-normal break-words max-w-[600px] text-center p-5 text-xs sm:text-sm">
+                                    {row.getVisibleCells().map((cell) => {
+                                        const colId = cell.column.id
+                                        const alwaysShow = ["code", "name"]
+                                        return (
+                                        <TableCell 
+                                            key={cell.id} 
+                                            className={`
+                                                text-foreground 
+                                                text-[10px] sm:text-xs xl:text-sm
+                                                p-1 sm:p-2 xl:p-3
+                                                align-middle text-center
+                                                whitespace-nowrap overflow-hidden text-ellipsis
+                                                max-w-[9rem] sm:max-w-[12rem] xl:max-w-[16rem]
+                                                ${!alwaysShow.includes(colId) ? "hidden xl:table-cell" : ""}
+                                            `}
+                                        >
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext()
                                             )}
                                         </TableCell>
-                                    ))}
+                                    )})}
                                 </TableRow>
                             ))
                         ) : (
@@ -168,9 +194,10 @@ export function DataTable<TData, TValue>({
                         )}
                     </TableBody>
                 </Table>
-                <PopUp open={showPopup} course={popupRowData} onClose={() => setShowPopup(false)}></PopUp>
+                </div>
             </div>
-            <div className="flex items-center justify-end space-x-2 py-4 mt-5">
+            <PopUp open={showPopup} course={popupRowData} onClose={() => setShowPopup(false)}></PopUp>
+            <div className="flex items-center justify-end gap-2 py-4 mt-5 w-full max-w-7xl px-2">
                 <Button
                 variant="outline"
                 size="sm"
