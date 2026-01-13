@@ -68,17 +68,6 @@
   --color-overlay: var(--overlay);
 }
 
-/* Chrome, Edge, Safari */
-::-webkit-scrollbar {
-  width: 3px;
-  height: 7px;
-}
-::-webkit-scrollbar-thumb {
-  background: #F9DD4A;
-  border-radius: 8px;
-  border: 1px solid #1c1c1c71;
-}
-
 /* Custom animations for loading page */
 @keyframes spin-reverse {
   from { transform: rotate(360deg); }
