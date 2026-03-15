@@ -230,8 +230,8 @@ const filteredProfessors =
   return (
     <main className="min-h-screen bg-background pt-5 w-full">
       <Navbar/>
-      <div className="flex flex-col items-center mb-10 p-5">
-        <div className="flex flex-col items-center justify-center p-8 w-full max-w-8xl mt-20 gap-4 text-center">
+      <div className="flex flex-col items-center mb-10 p-3 sm:p-5">
+        <div className="flex flex-col items-center justify-center px-4 py-6 sm:p-8 w-full max-w-8xl mt-16 sm:mt-20 gap-4 text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[800] text-secondary">Catalogue</h1>
             <p className="text-sm sm:text-base md:text-lg text-secondary">
               Browse and search through TMU&apos;s comprehensive course offerings and professor ratings.

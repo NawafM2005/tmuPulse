@@ -214,12 +214,12 @@ export default function Dashboard() {
       <Toaster />
       
       {/* Header Section */}
-      <div className="pt-30 pb-8 px-4 md:px-8 lg:px-20">
+      <div className="pt-20 sm:pt-24 md:pt-30 pb-8 px-4 md:px-8 lg:px-20">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent mb-4">
             Dashboard
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
             Manage your profile and academic settings
           </p>
         </div>

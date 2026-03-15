@@ -220,9 +220,9 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <div className={`fixed top-0 right-0 h-full w-full z-40 xl:hidden pointer-events-none`}>
-        <div className={`absolute top-0 right-0 h-full w-1/2 min-w-[220px] max-w-[400px] bg-black/80 backdrop-blur-xl border-l border-secondary/30 shadow-2xl transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'} pointer-events-auto overflow-y-auto overscroll-y-contain`}>
-          <div className="pt-25 px-4 flex flex-col space-y-3 text-xs">
+      <div className={`fixed top-0 right-0 h-full w-full z-40 xl:hidden ${mobileMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`} onClick={() => setMobileMenuOpen(false)}>
+        <div className={`absolute top-0 right-0 h-full w-3/4 min-w-[220px] max-w-[340px] bg-black/90 backdrop-blur-xl border-l border-secondary/30 shadow-2xl transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'} pointer-events-auto overflow-y-auto overscroll-y-contain`} onClick={(e) => e.stopPropagation()}>
+          <div className="pt-20 px-4 flex flex-col space-y-2 text-sm">
             <Link 
               href="/catalogue" 
               onClick={() => setMobileMenuOpen(false)}

@@ -147,6 +147,7 @@ function sectionToEvents(courseCode: string, sec: any): EventInput[] {
 /* ---------------------- Page ---------------------- */
 export default function Schedule() {
   const [booting, setBooting] = useState(true);
+  const [mobileTab, setMobileTab] = useState<"catalogue" | "courses" | "calendar">("catalogue");
 
   // DB rows for catalogue
   const [courses, setCourses] = useState<LeftCourseRow[]>([]);
@@ -324,7 +325,7 @@ export default function Schedule() {
 
       <Navbar />
 
-      <div className="flex flex-col items-center justify-center p-8 w-full max-w-6xl mt-20 gap-4 text-center">
+      <div className="flex flex-col items-center justify-center px-4 py-6 sm:p-8 w-full max-w-6xl mt-16 sm:mt-20 gap-4 text-center">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[800] text-foreground">
           Schedule Builder
         </h1>
@@ -333,7 +334,7 @@ export default function Schedule() {
         </p>
       </div>
 
-      <div className="w-full p-5">
+      <div className="w-full p-3 sm:p-5">
         {/* Planner UI only on xl+ */}
         <div className="hidden xl:flex flex-row gap-5">
           {/* Left Sidebar */}
@@ -371,18 +372,75 @@ export default function Schedule() {
           </div>
         </div>
 
-        {/* Show message below xl */}
-        <div className="xl:hidden mt-6 bg-card-bg border-2 border-borders rounded-2xl shadow-lg p-6 text-center max-w-md mx-auto">
-          <div className="mb-4 text-6xl">📱</div>
-          <h2 className="text-primary font-bold text-xl mb-3">
-            Screen Too Small
-          </h2>
-          <p className="text-foreground text-sm leading-relaxed mb-4">
-            The Degree Planner requires a larger screen for the best experience. 
-            Please use a tablet, laptop, or desktop computer to access the planner.
-          </p>
-          <div className="text-xs text-muted">
-            Minimum screen width: 1280px (desktop size)
+        {/* Mobile tabbed view (below xl) */}
+        <div className="xl:hidden flex flex-col gap-0">
+          {/* Tab bar */}
+          <div className="flex border-b-2 border-borders bg-card-bg rounded-t-xl overflow-hidden">
+            <button
+              onClick={() => setMobileTab("catalogue")}
+              className={`flex-1 py-3 text-sm font-bold transition-colors hover:cursor-pointer ${
+                mobileTab === "catalogue"
+                  ? "bg-primary text-white"
+                  : "text-foreground hover:bg-card-hover"
+              }`}
+            >
+              📚 Browse
+            </button>
+            <button
+              onClick={() => setMobileTab("courses")}
+              className={`flex-1 py-3 text-sm font-bold transition-colors hover:cursor-pointer border-l border-r border-borders ${
+                mobileTab === "courses"
+                  ? "bg-primary text-white"
+                  : "text-foreground hover:bg-card-hover"
+              }`}
+            >
+              🛒 My Courses {selectedCourses.length > 0 && `(${selectedCourses.length})`}
+            </button>
+            <button
+              onClick={() => setMobileTab("calendar")}
+              className={`flex-1 py-3 text-sm font-bold transition-colors hover:cursor-pointer ${
+                mobileTab === "calendar"
+                  ? "bg-primary text-white"
+                  : "text-foreground hover:bg-card-hover"
+              }`}
+            >
+              📅 Schedule
+            </button>
+          </div>
+
+          {/* Tab content */}
+          <div className="bg-card-bg border-2 border-borders border-t-0 rounded-b-xl p-3 min-h-[400px]">
+            {mobileTab === "catalogue" && (
+              <CourseCatalogue courses={catalogueCourses} onAddCourse={(c) => {
+                handleAddCourse(c);
+                setMobileTab("courses");
+              }} />
+            )}
+            {mobileTab === "courses" && (
+              <LeftSidebar
+                courses={selectedCourses as any}
+                onRemove={(id) =>
+                  setSelectedCourses((prev) => prev.filter((c) => (c as any).id !== id))
+                }
+                onToggle={(id, chk) =>
+                  setSelectedCourses((prev) =>
+                    prev.map((c) =>
+                      (c as any).id === id ? ({ ...c, selected: chk } as any) : c
+                    )
+                  )
+                }
+                onChange={(id, kind, value) =>
+                  setSelectedCourses((prev) =>
+                    prev.map((c) =>
+                      (c as any).id === id ? ({ ...c, [kind]: value } as any) : c
+                    )
+                  )
+                }
+              />
+            )}
+            {mobileTab === "calendar" && (
+              <ScheduleCalendar events={calendarEvents} initialView="timeGridDay" />
+            )}
           </div>
         </div>
       </div>
