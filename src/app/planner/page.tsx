@@ -19,9 +19,9 @@ export default function Planner() {
         </p>
         
         {/* Mobile tip banner */}
-        <div className="md:hidden mb-4 bg-primary/10 border border-primary/30 rounded-xl p-3 max-w-md mx-auto text-center">
+        <div className="lg:hidden mb-4 bg-primary/10 border border-primary/30 rounded-xl p-3 max-w-md mx-auto text-center">
           <p className="text-xs text-foreground font-semibold">
-            💡 Tip: Drag courses from the catalogue into semester slots. On mobile, scroll down past the semesters to see the course catalogue.
+            💡 Tip: Tap a course in the catalogue to select it, then tap an empty slot to assign it. Scroll down to see the course catalogue.
           </p>
         </div>
 
