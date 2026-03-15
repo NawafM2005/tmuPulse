@@ -6777,7 +6777,7 @@
     {
       "code": "CVL 72A",
       "name": "- Transportation Capstone Design Project",
-      "description": "A design project for all areas of Civil Engineering. Students complete a design for a real-life project from industry. Students work in teams of 4 - 6 per group or as instructor dictates. Teams submit at least two design alternatives and evaluate them based on economic, environmental, and other considerations. Typically, each team determines the best alternative in the fall and completes a detailed design in the winter, along with oral presentation and written report.",
+      "description": "<p>A design project for all areas of Civil Engineering. Students complete a design for a real-life project from industry. Students work in teams of 4 - 6 per group or as instructor dictates. Teams submit at least two design alternatives and evaluate them based on economic, environmental, and other considerations. Typically, each team determines the best alternative in the fall and completes a detailed design in the winter, along with oral presentation and written report.</p>",
       "weekly contact": "Lecture 1 hr. Tutorial 3 hrs.",
       "gpa weight": "2.00",
       "billing unit": "1/1",
@@ -7581,7 +7581,7 @@
     {
       "code": "CMN 340",
       "name": "Climate Change Communication",
-      "description": "What role do words have in climate change? This course untangles this question with a focus on the corporate communication of climate change (CSR, ESG, etc.), the public relations of environmental organizations, critical analysis of greenwashing and of climate change denialism informed by theories of environmental racism, queer theory, disability theory, and anti-colonial scholarship. This course further unpacks the role of narrative and storytelling in the face of climate change, specifically in the form of art, literature, documentary film, and podcasting.",
+      "description": "<p>What role do words have in climate change? This course untangles this question with a focus on the corporate communication of climate change (CSR, ESG, etc.), the public relations of environmental organizations, critical analysis of greenwashing and of climate change denialism informed by theories of environmental racism, queer theory, disability theory, and anti-colonial scholarship. This course further unpacks the role of narrative and storytelling in the face of climate change, specifically in the form of art, literature, documentary film, and podcasting.</p>",
       "weekly contact": "Lecture 1 hr. Tutorial 2 hrs.",
       "gpa weight": "1.00",
       "billing unit": "1",
@@ -9955,7 +9955,7 @@
     {
       "code": "CRI 810",
       "name": "Studies in Creative Collaboration",
-      "description": "Creative work is inherently collaborative, even if we sometimes retain the image of the solitary artist working alone. This course examines best practices to facilitate creative collaboration and to navigate the challenging terrain of working with others. In particular, students learn the skill of facilitation and develop their own frameworks for enabling diverse teams to collaborate.",
+      "description": "<p>Creative work is inherently collaborative, even if we sometimes retain the image of the solitary artist working alone. This course examines best practices to facilitate creative collaboration and to navigate the challenging terrain of working with others. In particular, students learn the skill of facilitation and develop their own frameworks for enabling diverse teams to collaborate.</p>",
       "weekly contact": "Lab 3 hrs.",
       "gpa weight": "1.00",
       "billing unit": "1",
@@ -11095,6 +11095,34 @@
       "custom requisites": "None"
     },
     {
+      "code": "DST 880",
+      "name": "Foundations: Disability Studies Research",
+      "description": "<p>This course provides students with a basic understanding of social inquiry from the perspective of disability studies. Challenging the quantitative/qualitative binary, students explore questions about knowledge itself\u2014specifically what \u201ccounts\u201d as knowledge in academia and public life. Students will practice finding, organizing, and critically appraising disability studies research. This course will attend to the histories and presences of disability in research.</p>",
+      "weekly contact": "Lecture 3 hrs.",
+      "gpa weight": "1.00",
+      "billing unit": "1/1",
+      "course count": "1.00",
+      "liberal": "None",
+      "prerequisites": "None",
+      "corequisites": "None",
+      "antirequisites": "DST 88A/B",
+      "custom requisites": "None"
+    },
+    {
+      "code": "DST 881",
+      "name": "Disability Studies Research in Action",
+      "description": "<p>Building on DST 880, this course covers a wide range of research methodologies and data-gathering/analysis techniques applicable to research in the field of disability studies. Students will develop some initial skills in framing and conducting a small study including the collection, analysis, and interpretation of data. Of central concern is the question of how we can use research to understand and change the oppression experienced by disabled people.</p>",
+      "weekly contact": "Lecture 3 hrs.",
+      "gpa weight": "1.00",
+      "billing unit": "1/1",
+      "course count": "1.00",
+      "liberal": "None",
+      "prerequisites": "None",
+      "corequisites": "None",
+      "antirequisites": "DST 88A/B",
+      "custom requisites": "None"
+    },
+    {
       "code": "DST 88A",
       "name": "- Research Methods",
       "description": "This course will provide students with a basic understanding of social research and its relevance to disability studies. Students will acquire the knowledge and skills required to plan, conduct and critically analyse research. A range of qualitative and quantitative methods will be explored along with their use in transforming perceptions of disability. Issues of social location and the meaningful participation of people with disabilities in research are discussed.",
@@ -11109,9 +11137,37 @@
       "custom requisites": "None"
     },
     {
+      "code": "DST 990",
+      "name": "Applied Community or Research Project",
+      "description": "<p>This is the required &quot;capstone&quot; preparation course of the Disability Studies program. It provides students with the opportunity to engage in focused scholarly and project work from a disability studies perspective. Utilizing research methodologies from DST 880 and DST 881, individual project proposals reflecting student interests are developed from concept to research design. Students wishing to carry out their project under the supervision of an individual faculty member may do so in DST 991.</p>",
+      "weekly contact": "Lecture 3 hrs.",
+      "gpa weight": "1.00",
+      "billing unit": "1/1",
+      "course count": "1.00",
+      "liberal": "None",
+      "prerequisites": "DST 501 and [DST 88A/B or (DST 880 and DST 881)]",
+      "corequisites": "None",
+      "antirequisites": "None",
+      "custom requisites": "None"
+    },
+    {
+      "code": "DST 991",
+      "name": "Independent Research Thesis",
+      "description": "<p>Building on work completed in DST 990, students have the option to complete a small research project working with publicly available data. The course will be individually structured for each student in collaboration with a faculty advisor. The orienting question will revolve around how social environments and structures shape the experiences of people with disabilities.</p>",
+      "weekly contact": "Lecture 3 hrs.",
+      "gpa weight": "1.00",
+      "billing unit": "1/1",
+      "course count": "1.00",
+      "liberal": "None",
+      "prerequisites": "DST 990",
+      "corequisites": "None",
+      "antirequisites": "None",
+      "custom requisites": "None"
+    },
+    {
       "code": "DST 99A",
       "name": "- Applied Community Project/Thesis",
-      "description": "This is the \"capstone\" course of the Disability Studies program.  It provides students with the opportunity to engage in focussed scholarly and project work from a disability studies perspective.  It must be taken after all other courses.  The course will be individually structured for each student in collaboration with a faculty advisor.  The orienting question will revolve around how social environments and structures shape the experience of people with disabilities.",
+      "description": "This is the &quot;capstone&quot; course of the Disability Studies program.  It provides students with the opportunity to engage in focussed scholarly and project work from a disability studies perspective.  It must be taken after all other courses.  The course will be individually structured for each student in collaboration with a faculty advisor.  The orienting question will revolve around how social environments and structures shape the experience of people with disabilities.",
       "weekly contact": "Lecture 3 hrs.",
       "gpa weight": "4.00",
       "billing unit": "1/1",
@@ -17861,7 +17917,7 @@
     {
       "code": "MPF 420",
       "name": "Capstone Project I",
-      "description": "This course leverages the theories, concepts and filmmaking techniques learned throughout the program for the development and production of final capstone projects, short films in the students\u2019 preferred form (narrative, documentary, animation, experimental). In groups, students will pitch story concepts to a selection committee. In close consultation with instructors and advisors, selected projects will then move forward through the script development and pre-production processes towards production in the following semester. (Formerly MPF 42A.)",
+      "description": "<p>This course leverages the theories, concepts and filmmaking techniques learned throughout the program for the development and production of final capstone projects, short films in the students\u2019 preferred form (narrative, documentary, animation, experimental). In groups, students will pitch story concepts to a selection committee. In close consultation with instructors and advisors, selected projects will then move forward through the script development and pre-production processes towards production in the following semester. (Formerly MPF 42A.)</p>",
       "weekly contact": "Lecture 6 hrs.",
       "gpa weight": "2.00",
       "billing unit": "2",
@@ -17875,7 +17931,7 @@
     {
       "code": "MPF 422",
       "name": "Film Production",
-      "description": "This intermediate level course offers production techniques for film. The course explores the myriad approaches and styles suggested by the term \"documentary\" and \"narrative\", including the production processes and the roles of each crew member. Students work in teams to produce short assignments.",
+      "description": "This intermediate level course offers production techniques for film. The course explores the myriad approaches and styles suggested by the term &quot;documentary&quot; and &quot;narrative&quot;, including the production processes and the roles of each crew member. Students work in teams to produce short assignments.",
       "weekly contact": "Lab 3 hrs.",
       "gpa weight": "1.50",
       "billing unit": "1",
@@ -17931,7 +17987,7 @@
     {
       "code": "MPF 430",
       "name": "Capstone Project II",
-      "description": "This course concentrates on the production and post production of final capstone projects. Working in groups, students produce short films to a professional standard, performing major creative roles such as screenwriter, producer, director, cinematographer, production designer, editor, and sound designer. Works-in-progress are screened for the class in a series of critiques. The class culminates with the screening of the films in a student run film festival.\u00a0(Formerly MPF 42B.)",
+      "description": "<p>This course concentrates on the production and post production of final capstone projects. Working in groups, students produce short films to a professional standard, performing major creative roles such as screenwriter, producer, director, cinematographer, production designer, editor, and sound designer. Works-in-progress are screened for the class in a series of critiques. The class culminates with the screening of the films in a student run film festival.&nbsp;(Formerly MPF 42B.)</p>",
       "weekly contact": "Lab 6 hrs.",
       "gpa weight": "2.00",
       "billing unit": "2",
@@ -18933,7 +18989,7 @@
     {
       "code": "FCS 120",
       "name": "Equity in the Future of Health Care",
-      "description": "Who delivers health care and who can access and receive care are important components of equity and justice in the Canadian health care system. This course will explore diverse health care arenas including medicine, nursing, midwifery, social work, nutrition and others to identify critical issues and explore arenas for generating greater equity in health care. Students will learn about barriers to health care as well as equity initiatives within diverse health care fields and settings.",
+      "description": "<p>Who delivers health care and who can access and receive care are important components of equity and justice in the Canadian health care system. This course will explore diverse health care arenas including medicine, nursing, midwifery, social work, nutrition and others to identify critical issues and explore arenas for generating greater equity in health care. Students will learn about barriers to health care as well as equity initiatives within diverse health care fields and settings.</p>",
       "weekly contact": "Lecture 3 hrs.",
       "gpa weight": "1.00",
       "billing unit": "1",
@@ -19905,7 +19961,7 @@
     {
       "code": "GEO 313",
       "name": "Weather and Climate",
-      "description": "This course explores the intertwined atmospheric processes that create weather and climate. Fundamental scientific principles and methods are connected to observable atmospheric phenomena. Spatial and temporal patterns in weather and climate in Canada and around the globe, as well as the role of human activities in anthropogenic climate change are explored. The learning experience comprises lectures and data-based exercises.",
+      "description": "<p>This course explores the intertwined atmospheric processes that create weather and climate. Fundamental scientific principles and methods are connected to observable atmospheric phenomena. Spatial and temporal patterns in weather and climate in Canada and around the globe, as well as the role of human activities in anthropogenic climate change are explored. The learning experience comprises lectures and data-based exercises.</p>",
       "weekly contact": "Lecture 2 hrs. Lab 1 hr.",
       "gpa weight": "1.00",
       "billing unit": "1",
@@ -20101,7 +20157,7 @@
     {
       "code": "GEO 513",
       "name": "Physical Geography in Decision Support",
-      "description": "The origins of environmental conflicts and the information that supports environmental decision-making will be investigated from the perspective of physical geography. The role of data and information for understanding physical processes is traced from field observations to modelling, spatial analyses, prediction, and decision-making. Examples from the fields of soil science and hydrology will be examined. The learning experience is comprised of readings, lectures, and the collection and analysis of primary and secondary data.",
+      "description": "<p>The origins of environmental conflicts and the information that supports environmental decision-making will be investigated from the perspective of physical geography. The role of data and information for understanding physical processes is traced from field observations to modelling, spatial analyses, prediction, and decision-making. Examples from the fields of soil science and hydrology will be examined. The learning experience is comprised of readings, lectures, and the collection and analysis of primary and secondary data.</p>",
       "weekly contact": "Lecture 2 hrs. Lab 1 hr.",
       "gpa weight": "1.00",
       "billing unit": "1",
@@ -29703,7 +29759,7 @@
     {
       "code": "LAW 68A",
       "name": "- Law and Business Clinic",
-      "description": "The Law and Business Clinic offers upper year students the opportunity to serve clients under the supervision of lawyers and academic coordinator on a variety of business-related legal matters. Students will gain practical, \"hands-on\" experience as they assist clients with business law matters such as incorporation, drafting the articles of incorporation, reviewing shareholder and partnership agreements, trade-marks, compliance with regulation, and employment law matters. Clinical experience will be supplemented with weekly seminars to equip students with the knowledge and skills necessary to serve their clients. Clients will include small businesses and entrepreneurs who cannot afford a lawyer. Only available to Law and Business majors. See teaching department for consent criteria.",
+      "description": "The Law and Business Clinic offers upper year students the opportunity to serve clients under the supervision of lawyers and academic coordinator on a variety of business-related legal matters. Students will gain practical, &quot;hands-on&quot; experience as they assist clients with business law matters such as incorporation, drafting the articles of incorporation, reviewing shareholder and partnership agreements, trade-marks, compliance with regulation, and employment law matters. Clinical experience will be supplemented with weekly seminars to equip students with the knowledge and skills necessary to serve their clients. Clients will include small businesses and entrepreneurs who cannot afford a lawyer. Only available to Law and Business majors. See teaching department for consent criteria.",
       "weekly contact": "Lecture 3 hrs.",
       "gpa weight": "2.00",
       "billing unit": "1/1",
@@ -32667,7 +32723,7 @@
     {
       "code": "RTA 885",
       "name": "RTA Media Producing Intensive",
-      "description": "Students are given a window into the business, organizational and creative practices of the commercial international media industry. The focus is on television with discussion of transmedia and feature films. The course culminates in an intense two weeks of lectures/case studies/workshops with current media industry professionals in production centers such as Los Angeles or London or around a major Media Market such as Cannes. Spring/Summer course which may not be offered every year. (Note: Students bear additional costs for transportation, room and board). See teaching department for consent criteria.",
+      "description": "<p>Students are given a window into the business, organizational and creative practices of the commercial international media industry. The focus is on television with discussion of transmedia and feature films. The course culminates in an intense two weeks of lectures/case studies/workshops with current media industry professionals in production centers such as Los Angeles or London or around a major Media Market such as Cannes. Spring/Summer course which may not be offered every year. (Note: Students bear additional costs for transportation, room and board). See teaching department for consent criteria.</p>",
       "weekly contact": "Lab 3 hrs.",
       "gpa weight": "1.00",
       "billing unit": "1",
@@ -42529,7 +42585,7 @@
     {
       "code": "POG 370",
       "name": "Politics of Global Migration and Inequality",
-      "description": "Migration is a phenomenon that reflects global inequalities, as millions move seeking a better life elsewhere. Global and national governance of migration can either reinforce or redress inequalities in access to mobility, rights, resources, and protection. This course examines the social politics of migration in global perspective. It provides an overview of global migration trends, with emphasis on migration governance, human rights, transnationalism, and social policy innovations to mitigate intersecting forms of inequality.",
+      "description": "<p>Migration is a phenomenon that reflects global inequalities, as millions move seeking a better life elsewhere. Global and national governance of migration can either reinforce or redress inequalities in access to mobility, rights, resources, and protection. This course examines the social politics of migration in global perspective. It provides an overview of global migration trends, with emphasis on migration governance, human rights, transnationalism, and social policy innovations to mitigate intersecting forms of inequality.</p>",
       "weekly contact": "Lecture 3 hrs.",
       "gpa weight": "1.00",
       "billing unit": "1",
@@ -44987,7 +45043,7 @@
     {
       "code": "PSY 813",
       "name": "Psychology of Art and Creativity",
-      "description": "We are both creators and perceivers of works of art. The psychology of creativity is concerned with the perceptual, cognitive, motivational, educational and cultural factors involved in original achievement. The psychology of aesthetics examines factors that produce judgments of artistic productions as ugly or beautiful, interesting or uninteresting, simple or complex.",
+      "description": "<p>We are both creators and perceivers of works of art. The psychology of creativity is concerned with the perceptual, cognitive, motivational, educational and cultural factors involved in original achievement. The psychology of aesthetics examines factors that produce judgments of artistic productions as ugly or beautiful, interesting or uninteresting, simple or complex.</p>",
       "weekly contact": "Lecture 3 hrs.",
       "gpa weight": "1.00",
       "billing unit": "1",
@@ -47671,7 +47727,7 @@
     {
       "code": "SOC 25A",
       "name": "- Media and Society",
-      "description": "The relationship between media and contemporary society is complex and important. The structure, power and influence of dominant mass media is examined with a particular focus on film and TV. Special attention is paid to issues of imagery and the definition of reality, the construction and significance of the news and advertising, concentration of ownership, the production of spectacle and diversion, the \"wired\" society, narrative and the construction of reality, and the globalization of media.",
+      "description": "The relationship between media and contemporary society is complex and important. The structure, power and influence of dominant mass media is examined with a particular focus on film and TV. Special attention is paid to issues of imagery and the definition of reality, the construction and significance of the news and advertising, concentration of ownership, the production of spectacle and diversion, the &quot;wired&quot; society, narrative and the construction of reality, and the globalization of media.",
       "weekly contact": "Lecture 3 hrs.",
       "gpa weight": "2.00",
       "billing unit": "1/1",
