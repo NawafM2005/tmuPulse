@@ -86,7 +86,7 @@ export function LoginForm({
   }
 
   return (
-    <div className={cn("flex flex-col gap-6 mb-10 mt-30 text-foreground rounded-[15px] min-w-sm", className)} {...props}>
+    <div className={cn("flex flex-col gap-6 mb-10 mt-20 sm:mt-30 text-foreground rounded-[15px] w-full max-w-sm px-4 sm:px-0", className)} {...props}>
       <Toaster />
       <Card className="bg-background/10 border-2 border-foreground">
         <CardHeader className="text-center">

@@ -221,7 +221,7 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
     }));
 
   return (
-    <main className="flex flex-col items-center px-8 md:px-16 lg:px-24 w-full max-w-6xl">
+    <main className="flex flex-col items-center px-4 sm:px-8 md:px-16 lg:px-24 w-full max-w-6xl">
       <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg p-8 w-full space-y-8 mb-20">
         {/* Header */}
         <div className="text-center">
@@ -268,8 +268,8 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
         )}
 
         {/* Charts Section */}
-        <div className="hidden md:block bg-card-bg border border-input-border rounded-lg p-8 space-y-8">
-          <h3 className="text-2xl font-[800] text-foreground text-center mb-6">Performance Analytics</h3>
+        <div className="bg-card-bg border border-input-border rounded-lg p-4 sm:p-8 space-y-6 sm:space-y-8">
+          <h3 className="text-xl sm:text-2xl font-[800] text-foreground text-center mb-4 sm:mb-6">Performance Analytics</h3>
           
           <div className="grid grid-cols-1 xl:grid-cols-1 gap-8">
             {userStats && (

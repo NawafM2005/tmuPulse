@@ -83,6 +83,16 @@ export default function DegreePlanner() {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [selectedMobileCourse, setSelectedMobileCourse] = useState<Course | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile screen size (below lg = 1024px)
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Fetch programs from database with user consideration
   useEffect(() => {
@@ -1725,12 +1735,35 @@ export default function DegreePlanner() {
 
     const isDroppable = requirement.type !== "code" && !requirement.course && !requirement.requirement.isStreamPlaceholder;
 
+    const handleMobileTap = () => {
+      if (!isMobile || !selectedMobileCourse || !isDroppable) return;
+      const isValid = validateCourseForRequirement(selectedMobileCourse, requirement);
+      if (isValid) {
+        const newSemesterPlans = semesterPlans.map((plan) => ({
+          ...plan,
+          requirements: plan.requirements.map((req) =>
+            req.id === requirement.id
+              ? { ...req, course: { ...selectedMobileCourse, id: `${req.id}-course` } }
+              : req
+          ),
+        }));
+        setSemesterPlans(newSemesterPlans);
+        setSelectedMobileCourse(null);
+        if (user) setHasUnsavedChanges(true);
+      }
+    };
+
+    const isMobileTargetable = isMobile && isDroppable && selectedMobileCourse !== null;
+
     return (
       <div
         ref={setNodeRef}
+        onClick={handleMobileTap}
         className={`relative group p-2 sm:p-3 rounded-lg min-h-[50px] sm:min-h-[60px] flex items-center justify-between transition-colors max-w-full ${getSlotColor()} ${
           isDroppable ? "hover:border-solid hover:bg-opacity-30" : ""
-        } ${isOver && isDroppable ? "border-solid bg-opacity-50 scale-105" : ""}`}
+        } ${isOver && isDroppable ? "border-solid bg-opacity-50 scale-105" : ""} ${
+          isMobileTargetable ? "ring-2 ring-green-400 cursor-pointer border-solid animate-pulse" : ""
+        }`}
       >
         <div className="flex-1">
           {requirement.course ? (
@@ -1794,7 +1827,15 @@ export default function DegreePlanner() {
             <div className="text-center">
               <p className="text-xs sm:text-sm font-medium">{getSlotLabel(requirement)}</p>
               {isDroppable && (
-                <p className="text-xs opacity-60 mt-1 hidden sm:block">Drag course here</p>
+                <>
+                  <p className="text-xs opacity-60 mt-1 hidden lg:block">Drag course here</p>
+                  {isMobile && selectedMobileCourse && (
+                    <p className="text-xs text-green-600 font-semibold mt-1">Tap to assign</p>
+                  )}
+                  {isMobile && !selectedMobileCourse && (
+                    <p className="text-xs opacity-60 mt-1">Select course below</p>
+                  )}
+                </>
               )}
             </div>
           )}
@@ -1803,8 +1844,8 @@ export default function DegreePlanner() {
           <Button
             size="sm"
             variant="ghost"
-            className="h-5 w-5 sm:h-6 sm:w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-            onClick={() => removeCourseFromSlot(requirement.id)}
+            className={`h-5 w-5 sm:h-6 sm:w-6 p-0 transition-opacity cursor-pointer ${isMobile ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+            onClick={(e) => { e.stopPropagation(); removeCourseFromSlot(requirement.id); }}
           >
             <X className="h-3 w-3 sm:h-4 sm:w-4" />
           </Button>
@@ -1825,39 +1866,64 @@ export default function DegreePlanner() {
       id: course.id,
     });
 
-    const style = transform
+    const style = !isMobile && transform
       ? {
           transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
         }
       : undefined;
 
+    const isSelectedMobile = isMobile && selectedMobileCourse?.id === course.id;
+
+    const handleMobileTap = () => {
+      if (!isMobile) return;
+      setSelectedMobileCourse(isSelectedMobile ? null : course);
+    };
+
     return (
       <div
         ref={setNodeRef}
         style={style}
-        className={`p-2 sm:p-3 rounded-lg transition-all duration-200 bg-background text-foreground border-2 border-gray-600 font-bold relative ${
+        onClick={isMobile ? handleMobileTap : undefined}
+        className={`p-2 sm:p-3 rounded-lg transition-all duration-200 bg-background text-foreground border-2 font-bold relative ${
+          isSelectedMobile
+            ? "border-green-500 ring-2 ring-green-400 scale-[1.02]"
+            : "border-gray-600"
+        } ${
           isDragging
             ? "opacity-50 scale-95"
+            : isMobile
+            ? "active:scale-95 cursor-pointer"
             : "hover:scale-101 hover:shadow-lg hover:bg-card-hover"
         }`}
       >
         <div className="flex flex-col gap-1 sm:gap-2">
           <div className="flex items-center gap-1 sm:gap-2">
-            {/* Draggable handle area */}
-            <div 
-              className="flex items-center gap-1 sm:gap-2 flex-1 cursor-grab active:cursor-grabbing"
-              {...listeners}
-              {...attributes}
-            >
-              <GripVertical className="h-3 w-3 sm:h-4 sm:w-4 opacity-60" />
-              <span className="text-xs font-bold truncate">
-                {course.code || "Course"}
-              </span>
-            </div>
-            
-            {/* Non-draggable info button */}
+            {/* Draggable handle area — desktop only */}
+            {!isMobile ? (
+              <div
+                className="flex items-center gap-1 sm:gap-2 flex-1 cursor-grab active:cursor-grabbing"
+                {...listeners}
+                {...attributes}
+              >
+                <GripVertical className="h-3 w-3 sm:h-4 sm:w-4 opacity-60" />
+                <span className="text-xs font-bold truncate">
+                  {course.code || "Course"}
+                </span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-1 flex-1">
+                {isSelectedMobile && (
+                  <span className="text-green-500 font-bold text-sm leading-none">✓</span>
+                )}
+                <span className="text-xs font-bold truncate">
+                  {course.code || "Course"}
+                </span>
+              </div>
+            )}
+
+            {/* Info button */}
             <button
-              onClick={(e) => handleShowCourseInfo(course, e)}
+              onClick={(e) => { e.stopPropagation(); handleShowCourseInfo(course, e); }}
               className="p-1 sm:p-1.5 hover:bg-card-hover rounded-full transition-colors hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-card-hover flex-shrink-0 hover:cursor-pointer"
               title="Course Info"
               type="button"
@@ -1865,10 +1931,9 @@ export default function DegreePlanner() {
               <Info className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400 hover:text-blue-300 transition-colors" />
             </button>
           </div>
-          
+
           {/* Badges Row */}
           <div className="flex flex-wrap gap-1">
-            {/* Liberal Type Badge */}
             {course.category === "lowerlib" && (
               <Badge className="bg-blue-400 text-black text-xs px-1 py-0 h-3 sm:h-4">
                 Lower
@@ -1879,8 +1944,6 @@ export default function DegreePlanner() {
                 Upper
               </Badge>
             )}
-            
-            {/* Term Badges */}
             {course.term?.includes('Fall') && (
               <Badge className="bg-blue-400 text-black text-xs px-1 py-0 h-3 sm:h-4">
                 Fall
@@ -1892,6 +1955,13 @@ export default function DegreePlanner() {
               </Badge>
             )}
           </div>
+
+          {/* Mobile selection hint */}
+          {isSelectedMobile && (
+            <p className="text-xs text-green-600 font-semibold text-center">
+              Selected — scroll up &amp; tap a slot
+            </p>
+          )}
         </div>
       </div>
     );
@@ -1938,12 +2008,16 @@ export default function DegreePlanner() {
                 <span className="font-bold" style={{color: "#fb923c"}}>Stream Requirements:</span>{" "}
                 Program-specific tracks (Aircraft, Avionics, etc.)
               </div>
-              <div>
+              <div className="hidden lg:block">
                 <span className="font-bold text-warning">Drag courses</span> from
                 catalogue to empty slots
               </div>
+              <div className="lg:hidden">
+                <span className="font-bold text-warning">Tap a course</span> in the catalogue, then{" "}
+                <span className="font-bold text-warning">tap a slot</span> to assign it
+              </div>
               <div>
-                <span className="font-bold text-danger">Click courses</span> to
+                <span className="font-bold text-danger">Click courses</span> in slots to
                 mark as completed
               </div>
             </div>
@@ -2032,6 +2106,23 @@ export default function DegreePlanner() {
                   </>
                 )}
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile: selected course banner */}
+        {isMobile && selectedMobileCourse && (
+          <div className="lg:hidden sticky top-16 z-50 mx-4 mt-4">
+            <div className="bg-green-500 text-white rounded-xl px-4 py-2 flex items-center justify-between shadow-lg">
+              <span className="text-sm font-bold">
+                ✓ {selectedMobileCourse.code} selected — tap a slot to assign
+              </span>
+              <button
+                onClick={() => setSelectedMobileCourse(null)}
+                className="ml-3 p-1 rounded-full hover:bg-green-600 transition-colors"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
           </div>
         )}

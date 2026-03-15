@@ -119,13 +119,13 @@ export default function ReleasesPage() {
   return (
     <div className="min-h-screen bg-background pt-20 pb-16">
       <Navbar />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-3 mb-6 mt-20">
-            <Sparkles className="h-8 w-8 text-primary animate-pulse" />
-            <h1 className="text-4xl md:text-5xl font-black text-foreground">Release Notes</h1>
-            <Sparkles className="h-8 w-8 text-primary animate-pulse" />
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 mt-16 sm:mt-20">
+            <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-primary animate-pulse" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-foreground">Release Notes</h1>
+            <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-primary animate-pulse" />
           </div>
           <p className="text-lg text-muted font-medium max-w-2xl mx-auto">
             Stay updated with the latest features, improvements, and bug fixes in TMU Pulse.
@@ -143,7 +143,7 @@ export default function ReleasesPage() {
               const showTail = index !== sorted.length - 1;
 
               return (
-                <div key={release.version} className="relative pl-12">
+                <div key={release.version} className="relative pl-8 sm:pl-12">
                   {/* dot */}
                   <div className="absolute left-5 -translate-x-1/2 top-6">
                     <div className="relative">
@@ -167,15 +167,15 @@ export default function ReleasesPage() {
                         </div>
                       )}
 
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-lg">
-                          <span className="text-2xl font-black text-white">
+                      <div className="flex items-center gap-3 sm:gap-4 mb-4">
+                        <div className="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-lg flex-shrink-0">
+                          <span className="text-lg sm:text-2xl font-black text-white">
                             {release.version.split('.')[0]}.{release.version.split('.')[1]}
                           </span>
                         </div>
                         <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <h2 className="text-2xl md:text-2xl font-black text-foreground">
+                          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
+                            <h2 className="text-lg sm:text-2xl font-black text-foreground">
                               {release.title}
                             </h2>
                             <span

@@ -68,6 +68,31 @@
   --color-overlay: var(--overlay);
 }
 
+/* Mobile: prevent horizontal overflow */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Better touch targets for interactive elements */
+button, a, select, input[type="checkbox"], input[type="radio"] {
+  touch-action: manipulation;
+}
+
+/* Mobile FullCalendar compact toolbar */
+@media (max-width: 640px) {
+  .tmupulse-cal .fc .fc-toolbar-title {
+    font-size: 0.875rem;
+  }
+  .tmupulse-cal .fc .fc-button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  .tmupulse-cal .fc .fc-timegrid-slot {
+    height: 32px;
+  }
+}
+
 /* Custom animations for loading page */
 @keyframes spin-reverse {
   from { transform: rotate(360deg); }

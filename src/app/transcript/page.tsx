@@ -161,7 +161,7 @@ export default function Transcript() {
   return (
     <main className="min-h-screen bg-background flex flex-col items-center">
       <Navbar />
-      <div className="flex flex-col items-center justify-center px-8 md:px-16 lg:px-24 py-8 w-full max-w-6xl mt-20 gap-6 text-center">
+      <div className="flex flex-col items-center justify-center px-4 sm:px-8 md:px-16 lg:px-24 py-8 w-full max-w-6xl mt-16 sm:mt-20 gap-6 text-center">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[900] text-foreground mb-4">
           <span className="text-accent">T</span><span className="text-[#f5d60b]">M</span><span className="text-primary">U</span> Transcript Analyser
         </h1>
@@ -231,7 +231,7 @@ export default function Transcript() {
         </div>
       </div>
       {json && allCourses.length > 0 && (
-        <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg px-8 md:px-16 lg:px-24 py-8 max-w-6xl w-full space-y-8 mb-20">
+        <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg px-4 sm:px-8 md:px-16 lg:px-24 py-8 max-w-6xl w-full space-y-8 mb-20">
           {/* Header Info */}
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-primary/10 border-2 border-primary/30 rounded-lg p-6">

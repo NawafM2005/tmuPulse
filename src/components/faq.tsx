@@ -41,17 +41,17 @@ export default function FAQ() {
 	const [open, setOpen] = useState<number | null>(null);
 
 	return (
-		<div className="max-w-8xl mx-auto mb-10 mt-10 rounded-2xl bg-foreground p-6 shadow-lg">
-			<h2 className="mb-10 text-center text-4xl font-[600] text-background">
+		<div className="max-w-4xl mx-auto mb-10 mt-10 rounded-2xl bg-foreground p-4 sm:p-6 shadow-lg w-full">
+			<h2 className="mb-6 sm:mb-10 text-center text-2xl sm:text-4xl font-[600] text-background">
 				Frequently Asked Questions
 			</h2>
 			{faqs.map((item, i) => (
 				<div
 					key={i}
-					className="mb-3 max-w-3xl rounded-xl bg-white shadow-sm"
+					className="mb-3 w-full rounded-xl bg-white shadow-sm"
 				>
 					<button
-						className={`flex w-full items-center justify-between rounded-xl px-4 py-3 font-semibold text-left transition-colors duration-150
+						className={`flex w-full items-center justify-between rounded-xl px-3 sm:px-4 py-3 font-semibold text-left text-sm sm:text-base transition-colors duration-150
               focus:outline-none hover:cursor-pointer
               ${open === i ? "bg-yellow-200 text-black" : "bg-background text-black"}
             `}

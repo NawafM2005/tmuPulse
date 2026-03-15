@@ -25,7 +25,7 @@ export default function LineChartGeneric({
   title,
 }: LineChartGenericProps) {
   return (
-    <div className="p-2 w-2/3 text-foreground mt-5 mb-5">
+    <div className="p-2 w-full sm:w-2/3 text-foreground mt-5 mb-5">
       {title && <h3 className="text-xl font-bold mb-4">{title}</h3>}
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
