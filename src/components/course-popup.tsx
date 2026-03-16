@@ -209,7 +209,7 @@ export default function PopUp({ open, onClose, course }: popup_types) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.99 }}
             transition={{ duration: 0.12 }}
-            className="relative flex flex-col w-full max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-4xl max-h-[90vh] bg-card-bg text-foreground rounded-2xl shadow-2xl border-2 border-borders overflow-hidden"
+            className="relative flex flex-col w-[95vw] sm:max-w-lg md:max-w-2xl lg:max-w-4xl max-h-[92vh] bg-card-bg text-foreground rounded-2xl shadow-2xl border-2 border-borders overflow-hidden"
             onClick={e => e.stopPropagation()}
           >
             {/* Header with close button */}
@@ -381,14 +381,14 @@ export default function PopUp({ open, onClose, course }: popup_types) {
                     const isOpen = (s.status || "").toLowerCase() === "open";
                     return (
                       <div key={idx} className="rounded-lg border border-input-border bg-card-bg p-3">
-                        <div className="flex items-center justify-between mb-1">
-                          <div className="flex items-center gap-2">
+                        <div className="flex items-center justify-between mb-2 flex-wrap gap-1">
+                          <div className="flex items-center gap-1.5">
                             {isOpen ? (
-                              <CheckCircle2 className="h-2 w-2" />
+                              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                             ) : (
-                              <XCircle className="h-2 w-2" />
+                              <XCircle className="h-3.5 w-3.5 text-rose-500 shrink-0" />
                             )}
-                            <span className={`text-sm font-semibold px-2 py-0.5 rounded-full border ${
+                            <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${
                               isOpen
                                 ? "border-emerald-500/40 text-emerald-500"
                                 : "border-rose-500/40 text-rose-500"
@@ -396,31 +396,31 @@ export default function PopUp({ open, onClose, course }: popup_types) {
                               {s.status || "N/A"}
                             </span>
                           </div>
-                          <span className="text-[11px] text-muted">{s.section || "—"}</span>
+                          <span className="text-xs text-muted">{s.section || "—"}</span>
                         </div>
 
-                        <div className="mt-1 space-y-1.5">
+                        <div className="mt-1 space-y-2">
                           <div className="flex items-center gap-2">
-                            <Clock className="h-4 w-4" />
-                            <span className="text-[8px]">
-                              {s.day || "—"} {s.start || "—"}-{s.end || "—"}
+                            <Clock className="h-3.5 w-3.5 shrink-0 text-muted" />
+                            <span className="text-xs font-medium">
+                              {s.day || "—"} {s.start || "—"}–{s.end || "—"}
                             </span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <MapPin className="h-4 w-4" />
-                            <span className="text-sm">{s.room || "TBA"}</span>
+                            <MapPin className="h-3.5 w-3.5 shrink-0 text-muted" />
+                            <span className="text-xs">{s.room || "TBA"}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <UserIcon className="h-4 w-4" />
-                            <span className="text-sm">{s.instructor || "TBA"}</span>
+                            <UserIcon className="h-3.5 w-3.5 shrink-0 text-muted" />
+                            <span className="text-xs">{s.instructor || "TBA"}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Hash className="h-4 w-4" />
-                            <span className="text-sm">Class #{s.class_number || "—"}</span>
+                            <Hash className="h-3.5 w-3.5 shrink-0 text-muted" />
+                            <span className="text-xs">Class #{s.class_number || "—"}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4" />
-                            <span className="text-sm text-muted">{s.meeting_dates || "—"}</span>
+                            <Calendar className="h-3.5 w-3.5 shrink-0 text-muted" />
+                            <span className="text-xs text-muted">{s.meeting_dates || "—"}</span>
                           </div>
                         </div>
                       </div>
