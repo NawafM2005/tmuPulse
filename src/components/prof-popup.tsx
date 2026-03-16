@@ -127,7 +127,7 @@ export default function PopUp({ open, onClose, prof }: popup_types) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.1 }}
-            className="relative flex flex-col w-[95vw] sm:max-w-lg md:max-w-2xl lg:max-w-3xl max-h-[92vh] bg-card-bg text-foreground rounded-2xl shadow-2xl border-2 border-borders overflow-hidden"
+            className="relative flex flex-col w-[95vw] sm:max-w-lg md:max-w-2xl lg:max-w-3xl max-h-[90dvh] bg-card-bg text-foreground rounded-2xl shadow-2xl border-2 border-borders overflow-hidden"
             onClick={e => e.stopPropagation()}
           >
             {/* Header with close button */}
