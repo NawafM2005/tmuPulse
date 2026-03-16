@@ -127,7 +127,7 @@ export default function PopUp({ open, onClose, prof }: popup_types) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.1 }}
-            className="relative flex flex-col w-full max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-3xl max-h-[90vh] bg-card-bg text-foreground rounded-2xl shadow-2xl border-2 border-borders overflow-hidden"
+            className="relative flex flex-col w-[95vw] sm:max-w-lg md:max-w-2xl lg:max-w-3xl max-h-[90dvh] bg-card-bg text-foreground rounded-2xl shadow-2xl border-2 border-borders overflow-hidden"
             onClick={e => e.stopPropagation()}
           >
             {/* Header with close button */}
@@ -151,7 +151,7 @@ export default function PopUp({ open, onClose, prof }: popup_types) {
 
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="bg-card-hover rounded-xl p-4 border border-input-border flex flex-col items-center">
                   <span className="font-[700] text-xs sm:text-sm text-muted mb-2">Avg. Rating</span>
                   <span className="text-lg sm:text-xl font-bold">
@@ -189,10 +189,10 @@ export default function PopUp({ open, onClose, prof }: popup_types) {
                         {prof.courses_taught.map((course : string) => (
                           <button
                             key={course}
-                            className={`text-xs font-medium px-2 py-0.5 rounded-md hover:cursor-pointer ${
+                            className={`text-xs font-medium px-2 py-0.5 rounded-md hover:cursor-pointer border transition-colors ${
                               selectedCourse === course
-                                ? "bg-blue-600 text-white"
-                                : "bg-blue-100 text-blue-800"
+                                ? "bg-primary text-white border-primary"
+                                : "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20"
                             }`}
                             onClick={() => handleCourseClick(course)}
                           >
@@ -212,20 +212,20 @@ export default function PopUp({ open, onClose, prof }: popup_types) {
                           className="bg-card-hover rounded-xl p-4 border border-borders/60 shadow-sm hover:shadow-md transition"
                         >
                           {/* Top row: class + date */}
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex flex-wrap items-center gap-2">
+                          <div className="flex flex-wrap items-start justify-between gap-1 mb-2">
+                            <div className="flex flex-wrap items-center gap-1.5">
                               {review.class && (
-                                <span className="text-xs font-medium bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md">
+                                <span className="text-xs font-medium bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 rounded-md">
                                   {review.class}
                                 </span>
                               )}
                               {review.grade && (
-                                <span className="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md">
+                                <span className="text-xs bg-success/10 text-success border border-success/20 px-2 py-0.5 rounded-md">
                                   Grade: {review.grade}
                                 </span>
                               )}
                             </div>
-                            <span className="text-xs text-muted">
+                            <span className="text-xs text-muted shrink-0">
                               {review.date
                                 ? new Date(review.date).toLocaleDateString(undefined, {
                                     year: "numeric",
@@ -241,27 +241,27 @@ export default function PopUp({ open, onClose, prof }: popup_types) {
                             {review.comment ? (
                               <p className="whitespace-pre-line">{review.comment}</p>
                             ) : (
-                              <span className="italic text-gray-400">No comment provided</span>
+                              <span className="italic text-muted">No comment provided</span>
                             )}
                           </div>
 
                           {/* Ratings */}
-                          <div className="flex flex-wrap gap-2 text-xs font-medium">
-                            <span className="px-2 py-0.5 rounded-md bg-gray-100 text-gray-800">
+                          <div className="flex flex-wrap gap-1.5 text-xs font-medium">
+                            <span className="px-2 py-0.5 rounded-md bg-card-bg border border-input-border text-foreground">
                               Helpful: {review.helpful_rating || "—"}
                             </span>
-                            <span className="px-2 py-0.5 rounded-md bg-gray-100 text-gray-800">
+                            <span className="px-2 py-0.5 rounded-md bg-card-bg border border-input-border text-foreground">
                               Clarity: {review.clarity_rating || "—"}
                             </span>
-                            <span className="px-2 py-0.5 rounded-md bg-gray-100 text-gray-800">
+                            <span className="px-2 py-0.5 rounded-md bg-card-bg border border-input-border text-foreground">
                               Difficulty: {review.difficulty_rating || "—"}
                             </span>
                             {typeof review.would_take_again === "boolean" && (
                               <span
-                                className={`px-2 py-0.5 rounded-md ${
+                                className={`px-2 py-0.5 rounded-md border ${
                                   review.would_take_again
-                                    ? "bg-green-100 text-green-700"
-                                    : "bg-red-100 text-red-700"
+                                    ? "bg-success/10 text-success border-success/20"
+                                    : "bg-danger/10 text-danger border-danger/20"
                                 }`}
                               >
                                 {review.would_take_again ? "Would Take Again" : "Would Not Take Again"}
@@ -269,7 +269,7 @@ export default function PopUp({ open, onClose, prof }: popup_types) {
                             )}
                             {review.attendance_mandatory &&
                               review.attendance_mandatory !== "unknown" && (
-                                <span className="px-2 py-0.5 rounded-md bg-purple-100 text-purple-700">
+                                <span className="px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">
                                   Attendance:{" "}
                                   {review.attendance_mandatory === "mandatory"
                                     ? "Mandatory"
@@ -281,12 +281,12 @@ export default function PopUp({ open, onClose, prof }: popup_types) {
                       ))}
                     </ul>
                   ) : (
-                    <p className="italic text-gray-400">No reviews available</p>
+                    <p className="italic text-muted">No reviews available</p>
                   )}
                 </div>
                 {displayedReviews.length > 5 && (
                   <div>
-                    <button className="text-sm text-blue-500 hover:underline hover:cursor-pointer" onClick={() => {
+                    <button className="text-sm text-primary hover:underline hover:cursor-pointer" onClick={() => {
                       setEndIdx((prevEndIdx) => Math.min(prevEndIdx + 5, displayedReviews.length));
                     }}>
                       Show more
