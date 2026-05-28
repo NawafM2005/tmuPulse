@@ -1759,7 +1759,7 @@ export default function DegreePlanner() {
       <div
         ref={setNodeRef}
         onClick={handleMobileTap}
-        className={`relative group p-2 sm:p-3 rounded-lg min-h-[50px] sm:min-h-[60px] flex items-center justify-between transition-colors max-w-full ${getSlotColor()} ${
+        className={`relative group p-3 sm:p-3 rounded-lg min-h-[60px] sm:min-h-[60px] flex items-center justify-between transition-colors max-w-full ${getSlotColor()} ${
           isDroppable ? "hover:border-solid hover:bg-opacity-30" : ""
         } ${isOver && isDroppable ? "border-solid bg-opacity-50 scale-105" : ""} ${
           isMobileTargetable ? "ring-2 ring-green-400 cursor-pointer border-solid animate-pulse" : ""
@@ -1844,10 +1844,11 @@ export default function DegreePlanner() {
           <Button
             size="sm"
             variant="ghost"
-            className={`h-5 w-5 sm:h-6 sm:w-6 p-0 transition-opacity cursor-pointer ${isMobile ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+            className={`h-10 w-10 sm:h-8 sm:w-8 p-0 transition-opacity cursor-pointer flex-shrink-0 ${isMobile ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
             onClick={(e) => { e.stopPropagation(); removeCourseFromSlot(requirement.id); }}
+            aria-label="Remove course"
           >
-            <X className="h-3 w-3 sm:h-4 sm:w-4" />
+            <X className="h-4 w-4 sm:h-4 sm:w-4" />
           </Button>
         )}
       </div>
@@ -1884,9 +1885,9 @@ export default function DegreePlanner() {
         ref={setNodeRef}
         style={style}
         onClick={isMobile ? handleMobileTap : undefined}
-        className={`p-2 sm:p-3 rounded-lg transition-all duration-200 bg-background text-foreground border-2 font-bold relative ${
+        className={`p-3 sm:p-3 rounded-lg transition-all duration-200 bg-background text-foreground border-2 font-bold relative min-h-[60px] ${
           isSelectedMobile
-            ? "border-green-500 ring-2 ring-green-400 scale-[1.02]"
+            ? "border-green-500 ring-2 ring-green-400 scale-[1.02] bg-green-50"
             : "border-gray-600"
         } ${
           isDragging
@@ -1924,11 +1925,11 @@ export default function DegreePlanner() {
             {/* Info button */}
             <button
               onClick={(e) => { e.stopPropagation(); handleShowCourseInfo(course, e); }}
-              className="p-1 sm:p-1.5 hover:bg-card-hover rounded-full transition-colors hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-card-hover flex-shrink-0 hover:cursor-pointer"
+              className="h-9 w-9 sm:h-8 sm:w-8 flex items-center justify-center hover:bg-card-hover rounded-full transition-colors hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-card-hover flex-shrink-0 hover:cursor-pointer"
               title="Course Info"
               type="button"
             >
-              <Info className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400 hover:text-blue-300 transition-colors" />
+              <Info className="h-4 w-4 sm:h-4 sm:w-4 text-blue-400 hover:text-blue-300 transition-colors" />
             </button>
           </div>
 
@@ -2110,18 +2111,22 @@ export default function DegreePlanner() {
           </div>
         )}
 
-        {/* Mobile: selected course banner */}
+        {/* Mobile: selected course banner — fixed at bottom */}
         {isMobile && selectedMobileCourse && (
-          <div className="lg:hidden sticky top-16 z-50 mx-4 mt-4">
-            <div className="bg-green-500 text-white rounded-xl px-4 py-2 flex items-center justify-between shadow-lg">
-              <span className="text-sm font-bold">
-                ✓ {selectedMobileCourse.code} selected — tap a slot to assign
-              </span>
+          <div className="lg:hidden fixed bottom-4 left-3 right-3 z-50">
+            <div className="bg-green-600 text-white rounded-2xl px-4 py-3 flex items-center justify-between shadow-2xl border-2 border-green-700">
+              <div className="flex-1 min-w-0 mr-2">
+                <p className="text-xs font-bold text-green-100 mb-0.5">✓ Selected</p>
+                <p className="text-sm font-bold truncate">
+                  {selectedMobileCourse.code} — tap a slot to place
+                </p>
+              </div>
               <button
                 onClick={() => setSelectedMobileCourse(null)}
-                className="ml-3 p-1 rounded-full hover:bg-green-600 transition-colors"
+                aria-label="Cancel selection"
+                className="touch-target shrink-0 flex items-center justify-center rounded-xl bg-green-700 hover:bg-green-800 active:scale-95 transition-all"
               >
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
               </button>
             </div>
           </div>
@@ -2303,7 +2308,7 @@ export default function DegreePlanner() {
                   placeholder="Search courses..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 sm:pl-12 bg-input-bg border-2 border-input-border rounded-xl text-foreground font-bold placeholder:text-muted focus:border-input-focus transition-all text-sm"
+                  className="pl-10 sm:pl-12 h-11 bg-input-bg border-2 border-input-border rounded-xl text-foreground font-bold placeholder:text-muted focus:border-input-focus transition-all text-sm"
                 />
               </div>
               <div className="flex-1 overflow-y-auto px-1 sm:px-2 lg:max-h-96">
@@ -2322,17 +2327,17 @@ export default function DegreePlanner() {
 
               {/* Pagination Controls */}
               {filteredCourses.length > 0 && (
-                <div className="flex items-center justify-between px-1 sm:px-2 py-2 sm:py-3 border-t border-borders">
+                <div className="flex items-center justify-between gap-2 px-1 sm:px-2 py-3 border-t border-borders">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={handlePreviousPage}
                     disabled={!canPreviousPage}
-                    className="border-gray-700 text-foreground hover:bg-gray-800 hover:text-white hover:cursor-pointer bg-background text-xs px-2 py-1 h-6"
+                    className="border-gray-700 text-foreground hover:bg-gray-800 hover:text-white hover:cursor-pointer bg-background text-xs h-10 px-4 flex-1"
                   >
                     Previous
                   </Button>
-                  <p className="text-xs font-semibold text-foreground">
+                  <p className="text-xs font-semibold text-foreground tabular-nums min-w-[3rem] text-center">
                     {totalPages === 0 ? "0 / 0" : `${currentPage} / ${totalPages}`}
                   </p>
                   <Button
@@ -2340,7 +2345,7 @@ export default function DegreePlanner() {
                     size="sm"
                     onClick={handleNextPage}
                     disabled={!canNextPage}
-                    className="border-gray-700 text-foreground hover:bg-gray-800 hover:text-white hover:cursor-pointer bg-background text-xs px-2 py-1 h-6"
+                    className="border-gray-700 text-foreground hover:bg-gray-800 hover:text-white hover:cursor-pointer bg-background text-xs h-10 px-4 flex-1"
                   >
                     Next
                   </Button>

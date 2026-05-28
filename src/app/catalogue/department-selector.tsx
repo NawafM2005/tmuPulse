@@ -76,18 +76,18 @@ export function ProgramSelector({ label = "Department", programs, selectedProgra
 
 
   return (
-    <div>
+    <div className="w-full md:w-auto">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button 
-            variant="outline" 
-            className="text-foreground bg-background border-2 border-secondary hover:bg-gray-800 hover:text-white hover:cursor-pointer p-5 w-full max-w-sm min-w-[200px]"
+          <Button
+            variant="outline"
+            className="text-foreground bg-background border-2 border-secondary hover:bg-gray-800 hover:text-white hover:cursor-pointer h-12 px-4 w-full md:max-w-sm md:min-w-[200px] justify-between font-semibold"
           >
-            {getButtonText()}
-            <ChevronDown className="ml-2 h-4 w-4"/>
+            <span className="truncate">{getButtonText()}</span>
+            <ChevronDown className="ml-2 h-4 w-4 shrink-0"/>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-background border-accent border-2 max-h-80 overflow-y-auto" side="bottom">
+        <DropdownMenuContent className="bg-background border-accent border-2 max-h-[60vh] overflow-y-auto w-[calc(100vw-2rem)] md:w-auto md:min-w-[240px]" side="bottom" align="start">
           <DropdownMenuLabel className="text-foreground">{`Select ${label}`}</DropdownMenuLabel>
           <DropdownMenuSeparator className="bg-foreground" />
           {programs.map((program) => (

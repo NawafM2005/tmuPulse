@@ -103,12 +103,12 @@ export type LeftSidebarProps = {
 
 export default function LeftSidebar({ courses, onRemove, onToggle, onChange }: LeftSidebarProps) {
   return (
-  <aside className="w-full h-auto sticky top-[64px] overflow-y-auto bg-background border-r border-input-border p-4">
+  <aside className="w-full h-auto xl:sticky xl:top-[64px] xl:overflow-y-auto bg-background xl:border-r xl:border-input-border p-2 sm:p-4">
       {/* Header */}
       <header className="mb-3 flex items-center justify-between">
-        <h1 className="text-md font-bold tracking-wide uppercase text-foreground">Course Cart</h1>
+        <h1 className="text-sm sm:text-md font-bold tracking-wide uppercase text-foreground">Course Cart</h1>
         <span className="text-xs px-2 py-0.5 rounded-full bg-card-hover text-foreground border border-input-border">
-          {courses.length} items
+          {courses.length} {courses.length === 1 ? "item" : "items"}
         </span>
       </header>
 
@@ -215,10 +215,10 @@ export default function LeftSidebar({ courses, onRemove, onToggle, onChange }: L
                   type="button"
                   aria-label={`Remove course ${c.code}`}
                   title="Remove"
-                  className="absolute top-2 right-2 h-7 w-7 inline-flex items-center justify-center rounded-md border border-input-border bg-card-bg/70 hover:bg-card-bg active:scale-95 cursor-pointer"
+                  className="absolute top-2 right-2 h-10 w-10 inline-flex items-center justify-center rounded-md border border-input-border bg-card-bg/70 hover:bg-card-bg active:scale-95 cursor-pointer"
                   onClick={() => onRemove?.(c.id)}
                 >
-                  <X className="h-4 w-4 text-foreground" />
+                  <X className="h-5 w-5 text-foreground" />
                 </button>
 
                 <div className="p-3 pt-4">
@@ -226,7 +226,7 @@ export default function LeftSidebar({ courses, onRemove, onToggle, onChange }: L
                     <input
                       type="checkbox"
                       id={`chk-${c.id}`}
-                      className="mt-1 h-4 w-4 rounded border-input-border accent-primary focus:ring-2 focus:ring-primary"
+                      className="mt-1 h-5 w-5 rounded border-input-border accent-primary focus:ring-2 focus:ring-primary cursor-pointer"
                       defaultChecked
                       onChange={(e) => onToggle?.(c.id, e.target.checked)}
                     />
@@ -274,7 +274,7 @@ export default function LeftSidebar({ courses, onRemove, onToggle, onChange }: L
                           </label>
                           <select
                             id={`lec-${c.id}`}
-                            className="w-full rounded-lg border border-input-border bg-input-bg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                            className="w-full rounded-lg border border-input-border bg-input-bg px-3 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                             value={lectureValue}
                             onChange={(e) => handleLectureChange(e.target.value)}
                             disabled={lecOptions.length === 0}
@@ -302,7 +302,7 @@ export default function LeftSidebar({ courses, onRemove, onToggle, onChange }: L
                           </label>
                           <select
                             id={`lab-${c.id}`}
-                            className="w-full rounded-lg border border-input-border bg-input-bg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                            className="w-full rounded-lg border border-input-border bg-input-bg px-3 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                             value={labValue}
                             onChange={(e) => handleLabChange(e.target.value)}
                             disabled={labOptions.length === 0}

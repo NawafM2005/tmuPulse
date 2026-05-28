@@ -231,7 +231,7 @@ export default function CourseCatalogue({
 
   return (
     <>
-      <aside className="w-full lg:sticky lg:top-20 lg:self-start bg-card-bg border border-borders rounded-2xl shadow p-4 space-y-4 h-auto">
+      <aside className="w-full xl:sticky xl:top-20 xl:self-start bg-card-bg border border-borders rounded-2xl shadow p-3 sm:p-4 space-y-3 sm:space-y-4 h-auto">
         <h3 className="text-primary font-extrabold text-base sm:text-lg text-center">Course Catalogue</h3>
 
         {/* Filters */}
@@ -313,67 +313,67 @@ export default function CourseCatalogue({
             placeholder="Search courses..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9 bg-input-bg border border-input-border rounded-xl text-foreground placeholder:text-muted focus:border-input-focus text-sm"
+            className="pl-9 h-11 bg-input-bg border border-input-border rounded-xl text-foreground placeholder:text-muted focus:border-input-focus text-sm"
           />
         </div>
 
         {/* List */}
-        <div className="flex-1 overflow-y-auto px-1 lg:max-h-96">
+        <div className="flex-1 overflow-y-auto px-1 xl:max-h-96">
           <div className="space-y-2">
             {paginatedCourses.map((course: NormCourse) =>
               renderCourse ? (
                 <div key={course.id}>{renderCourse(course)}</div>
               ) : (
-                <div key={course.id} className="rounded-lg border border-borders bg-background p-3">
-                  {/* Top row: code + actions */}
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="text-sm font-semibold">{course.code}</div>
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        type="button"
-                        title="Course Info"
-                        aria-label={`Info for ${course.code}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          openCourseInfo(course);
-                        }}
-                        className="p-1.5 rounded-md border border-borders hover:bg-card-hover transition cursor-pointer"
-                      >
-                        <Info className="h-4 w-4" />
-                      </button>
-                      <button
-                        type="button"
-                        title="Add to plan"
-                        aria-label={`Add ${course.code}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          onAddCourse?.(course);
-                        }}
-                        className="p-1.5 rounded-md border border-borders hover:bg-card-hover transition cursor-pointer"
-                      >
-                        <Plus className="h-4 w-4" />
-                      </button>
+                <div key={course.id} className="rounded-lg border border-borders bg-background p-3 flex flex-col gap-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-bold text-foreground">{course.code}</div>
+                      <div className="text-xs text-foreground/70 line-clamp-2">{course.name}</div>
                     </div>
+                    <button
+                      type="button"
+                      title="Course Info"
+                      aria-label={`Info for ${course.code}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openCourseInfo(course);
+                      }}
+                      className="touch-target shrink-0 flex items-center justify-center rounded-md border border-borders hover:bg-card-hover transition cursor-pointer"
+                    >
+                      <Info className="h-4 w-4" />
+                    </button>
                   </div>
-
-                  {/* Name */}
-                  <div className="text-xs text-foreground/70">{course.name}</div>
 
                   {/* Badges */}
-                  <div className="mt-1 flex gap-2">
-                    {course.liberalNorm !== "None" && (
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">
-                        {course.liberalNorm.startsWith("Lower") ? "Lower" : "Upper"}
-                      </span>
-                    )}
-                    {course.termNorm.map((t) => (
-                      <span key={t} className="text-[10px] px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                  {(course.liberalNorm !== "None" || course.termNorm.length > 0) && (
+                    <div className="flex flex-wrap gap-1.5">
+                      {course.liberalNorm !== "None" && (
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">
+                          {course.liberalNorm.startsWith("Lower") ? "Lower" : "Upper"}
+                        </span>
+                      )}
+                      {course.termNorm.map((t) => (
+                        <span key={t} className="text-[10px] px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    aria-label={`Add ${course.code}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onAddCourse?.(course);
+                    }}
+                    className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 active:scale-[0.98] transition-all"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Add to Schedule
+                  </button>
                 </div>
               )
             )}
@@ -389,18 +389,18 @@ export default function CourseCatalogue({
 
         {/* Pagination */}
         {filteredCourses.length > 0 && (
-          <div className="flex items-center justify-between border-t border-borders pt-3">
+          <div className="flex items-center justify-between gap-2 border-t border-borders pt-3">
             <Button
               variant="outline"
               size="sm"
               onClick={handlePreviousPage}
               disabled={!canPreviousPage}
-              className="text-xs h-8 px-3 cursor-pointer"
+              className="text-xs h-10 px-4 cursor-pointer flex-1"
             >
               Previous
             </Button>
 
-            <p className="text-xs font-semibold text-foreground">
+            <p className="text-xs font-semibold text-foreground tabular-nums min-w-[3rem] text-center">
               {filteredCourses.length === 0 ? "0 / 0" : `${currentPage} / ${totalPages}`}
             </p>
 
@@ -409,7 +409,7 @@ export default function CourseCatalogue({
               size="sm"
               onClick={handleNextPage}
               disabled={!canNextPage}
-              className="text-xs h-8 px-3 cursor-pointer"
+              className="text-xs h-10 px-4 cursor-pointer flex-1"
             >
               Next
             </Button>

@@ -214,25 +214,25 @@ export default function Dashboard() {
       <Toaster />
       
       {/* Header Section */}
-      <div className="pt-20 sm:pt-24 md:pt-30 pb-8 px-4 md:px-8 lg:px-20">
+      <div className="pt-20 sm:pt-24 md:pt-30 pb-4 sm:pb-8 px-4 md:px-8 lg:px-20">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-primary to-primary/70 bg-clip-text text-transparent mb-2 sm:mb-4">
             Dashboard
           </h1>
-          <p className="text-base sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto px-2">
             Manage your profile and academic settings
           </p>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 px-4 md:px-8 lg:px-20 pb-12">
+      <div className="flex-1 px-3 sm:px-4 md:px-8 lg:px-20 pb-12">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
             
             {/* Left Section - User Settings */}
             <div className="space-y-6">
-              <div className="bg-gradient-to-r from-card/60 to-card/40 backdrop-blur-sm border border-border/60 rounded-2xl p-6 md:p-8 shadow-2xl shadow-black/5">
+              <div className="bg-gradient-to-r from-card/60 to-card/40 backdrop-blur-sm border border-border/60 rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl shadow-black/5">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-2 rounded-xl bg-primary/10 backdrop-blur-sm">
                     <Settings className="h-6 w-6 text-primary" />
@@ -370,7 +370,7 @@ export default function Dashboard() {
 
             {/* Right Section - Profile Display */}
             <div className="space-y-6">
-              <div className="bg-gradient-to-r from-card/60 to-card/40 backdrop-blur-sm border border-border/60 rounded-2xl p-6 md:p-8 shadow-2xl shadow-black/5">
+              <div className="bg-gradient-to-r from-card/60 to-card/40 backdrop-blur-sm border border-border/60 rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl shadow-black/5">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-2 rounded-xl bg-primary/10 backdrop-blur-sm">
                     <User className="h-6 w-6 text-primary" />

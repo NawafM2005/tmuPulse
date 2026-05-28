@@ -321,20 +321,20 @@ export default function Schedule() {
   return (
     <main className="min-h-screen bg-background pt-5 flex flex-col items-center">
       {/* Sonner host (keep once at app root or here) */}
-      <Toaster position="bottom-right" richColors />
+      <Toaster position="top-center" richColors />
 
       <Navbar />
 
-      <div className="flex flex-col items-center justify-center px-4 py-6 sm:p-8 w-full max-w-6xl mt-16 sm:mt-20 gap-4 text-center">
+      <div className="flex flex-col items-center justify-center px-4 py-4 sm:p-8 w-full max-w-6xl mt-16 sm:mt-20 gap-3 sm:gap-4 text-center">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[800] text-foreground">
           Schedule Builder
         </h1>
-        <p className="text-sm sm:text-base md:text-lg text-secondary max-w-4xl mx-auto">
+        <p className="text-sm sm:text-base md:text-lg text-secondary max-w-4xl mx-auto px-2">
           Plan your semester schedule with our interactive schedule builder
         </p>
       </div>
 
-      <div className="w-full p-3 sm:p-5">
+      <div className="w-full p-2 sm:p-5">
         {/* Planner UI only on xl+ */}
         <div className="hidden xl:flex flex-row gap-5">
           {/* Left Sidebar */}
@@ -373,43 +373,53 @@ export default function Schedule() {
         </div>
 
         {/* Mobile tabbed view (below xl) */}
-        <div className="xl:hidden flex flex-col gap-0">
-          {/* Tab bar */}
-          <div className="flex border-b-2 border-borders bg-card-bg rounded-t-xl overflow-hidden">
+        <div className="xl:hidden flex flex-col gap-0 max-w-3xl mx-auto w-full">
+          {/* Tab bar — sticky under navbar */}
+          <div className="sticky top-16 sm:top-20 z-30 flex border-b-2 border-borders bg-card-bg rounded-t-xl overflow-hidden shadow-md">
             <button
               onClick={() => setMobileTab("catalogue")}
-              className={`flex-1 py-3 text-sm font-bold transition-colors hover:cursor-pointer ${
+              className={`flex-1 py-3.5 px-2 text-xs sm:text-sm font-bold transition-colors hover:cursor-pointer flex flex-col items-center justify-center gap-0.5 ${
                 mobileTab === "catalogue"
                   ? "bg-primary text-white"
                   : "text-foreground hover:bg-card-hover"
               }`}
             >
-              📚 Browse
+              <span className="text-base">📚</span>
+              <span>Browse</span>
             </button>
             <button
               onClick={() => setMobileTab("courses")}
-              className={`flex-1 py-3 text-sm font-bold transition-colors hover:cursor-pointer border-l border-r border-borders ${
+              className={`flex-1 py-3.5 px-2 text-xs sm:text-sm font-bold transition-colors hover:cursor-pointer border-l border-r border-borders flex flex-col items-center justify-center gap-0.5 relative ${
                 mobileTab === "courses"
                   ? "bg-primary text-white"
                   : "text-foreground hover:bg-card-hover"
               }`}
             >
-              🛒 My Courses {selectedCourses.length > 0 && `(${selectedCourses.length})`}
+              <span className="text-base">🛒</span>
+              <span>My Courses</span>
+              {selectedCourses.length > 0 && (
+                <span className={`absolute top-1 right-2 text-[10px] font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center ${
+                  mobileTab === "courses" ? "bg-white text-primary" : "bg-primary text-white"
+                }`}>
+                  {selectedCourses.length}
+                </span>
+              )}
             </button>
             <button
               onClick={() => setMobileTab("calendar")}
-              className={`flex-1 py-3 text-sm font-bold transition-colors hover:cursor-pointer ${
+              className={`flex-1 py-3.5 px-2 text-xs sm:text-sm font-bold transition-colors hover:cursor-pointer flex flex-col items-center justify-center gap-0.5 ${
                 mobileTab === "calendar"
                   ? "bg-primary text-white"
                   : "text-foreground hover:bg-card-hover"
               }`}
             >
-              📅 Schedule
+              <span className="text-base">📅</span>
+              <span>Schedule</span>
             </button>
           </div>
 
           {/* Tab content */}
-          <div className="bg-card-bg border-2 border-borders border-t-0 rounded-b-xl p-3 min-h-[400px]">
+          <div className="bg-card-bg border-2 border-borders border-t-0 rounded-b-xl p-2 sm:p-3 min-h-[400px]">
             {mobileTab === "catalogue" && (
               <CourseCatalogue courses={catalogueCourses} onAddCourse={(c) => {
                 handleAddCourse(c);
@@ -417,29 +427,57 @@ export default function Schedule() {
               }} />
             )}
             {mobileTab === "courses" && (
-              <LeftSidebar
-                courses={selectedCourses as any}
-                onRemove={(id) =>
-                  setSelectedCourses((prev) => prev.filter((c) => (c as any).id !== id))
-                }
-                onToggle={(id, chk) =>
-                  setSelectedCourses((prev) =>
-                    prev.map((c) =>
-                      (c as any).id === id ? ({ ...c, selected: chk } as any) : c
+              selectedCourses.length === 0 ? (
+                <div className="flex flex-col items-center justify-center text-center py-12 px-4">
+                  <span className="text-5xl mb-3">📭</span>
+                  <p className="text-base font-bold text-foreground mb-1">No courses added yet</p>
+                  <p className="text-sm text-muted mb-4">Browse the catalogue and tap a course to add it to your schedule.</p>
+                  <button
+                    onClick={() => setMobileTab("catalogue")}
+                    className="px-5 py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-md active:scale-95 transition-transform"
+                  >
+                    📚 Browse Courses
+                  </button>
+                </div>
+              ) : (
+                <LeftSidebar
+                  courses={selectedCourses as any}
+                  onRemove={(id) =>
+                    setSelectedCourses((prev) => prev.filter((c) => (c as any).id !== id))
+                  }
+                  onToggle={(id, chk) =>
+                    setSelectedCourses((prev) =>
+                      prev.map((c) =>
+                        (c as any).id === id ? ({ ...c, selected: chk } as any) : c
+                      )
                     )
-                  )
-                }
-                onChange={(id, kind, value) =>
-                  setSelectedCourses((prev) =>
-                    prev.map((c) =>
-                      (c as any).id === id ? ({ ...c, [kind]: value } as any) : c
+                  }
+                  onChange={(id, kind, value) =>
+                    setSelectedCourses((prev) =>
+                      prev.map((c) =>
+                        (c as any).id === id ? ({ ...c, [kind]: value } as any) : c
+                      )
                     )
-                  )
-                }
-              />
+                  }
+                />
+              )
             )}
             {mobileTab === "calendar" && (
-              <ScheduleCalendar events={calendarEvents} initialView="timeGridDay" />
+              selectedCourses.length === 0 ? (
+                <div className="flex flex-col items-center justify-center text-center py-12 px-4">
+                  <span className="text-5xl mb-3">🗓️</span>
+                  <p className="text-base font-bold text-foreground mb-1">Your schedule is empty</p>
+                  <p className="text-sm text-muted mb-4">Add courses from the Browse tab to see them here.</p>
+                  <button
+                    onClick={() => setMobileTab("catalogue")}
+                    className="px-5 py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-md active:scale-95 transition-transform"
+                  >
+                    📚 Browse Courses
+                  </button>
+                </div>
+              ) : (
+                <ScheduleCalendar events={calendarEvents} initialView="timeGridDay" />
+              )
             )}
           </div>
         </div>

@@ -92,7 +92,7 @@ export default function GPACalculator() {
     <main className="flex flex-col min-h-screen bg-background">
       <Navbar />
       
-      <div className="flex-1 container mx-auto px-4 sm:px-8 md:px-30 lg:px-42 py-8 mt-20">
+      <div className="flex-1 container mx-auto px-3 sm:px-8 md:px-16 lg:px-24 py-6 sm:py-8 mt-20">
         {/* Header Section */}
         <div className="text-center mb-8">
           <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-[900] text-foreground mb-4">
@@ -192,18 +192,18 @@ export default function GPACalculator() {
 
         {/* Calculator Section */}
         <div className="bg-card-bg rounded-lg shadow-lg p-4 sm:p-6 mb-8 border-2 border-foreground">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-3 sm:gap-4">
             <h2 className="text-xl sm:text-2xl font-[800] text-foreground">GPA Calculator</h2>
             <div className="flex flex-row gap-2 sm:gap-4">
               <button
                 onClick={addCourse}
-                className="flex-1 sm:flex-none bg-primary text-white font-[700] px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base rounded hover:opacity-90 transition-all duration-200 cursor-pointer touch-manipulation"
+                className="flex-1 sm:flex-none bg-primary text-white font-[700] px-4 py-3 sm:px-4 sm:py-2 text-sm sm:text-base rounded-lg hover:opacity-90 transition-all duration-200 cursor-pointer touch-manipulation active:scale-95"
               >
-                Add Course
+                + Add Course
               </button>
               <button
                 onClick={clearAll}
-                className="flex-1 sm:flex-none bg-danger text-white font-[700] px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base rounded hover:opacity-90 transition-all duration-200 cursor-pointer touch-manipulation"
+                className="flex-1 sm:flex-none bg-danger text-white font-[700] px-4 py-3 sm:px-4 sm:py-2 text-sm sm:text-base rounded-lg hover:opacity-90 transition-all duration-200 cursor-pointer touch-manipulation active:scale-95"
               >
                 Clear All
               </button>
@@ -211,39 +211,39 @@ export default function GPACalculator() {
           </div>
 
           {/* Mobile Card View (Visible on small screens) */}
-          <div className="md:hidden space-y-4">
+          <div className="md:hidden space-y-3">
             {courses.map((course, index) => (
-              <div key={course.id} className="bg-background p-4 rounded-lg border border-input-border shadow-sm">
+              <div key={course.id} className="bg-background p-3 rounded-xl border-2 border-input-border shadow-sm">
                 <div className="flex justify-between items-center mb-3 pb-2 border-b border-input-border">
                   <h3 className="font-[800] text-foreground text-sm">Course #{index + 1}</h3>
                   <button
                     onClick={() => removeCourse(course.id)}
                     disabled={courses.length === 1}
-                    className="bg-danger text-white font-[700] px-2 py-1 text-xs rounded hover:opacity-90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="bg-danger text-white font-[700] px-3 py-1.5 text-xs rounded-lg hover:opacity-90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
                   >
                     Remove
                   </button>
                 </div>
-                
+
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-xs font-[700] text-foreground mb-1">Course Name</label>
+                    <label className="block text-xs font-[700] text-foreground mb-1.5">Course Name</label>
                     <input
                       type="text"
                       value={course.courseName}
                       onChange={(e) => updateCourse(course.id, 'courseName', e.target.value)}
                       placeholder="e.g. MTH110"
-                      className="w-full p-2 border border-input-border bg-input-bg text-foreground rounded font-[600] focus:border-input-focus focus:outline-none text-sm"
+                      className="w-full h-11 px-3 border border-input-border bg-input-bg text-foreground rounded-lg font-[600] focus:border-input-focus focus:outline-none text-sm"
                     />
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-[700] text-foreground mb-1">Weight</label>
+                      <label className="block text-xs font-[700] text-foreground mb-1.5">Weight</label>
                       <select
                         value={course.courseWeight}
                         onChange={(e) => updateCourse(course.id, 'courseWeight', parseFloat(e.target.value))}
-                        className="w-full p-2 border border-input-border bg-input-bg text-foreground rounded font-[600] focus:border-input-focus focus:outline-none text-sm"
+                        className="w-full h-11 px-3 border border-input-border bg-input-bg text-foreground rounded-lg font-[600] focus:border-input-focus focus:outline-none text-sm"
                       >
                         <option value={0.5}>0.5</option>
                         <option value={1.0}>1.0</option>
@@ -252,11 +252,11 @@ export default function GPACalculator() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-[700] text-foreground mb-1">Grade</label>
+                      <label className="block text-xs font-[700] text-foreground mb-1.5">Grade</label>
                       <select
                         value={course.grade}
                         onChange={(e) => updateCourse(course.id, 'grade', e.target.value)}
-                        className="w-full p-2 border border-input-border bg-input-bg text-foreground rounded font-[600] focus:border-input-focus focus:outline-none text-sm"
+                        className="w-full h-11 px-3 border border-input-border bg-input-bg text-foreground rounded-lg font-[600] focus:border-input-focus focus:outline-none text-sm"
                       >
                         <option value="">Select</option>
                         {Object.keys(gradeScale).map(grade => (
@@ -352,21 +352,26 @@ export default function GPACalculator() {
           </div>
 
           {/* Results */}
-          <div className="mt-6 p-4 sm:p-6 bg-card-hover rounded-lg border-2 border-foreground">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-              <div className="p-2 sm:p-0 bg-background sm:bg-transparent rounded border sm:border-0 border-input-border">
-                <h3 className="text-sm sm:text-lg font-[800] text-foreground">Total Weight</h3>
-                <p className="text-lg sm:text-2xl font-[700] text-primary">
+          <div className="mt-6 p-4 sm:p-6 bg-card-hover rounded-xl border-2 border-foreground">
+            {/* Big GPA on top for mobile */}
+            <div className="text-center mb-4 sm:hidden p-4 bg-background rounded-lg border-2 border-accent">
+              <h3 className="text-xs font-[800] text-muted uppercase tracking-wider mb-1">Your GPA</h3>
+              <p className="text-5xl font-[900] text-accent leading-none">{calculateGPA()}</p>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 text-center">
+              <div className="p-3 sm:p-0 bg-background sm:bg-transparent rounded-lg border sm:border-0 border-input-border">
+                <h3 className="text-xs sm:text-lg font-[800] text-foreground">Total Weight</h3>
+                <p className="text-xl sm:text-2xl font-[700] text-primary mt-1">
                   {courses.reduce((sum, course) => sum + course.courseWeight, 0).toFixed(1)}
                 </p>
               </div>
-              <div className="p-2 sm:p-0 bg-background sm:bg-transparent rounded border sm:border-0 border-input-border">
-                <h3 className="text-sm sm:text-lg font-[800] text-foreground">Total Grade Points</h3>
-                <p className="text-lg sm:text-2xl font-[700] text-primary">
+              <div className="p-3 sm:p-0 bg-background sm:bg-transparent rounded-lg border sm:border-0 border-input-border">
+                <h3 className="text-xs sm:text-lg font-[800] text-foreground">Total Points</h3>
+                <p className="text-xl sm:text-2xl font-[700] text-primary mt-1">
                   {courses.reduce((sum, course) => sum + (course.gradePoints * course.courseWeight), 0).toFixed(2)}
                 </p>
               </div>
-              <div className="p-2 sm:p-0 bg-background sm:bg-transparent rounded border sm:border-0 border-input-border">
+              <div className="p-3 sm:p-0 bg-background sm:bg-transparent rounded-lg border sm:border-0 border-input-border hidden sm:block">
                 <h3 className="text-sm sm:text-lg font-[800] text-foreground">Your GPA</h3>
                 <p className="text-2xl sm:text-4xl font-[900] text-accent">
                   {calculateGPA()}

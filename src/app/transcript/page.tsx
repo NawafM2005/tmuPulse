@@ -161,13 +161,12 @@ export default function Transcript() {
   return (
     <main className="min-h-screen bg-background flex flex-col items-center">
       <Navbar />
-      <div className="flex flex-col items-center justify-center px-4 sm:px-8 md:px-16 lg:px-24 py-8 w-full max-w-6xl mt-16 sm:mt-20 gap-6 text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[900] text-foreground mb-4">
+      <div className="flex flex-col items-center justify-center px-4 sm:px-8 md:px-16 lg:px-24 py-6 sm:py-8 w-full max-w-6xl mt-16 sm:mt-20 gap-4 sm:gap-6 text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[900] text-foreground mb-2 sm:mb-4">
           <span className="text-accent">T</span><span className="text-[#f5d60b]">M</span><span className="text-primary">U</span> Transcript Analyser
         </h1>
-        <p className="text-sm sm:text-base md:text-lg font-[600] text-muted max-w-4xl leading-relaxed">
-          Effortlessly upload your academic transcript and let our parser automatically extract your courses, grades, and credits. 
-          Instantly see a clean summary, track your progress, and save time on manual entry—perfect for students who want all their academic info in one place!
+        <p className="text-sm sm:text-base md:text-lg font-[600] text-muted max-w-4xl leading-relaxed px-2">
+          Upload your transcript and we&apos;ll automatically extract your courses, grades, and credits — see your progress instantly.
         </p>
 
         <div className="bg-red-50 border border-red-200 rounded-lg p-3 max-w-2xl">
@@ -177,19 +176,23 @@ export default function Transcript() {
         </div>
         
         {/* Upload Section */}
-        <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg p-8 w-full max-w-md mt-6">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-2">
+        <label
+          htmlFor="transcript-upload"
+          className="bg-card-bg border-2 border-dashed border-primary/40 hover:border-primary rounded-xl shadow-lg p-6 sm:p-8 w-full max-w-md mt-4 sm:mt-6 cursor-pointer hover:bg-primary/5 transition-all duration-200 active:scale-[0.99]"
+        >
+          <div className="flex flex-col items-center gap-3 sm:gap-4">
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
               <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
             </div>
-            <label
-              htmlFor="transcript-upload"
-              className="bg-primary text-white font-[700] px-8 py-3 rounded-lg cursor-pointer hover:opacity-90 transition-all duration-200 border-2 border-primary hover:scale-105 shadow-md"
-            >
+            <div className="text-center">
+              <p className="font-[800] text-base text-foreground">Tap to upload PDF</p>
+              <p className="text-xs text-muted mt-1">Your file stays on your device</p>
+            </div>
+            <span className="bg-primary text-white font-[700] px-6 py-3 rounded-lg text-sm shadow-md">
               Choose Transcript File
-            </label>
+            </span>
             <input
               type="file"
               id="transcript-upload"
@@ -223,24 +226,24 @@ export default function Transcript() {
               }}
             />
             {fileName && (
-              <span className="text-sm text-muted font-[600] bg-highlight px-3 py-1 rounded-full">
+              <span className="text-xs sm:text-sm text-muted font-[600] bg-highlight px-3 py-1 rounded-full break-all max-w-full">
                 {fileName}
               </span>
             )}
           </div>
-        </div>
+        </label>
       </div>
       {json && allCourses.length > 0 && (
-        <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg px-4 sm:px-8 md:px-16 lg:px-24 py-8 max-w-6xl w-full space-y-8 mb-20">
+        <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg px-3 sm:px-8 md:px-16 lg:px-24 py-6 sm:py-8 max-w-6xl w-full space-y-6 sm:space-y-8 mb-20 mx-3 sm:mx-0">
           {/* Header Info */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-primary/10 border-2 border-primary/30 rounded-lg p-6">
-              <h2 className="text-xl font-[800] text-primary mb-2">Program</h2>
-              <p className="text-2xl font-[700] text-foreground">{json.program}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div className="bg-primary/10 border-2 border-primary/30 rounded-lg p-4 sm:p-6">
+              <h2 className="text-sm sm:text-xl font-[800] text-primary mb-1 sm:mb-2 uppercase tracking-wide">Program</h2>
+              <p className="text-lg sm:text-2xl font-[700] text-foreground break-words">{json.program}</p>
             </div>
-            <div className="bg-[#f5d60b]/10 border-2 border-[#f5d60b]/30 rounded-lg p-6">
-              <h2 className="text-xl font-[800] text-[#f5d60b] mb-2">Cumulative GPA</h2>
-              <p className="text-2xl font-[700] text-foreground">{json.cumulative_gpa}</p>
+            <div className="bg-[#f5d60b]/10 border-2 border-[#f5d60b]/30 rounded-lg p-4 sm:p-6">
+              <h2 className="text-sm sm:text-xl font-[800] text-[#f5d60b] mb-1 sm:mb-2 uppercase tracking-wide">Cumulative GPA</h2>
+              <p className="text-3xl sm:text-2xl font-[700] text-foreground">{json.cumulative_gpa}</p>
             </div>
           </div>
 

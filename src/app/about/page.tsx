@@ -10,10 +10,10 @@ export default function About() {
     <main className="flex flex-col min-h-screen bg-background">
       <Navbar />
       
-      <div className="flex-1 container mx-auto px-4 sm:px-8 md:px-12 lg:px-16 py-8 mt-20">
+      <div className="flex-1 container mx-auto px-3 sm:px-8 md:px-12 lg:px-16 py-6 sm:py-8 mt-20">
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[900] text-foreground mb-6">
+        <div className="text-center mb-6 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[900] text-foreground mb-4 sm:mb-6">
             About the <span className="text-accent">Creators</span>
           </h1>
         </div>
@@ -36,7 +36,7 @@ export default function About() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-8 mb-8 sm:mb-12">
           <div className="bg-card-bg rounded-2xl shadow-lg p-6 sm:p-8 border-2 border-foreground hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
             <div className="text-center mb-6">
               <Image
@@ -72,15 +72,15 @@ export default function About() {
              My strengths include developing responsive web and iOS applications, designing efficient databases and APIs, integrating external APIs, and applying strong foundations in algorithms, object-oriented programming, and statistics.
             </p>
             
-            <div className="flex justify-center gap-4">
-              <a href="https://github.com/NawafM2005" target="_blank" className="p-2 sm:p-3 bg-primary/10 hover:bg-primary/20 rounded-full transition-colors hover:cursor-pointer">
-                <Github className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+            <div className="flex justify-center gap-3 sm:gap-4">
+              <a href="https://github.com/NawafM2005" target="_blank" className="touch-target flex items-center justify-center bg-primary/10 hover:bg-primary/20 rounded-full transition-colors hover:cursor-pointer">
+                <Github className="h-5 w-5 text-primary" />
               </a>
-              <a href="https://www.linkedin.com/in/nawaf-m-08a9792a6/" target="_blank" className="p-2 sm:p-3 bg-accent/10 hover:bg-accent/20 rounded-full transition-colors hover:cursor-pointer">
-                <Linkedin className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+              <a href="https://www.linkedin.com/in/nawaf-m-08a9792a6/" target="_blank" className="touch-target flex items-center justify-center bg-accent/10 hover:bg-accent/20 rounded-full transition-colors hover:cursor-pointer">
+                <Linkedin className="h-5 w-5 text-accent" />
               </a>
-              <a href="mailto:nawaf.mahmood2005@gmail.com" target="_blank" className="p-2 sm:p-3 bg-foreground/10 hover:bg-foreground/20 rounded-full transition-colors hover:cursor-pointer">
-                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-foreground" />
+              <a href="mailto:nawaf.mahmood2005@gmail.com" target="_blank" className="touch-target flex items-center justify-center bg-foreground/10 hover:bg-foreground/20 rounded-full transition-colors hover:cursor-pointer">
+                <Mail className="h-5 w-5 text-foreground" />
               </a>
             </div>
           </div>
@@ -119,12 +119,12 @@ export default function About() {
               efficient data pipelines that power seamless user experiences and reliable performance.
             </p>
             
-            <div className="flex justify-center gap-4">
-              <a href="https://github.com/samokw" target="_blank" className="p-2 sm:p-3 bg-primary/10 hover:bg-primary/20 rounded-full transition-colors hover:cursor-pointer">
-                <Github className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+            <div className="flex justify-center gap-3 sm:gap-4">
+              <a href="https://github.com/samokw" target="_blank" className="touch-target flex items-center justify-center bg-primary/10 hover:bg-primary/20 rounded-full transition-colors hover:cursor-pointer">
+                <Github className="h-5 w-5 text-primary" />
               </a>
-              <a href="https://www.linkedin.com/in/chibuzor-okwusiuno-24041b271/" target="_blank" className="p-2 sm:p-3 bg-accent/10 hover:bg-accent/20 rounded-full transition-colors hover:cursor-pointer">
-                <Linkedin className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+              <a href="https://www.linkedin.com/in/chibuzor-okwusiuno-24041b271/" target="_blank" className="touch-target flex items-center justify-center bg-accent/10 hover:bg-accent/20 rounded-full transition-colors hover:cursor-pointer">
+                <Linkedin className="h-5 w-5 text-accent" />
               </a>
             </div>
           </div>

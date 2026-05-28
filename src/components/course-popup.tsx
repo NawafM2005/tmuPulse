@@ -213,28 +213,26 @@ export default function PopUp({ open, onClose, course }: popup_types) {
             onClick={e => e.stopPropagation()}
           >
             {/* Header with close button */}
-            <div className="sticky top-0 bg-card-bg border-b border-borders p-4 sm:p-6 flex items-start justify-between">
-              <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
-                <button
-                  onClick={onClose}
-                  className="flex-shrink-0 p-2 hover:bg-card-hover rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
-                  aria-label="Close"
-                >
-                  <X className="h-5 w-5 sm:h-6 sm:w-6 text-muted hover:text-foreground hover:cursor-pointer" />
-                </button>
-              </div>
-              <div className="w-full text-center">
-                <h1 className="font-[900] text-lg sm:text-xl md:text-2xl text-foreground leading-tight">
+            <div className="sticky top-0 bg-card-bg border-b border-borders px-4 py-3 sm:px-6 sm:py-4 flex items-center gap-3">
+              <div className="flex-1 min-w-0 text-center pl-11">
+                <h1 className="font-[900] text-lg sm:text-xl md:text-2xl text-foreground leading-tight truncate">
                   {course?.code}
                 </h1>
-                <h2 className="font-[600] text-sm sm:text-base md:text-lg text-muted mt-1">
+                <h2 className="font-[600] text-xs sm:text-base md:text-lg text-muted mt-0.5 line-clamp-2">
                   {course?.name}
                 </h2>
               </div>
+              <button
+                onClick={onClose}
+                className="touch-target shrink-0 flex items-center justify-center hover:bg-card-hover rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary hover:cursor-pointer"
+                aria-label="Close"
+              >
+                <X className="h-6 w-6 text-muted" />
+              </button>
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+            <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-4 sm:space-y-6">
               {course && (
                 <>
                   {/* Description */}

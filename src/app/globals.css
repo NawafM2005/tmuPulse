@@ -79,18 +79,36 @@ button, a, select, input[type="checkbox"], input[type="radio"] {
   touch-action: manipulation;
 }
 
+/* Reusable touch-target helper */
+.touch-target { min-height: 44px; min-width: 44px; }
+
+/* Body scroll lock when a mobile drawer/modal is open */
+body.no-scroll { overflow: hidden; touch-action: none; }
+
 /* Mobile FullCalendar compact toolbar */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .tmupulse-cal .fc .fc-toolbar {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 4px;
+  }
   .tmupulse-cal .fc .fc-toolbar-title {
-    font-size: 0.875rem;
+    font-size: 0.95rem;
+    flex: 1 1 100%;
+    text-align: center;
   }
   .tmupulse-cal .fc .fc-button {
-    padding: 4px 8px;
+    padding: 8px 10px;
     font-size: 12px;
+    min-height: 36px;
   }
-  .tmupulse-cal .fc .fc-timegrid-slot {
-    height: 32px;
-  }
+  .tmupulse-cal .fc .fc-timegrid-slot { height: 34px; }
+  .tmupulse-cal .fc .fc-timegrid-axis-cushion { font-size: 10px; padding-right: 2px; }
+  .tmupulse-cal .fc .fc-col-header-cell { padding: 4px 0; font-size: 10px; }
+  .tmupulse-cal .fc .fc-list-event-title { font-size: 13px; }
+  .tmupulse-cal .fc .fc-list-event-time { font-size: 12px; }
+  /* hide empty all-day row when mostly unused */
+  .tmupulse-cal .fc .fc-timegrid-axis { padding: 2px; }
 }
 
 /* Custom animations for loading page */

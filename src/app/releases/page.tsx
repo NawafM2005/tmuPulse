@@ -156,7 +156,7 @@ export default function ReleasesPage() {
 
                   {/* card */}
                   <div className="bg-card-bg border-2 border-input-border rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-                    <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-b border-input-border p-6 relative">
+                    <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-b border-input-border p-4 sm:p-6 relative">
                       {/* latest badge */}
                       {isFirst && (
                         <div className="absolute right-4 top-4">
@@ -202,7 +202,7 @@ export default function ReleasesPage() {
                       </p>
                     </div>
 
-                    <div className="p-6 space-y-6">
+                    <div className="p-4 sm:p-6 space-y-5 sm:space-y-6">
                       {!!release.features?.length && (
                         <div>
                           <div className="flex items-center gap-2 mb-4">
@@ -277,20 +277,19 @@ export default function ReleasesPage() {
         </div>
 
         {/* Footer */}
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/30 rounded-2xl p-8">
-            <div className="flex items-center justify-center gap-2 mb-4">
+        <div className="mt-10 sm:mt-16 text-center">
+          <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/30 rounded-2xl p-5 sm:p-8">
+            <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
               <Users className="h-6 w-6 text-primary" />
-              <h3 className="text-2xl font-bold text-foreground">Stay Connected</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground">Stay Connected</h3>
             </div>
-            <p className="text-muted font-medium mb-6 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-muted font-medium mb-4 sm:mb-6 max-w-2xl mx-auto">
               Have suggestions for new features or found a bug? We&apos;d love to hear from you!
-              TMU Pulse is continuously evolving based on student feedback.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <a
                 href="/feedback"
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-bold hover:shadow-lg transition-all duration-300 hover:scale-105"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-bold hover:shadow-lg transition-all duration-300 hover:scale-105 text-center"
               >
                 Share Feedback
               </a>

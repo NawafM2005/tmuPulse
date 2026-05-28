@@ -20,10 +20,26 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Badge } from "@/components/ui/badge"
+import { ChevronRight } from "lucide-react"
 import Image from "next/image"
 import search from "@/assets/search.png"
 import ProfPopUp from "@/components/prof-popup"
 import type { Professor } from "./prof_columns"
+
+function ratingColor(r: number) {
+  if (isNaN(r)) return "bg-gray-300 text-gray-800"
+  if (r >= 4.0) return "bg-green-500 text-white"
+  if (r >= 3.0) return "bg-yellow-400 text-black"
+  if (r > 0) return "bg-red-500 text-white"
+  return "bg-gray-300 text-gray-800"
+}
+function difficultyColor(d: number) {
+  if (isNaN(d)) return "bg-gray-300 text-gray-800"
+  if (d <= 2.0) return "bg-green-500 text-white"
+  if (d <= 3.5) return "bg-yellow-400 text-black"
+  return "bg-red-500 text-white"
+}
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -158,7 +174,56 @@ export function ProfessorDataTable<TData, TValue>({
 
       {belowSearchContent}
 
-      <div className="w-full overflow-x-auto px-2">
+      {/* Mobile card list (below md) */}
+      <div className="md:hidden w-full px-2">
+        <div className="flex flex-col gap-2 w-full max-w-3xl mx-auto">
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => {
+              const p = row.original as Professor & { courses_taught?: string[] }
+              const rating = parseFloat(p.avg_rating)
+              const diff = parseFloat(p.avg_difficulty)
+              const courses = (p as any).courses_taught as string[] | undefined
+              return (
+                <button
+                  key={row.id}
+                  onClick={() => { setPopupRowData(row.original); setShowPopup(true) }}
+                  className="flex items-center gap-3 w-full text-left bg-card-bg border-2 border-secondary/40 rounded-xl p-3 active:scale-[0.99] transition-transform hover:border-secondary hover:bg-card-hover"
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-foreground truncate">
+                      {p.first_name} {p.last_name}
+                    </p>
+                    <p className="text-xs text-muted truncate mb-2">{p.department || "—"}</p>
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <Badge className={`${ratingColor(rating)} text-[10px]`}>
+                        ★ {isNaN(rating) ? "N/A" : rating.toFixed(2)}
+                      </Badge>
+                      <Badge className={`${difficultyColor(diff)} text-[10px]`}>
+                        Diff {isNaN(diff) ? "N/A" : diff.toFixed(2)}
+                      </Badge>
+                      <Badge className="bg-blue-100 text-blue-800 text-[10px]">
+                        {p.num_ratings ?? 0} reviews
+                      </Badge>
+                      {courses && courses.length > 0 && (
+                        <Badge className="bg-muted/20 text-foreground text-[10px]">
+                          {courses.length} course{courses.length === 1 ? "" : "s"}
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                  <ChevronRight className="h-5 w-5 text-muted shrink-0" />
+                </button>
+              )
+            })
+          ) : (
+            <div className="py-10 text-center text-red-500 text-base font-semibold">
+              No results.
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="hidden md:block w-full overflow-x-auto px-2">
         <div className="rounded-md text-foreground bg-background border-4 border-secondary p-2 sm:p-3 md:p-5 w-full max-w-7xl mx-auto">
           <Table className="min-w-[360px] xl:min-w-[900px] w-full table-fixed">
             <TableHeader>
@@ -232,17 +297,17 @@ export function ProfessorDataTable<TData, TValue>({
         </div>
       </div>
 
-      <div className="flex items-center justify-end gap-2 py-4 mt-5 w-full max-w-7xl px-2">
+      <div className="flex items-center justify-center gap-3 py-4 mt-5 w-full max-w-7xl px-3">
         <Button
           variant="outline"
           size="sm"
           onClick={() => { table.previousPage(); scrollToTop() }}
           disabled={!table.getCanPreviousPage()}
-          className="border-foreground/20 text-foreground hover:bg-primary/20 hover:cursor-pointer bg-card-bg font-[700] transition-all duration-200 hover:scale-105 shadow-md"
+          className="border-foreground/20 text-foreground hover:bg-primary/20 hover:cursor-pointer bg-card-bg font-[700] transition-all duration-200 hover:scale-105 shadow-md h-11 px-5 flex-1 sm:flex-none"
         >
           Previous
         </Button>
-        <p className="text-sm font-semibold text-foreground">
+        <p className="text-sm font-semibold text-foreground tabular-nums min-w-[3rem] text-center">
           {pageCount === 0 ? "0 / 0" : `${pageIndex + 1} / ${pageCount}`}
         </p>
         <Button
@@ -250,7 +315,7 @@ export function ProfessorDataTable<TData, TValue>({
           size="sm"
           onClick={() => { table.nextPage(); scrollToTop() }}
           disabled={!table.getCanNextPage()}
-          className="border-foreground/20 text-foreground hover:bg-primary/20 hover:cursor-pointer bg-card-bg font-[700] transition-all duration-200 hover:scale-105 shadow-md"
+          className="border-foreground/20 text-foreground hover:bg-primary/20 hover:cursor-pointer bg-card-bg font-[700] transition-all duration-200 hover:scale-105 shadow-md h-11 px-5 flex-1 sm:flex-none"
         >
           Next
         </Button>

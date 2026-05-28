@@ -14,47 +14,16 @@ export default function Home() {
       <Navbar />
 
       <div className="flex flex-col items-center justify-center mt-20 sm:mt-24 md:mt-30 text-center">
-        <div className="text-foreground flex flex-col gap-4 px-4 sm:px-8 md:px-10 pt-6 pb-6 items-center justify-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-[900] leading-tight">Welcome to Your <span className="text-accent">T</span><span className="text-[#f5d60b]">M</span><span className="text-primary">U</span> Dashboard</h1>
-          <div className="flex flex-col gap-8 mt-6 sm:mt-10 p-3">
-            {/* Mobile: Single column with all images overlapping */}
-            <div className="relative flex flex-col items-center justify-center w-full max-w-7xl md:hidden">
-              <div className="flex flex-col items-center justify-center relative">
-                {/* Line Chart */}
-                <img 
-                  src={degree_more.src} 
-                  alt="Line Chart Screenshot" 
-                  className="screenshot w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-2 hover:rotate-0 transition-transform duration-300 z-10"
-                />
-                
-                {/* Pie Chart - overlapping */}
-                <img 
-                  src={pieChart.src} 
-                  alt="Pie Chart Screenshot" 
-                  className="screenshot w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform rotate-2 hover:rotate-0 transition-transform duration-300 z-20 -mt-12"
-                />
-                
-                {/* Progress - center, highest z-index */}
-                <img 
-                  src={progress.src} 
-                  alt="Progress Screenshot" 
-                  className="screenshot w-72 h-auto rounded-lg shadow-xl border-4 border-gray-300 transform hover:scale-105 transition-transform duration-300 z-30 -mt-16"
-                />
-                
-                {/* Transcript - overlapping */}
-                <img 
-                  src={transcriptmain.src} 
-                  alt="Transcript Screenshot" 
-                  className="screenshot w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform -rotate-1 hover:rotate-0 transition-transform duration-300 z-20 -mt-12"
-                />
-                
-                {/* Catalogue - bottom */}
-                <img 
-                  src={catalogue.src} 
-                  alt="Catalogue Screenshot" 
-                  className="screenshot w-64 h-auto rounded-lg shadow-lg border-4 border-gray-300 transform rotate-1 hover:rotate-0 transition-transform duration-300 z-10 -mt-12"
-                />
-              </div>
+        <div className="text-foreground flex flex-col gap-3 sm:gap-4 px-4 sm:px-8 md:px-10 pt-4 sm:pt-6 pb-4 sm:pb-6 items-center justify-center">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-[900] leading-tight">Welcome to Your <span className="text-accent">T</span><span className="text-[#f5d60b]">M</span><span className="text-primary">U</span> Dashboard</h1>
+          <div className="flex flex-col gap-6 sm:gap-8 mt-4 sm:mt-10 p-1 sm:p-3">
+            {/* Mobile: Single hero image */}
+            <div className="relative flex flex-col items-center justify-center w-full md:hidden px-2">
+              <img
+                src={progress.src}
+                alt="Degree progress dashboard"
+                className="screenshot w-full max-w-sm h-auto rounded-xl shadow-xl border-4 border-gray-300"
+              />
             </div>
 
             {/* Desktop: 3 top, 2 bottom layout */}

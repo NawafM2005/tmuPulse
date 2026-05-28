@@ -231,17 +231,17 @@ const filteredProfessors =
     <main className="min-h-screen bg-background pt-5 w-full">
       <Navbar/>
       <div className="flex flex-col items-center mb-10 p-3 sm:p-5">
-        <div className="flex flex-col items-center justify-center px-4 py-6 sm:p-8 w-full max-w-8xl mt-16 sm:mt-20 gap-4 text-center">
+        <div className="flex flex-col items-center justify-center px-4 py-4 sm:p-8 w-full max-w-8xl mt-16 sm:mt-20 gap-3 sm:gap-4 text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-[800] text-secondary">Catalogue</h1>
-            <p className="text-sm sm:text-base md:text-lg text-secondary">
+            <p className="text-sm sm:text-base md:text-lg text-secondary px-2">
               Browse and search through TMU&apos;s comprehensive course offerings and professor ratings.
             </p>
-            <p className="text-1xl font-[400] text-foreground">Browse all current courses and professors at TMU. Search, filter, and explore by course code, department, or keyword.</p>
+            <p className="text-sm sm:text-base font-[400] text-foreground px-2 hidden sm:block">Browse all current courses and professors at TMU. Search, filter, and explore by course code, department, or keyword.</p>
         </div>
-        <div className="grid grid-cols-2 gap-4 w-full max-w-7xl">
+        <div className="grid grid-cols-2 gap-2 sm:gap-4 w-full max-w-7xl px-2 sm:px-0">
           <button
-            className={`py-1 px-4 rounded w-full hover:cursor-pointer hover:opacity-80 ${
-              selectedTable === "Courses" ? "bg-secondary text-background" : "bg-gray-200 text-black"
+            className={`h-12 sm:h-11 px-4 rounded-lg w-full font-bold text-sm sm:text-base transition-all hover:cursor-pointer active:scale-[0.99] ${
+              selectedTable === "Courses" ? "bg-secondary text-background shadow-md" : "bg-gray-200 text-black hover:bg-gray-300"
             }`}
             onClick={() => setSelectedTable("Courses")}
           >
@@ -249,8 +249,8 @@ const filteredProfessors =
           </button>
 
           <button
-            className={`py-1 px-4 rounded w-full hover:cursor-pointer hover:opacity-80 ${
-              selectedTable === "Professors" ? "bg-secondary text-background" : "bg-gray-200 text-black"
+            className={`h-12 sm:h-11 px-4 rounded-lg w-full font-bold text-sm sm:text-base transition-all hover:cursor-pointer active:scale-[0.99] ${
+              selectedTable === "Professors" ? "bg-secondary text-background shadow-md" : "bg-gray-200 text-black hover:bg-gray-300"
             }`}
             onClick={() => setSelectedTable("Professors")}
           >
@@ -262,10 +262,10 @@ const filteredProfessors =
               columns={columns} 
               data={courses} 
               topContent={
-                <div className="flex flex-col md:flex-row flex-wrap
-                    items-center
+                <div className="flex flex-col md:flex-row md:flex-wrap
+                    items-stretch md:items-center
                     w-full max-w-3xl
-                    gap-2 md:gap-10
+                    gap-2 md:gap-6
                   ">
                   <ProgramSelector 
                     programs={departments.map(dept => dept.name)} 
@@ -362,10 +362,10 @@ const filteredProfessors =
               columns={professorColumns} 
               data={filteredProfessors} 
               topContent={
-                <div className="flex flex-col md:flex-row flex-wrap
-                    items-center
+                <div className="flex flex-col md:flex-row md:flex-wrap
+                    items-stretch md:items-center
                     w-full max-w-3xl
-                    gap-2 md:gap-10
+                    gap-2 md:gap-6
                   ">
                   <ProgramSelector 
                     programs={departments.map(dept => dept.name)} 

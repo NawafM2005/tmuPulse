@@ -4,7 +4,7 @@ import tmuLogo from '../assets/tmu-monkey-logo.png';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import lightIcon from '../assets/light.png';
 import { Moon, Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
 import {
@@ -23,6 +23,16 @@ export default function Navbar() {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
+
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) document.body.classList.add('no-scroll');
+    else document.body.classList.remove('no-scroll');
+    return () => document.body.classList.remove('no-scroll');
+  }, [mobileMenuOpen]);
+
+  const isActive = (href: string) => pathname === href || pathname?.startsWith(href + '/');
 
   // Check auth state and listen for changes
   useEffect(() => {
@@ -209,116 +219,95 @@ export default function Navbar() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden rounded-xl text-xl font-bold p-2 transition-all duration-300 hover:cursor-pointer hover:bg-foreground/10 active:scale-95"
+              className="xl:hidden rounded-xl font-bold p-2 transition-all duration-300 hover:cursor-pointer hover:bg-foreground/10 active:scale-95 touch-target flex items-center justify-center"
               aria-label="Toggle mobile menu"
             >
-              {mobileMenuOpen ? 
-                <X size={20} className="text-foreground transition-transform duration-300 rotate-90" /> : 
-                <Menu size={20} className="text-foreground transition-transform duration-300" />
+              {mobileMenuOpen ?
+                <X size={24} className="text-foreground transition-transform duration-300 rotate-90" /> :
+                <Menu size={24} className="text-foreground transition-transform duration-300" />
               }
             </button>
         </div>
       </nav>
 
-      <div className={`fixed top-0 right-0 h-full w-full z-40 xl:hidden ${mobileMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`} onClick={() => setMobileMenuOpen(false)}>
-        <div className={`absolute top-0 right-0 h-full w-3/4 min-w-[220px] max-w-[340px] bg-black/90 backdrop-blur-xl border-l border-secondary/30 shadow-2xl transform transition-all duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'} pointer-events-auto overflow-y-auto overscroll-y-contain`} onClick={(e) => e.stopPropagation()}>
-          <div className="pt-20 px-4 flex flex-col space-y-2 text-sm">
-            <Link 
-              href="/catalogue" 
+      <div
+        className={`fixed inset-0 z-40 xl:hidden bg-black/50 transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        <div
+          className={`absolute top-0 right-0 h-full w-[85%] min-w-[260px] max-w-[360px] bg-black/95 backdrop-blur-xl border-l border-secondary/30 shadow-2xl transform transition-transform duration-300 ease-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} overflow-y-auto overscroll-y-contain flex flex-col`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex items-center justify-between px-4 py-4 border-b border-white/10 sticky top-0 bg-black/95 backdrop-blur-xl z-10">
+            <span className="text-white font-bold text-base">Menu</span>
+            <button
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
+              className="touch-target rounded-xl hover:bg-white/10 transition-colors active:scale-95 flex items-center justify-center"
+              aria-label="Close menu"
             >
-              <span className="relative z-10">Catalogue</span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-            </Link>
-            <Link 
-              href="/planner" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
-            >
-              <span className="relative z-10">Degree Planner</span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-            </Link>
-            <Link 
-              href="/schedule" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
-            >
-              <span className="relative z-10">Schedule Builder</span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-            </Link>
-            <Link 
-              href="/gpa-calculator" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
-            >
-              <span className="relative z-10">GPA Calculator</span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-            </Link>
-            <Link 
-              href="/about" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-500 hover:text-white transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
-            >
-              <span className="relative z-10">About Us</span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-            </Link>
-            <Link 
-              href="/releases" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-purple-400 hover:to-purple-500 hover:text-white transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
-            >
-              <span className="relative z-10">Release Notes</span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-            </Link>
-            <Link 
-              href="/transcript" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 rounded-xl hover:bg-gradient-to-r hover:from-[#f5d60b] hover:to-[#ffeb3b] hover:text-black transition-all duration-300 text-white font-bold text-center hover:shadow-lg relative overflow-hidden group"
-            >
-              <span className="relative z-10">Transcript Analyser</span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-            </Link>
+              <X size={22} className="text-white" />
+            </button>
+          </div>
 
-            <div className="border-t border-gray-500/50 pt-3 space-y-2 mt-4">
-              <Link 
-                href="/feedback" 
+          <div className="px-4 py-4 flex flex-col gap-1.5 text-base">
+            {[
+              { href: '/catalogue', label: 'Catalogue' },
+              { href: '/planner', label: 'Degree Planner' },
+              { href: '/schedule', label: 'Schedule Builder' },
+              { href: '/gpa-calculator', label: 'GPA Calculator' },
+              { href: '/transcript', label: 'Transcript Analyser' },
+              { href: '/about', label: 'About Us' },
+              { href: '/releases', label: 'Release Notes' },
+            ].map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 font-bold text-center hover:shadow-lg relative overflow-hidden group"
+                className={`flex items-center px-4 py-3.5 rounded-xl font-semibold transition-all duration-200 active:scale-[0.98] ${
+                  isActive(href)
+                    ? 'bg-gradient-to-r from-[#f5d60b] to-[#ffeb3b] text-black shadow-lg'
+                    : 'text-white hover:bg-white/10'
+                }`}
               >
-                <span className="relative z-10">Feedback</span>
-                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                {label}
               </Link>
-              
+            ))}
+
+            <div className="border-t border-white/15 pt-3 mt-3 flex flex-col gap-2">
+              <Link
+                href="/feedback"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center w-full px-4 py-3.5 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-black hover:from-yellow-500 hover:to-yellow-600 transition-all duration-200 font-bold active:scale-[0.98]"
+              >
+                Send Feedback
+              </Link>
+
               {!loading && (
                 user ? (
-                  <div className="space-y-2">
-                    <Link 
-                      href="/dashboard" 
+                  <>
+                    <Link
+                      href="/dashboard"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-bold text-center text-white hover:shadow-lg relative overflow-hidden group"
+                      className="flex items-center justify-center gap-2 w-full px-4 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-200 font-bold text-white active:scale-[0.98]"
                     >
-                      <User size={16} className="relative z-10" />
-                      <span className="relative z-10">Dashboard</span>
-                      <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                      <User size={18} />
+                      Dashboard
                     </Link>
                     <button
                       onClick={handleSignOut}
-                      className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 font-bold text-center text-white hover:shadow-lg relative overflow-hidden group hover:cursor-pointer"
+                      className="flex items-center justify-center gap-2 w-full px-4 py-3.5 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-200 font-bold text-white hover:cursor-pointer active:scale-[0.98]"
                     >
-                      <LogOut size={16} className="relative z-10" />
-                      <span className="relative z-10">Sign Out</span>
-                      <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                      <LogOut size={18} />
+                      Sign Out
                     </button>
-                  </div>
+                  </>
                 ) : (
-                  <Link 
-                    href="/login" 
+                  <Link
+                    href="/login"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 font-bold text-center text-white hover:shadow-lg relative overflow-hidden group"
+                    className="flex items-center justify-center w-full px-4 py-3.5 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-200 font-bold text-white active:scale-[0.98]"
                   >
-                    <span className="relative z-10">Login</span>
-                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                    Login
                   </Link>
                 )
               )}

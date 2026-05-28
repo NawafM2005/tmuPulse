@@ -90,21 +90,21 @@ export function LoginForm({
       <Toaster />
       <Card className="bg-background/10 border-2 border-foreground">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
-          <CardDescription>
-            Login with your Google account
+          <CardTitle className="text-2xl">Welcome back</CardTitle>
+          <CardDescription className="text-sm">
+            Login to your TMU Pulse account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
-            <div className="grid gap-6">
+            <div className="grid gap-5">
               <div className="flex flex-col gap-4">
-                <Button 
+                <Button
                   type="button"
                   onClick={signInWithGoogle}
-                  variant="outline" 
+                  variant="outline"
                   disabled={loading}
-                  className="w-full bg-primary font-bold hover:cursor-pointer text-background"
+                  className="w-full h-12 bg-primary font-bold hover:cursor-pointer text-background text-base"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path
@@ -120,9 +120,9 @@ export function LoginForm({
                 <div className="flex-1 border-1 border-dotted" />
               </div>
 
-              <div className="grid gap-6">
-                <div className="grid gap-3">
-                  <Label htmlFor="email">Email</Label>
+              <div className="grid gap-5">
+                <div className="grid gap-2">
+                  <Label htmlFor="email" className="text-sm font-semibold">Email</Label>
                   <Input
                     id="email"
                     type="email"
@@ -131,32 +131,32 @@ export function LoginForm({
                     disabled={loading}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="h-12 text-base"
                   />
                 </div>
-                <div className="grid gap-3">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                  </div>
-                  <Input 
-                    id="password" 
-                    type="password" 
-                    required 
+                <div className="grid gap-2">
+                  <Label htmlFor="password" className="text-sm font-semibold">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    required
                     disabled={loading}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="h-12 text-base"
                   />
                 </div>
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   disabled={loading}
-                  className="w-full hover:cursor-pointer text-background"
+                  className="w-full h-12 hover:cursor-pointer text-background font-bold text-base"
                 >
                   {loading ? "Signing in..." : "Login"}
                 </Button>
               </div>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <a href="/signup" className="underline underline-offset-4">
+                <a href="/signup" className="underline underline-offset-4 font-semibold">
                   Sign up
                 </a>
               </div>

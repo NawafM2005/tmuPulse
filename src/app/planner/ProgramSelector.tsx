@@ -38,7 +38,7 @@ export default function ProgramSelector({
   };
 
   return (
-    <div className="relative w-xs sm:w-sm mx-auto">
+    <div className="relative w-full max-w-md mx-auto px-3 sm:px-0">
       <Card className="bg-background border-gray-700 p-2 backdrop-blur-sm items-center gap-1 text-foreground w-full">
         <div className="flex items-center gap-3">
           <BookOpen className="h-5 w-5 text-foreground" />

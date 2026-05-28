@@ -221,62 +221,62 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
     }));
 
   return (
-    <main className="flex flex-col items-center px-4 sm:px-8 md:px-16 lg:px-24 w-full max-w-6xl">
-      <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg p-8 w-full space-y-8 mb-20">
+    <main className="flex flex-col items-center px-3 sm:px-8 md:px-16 lg:px-24 w-full max-w-6xl">
+      <div className="bg-card-bg border-2 border-input-border rounded-xl shadow-lg p-4 sm:p-8 w-full space-y-6 sm:space-y-8 mb-20">
         {/* Header */}
         <div className="text-center">
-          <h2 className="text-3xl font-[900] text-foreground mb-2">Academic Analytics</h2>
-          <p className="text-muted font-[600]">Comprehensive breakdown of your academic progress and performance</p>
+          <h2 className="text-2xl sm:text-3xl font-[900] text-foreground mb-2">Academic Analytics</h2>
+          <p className="text-sm sm:text-base text-muted font-[600] px-2">Breakdown of your academic progress and performance</p>
         </div>
 
         {/* Progress Overview */}
         {userStats && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-primary/10 border-2 border-primary/30 rounded-lg p-6 text-center">
-              <h3 className="text-sm font-[800] text-primary uppercase tracking-wide mb-2">Total Courses</h3>
-              <p className="text-3xl font-[900] text-foreground">{userStats.total_courses_done}</p>
-              <p className="text-sm text-muted font-[600]">of {userStats.total_courses_required} required</p>
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+            <div className="bg-primary/10 border-2 border-primary/30 rounded-lg p-3 sm:p-6 text-center">
+              <h3 className="text-[10px] sm:text-sm font-[800] text-primary uppercase tracking-wide mb-1 sm:mb-2">Total Courses</h3>
+              <p className="text-2xl sm:text-3xl font-[900] text-foreground">{userStats.total_courses_done}</p>
+              <p className="text-[10px] sm:text-sm text-muted font-[600]">of {userStats.total_courses_required}</p>
             </div>
-            
-            <div className="bg-accent/10 border-2 border-accent/30 rounded-lg p-6 text-center">
-              <h3 className="text-sm font-[800] text-accent uppercase tracking-wide mb-2">Lower Liberals</h3>
-              <p className="text-3xl font-[900] text-foreground">{userStats.lower_libs_done}</p>
-              <p className="text-sm text-muted font-[600]">of {userStats.lower_libs_required} required</p>
+
+            <div className="bg-accent/10 border-2 border-accent/30 rounded-lg p-3 sm:p-6 text-center">
+              <h3 className="text-[10px] sm:text-sm font-[800] text-accent uppercase tracking-wide mb-1 sm:mb-2">Lower Lib</h3>
+              <p className="text-2xl sm:text-3xl font-[900] text-foreground">{userStats.lower_libs_done}</p>
+              <p className="text-[10px] sm:text-sm text-muted font-[600]">of {userStats.lower_libs_required}</p>
             </div>
-            
-            <div className="bg-success/10 border-2 border-success/30 rounded-lg p-6 text-center">
-              <h3 className="text-sm font-[800] text-success uppercase tracking-wide mb-2">Upper Liberals</h3>
-              <p className="text-3xl font-[900] text-foreground">{userStats.upper_libs_done}</p>
-              <p className="text-sm text-muted font-[600]">of {userStats.upper_libs_required} required</p>
+
+            <div className="bg-success/10 border-2 border-success/30 rounded-lg p-3 sm:p-6 text-center">
+              <h3 className="text-[10px] sm:text-sm font-[800] text-success uppercase tracking-wide mb-1 sm:mb-2">Upper Lib</h3>
+              <p className="text-2xl sm:text-3xl font-[900] text-foreground">{userStats.upper_libs_done}</p>
+              <p className="text-[10px] sm:text-sm text-muted font-[600]">of {userStats.upper_libs_required}</p>
             </div>
-            
-            <div className="bg-[#f5d60b]/10 border-2 border-[#f5d60b]/30 rounded-lg p-6 text-center">
-              <h3 className="text-sm font-[800] text-[#f5d60b] uppercase tracking-wide mb-2">Core/Open</h3>
-              <p className="text-3xl font-[900] text-foreground">{userStats.other_done}</p>
-              <p className="text-sm text-muted font-[600]">of {userStats.other_required} required</p>
+
+            <div className="bg-[#f5d60b]/10 border-2 border-[#f5d60b]/30 rounded-lg p-3 sm:p-6 text-center">
+              <h3 className="text-[10px] sm:text-sm font-[800] text-[#f5d60b] uppercase tracking-wide mb-1 sm:mb-2">Core/Open</h3>
+              <p className="text-2xl sm:text-3xl font-[900] text-foreground">{userStats.other_done}</p>
+              <p className="text-[10px] sm:text-sm text-muted font-[600]">of {userStats.other_required}</p>
             </div>
           </div>
         )}
 
         {/* GPA Display */}
         {userStats && (
-          <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/30 rounded-lg p-8 text-center">
-            <h3 className="text-xl font-[800] text-primary mb-4">Cumulative Grade Point Average</h3>
-            <p className="text-6xl font-[900] text-foreground mb-2">{userStats.cumulative_gpa?.toFixed(2) ?? "N/A"}</p>
-            <p className="text-muted font-[600]">out of 4.33 TMU scale</p>
+          <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/30 rounded-lg p-5 sm:p-8 text-center">
+            <h3 className="text-sm sm:text-xl font-[800] text-primary mb-2 sm:mb-4 uppercase tracking-wide">Cumulative GPA</h3>
+            <p className="text-5xl sm:text-6xl font-[900] text-foreground mb-1 sm:mb-2 leading-none">{userStats.cumulative_gpa?.toFixed(2) ?? "N/A"}</p>
+            <p className="text-xs sm:text-base text-muted font-[600]">out of 4.33 TMU scale</p>
           </div>
         )}
 
         {/* Charts Section */}
-        <div className="bg-card-bg border border-input-border rounded-lg p-4 sm:p-8 space-y-6 sm:space-y-8">
-          <h3 className="text-xl sm:text-2xl font-[800] text-foreground text-center mb-4 sm:mb-6">Performance Analytics</h3>
-          
-          <div className="grid grid-cols-1 xl:grid-cols-1 gap-8">
+        <div className="bg-card-bg border border-input-border rounded-lg p-3 sm:p-8 space-y-4 sm:space-y-8">
+          <h3 className="text-xl sm:text-2xl font-[800] text-foreground text-center mb-2 sm:mb-6">Performance Analytics</h3>
+
+          <div className="grid grid-cols-1 xl:grid-cols-1 gap-4 sm:gap-8">
             {userStats && (
-              <div className="bg-black/30 border border-input-border rounded-lg p-6">
-                <h4 className="text-lg font-[700] text-foreground mb-4 text-center">Course Breakdown</h4>
+              <div className="bg-black/30 border border-input-border rounded-lg p-3 sm:p-6">
+                <h4 className="text-base sm:text-lg font-[700] text-foreground mb-3 sm:mb-4 text-center">Course Breakdown</h4>
                 <ChartPieLegend
-                    mode="breakdown"  
+                    mode="breakdown"
                     lower={userStats.lower_libs_done}
                     upper={userStats.upper_libs_done}
                     other={userStats.unknown}
@@ -286,10 +286,10 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
             )}
 
             {userStats && (
-              <div className="bg-black/30 border border-input-border rounded-lg p-6">
-                <h4 className="text-lg font-[700] text-foreground mb-4 text-center">Degree Completion</h4>
+              <div className="bg-black/30 border border-input-border rounded-lg p-3 sm:p-6">
+                <h4 className="text-base sm:text-lg font-[700] text-foreground mb-3 sm:mb-4 text-center">Degree Completion</h4>
                 <ChartPieLegend
-                    mode="completion"  
+                    mode="completion"
                     completed={userStats.total_courses_done}
                     total={userStats.total_courses_required}
                 />
@@ -297,16 +297,16 @@ export default function Stats({ totalCourses, courseCodes, program, cgpa, allCou
             )}
           </div>
 
-          <div className="bg-black/30 border border-input-border rounded-lg p-6">
-            <h4 className="text-lg font-[700] text-foreground mb-4 text-center">GPA by Course Type</h4>
+          <div className="bg-black/30 border border-input-border rounded-lg p-3 sm:p-6">
+            <h4 className="text-base sm:text-lg font-[700] text-foreground mb-3 sm:mb-4 text-center">GPA by Course Type</h4>
             <ChartPieLegend
               mode="gpa_by_type"
               gpaData={gpaByType}
             />
           </div>
 
-          <div className="bg-black/30 border border-input-border rounded-lg p-6">
-            <h4 className="text-lg font-[700] text-foreground mb-4 text-center">Academic Progress Over Time</h4>
+          <div className="bg-black/30 border border-input-border rounded-lg p-3 sm:p-6">
+            <h4 className="text-base sm:text-lg font-[700] text-foreground mb-3 sm:mb-4 text-center">GPA Over Time</h4>
             <div className="flex justify-center">
               <LineChartGeneric
                 data={termGpaChartData}

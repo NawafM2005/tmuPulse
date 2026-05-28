@@ -25,10 +25,10 @@ export default function LineChartGeneric({
   title,
 }: LineChartGenericProps) {
   return (
-    <div className="p-2 w-full sm:w-2/3 text-foreground mt-5 mb-5">
-      {title && <h3 className="text-xl font-bold mb-4">{title}</h3>}
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
+    <div className="p-2 w-full md:w-2/3 text-foreground mt-3 mb-3 sm:mt-5 sm:mb-5">
+      {title && <h3 className="text-base sm:text-xl font-bold mb-2 sm:mb-4">{title}</h3>}
+      <ResponsiveContainer width="100%" height={240} className="sm:!h-[300px]">
+        <LineChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 64, 64, 0.2)" />
           <XAxis
             dataKey="label"

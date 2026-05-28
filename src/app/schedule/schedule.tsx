@@ -95,18 +95,43 @@ export default function ScheduleCalendar({
     }
   };
 
+  const switchView = (view: "timeGridDay" | "timeGridWeek" | "listWeek") => {
+    calApi?.changeView(view);
+  };
+
   return (
-    <div className={`rounded-xl border border-border bg-card p-3 tmupulse-cal ${className}`}>
-      {/* Top toolbar — no titles, no help cursor */}
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
+    <div className={`rounded-xl border border-border bg-card p-2 sm:p-3 tmupulse-cal ${className}`}>
+      {/* Top toolbar — responsive */}
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5 flex-wrap">
           <button
             onClick={() => calApi?.gotoDate(SEMESTER_START)}
             aria-label="Jump to Winter Start"
-            className="px-3 py-1.5 rounded-xl border bg-background hover:bg-muted transition shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer"
+            className="px-3 py-2 text-xs sm:text-sm rounded-xl border bg-background hover:bg-muted transition shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer font-semibold"
           >
             Winter Start
           </button>
+          {/* Mobile view switcher */}
+          <div className="md:hidden flex items-center rounded-xl border bg-background overflow-hidden shadow-sm">
+            <button
+              onClick={() => switchView("timeGridDay")}
+              className="px-2.5 py-2 text-xs font-semibold hover:bg-muted transition cursor-pointer"
+            >
+              Day
+            </button>
+            <button
+              onClick={() => switchView("timeGridWeek")}
+              className="px-2.5 py-2 text-xs font-semibold hover:bg-muted transition cursor-pointer border-l"
+            >
+              Week
+            </button>
+            <button
+              onClick={() => switchView("listWeek")}
+              className="px-2.5 py-2 text-xs font-semibold hover:bg-muted transition cursor-pointer border-l"
+            >
+              Agenda
+            </button>
+          </div>
         </div>
 
         <button
@@ -115,9 +140,10 @@ export default function ScheduleCalendar({
           aria-label="Download schedule as PDF"
           aria-live="polite"
           className={[
-            "group inline-flex items-center gap-2 px-4 py-2 rounded-2xl",
-            "text-black",
-            "shadow-lg shadow-black-500",
+            "group inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-2xl",
+            "text-black bg-yellow-400 hover:bg-yellow-500",
+            "shadow-md",
+            "text-xs sm:text-sm",
             "transition-transform hover:-translate-y-0.5 active:translate-y-0",
             "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400",
             downloading ? "opacity-80 cursor-wait" : "cursor-pointer",
@@ -134,8 +160,8 @@ export default function ScheduleCalendar({
               <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           )}
-          <span className="font-semibold tracking-wide select-none">
-            {downloading ? "Preparing…" : "Download PDF"}
+          <span className="font-semibold tracking-wide select-none whitespace-nowrap">
+            {downloading ? "Preparing…" : "PDF"}
           </span>
         </button>
       </div>
